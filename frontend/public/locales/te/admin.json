@@ -1,0 +1,66 @@
+{
+  "panelTitle": "నిర్వాహక ప్యానెల్",
+  "panelSubtitle": "డేటాబేస్ & పట్టికల మేనేజర్",
+  "dashboard": "డాష్‌బోర్డ్ అవలోకనం",
+  "allTables": "ప్రధాన డేటాబేస్ పట్టికలు",
+  "permissionManager": "పాత్ర & అనుమతుల మాతృక",
+  "userManagement": "వినియోగదారుల నిర్వహణ",
+  "totalRecords": "మొత్తం రికార్డులు",
+  "activeTables": "యాక్టివ్ పట్టికలు",
+  "systemRoles": "సిస్టమ్ పాత్రలు",
+  "filterMenuPlaceholder": "పట్టికలను ఫిల్టర్ చేయండి...",
+  "categories": {
+    "system": "వ్యవస్థ & అవలోకనం",
+    "clients": "జాతకాలు & క్లయింట్ డేటా",
+    "astronomy": "గ్రహాలు & రాశులు",
+    "kpSystem": "కేపీ జ్యోతిష్య వ్యవస్థ",
+    "panchangam": "పంచాంగం & క్యాలెండర్",
+    "prasannam": "ప్రసన్న జ్యోతిష్యం"
+  },
+  "stats": {
+    "kadikara": "గడికార ప్రసన్నం",
+    "users": "నమోదైన వినియోగదారులు",
+    "profiles": "సేవ్ చేసిన జాతకాలు",
+    "rasis": "రాశులు (12 Zodiacs)",
+    "nakshatras": "నక్షత్రాలు (27 Stars)",
+    "planets": "నవగ్రహాలు (Planets)",
+    "tithis": "తిథులు (30 Tithis)",
+    "yogas": "నిత్య యోగాలు (27 Yogas)",
+    "karanas": "కరణాలు (11 Karanas)",
+    "years": "సంవత్సరాలు (60 Years)",
+    "months": "సౌర మాసాలు (12 Months)"
+  },
+  "table": {
+    "search": "రికార్డులు వెతకండి...",
+    "addRecord": "కొత్త రికార్డు జోడించు",
+    "editRecord": "రికార్డు సవరించు",
+    "viewRecord": "రికార్డు చూడు",
+    "deleteRecord": "రికార్డు తొలగించు",
+    "confirmDelete": "మీరు ఖచ్చితంగా ఈ రికార్డును తొలగించాలనుకుంటున్నారా?",
+    "deleteWarning": "ఈ చర్యను రద్దు చేయడం సాధ్యపడదు.",
+    "saveChanges": "మార్పులు సేవ్ చేయి",
+    "createSuccess": "రికార్డు విజయవంతంగా సృష్టించబడింది!",
+    "updateSuccess": "రికార్డు విజయవంతంగా నవీకరించబడింది!",
+    "deleteSuccess": "రికార్డు విజయవంతంగా తొలగించబడింది!",
+    "noPermission": "ఈ చర్యను అమలు చేయడానికి మీకు అనుమతి లేదు."
+  },
+  "permissions": {
+    "title": "పాత్ర ఆధారిత యాక్సెస్ నియంత్రణ (RBAC)",
+    "subtitle": "అన్ని డేటాబేస్ పట్టికల కోసం అనుమతులను కాన్ఫిగర్ చేయండి.",
+    "roles": {
+      "superadmin": "ప్రధాన నిర్వాహకుడు (Super Admin)",
+      "admin": "సిస్టమ్ నిర్వాహకుడు (Admin)",
+      "user": "సాధారణ వినియోగదారు (User)"
+    },
+    "tablePermissions": "పట్టిక CRUD అనుమతులు",
+    "read": "చదువు (Read)",
+    "create": "సృష్టించు (Create)",
+    "update": "సవరించు (Update)",
+    "delete": "తొలగించు (Delete)",
+    "canAccessAdmin": "నిర్వాహక ప్యానెల్ యాక్సెస్",
+    "canManageUsers": "వినియోగదారుల నిర్వహణ",
+    "canManagePermissions": "అనుమతుల మాతృక నిర్వహణ",
+    "saveRoles": "అనుమతులు సేవ్ చేయి",
+    "resetDefaults": "డిఫాల్ట్‌లకు రీసెట్ చేయి"
+  }
+}

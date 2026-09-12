@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- 1. Homepage / Kundli Calculator -->
+  <url>
+    <loc>https://jothidam.portal/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/" />
+  </url>
+
+  <!-- 2. KP Horary Numbers 1-249 Table -->
+  <url>
+    <loc>https://jothidam.portal/kp-horary</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/kp-horary?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/kp-horary?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/kp-horary?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/kp-horary?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/kp-horary?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/kp-horary?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/kp-horary" />
+  </url>
+
+  <!-- 3. 12 Rasis Directory -->
+  <url>
+    <loc>https://jothidam.portal/rasis</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/rasis?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/rasis?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/rasis?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/rasis?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/rasis?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/rasis?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/rasis" />
+  </url>
+
+  <!-- 4. 27 Nakshatras Directory -->
+  <url>
+    <loc>https://jothidam.portal/nakshatras</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/nakshatras?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/nakshatras?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/nakshatras?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/nakshatras?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/nakshatras?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/nakshatras?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/nakshatras" />
+  </url>
+
+  <!-- 5. 9 Navagrahas Directory -->
+  <url>
+    <loc>https://jothidam.portal/planets</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/planets?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/planets?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/planets?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/planets?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/planets?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/planets?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/planets" />
+  </url>
+
+  <!-- 6. 360° Kalachakram Wheel -->
+  <url>
+    <loc>https://jothidam.portal/kalachakram</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/kalachakram?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/kalachakram?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/kalachakram?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/kalachakram?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/kalachakram?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/kalachakram?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/kalachakram" />
+  </url>
+
+  <!-- 7. 30 Tithis Directory -->
+  <url>
+    <loc>https://jothidam.portal/tithis</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/tithis?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/tithis?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/tithis?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/tithis?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/tithis?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/tithis?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/tithis" />
+  </url>
+
+  <!-- 8. 27 Yogas Directory -->
+  <url>
+    <loc>https://jothidam.portal/yogas</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/yogas?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/yogas?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/yogas?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/yogas?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/yogas?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/yogas?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/yogas" />
+  </url>
+
+  <!-- 9. 11 Karanas Directory -->
+  <url>
+    <loc>https://jothidam.portal/karanas</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/karanas?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/karanas?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/karanas?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/karanas?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/karanas?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/karanas?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/karanas" />
+  </url>
+
+  <!-- 10. Tamil Calendar 60 Years & Months -->
+  <url>
+    <loc>https://jothidam.portal/tamil-calendar</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/tamil-calendar?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/tamil-calendar?lng=en" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://jothidam.portal/tamil-calendar?lng=hi" />
+    <xhtml:link rel="alternate" hreflang="te" href="https://jothidam.portal/tamil-calendar?lng=te" />
+    <xhtml:link rel="alternate" hreflang="kn" href="https://jothidam.portal/tamil-calendar?lng=kn" />
+    <xhtml:link rel="alternate" hreflang="ml" href="https://jothidam.portal/tamil-calendar?lng=ml" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/tamil-calendar" />
+  </url>
+
+  <!-- 11. Saved Profiles -->
+  <url>
+    <loc>https://jothidam.portal/saved</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://jothidam.portal/saved?lng=ta" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://jothidam.portal/saved?lng=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jothidam.portal/saved" />
+  </url>
+
+</urlset>

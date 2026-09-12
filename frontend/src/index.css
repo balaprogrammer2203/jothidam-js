@@ -1,0 +1,38 @@
+/* ==========================================================================
+   JOTHIDAM PORTAL - ENTERPRISE MASTER STYLESHEET (index.css)
+   Modular CSS & Tailwind CSS v4 Engine Integration
+   ========================================================================== */
+
+/* 0. Tailwind CSS v4 Core Engine */
+@import "tailwindcss";
+
+/* 1. Global Variables & Design Tokens */
+@import './styles/variables.css';
+
+/* 2. Dedicated Color Theme Settings (Frontend & Admin Panel) */
+@import './styles/theme-frontend.css';
+@import './styles/theme-admin.css';
+
+/* 3. Global CSS Reset, Box-sizing, Base Typography & Helper Classes */
+@import './styles/global.css';
+
+/* 4. Reusable Common Components (Buttons, Badges, Inputs, Breadcrumbs, Language Selector, Toasts) */
+@import './styles/common.css';
+
+/* 5. Application Layout (Header, Topbar, Subnav Horizontal Menu, 2-Column Grid, Enterprise Footer) */
+@import './styles/layout.css';
+
+/* 6. Horoscope Features (Calculator Form, Vedic Natal Charts D1 & D9, Planetary Tables, Right Sidebar) */
+@import './styles/horoscope.css';
+
+/* 7. Admin Control Panel (Topbar, Sidebar, Dashboard, DataTables, CRUD Modals, Permissions Matrix) */
+@import './styles/admin.css';
+
+/* 8. Authentication & Access Control (Admin Login, Role Pills, Access Denied) */
+@import './styles/auth.css';
+
+/* 9. Print Styles & PDF Export Layout */
+@import './styles/print.css';
+
+/* 10. Responsive Breakpoints (Desktop, Laptop, Tablet, Mobile 100% Full-Width) */
+@import './styles/responsive.css';

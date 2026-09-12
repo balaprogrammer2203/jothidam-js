@@ -1,0 +1,422 @@
+/* ==========================================================================
+   ENTERPRISE PRINT & PDF STYLESHEET FOR JOTHIDAM PORTAL
+   ========================================================================== */
+
+/* Screen default for print-only elements */
+.print-only-report-header {
+  display: none;
+}
+
+@media print {
+  /* 1. Page Configuration (A4 Portrait with 10mm margins) */
+  @page {
+    size: A4 portrait;
+    margin: 8mm 8mm 8mm 8mm;
+  }
+
+  /* 2. Force Exact Color & Background Printing */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* 3. Hide Non-Print UI Elements (Navbars, Buttons, Footers, Tooltips, Forms) */
+  .app-header-container,
+  .header-nav-tabs,
+  .detail-page-header,
+  .back-btn,
+  .print-btn,
+  .app-footer,
+  .epanchang-form-container,
+  .saved-search-bar,
+  .refresh-btn,
+  .view-chart-btn,
+  .save-status-toast,
+  .save-status-toast-close,
+  .planet-tooltip-card,
+  .planetary-subtitle {
+    display: none !important;
+  }
+
+  /* 4. Body & Page Wrapper Reset */
+  html, body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .main-content-area {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .saved-horoscope-detail-page {
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  /* 5. Print-Only Official Report Header */
+  .print-only-report-header {
+    display: block !important;
+    text-align: center;
+    border-bottom: 2px solid #ea580c;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+
+  .print-title {
+    font-size: 18pt !important;
+    font-weight: 800 !important;
+    color: #c2410c !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .print-subtitle {
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+  }
+
+  /* 6. Person Profile Summary Banner */
+  .saved-detail-profile-banner {
+    background: #f8fafc !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin-bottom: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .profile-avatar-large {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 18px !important;
+    border-radius: 8px !important;
+    background: #6b21a8 !important;
+    color: #ffffff !important;
+  }
+
+  .banner-name {
+    font-size: 16pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+  }
+
+  .banner-meta-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px 12px !important;
+  }
+
+  .meta-cell {
+    font-size: 9pt !important;
+  }
+
+  .meta-lbl {
+    color: #475569 !important;
+    font-weight: 600 !important;
+  }
+
+  .meta-val {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  /* 7. Location & Ayanamsa Header Bar */
+  .location-info {
+    text-align: center !important;
+    font-size: 9pt !important;
+    color: #334155 !important;
+    margin: 0 0 10px 0 !important;
+    padding: 4px 8px !important;
+    background: #f1f5f9 !important;
+    border-radius: 4px !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  /* 8. Side-by-Side Vedic Charts Layout (D1 Rasi & D9 Navamsa) */
+  .side-by-side-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 14px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .astrology-card {
+    background: #ffffff !important;
+    border: 1.5px solid #ea580c !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .card-header {
+    background: #ea580c !important;
+    color: #ffffff !important;
+    padding: 5px 10px !important;
+    font-size: 11pt !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .header-icon {
+    font-size: 12px !important;
+  }
+
+  /* 4x4 Grid System */
+  .chart-grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(4, 72px) !important;
+    gap: 2px !important;
+    background-color: #ea580c !important;
+    border: 2px solid #ea580c !important;
+    margin: 5px !important;
+    border-radius: 4px !important;
+  }
+
+  .rasi-cell {
+    background-color: #fffdf5 !important;
+    padding: 2px 3px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+  }
+
+  .rasi-cell.lagna-cell {
+    background-color: #fff1f2 !important;
+  }
+
+  .cell-header-bar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 2px !important;
+  }
+
+  .house-number {
+    font-size: 7.5pt !important;
+    font-weight: 800 !important;
+    color: #9a3412 !important;
+  }
+
+  .rasi-name-label {
+    font-size: 7pt !important;
+    font-weight: 700 !important;
+    color: #c2410c !important;
+  }
+
+  .planet-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2px 3px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  .planet-badge {
+    background: #ffedd5 !important;
+    border: 1px solid #fdba74 !important;
+    padding: 1px 3px !important;
+    border-radius: 2px !important;
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 1px !important;
+  }
+
+  .planet-badge.lagna-badge {
+    background: #fee2e2 !important;
+    border: 1px solid #fca5a5 !important;
+  }
+
+  .planet-badge.maandi-badge {
+    background: #f3e8ff !important;
+    border: 1px solid #d8b4fe !important;
+  }
+
+  .planet-name {
+    font-size: 8pt !important;
+    font-weight: 800 !important;
+    color: #7c2d12 !important;
+  }
+
+  .lagna-badge .planet-name {
+    color: #991b1b !important;
+  }
+
+  .maandi-badge .planet-name {
+    color: #6b21a8 !important;
+  }
+
+  .planet-degree {
+    font-size: 6.5pt !important;
+    font-weight: 700 !important;
+    color: #9a3412 !important;
+  }
+
+  .retro-indicator {
+    font-size: 6.5pt !important;
+    color: #dc2626 !important;
+    font-weight: bold !important;
+  }
+
+  /* Center Box */
+  .center-cell {
+    grid-area: 2 / 2 / 4 / 4 !important;
+    background: #ffedd5 !important;
+    border: 1px solid #fed7aa !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 4px !important;
+    border-radius: 3px !important;
+  }
+
+  .center-info-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 1px !important;
+  }
+
+  .center-date {
+    font-size: 7.5pt !important;
+    font-weight: 600 !important;
+    color: #431407 !important;
+  }
+
+  .center-time {
+    font-size: 7.5pt !important;
+    font-weight: 700 !important;
+    color: #7c2d12 !important;
+  }
+
+  .center-chart-name {
+    font-size: 11pt !important;
+    font-weight: 800 !important;
+    color: #ea580c !important;
+    margin: 1px 0 !important;
+  }
+
+  .center-nakshatra-name {
+    font-size: 7.5pt !important;
+    font-weight: 700 !important;
+    color: #c2410c !important;
+    background: #fff7ed !important;
+    padding: 1px 6px !important;
+    border-radius: 8px !important;
+    border: 1px solid #fdba74 !important;
+  }
+
+  /* 9. Side-by-Side Tables Layout (Planets + Basic Details) */
+  .planetary-details-horizontal-layout {
+    display: grid !important;
+    grid-template-columns: 1.25fr 1fr !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .planetary-positions-section,
+  .basic-details-section {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .planetary-title,
+  .basic-details-heading {
+    font-size: 10pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-bottom: 6px !important;
+  }
+
+  .planetary-table,
+  .basic-details-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 7.5pt !important;
+  }
+
+  .planetary-table th {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    padding: 3px 5px !important;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 7.5pt !important;
+  }
+
+  .planetary-table td {
+    padding: 3px 5px !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    font-size: 7.5pt !important;
+  }
+
+  .basic-lbl-cell {
+    padding: 2.5px 6px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    width: 44% !important;
+    border: 1px solid #cbd5e1 !important;
+    background-color: #f8fafc !important;
+    font-size: 7.5pt !important;
+  }
+
+  .basic-val-cell {
+    padding: 2.5px 6px !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 7.5pt !important;
+  }
+
+  .planet-cell-wrapper {
+    gap: 3px !important;
+  }
+
+  .astro-glyph,
+  .zodiac-glyph {
+    font-size: 9pt !important;
+  }
+
+  .planet-title-bold,
+  .lord-name,
+  .nakshatra-name {
+    font-size: 7.5pt !important;
+  }
+}

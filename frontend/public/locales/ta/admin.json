@@ -1,0 +1,66 @@
+{
+  "panelTitle": "நிர்வாகப் பலகை",
+  "panelSubtitle": "DB Tables Manager",
+  "dashboard": "முகப்பு (Dashboard)",
+  "allTables": "அனைத்து அட்டவணைகள்",
+  "permissionManager": "அனுமதி மேலாளர் (Permissions)",
+  "userManagement": "பயனர் மேலாண்மை",
+  "totalRecords": "மொத்த பதிவுகள்",
+  "activeTables": "செயலில் உள்ள அட்டவணைகள்",
+  "systemRoles": "பயனர் நிலைகள்",
+  "filterMenuPlaceholder": "அட்டவணைகளை வடிகட்டுக...",
+  "categories": {
+    "system": "மேலோட்டம் & கணினி மேலாண்மை",
+    "clients": "ஜாதகங்கள் & வாடிக்கையாளர் தரவு",
+    "astronomy": "கிரகங்கள் & ராசிகள்",
+    "kpSystem": "கே.பி ஜோதிட முறை",
+    "panchangam": "பஞ்சாங்கம் & காலக்கணக்கு",
+    "prasannam": "பிரசன்ன ஜோதிடம்"
+  },
+  "stats": {
+    "kadikara": "கடிகார பிரசன்னம்",
+    "users": "பயனர்கள் (Users)",
+    "profiles": "ஜாதகங்கள் (Profiles)",
+    "rasis": "ராசிகள் (Rasis)",
+    "nakshatras": "நட்சத்திரங்கள் (Stars)",
+    "planets": "கிரகங்கள் (Planets)",
+    "tithis": "திதிகள் (Tithis)",
+    "yogas": "யோகங்கள் (Yogas)",
+    "karanas": "கரணங்கள் (Karanas)",
+    "years": "தமிழ் ஆண்டுகள் (60 Years)",
+    "months": "தமிழ் மாதங்கள் (12 Months)"
+  },
+  "table": {
+    "search": "தேடுக...",
+    "addRecord": "புதிய பதிவு சேர்க்க",
+    "editRecord": "பதிவை திருத்து",
+    "viewRecord": "பதிவை பார்க்க",
+    "deleteRecord": "பதிவை நீக்கு",
+    "confirmDelete": "இப்பதிவை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+    "deleteWarning": "இந்த நடவடிக்கையை திரும்பப் பெற முடியாது.",
+    "saveChanges": "மாற்றங்களைச் சேமிக்க",
+    "createSuccess": "பதிவு வெற்றிகரமாக உருவாக்கப்பட்டது!",
+    "updateSuccess": "பதிவு வெற்றிகரமாக புதுப்பிக்கப்பட்டது!",
+    "deleteSuccess": "பதிவு வெற்றிகரமாக நீக்கப்பட்டது!",
+    "noPermission": "இந்தச் செயலைச் செய்ய உங்களுக்கு அனுமதி இல்லை."
+  },
+  "permissions": {
+    "title": "பயனர் பங்கு & அனுமதி மேலாண்மை",
+    "subtitle": "ஒவ்வொரு பயனர் நிலைக்கும் அட்டவணை CRUD அனுமதிகளை அமைக்கவும்.",
+    "roles": {
+      "superadmin": "முதன்மைக் கண்காணிப்பாளர் (Super Admin)",
+      "admin": "கணினி நிர்வாகி (Admin)",
+      "user": "பயனர் (User)"
+    },
+    "tablePermissions": "அட்டவணை CRUD அனுமதிகள்",
+    "read": "பார்வை (Read)",
+    "create": "உருவாக்கு (Create)",
+    "update": "திருத்து (Update)",
+    "delete": "நீக்கு (Delete)",
+    "canAccessAdmin": "நிர்வாக பலகை அணுகல்",
+    "canManageUsers": "பயனர்களை நிர்வகித்தல்",
+    "canManagePermissions": "அனுமதிகளை நிர்வகித்தல்",
+    "saveRoles": "அனுமதிகளைச் சேமிக்க",
+    "resetDefaults": "இயல்புநிலைக்கு மீட்டமை"
+  }
+}

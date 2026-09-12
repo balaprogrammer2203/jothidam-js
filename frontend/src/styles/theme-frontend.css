@@ -1,0 +1,185 @@
+/* ==========================================================================
+   FRONTEND THEME COLOR SETTINGS (theme-frontend.css)
+   Dedicated color tokens for Client Portal, Vedic Charts, Tables & Navigation
+   Supports Light Mode (Default) and Astrotalk-Style Dark Mode
+   ========================================================================== */
+
+/* 1. Light Mode (Default) */
+:root,
+[data-theme="light"] {
+  /* Brand Action Colors (Light Sunny Yellow & Warm Amber) */
+  --fe-primary: #facc15;
+  --fe-primary-light: #fef08a;
+  --fe-primary-hover: #fde047;
+  --fe-primary-gradient: linear-gradient(135deg, #fef08a, #facc15);
+  --fe-primary-shadow: rgba(250, 204, 21, 0.4);
+  --fe-primary-shadow-hover: rgba(250, 204, 21, 0.55);
+
+  /* Spiritual Ochre / Golden Bronze Palette */
+  --fe-ochre-dark: #78350f;
+  --fe-ochre-mid: #92400e;
+  --fe-ochre-light: #b45309;
+  --fe-ochre-deep: #451a03;
+  --fe-amber-gold: #ca8a04;
+  --fe-amber-warm: #a16207;
+
+  /* Surfaces, Backgrounds & Cards */
+  --fe-bg-app: #f8fafc;
+  --fe-bg-surface: #ffffff;
+  --fe-bg-warm: #fffdf5;
+  --fe-bg-cream: #fefce8;
+  --fe-bg-cream-accent: #fef9c3;
+  --fe-bg-subtle: #f1f5f9;
+  --fe-bg-hover: #faf5ff;
+  --fe-header-bg: #ffffff;
+  --fe-dropdown-bg: #ffffff;
+
+  /* Typography Colors */
+  --fe-text-heading: #0f172a;
+  --fe-text-main: #1e293b;
+  --fe-text-body: #334155;
+  --fe-text-muted: #64748b;
+  --fe-text-subtle: #94a3b8;
+  --fe-text-white: #ffffff;
+
+  /* Border & Divider System */
+  --fe-border-light: #e2e8f0;
+  --fe-border-subtle: #f1f5f9;
+  --fe-border-input: #cbd5e1;
+  --fe-border-yellow: #fef08a;
+  --fe-border-yellow-dark: #facc15;
+  --fe-border-yellow-hover: #fde047;
+
+  /* Deep Midnight Navy (Subnav & Enterprise Footer) */
+  --fe-navy-dark: #0f172a;
+  --fe-navy-mid: #1e293b;
+  --fe-navy-bottom: #090d16;
+  --fe-navy-border: #334155;
+  --fe-navy-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+
+  /* Vedic Charts (Rasi D1 & Navamsa D9) */
+  --chart-header-gradient: linear-gradient(135deg, #fef08a, #facc15);
+  --chart-header-text: #0f172a;
+  --chart-header-border: #fde047;
+  --chart-outer-border: #fef08a;
+  --chart-cell-bg: #fffdf5;
+  --chart-house-num: #854d0e;
+  --chart-rasi-name: #a16207;
+  --chart-planet-bg: #fefce8;
+  --chart-planet-border: #fef08a;
+  --chart-planet-text: #451a03;
+  --chart-lagna-bg: #fee2e2;
+  --chart-lagna-border: #fca5a5;
+  --chart-lagna-text: #991b1b;
+  --chart-retro-text: #b91c1c;
+  --chart-center-bg: linear-gradient(135deg, #fffdf5 0%, #fefce8 100%);
+  --chart-center-text: #713f12;
+  --chart-center-title: #92400e;
+  --chart-tooltip-bg: #0f172a;
+  --chart-tooltip-border: #334155;
+  --chart-tooltip-text: #f8fafc;
+  --chart-tooltip-highlight: #38bdf8;
+
+  /* Social Share Buttons */
+  --social-twitter-bg: #0ea5e9;
+  --social-facebook-bg: #1877f2;
+  --social-linkedin-bg: #0077b5;
+  --social-pinterest-bg: #e60023;
+  --social-whatsapp-bg: #25d366;
+  --social-email-bg: #64748b;
+
+  /* Timing & Status Badges */
+  --status-green-bg: #dcfce7;
+  --status-green-text: #15803d;
+  --status-red-bg: #fee2e2;
+  --status-red-text: #b91c1c;
+  --status-yellow-bg: #fef9c3;
+  --status-yellow-text: #a16207;
+}
+
+/* 2. Astrotalk-Style Rich Dark Theme (Warm Obsidian Amber & Matte Espresso) */
+:root[data-theme="dark"],
+[data-theme="dark"],
+body.dark-theme {
+  /* Brand Action Colors (Radiant Gold & Amber) */
+  --fe-primary: #f59e0b;
+  --fe-primary-light: #78350f;
+  --fe-primary-hover: #fbbf24;
+  --fe-primary-gradient: linear-gradient(135deg, #f59e0b, #fbbf24);
+  --fe-primary-shadow: rgba(245, 158, 11, 0.35);
+  --fe-primary-shadow-hover: rgba(245, 158, 11, 0.5);
+
+  /* Spiritual Ochre & Golden Glow */
+  --fe-ochre-dark: #fef08a;
+  --fe-ochre-mid: #fde047;
+  --fe-ochre-light: #fbbf24;
+  --fe-ochre-deep: #ffffff;
+  --fe-amber-gold: #fbbf24;
+  --fe-amber-warm: #f59e0b;
+
+  /* Astrotalk Deep Warm Cosmic Surfaces, Backgrounds & Cards */
+  --fe-bg-app: #100b05;
+  --fe-bg-surface: #1c150e;
+  --fe-bg-warm: #18120b;
+  --fe-bg-cream: #241b12;
+  --fe-bg-cream-accent: #2d2117;
+  --fe-bg-subtle: #20170f;
+  --fe-bg-hover: #291e14;
+  --fe-header-bg: #130d07;
+  --fe-dropdown-bg: #1c150e;
+
+  /* Typography Colors in Dark Mode */
+  --fe-text-heading: #ffffff;
+  --fe-text-main: #f5f5f4;
+  --fe-text-body: #e7e5e4;
+  --fe-text-muted: #a8a29e;
+  --fe-text-subtle: #78716c;
+  --fe-text-white: #ffffff;
+  --fe-text-label: #d6d3d1;
+
+  /* Warm Dark Border System */
+  --fe-border-light: #2c2015;
+  --fe-border-subtle: #221810;
+  --fe-border-input: #3d2b1b;
+  --fe-border-yellow: #54391e;
+  --fe-border-yellow-dark: #b45309;
+  --fe-border-yellow-hover: #f59e0b;
+
+  /* Deep Midnight Navy (Cosmic Dark in Dark Mode) */
+  --fe-navy-dark: #0a0703;
+  --fe-navy-mid: #130d07;
+  --fe-navy-bottom: #080502;
+  --fe-navy-border: #2c2015;
+  --fe-navy-gradient: linear-gradient(135deg, #0e0904, #181109);
+
+  /* Vedic Charts in Dark Mode */
+  --chart-header-gradient: linear-gradient(135deg, #451a03, #78350f);
+  --chart-header-text: #fefce8;
+  --chart-header-border: #92400e;
+  --chart-outer-border: #78350f;
+  --chart-cell-bg: #18120b;
+  --chart-house-num: #fbbf24;
+  --chart-rasi-name: #fde047;
+  --chart-planet-bg: #271d14;
+  --chart-planet-border: #443020;
+  --chart-planet-text: #fef08a;
+  --chart-lagna-bg: #450a0a;
+  --chart-lagna-border: #991b1b;
+  --chart-lagna-text: #fca5a5;
+  --chart-retro-text: #f87171;
+  --chart-center-bg: linear-gradient(135deg, #18120b 0%, #241b12 100%);
+  --chart-center-text: #fefce8;
+  --chart-center-title: #fbbf24;
+  --chart-tooltip-bg: #0c0804;
+  --chart-tooltip-border: #3d2b1b;
+  --chart-tooltip-text: #f8fafc;
+  --chart-tooltip-highlight: #38bdf8;
+
+  /* Timing & Status Badges in Dark Mode */
+  --status-green-bg: rgba(22, 163, 74, 0.22);
+  --status-green-text: #4ade80;
+  --status-red-bg: rgba(220, 38, 38, 0.22);
+  --status-red-text: #f87171;
+  --status-yellow-bg: rgba(245, 158, 11, 0.22);
+  --status-yellow-text: #fbbf24;
+}

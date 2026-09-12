@@ -1,0 +1,127 @@
+/* ==========================================================================
+   DESIGN TOKENS, CSS VARIABLES & TAILWIND CSS v4 @theme EXTENSIONS
+   ========================================================================== */
+
+@theme {
+  /* Brand Yellow Palette */
+  --color-brand-50: #fefce8;
+  --color-brand-100: #fef9c3;
+  --color-brand-200: #fef08a;
+  --color-brand-300: #fde047;
+  --color-brand-400: #facc15;
+  --color-brand-500: #eab308;
+  --color-brand-600: #ca8a04;
+
+  /* Spiritual Ochre & Bronze */
+  --color-ochre-700: #b45309;
+  --color-ochre-800: #92400e;
+  --color-ochre-900: #78350f;
+  --color-ochre-950: #451a03;
+
+  /* Admin Purple */
+  --color-admin-50: #faf5ff;
+  --color-admin-100: #f3e8ff;
+  --color-admin-200: #e9d5ff;
+  --color-admin-700: #7c3aed;
+  --color-admin-800: #6b21a8;
+  --color-admin-900: #4c1d95;
+
+  /* Shadows */
+  --shadow-yellow-glow: 0 8px 24px rgba(250, 204, 21, 0.4);
+  --shadow-purple-glow: 0 8px 24px rgba(107, 33, 168, 0.25);
+
+  /* Fonts */
+  --font-heading: Georgia, Cambria, 'Times New Roman', serif;
+}
+
+:root {
+  /* Brand & Accent Palette (Light Sunny Yellow & Warm Ochre) */
+  --color-primary: #facc15;
+  --color-primary-light: #fef08a;
+  --color-primary-hover: #fde047;
+  --color-primary-gradient: linear-gradient(135deg, #fef08a, #facc15);
+  --color-primary-shadow: rgba(250, 204, 21, 0.4);
+
+  /* Ochre / Bronze Spiritual Accents */
+  --color-ochre-dark: #78350f;
+  --color-ochre-mid: #92400e;
+  --color-ochre-light: #b45309;
+  --color-amber-gold: #ca8a04;
+
+  /* Neutral Surface Palette */
+  --color-bg-app: var(--fe-bg-app, #f8fafc);
+  --color-bg-surface: var(--fe-bg-surface, #ffffff);
+  --color-bg-surface-warm: var(--fe-bg-warm, #fffdf5);
+  --color-bg-cream: var(--fe-bg-cream, #fefce8);
+  --color-bg-cream-accent: var(--fe-bg-cream-accent, #fef9c3);
+
+  /* Text & Heading Colors */
+  --color-text-main: var(--fe-text-main, #1e293b);
+  --color-text-heading: var(--fe-text-heading, #0f172a);
+  --color-text-muted: var(--fe-text-muted, #64748b);
+  --color-text-subtle: var(--fe-text-subtle, #94a3b8);
+
+  /* Border & Divider Colors */
+  --color-border-light: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  --color-border-yellow: #fef08a;
+  --color-border-yellow-dark: #facc15;
+
+  /* Deep Midnight Navy (Header Subnav & Footer) */
+  --color-navy-dark: #0f172a;
+  --color-navy-mid: #1e293b;
+  --color-navy-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+
+  /* Status Colors */
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+
+  --color-info: #0284c7;
+  --color-info-bg: #f0f9ff;
+  --color-info-border: #bae6fd;
+
+  /* Admin Purple Palette */
+  --color-admin-purple: #6b21a8;
+  --color-admin-purple-dark: #4c1d95;
+  --color-admin-purple-light: #faf5ff;
+  --color-admin-purple-border: #e9d5ff;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --shadow-yellow-glow: 0 8px 24px rgba(250, 204, 21, 0.4);
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 50px;
+
+  /* Typography with Full Tamil Unicode Fallbacks */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Tamil", "Latha", "Vijaya", "Mukta Malar", Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-serif: Georgia, Cambria, 'Times New Roman', serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+
+  /* Transitions */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layering & Z-Index Hierarchy */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-dropdown: 1000;
+  --z-header: 1050;
+  --z-modal: 10000;
+  --z-tooltip: 99999;
+}

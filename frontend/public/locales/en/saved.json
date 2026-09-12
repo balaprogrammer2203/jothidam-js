@@ -1,0 +1,17 @@
+{
+  "title": "Saved Horoscopes",
+  "subtitle": "All horoscope profiles stored in the MongoDB 'horoscopeprofiles' collection.",
+  "searchPlaceholder": "Search by Name, Place, or Date...",
+  "empty": "No saved horoscopes found.",
+  "viewChart": "View Chart",
+  "dob": "Date of Birth",
+  "tob": "Time of Birth",
+  "place": "Birth Place",
+  "ayanamsa": "Ayanamsa",
+  "star": "Janma Star",
+  "maandi": "Maandi",
+  "details": "Profile Details",
+  "detailsTitle": "Horoscope Details",
+  "backToList": "Back to Saved List",
+  "profileNotFound": "Horoscope profile not found."
+}

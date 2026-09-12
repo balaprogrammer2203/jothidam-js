@@ -1,0 +1,23 @@
+# Enterprise robots.txt for Jothidam Portal
+User-agent: *
+Allow: /
+Allow: /kp-horary
+Allow: /rasis
+Allow: /nakshatras
+Allow: /planets
+Allow: /kalachakram
+Allow: /tithis
+Allow: /yogas
+Allow: /karanas
+Allow: /tamil-calendar
+Allow: /saved
+
+# Disallow private admin and API paths
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /api/
+
+# Crawl Delay & Sitemap
+Crawl-delay: 1
+Sitemap: https://jothidam.portal/sitemap.xml

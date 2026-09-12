@@ -1,0 +1,66 @@
+{
+  "panelTitle": "ನಿರ್ವಾಹಕ ಫಲಕ",
+  "panelSubtitle": "ಡೇಟಾಬೇಸ್ & ಕೋಷ್ಟಕಗಳ ನಿರ್ವಾಹಕ",
+  "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಅವಲೋಕನ",
+  "allTables": "ಮುಖ್ಯ ಡೇಟಾಬೇಸ್ ಕೋಷ್ಟಕಗಳು",
+  "permissionManager": "ಪಾತ್ರ & ಅನುಮತಿಗಳ ಮ್ಯಾಟ್ರಿಕ್ಸ್",
+  "userManagement": "ಬಳಕೆದಾರರ ನಿರ್ವಹಣೆ",
+  "totalRecords": "ಒಟ್ಟು ದಾಖಲೆಗಳು",
+  "activeTables": "ಸಕ್ರಿಯ ಕೋಷ್ಟಕಗಳು",
+  "systemRoles": "ವ್ಯವಸ್ಥೆಯ ಪಾತ್ರಗಳು",
+  "filterMenuPlaceholder": "ಕೋಷ್ಟಕಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ...",
+  "categories": {
+    "system": "ವ್ಯವಸ್ಥೆ & ಅವಲೋಕನ",
+    "clients": "ಜಾತಕಗಳು & ಕ್ಲೈಂಟ್ ಡೇಟಾ",
+    "astronomy": "ಗ್ರಹಗಳು & ರಾಶಿಗಳು",
+    "kpSystem": "ಕೆಪಿ ಜ್ಯೋತಿಷ್ಯ ವ್ಯವಸ್ಥೆ",
+    "panchangam": "ಪಂಚಾಂಗ & ಕ್ಯಾಲೆಂಡರ್",
+    "prasannam": "ಪ್ರಸನ್ನ ಜ್ಯೋತಿಷ್ಯ"
+  },
+  "stats": {
+    "kadikara": "ಗಡಿಯಾರ ಪ್ರಸನ್ನ",
+    "users": "ನೋಂದಾಯಿತ ಬಳಕೆದಾರರು",
+    "profiles": "ಉಳಿಸಿದ ಜಾತಕಗಳು",
+    "rasis": "ರಾಶಿಗಳು (12 Zodiacs)",
+    "nakshatras": "ನಕ್ಷತ್ರಗಳು (27 Stars)",
+    "planets": "ನವಗ್ರಹಗಳು (Planets)",
+    "tithis": "ತಿಥಿಗಳು (30 Tithis)",
+    "yogas": "ನಿತ್ಯ ಯೋಗಗಳು (27 Yogas)",
+    "karanas": "ಕರಣಗಳು (11 Karanas)",
+    "years": "ಸಂವತ್ಸರಗಳು (60 Years)",
+    "months": "ಸೌರ ಮಾಸಗಳು (12 Months)"
+  },
+  "table": {
+    "search": "ದಾಖಲೆಗಳನ್ನು ಹುಡುಕಿ...",
+    "addRecord": "ಹೊಸ ದಾಖಲೆ ಸೇರಿಸಿ",
+    "editRecord": "ದಾಖಲೆಯನ್ನು ತಿದ್ದುಪಡಿ ಮಾಡಿ",
+    "viewRecord": "ದಾಖಲೆಯನ್ನು ನೋಡಿ",
+    "deleteRecord": "ದಾಖಲೆಯನ್ನು ಅಳಿಸಿ",
+    "confirmDelete": "ನೀವು ನಿಜವಾಗಿಯೂ ಈ ದಾಖಲೆಯನ್ನು ಅಳಿಸಲು ಬಯಸುವಿರಾ?",
+    "deleteWarning": "ಈ ಕ್ರಿಯೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.",
+    "saveChanges": "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
+    "createSuccess": "ದಾಖಲೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ!",
+    "updateSuccess": "ದಾಖಲೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ!",
+    "deleteSuccess": "ದಾಖಲೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ!",
+    "noPermission": "ಈ ಕ್ರಿಯೆಯನ್ನು ಮಾಡಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ."
+  },
+  "permissions": {
+    "title": "ಪಾತ್ರ ಆಧಾರಿತ ಪ್ರವೇಶ ನಿಯಂತ್ರಣ (RBAC)",
+    "subtitle": "ಎಲ್ಲಾ ಡೇಟಾಬೇಸ್ ಕೋಷ್ಟಕಗಳಿಗಾಗಿ ಅನುಮತಿಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ.",
+    "roles": {
+      "superadmin": "ಮುಖ್ಯ ನಿರ್ವಾಹಕ (Super Admin)",
+      "admin": "ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ವಾಹಕ (Admin)",
+      "user": "ಸಾಮಾನ್ಯ ಬಳಕೆದಾರ (User)"
+    },
+    "tablePermissions": "ಕೋಷ್ಟಕ CRUD ಅನುಮತಿಗಳು",
+    "read": "ಓದು (Read)",
+    "create": "ರಚಿಸು (Create)",
+    "update": "ತಿದ್ದು (Update)",
+    "delete": "ಅಳಿಸು (Delete)",
+    "canAccessAdmin": "ನಿರ್ವಾಹಕ ಫಲಕ ಪ್ರವೇಶ",
+    "canManageUsers": "ಬಳಕೆದಾರರನ್ನು ನಿರ್ವಹಿಸು",
+    "canManagePermissions": "ಅನುಮತಿ ಮ್ಯಾಟ್ರಿಕ್ಸ್ ನಿರ್ವಹಿಸು",
+    "saveRoles": "ಅನುಮತಿಗಳನ್ನು ಉಳಿಸಿ",
+    "resetDefaults": "ಡೀಫಾಲ್ಟ್‌ಗಳಿಗೆ ಮರುಹೊಂದಿಸಿ"
+  }
+}

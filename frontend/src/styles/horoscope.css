@@ -1,0 +1,3050 @@
+/* ==========================================================================
+   HOROSCOPE CALCULATOR, CHARTS, TABLES & SIDEBAR (horoscope.css)
+   Tokenized using var(--fe-*), var(--chart-*) and global design variables
+   Optimized for Tamil Unicode Typography, Text Alignment & Responsive Layouts
+   ========================================================================== */
+
+/* 1. Hero Section */
+.prokerala-hero-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prokerala-page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  letter-spacing: -0.4px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.prokerala-hero-banner-card {
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  border-left: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-xl, 14px);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.08);
+}
+
+.hero-banner-left {
+  flex-shrink: 0;
+}
+
+.south-chart-kattam-mockup,
+.diamond-chart-mockup {
+  width: 135px;
+  height: 135px;
+  background: var(--fe-bg-warm);
+  border: 1.5px solid var(--fe-border-yellow);
+  border-radius: var(--radius-lg, 12px);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.08);
+}
+
+.south-kattam-svg,
+.diamond-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-mock-txt {
+  font-size: 11px;
+  fill: var(--fe-ochre-dark);
+  font-family: var(--font-sans, sans-serif);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.hero-banner-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-art-title {
+  font-family: var(--font-serif, Georgia, Cambria, 'Times New Roman', serif);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--fe-ochre-mid);
+  line-height: 1.2;
+}
+
+.hero-art-subtitle {
+  font-family: 'Brush Script MT', cursive, Georgia, serif;
+  font-size: 17px;
+  color: var(--fe-text-body);
+  margin: 0;
+}
+
+.chart-style-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.chart-style-pill {
+  background: none;
+  border: none;
+  color: var(--fe-text-muted);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 0;
+  border-bottom: 2px dotted var(--fe-text-subtle);
+  transition: color 0.15s;
+  line-height: 1.4;
+}
+
+.chart-style-pill:hover,
+.chart-style-pill.active {
+  color: var(--fe-amber-gold);
+  border-bottom-style: solid;
+  border-bottom-color: var(--fe-border-yellow-dark);
+}
+
+.style-sep {
+  color: var(--fe-border-input);
+}
+
+.prokerala-intro-text-block {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--fe-text-label, #475569);
+}
+
+.intro-tropical-link a {
+  color: var(--fe-ochre-light);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.intro-tropical-link a:hover {
+  text-decoration: underline;
+}
+
+/* 2. Form Card Wrapper */
+.form-card-wrapper {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-sm, 0 8px 24px rgba(0, 0, 0, 0.04));
+  overflow: hidden;
+}
+
+.form-card-header {
+  background: var(--fe-bg-cream);
+  border-bottom: 1px solid var(--fe-border-yellow);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.form-header-title-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gear-icon {
+  font-size: 16px;
+}
+
+.form-card-heading {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.form-header-hint {
+  font-size: 11.5px;
+  color: var(--fe-text-muted);
+  line-height: 1.4;
+}
+
+.epanchang-form-container {
+  background: transparent;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.epanchang-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.epanchang-label-col {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 175px;
+  max-width: 175px;
+  flex-shrink: 0;
+}
+
+.epanchang-input-col {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.epanchang-input-col.relative-col {
+  position: relative;
+}
+
+/* Coordinates & Timezone DMS Input Styles matching screenshot */
+.dms-coords-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 0 2px 0;
+}
+
+.dms-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dms-row-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fe-text-heading);
+  min-width: 85px;
+  letter-spacing: 0.1px;
+}
+
+.dms-inputs-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--fe-bg-subtle);
+  border: 1.5px solid var(--fe-border-light);
+  border-radius: var(--radius-md, 8px);
+  padding: 3px 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dms-inputs-group:focus-within {
+  border-color: var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 0 0 3px var(--fe-primary-shadow);
+}
+
+.dms-box-input {
+  border: 1px solid var(--fe-border-subtle);
+  background: var(--fe-bg-surface);
+  color: var(--fe-text-main);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.dms-box-input:focus {
+  border-color: var(--fe-border-yellow-dark);
+  background-color: var(--fe-bg-cream, #fefce8);
+}
+
+.dms-deg-input {
+  width: 52px;
+}
+
+.dms-min-input,
+.dms-sec-input {
+  width: 42px;
+}
+
+.dms-unit {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark);
+  user-select: none;
+  padding: 0 1px;
+}
+
+.dms-dir-select {
+  border: 1px solid var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  color: var(--fe-text-heading);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  margin-left: 4px;
+}
+
+.dms-dir-select:focus {
+  border-color: var(--fe-ochre-mid);
+  box-shadow: 0 0 0 2px var(--fe-primary-shadow);
+}
+
+.dms-decimal-preview {
+  font-size: 11px;
+  color: var(--fe-text-muted);
+  font-family: var(--font-mono, monospace);
+  margin-left: 8px;
+}
+
+/* Timezone Select Dropdown Styles */
+.tz-select-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.tz-select-wrapper {
+  flex: 1;
+  max-width: 420px;
+}
+
+.timezone-custom-select {
+  width: 100%;
+  border: 1.5px solid var(--fe-border-light);
+  background: var(--fe-bg-subtle);
+  color: var(--fe-text-main);
+  border-radius: var(--radius-md, 8px);
+  padding: 8px 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.timezone-custom-select:focus {
+  border-color: var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 0 0 3px var(--fe-primary-shadow);
+}
+
+.timezone-custom-select optgroup {
+  font-weight: 800;
+  font-style: normal;
+  color: var(--fe-ochre-dark);
+  background: var(--fe-bg-surface);
+}
+
+.timezone-custom-select option {
+  font-weight: 500;
+  color: var(--fe-text-main);
+  padding: 4px 6px;
+  background: var(--fe-bg-surface);
+}
+
+.dst-custom-select {
+  font-weight: 600;
+}
+
+.gmt-quick-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+.gmt-quick-item .dms-tz-label {
+  min-width: auto;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+}
+
+/* GMT & DST Row */
+.dms-timezone-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.dms-tz-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dms-tz-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fe-text-heading);
+  min-width: 45px;
+}
+
+.dms-tz-input-wrap {
+  display: inline-flex;
+}
+
+.dms-tz-input {
+  border: 1.5px solid var(--fe-border-light);
+  background: var(--fe-bg-subtle);
+  color: var(--fe-text-main);
+  border-radius: var(--radius-md, 8px);
+  padding: 5px 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  width: 105px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dms-tz-input:focus {
+  border-color: var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 0 0 3px var(--fe-primary-shadow);
+}
+
+.coords-input-wrapper {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.coord-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coord-field-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fe-text-muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.coord-input-box {
+  display: flex;
+  align-items: center;
+  background: var(--fe-bg-subtle);
+  border: 1.5px solid var(--fe-border-light);
+  border-radius: var(--radius-md, 8px);
+  padding: 0 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.coord-input-box:focus-within {
+  border-color: var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 0 0 3px var(--fe-primary-shadow);
+}
+
+.coord-input-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  padding: 9px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fe-text-main);
+}
+
+.coord-suffix {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fe-text-subtle);
+  margin-left: 6px;
+}
+
+.epanchang-bottom-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  gap: 16px;
+  width: 100%;
+}
+
+.chart-type-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-actions-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* 3. Side-by-Side Charts Layout (Rasi & Navamsa) */
+.charts-view-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.chart-meta-infobar {
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  border-left: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-lg, 10px);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.05);
+}
+
+.meta-infobar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--fe-text-body);
+  line-height: 1.5;
+}
+
+.meta-infobar-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.meta-infobar-label {
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+}
+
+.meta-infobar-value {
+  color: var(--fe-text-main);
+  font-weight: 600;
+}
+
+.meta-infobar-value.font-bold {
+  font-weight: 800;
+}
+
+.meta-infobar-coord-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fe-ochre-light);
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-left: 4px;
+  letter-spacing: 0.2px;
+}
+
+.side-by-side-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  justify-content: center;
+  align-items: start;
+}
+
+.astrology-card {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--chart-outer-border);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.08);
+  overflow: visible;
+  padding-bottom: 12px;
+}
+
+.card-header {
+  background: var(--chart-header-gradient);
+  color: var(--chart-header-text);
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--chart-header-border);
+  letter-spacing: 0.2px;
+  border-top-left-radius: var(--radius-md, 8px);
+  border-top-right-radius: var(--radius-md, 8px);
+  line-height: 1.35;
+}
+
+.header-icon {
+  font-size: 16px;
+}
+
+.chart-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 98px);
+  gap: 3px;
+  background-color: var(--chart-outer-border);
+  border: 4px solid var(--chart-outer-border);
+  margin: 12px;
+  border-radius: var(--radius-md, 8px);
+  overflow: visible;
+}
+
+.rasi-cell {
+  background-color: var(--chart-cell-bg);
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+
+.cell-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.house-number {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--chart-house-num);
+  opacity: 0.9;
+}
+
+.rasi-name-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--chart-rasi-name);
+  opacity: 0.85;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.planet-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 5px;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: visible;
+}
+
+.planet-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  background: var(--chart-planet-bg);
+  border: 1px solid var(--chart-planet-border);
+  padding: 2px 5px;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.planet-badge:hover {
+  background: var(--fe-border-yellow);
+  border-color: var(--fe-border-yellow-dark);
+  transform: translateY(-1px);
+  z-index: 1000;
+}
+
+.planet-badge.lagna-badge {
+  background: var(--chart-lagna-bg);
+  border-color: var(--chart-lagna-border);
+}
+
+.planet-badge.lagna-badge:hover {
+  background: #fecaca;
+  border-color: #ef4444;
+}
+
+.planet-badge.maandi-badge {
+  background: #f3e8ff;
+  border-color: #d8b4fe;
+}
+
+.planet-badge.maandi-badge:hover {
+  background: #e9d5ff;
+  border-color: #a855f7;
+}
+
+.planet-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--chart-planet-text);
+  line-height: 1.25;
+}
+
+.lagna-badge .planet-name {
+  color: var(--chart-lagna-text);
+}
+
+.maandi-badge .planet-name {
+  color: #7e22ce;
+}
+
+.retro-indicator {
+  font-size: 9px;
+  color: var(--chart-retro-text);
+  font-weight: bold;
+}
+
+.planet-degree {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--chart-house-num);
+  opacity: 0.85;
+}
+
+/* Floating Planet Tooltip */
+.planet-tooltip-card {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: var(--chart-tooltip-bg);
+  color: var(--chart-tooltip-text);
+  border: 1px solid var(--chart-tooltip-border);
+  border-radius: var(--radius-md, 8px);
+  padding: 8px 12px;
+  min-width: 235px;
+  max-width: 320px;
+  width: max-content;
+  box-sizing: border-box;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  z-index: var(--z-tooltip, 99999);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  text-align: left;
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.planet-tooltip-card::after {
+  content: '';
+  position: absolute;
+  border-width: 6px;
+  border-style: solid;
+}
+
+.planet-tooltip-card.pos-top-mid {
+  top: calc(100% + 6px);
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-top-mid {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.planet-tooltip-card.pos-top-mid::after {
+  bottom: 100%;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: transparent transparent var(--chart-tooltip-bg) transparent;
+}
+
+.planet-tooltip-card.pos-top-left {
+  top: calc(100% + 6px);
+  bottom: auto;
+  left: 0;
+  transform: translateY(-4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-top-left {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.planet-tooltip-card.pos-top-left::after {
+  bottom: 100%;
+  top: auto;
+  left: 14px;
+  border-color: transparent transparent var(--chart-tooltip-bg) transparent;
+}
+
+.planet-tooltip-card.pos-top-right {
+  top: calc(100% + 6px);
+  bottom: auto;
+  right: 0;
+  left: auto;
+  transform: translateY(-4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-top-right {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.planet-tooltip-card.pos-top-right::after {
+  bottom: 100%;
+  top: auto;
+  right: 14px;
+  left: auto;
+  border-color: transparent transparent var(--chart-tooltip-bg) transparent;
+}
+
+.planet-tooltip-card.pos-bottom-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-bottom-mid {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.planet-tooltip-card.pos-bottom-mid::after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: var(--chart-tooltip-bg) transparent transparent transparent;
+}
+
+.planet-tooltip-card.pos-bottom-left,
+.planet-tooltip-card.pos-left-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  left: 0;
+  transform: translateY(4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-bottom-left,
+.planet-badge:hover .planet-tooltip-card.pos-left-mid {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.planet-tooltip-card.pos-bottom-left::after,
+.planet-tooltip-card.pos-left-mid::after {
+  top: 100%;
+  bottom: auto;
+  left: 14px;
+  border-color: var(--chart-tooltip-bg) transparent transparent transparent;
+}
+
+.planet-tooltip-card.pos-bottom-right,
+.planet-tooltip-card.pos-right-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  right: 0;
+  left: auto;
+  transform: translateY(4px);
+}
+.planet-badge:hover .planet-tooltip-card.pos-bottom-right,
+.planet-badge:hover .planet-tooltip-card.pos-right-mid {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.planet-tooltip-card.pos-bottom-right::after,
+.planet-tooltip-card.pos-right-mid::after {
+  top: 100%;
+  bottom: auto;
+  right: 14px;
+  left: auto;
+  border-color: var(--chart-tooltip-bg) transparent transparent transparent;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--chart-tooltip-border);
+  padding-bottom: 5px;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.tooltip-planet-name {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--chart-tooltip-highlight);
+  letter-spacing: 0.2px;
+}
+
+.tooltip-deg-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--fe-navy-mid);
+  color: var(--fe-border-input);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  white-space: nowrap;
+}
+
+.tooltip-retro-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  background: #7f1d1d;
+  color: #fecaca;
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tooltip-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+
+.tooltip-lbl {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tooltip-val {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Center Box */
+.center-cell {
+  grid-area: 2 / 2 / 4 / 4;
+  background: var(--chart-center-bg);
+  color: var(--chart-center-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--chart-outer-border);
+  border-radius: 4px;
+  padding: 6px 4px;
+  box-shadow: inset 0 0 12px rgba(234, 179, 8, 0.08);
+  overflow: hidden;
+}
+
+.center-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.center-date {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--fe-ochre-deep);
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+}
+
+.center-time {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--chart-center-text);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.center-chart-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--chart-center-title);
+  margin: 1px 0;
+  text-transform: capitalize;
+  line-height: 1.25;
+}
+
+/* Center Box Additional Details (Location, Lat/Long, Ayanamsa) - Small Font View */
+.center-meta-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+  width: 96%;
+  max-width: 220px;
+  padding: 3px 5px;
+  background: rgba(254, 240, 138, 0.25);
+  border: 1px dashed var(--fe-border-yellow-dark);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.center-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 9.5px;
+  line-height: 1.25;
+  color: var(--chart-center-text);
+  max-width: 100%;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.center-meta-place {
+  font-weight: 700;
+  color: var(--fe-text-heading);
+}
+
+.center-meta-coords {
+  font-family: var(--font-mono, monospace);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--fe-ochre-deep);
+  letter-spacing: -0.1px;
+}
+
+.center-meta-ayanamsa {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--fe-text-muted);
+}
+
+.center-meta-icon {
+  font-size: 8px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.center-meta-val {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
+}
+
+/* North Indian Diamond Kundli Chart Styles */
+.north-indian-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.north-style-badge {
+  font-size: 10px;
+  font-weight: 800;
+  background: var(--fe-bg-cream);
+  color: var(--fe-ochre-dark);
+  border: 1px solid var(--fe-border-yellow-dark);
+  padding: 2px 7px;
+  border-radius: 12px;
+  margin-left: auto;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.north-chart-wrapper {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+}
+
+.north-indian-svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.north-canvas-bg {
+  fill: var(--fe-bg-warm);
+}
+
+.north-outer-border {
+  fill: none;
+  stroke: var(--fe-border-yellow-dark);
+  stroke-width: 3.5px;
+  rx: 6px;
+  ry: 6px;
+}
+
+.north-grid-line {
+  stroke: var(--fe-border-yellow);
+  stroke-width: 2px;
+}
+
+.north-diamond-line {
+  fill: none;
+  stroke: var(--fe-border-yellow-dark);
+  stroke-width: 2.5px;
+}
+
+.north-house-group {
+  overflow: visible;
+}
+
+.north-sign-number {
+  font-size: 12px;
+  font-weight: 900;
+  fill: var(--fe-ochre-mid);
+  font-family: var(--font-sans, sans-serif);
+  user-select: none;
+}
+
+.north-fo-container {
+  overflow: visible;
+}
+
+.north-house-planets-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 3px;
+  padding: 2px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.north-planet-badge {
+  font-size: 10px;
+  padding: 1px 4px;
+}
+
+.north-planet-badge .planet-name {
+  font-size: 10.5px;
+}
+
+.north-chart-footer-strip {
+  padding: 8px 16px 4px 16px;
+  border-top: 1px solid var(--fe-border-subtle);
+}
+
+.north-footer-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--fe-text-label, #475569);
+  line-height: 1.5;
+}
+
+.north-info-date, .north-info-time {
+  font-size: 11px;
+  color: var(--fe-text-main);
+}
+
+/* 4. Planetary Positions & Basic Details Tables Layout (One Below One, Compact with Scroller) */
+.planetary-details-horizontal-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 28px 0 36px 0;
+  width: 100%;
+}
+
+.planetary-positions-section,
+.basic-details-section {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-xl, 14px);
+  padding: 16px 18px;
+  margin: 0;
+  width: 100%;
+  box-shadow: var(--shadow-sm, 0 4px 16px rgba(0, 0, 0, 0.04));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.table-card-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--fe-border-subtle);
+}
+
+.table-card-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-card-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.planetary-title,
+.basic-details-heading {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.planetary-subtitle,
+.basic-details-sub {
+  font-size: 11.5px;
+  color: var(--fe-text-muted);
+  margin: 2px 0 0 0;
+  line-height: 1.4;
+}
+
+/* Compact Container Without Vertical Scroller */
+.table-responsive-container,
+.basic-details-table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--fe-border-yellow);
+}
+
+.planetary-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 11.5px;
+}
+
+.planetary-table th {
+  background-color: var(--fe-bg-cream);
+  color: var(--fe-ochre-dark);
+  font-weight: 800;
+  padding: 7px 10px;
+  border: 1px solid var(--fe-border-yellow);
+  font-size: 11px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.planetary-table td {
+  padding: 6px 10px;
+  border: 1px solid var(--fe-border-subtle);
+  color: var(--fe-text-main);
+  vertical-align: middle;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.planetary-table tbody tr:hover {
+  background-color: var(--fe-bg-warm);
+}
+
+.lagna-row-highlight {
+  background-color: #fff1f2 !important;
+}
+
+.planet-cell-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.astro-glyph {
+  font-size: 14px;
+  line-height: 1;
+  width: 16px;
+  text-align: center;
+}
+
+.asc-badge {
+  font-size: 9px;
+  font-weight: 800;
+  background: var(--fe-text-heading);
+  color: var(--fe-text-white);
+  padding: 1px 4px;
+  border-radius: 3px;
+  letter-spacing: 0.4px;
+}
+
+.planet-title-bold {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.retro-tag {
+  font-size: 9.5px;
+  color: var(--status-red-text);
+  font-weight: 800;
+}
+
+.deg-mono {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  letter-spacing: -0.2px;
+}
+
+.cell-position, .cell-degrees {
+  font-weight: 600;
+  color: var(--fe-text-body);
+  white-space: nowrap;
+  font-size: 11.5px;
+}
+
+.cell-degrees.font-bold {
+  font-weight: 800;
+  color: var(--fe-text-main);
+}
+
+.rasi-cell-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.zodiac-glyph-badge {
+  font-size: 13px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rasi-title {
+  font-weight: 700;
+  color: var(--fe-text-main);
+  font-size: 11.5px;
+}
+
+.lord-name {
+  font-weight: 700;
+  color: var(--fe-text-main);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.lord-highlight {
+  color: var(--fe-ochre-mid);
+  font-weight: 800;
+}
+
+.nakshatra-cell-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.nakshatra-name {
+  font-weight: 700;
+  color: var(--fe-text-body);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.pada-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+/* Basic Details Table */
+.basic-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 11.5px;
+}
+
+.basic-details-table tr {
+  border-bottom: 1px solid var(--fe-border-subtle);
+  transition: background-color 0.15s ease;
+}
+
+.basic-details-table tr:last-child {
+  border-bottom: none;
+}
+
+.basic-details-table tr:hover {
+  background-color: var(--fe-bg-warm);
+}
+
+.basic-lbl-cell {
+  padding: 6px 12px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+  width: 38%;
+  border-right: 1.5px solid var(--fe-border-yellow);
+  background-color: var(--fe-bg-warm);
+  white-space: nowrap;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.basic-val-cell {
+  padding: 6px 12px;
+  color: var(--fe-text-main);
+  font-weight: 700;
+  background-color: var(--fe-bg-surface);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.basic-star-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark);
+  background: var(--fe-bg-cream-accent);
+  border: 1px solid var(--fe-border-yellow-dark);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.basic-lagna-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.highlight-bold {
+  font-weight: 800;
+  color: var(--fe-ochre-mid);
+}
+
+/* 5. Saved Horoscopes Management & Detail Page Layout */
+.saved-horoscopes-container {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-xl, 16px);
+  padding: 28px;
+  box-shadow: var(--shadow-sm, 0 4px 20px rgba(0, 0, 0, 0.05));
+  margin-bottom: 30px;
+}
+
+.saved-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.saved-header-text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.saved-section-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--fe-text-main);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.saved-section-subtitle {
+  font-size: 13px;
+  color: var(--fe-text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.saved-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--fe-bg-subtle);
+  border: 1.5px solid var(--fe-border-light);
+  border-radius: var(--radius-lg, 10px);
+  padding: 0 14px;
+  margin-bottom: 24px;
+}
+
+.saved-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--fe-text-main);
+}
+
+.saved-profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.saved-profile-card {
+  background: var(--fe-bg-surface);
+  border: 1.5px solid var(--fe-border-light);
+  border-radius: var(--radius-lg, 12px);
+  padding: 18px;
+  box-shadow: var(--shadow-xs, 0 2px 8px rgba(0, 0, 0, 0.04));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.saved-profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--admin-primary-shadow);
+  border-color: var(--admin-primary-border-hover);
+}
+
+.profile-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg, 10px);
+  background: var(--admin-primary-gradient);
+  color: var(--fe-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.profile-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fe-text-main);
+  margin: 0;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-gender-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark);
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+  width: fit-content;
+}
+
+.profile-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 12.5px;
+  border-top: 1px solid var(--fe-border-subtle);
+  padding-top: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.detail-lbl {
+  color: var(--fe-text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.detail-val {
+  color: var(--fe-text-main);
+  font-weight: 700;
+  font-size: 12.5px;
+  text-align: right;
+}
+
+.detail-val.highlight-val {
+  color: var(--fe-ochre-mid);
+  font-weight: 800;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.profile-card-actions {
+  margin-top: 4px;
+}
+
+/* Detail Page Header & Actions Bar */
+.saved-horoscope-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.saved-detail-top-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-lg, 12px);
+  padding: 10px 16px;
+  box-shadow: var(--shadow-xs, 0 1px 3px rgba(0, 0, 0, 0.04));
+}
+
+.detail-top-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chart-style-pill-group {
+  display: inline-flex;
+  align-items: center;
+  background: var(--fe-bg-subtle);
+  border: 1px solid var(--fe-border-light);
+  border-radius: 30px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.chart-style-segmented-btn {
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fe-text-label, #475569);
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.15s ease);
+  line-height: 1.35;
+}
+
+.chart-style-segmented-btn:hover {
+  color: var(--fe-text-heading);
+}
+
+.chart-style-segmented-btn.active {
+  background: var(--fe-primary-gradient);
+  color: var(--fe-text-heading);
+  box-shadow: 0 2px 6px var(--fe-primary-shadow);
+}
+
+.profile-id-badge {
+  font-size: 11.5px;
+  font-family: var(--font-mono, monospace);
+  color: var(--fe-text-muted);
+  background: var(--fe-bg-subtle);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--fe-border-light);
+  font-weight: 700;
+}
+
+/* Person Detail Summary Banner & Meta Grid Tiles */
+.saved-detail-profile-banner {
+  background: var(--fe-bg-surface);
+  border: 1.5px solid var(--fe-border-light);
+  border-left: 5px solid var(--admin-primary);
+  border-radius: var(--radius-xl, 14px);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm, 0 4px 16px rgba(0, 0, 0, 0.04));
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.profile-avatar-large {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-lg, 12px);
+  background: var(--admin-primary-gradient);
+  color: var(--fe-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--admin-primary-shadow);
+}
+
+.banner-info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.banner-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.banner-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Structured Meta Card Tiles with equal heights and ample Tamil spacing */
+.banner-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.meta-card-tile {
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  border-radius: var(--radius-md, 8px);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: var(--transition-fast, all 0.15s ease);
+}
+
+.meta-card-tile:hover {
+  background: var(--fe-bg-cream);
+  border-color: var(--fe-border-yellow-dark);
+}
+
+.meta-card-tile.highlight-tile {
+  background: var(--fe-bg-cream-accent);
+  border-color: var(--fe-border-yellow-dark);
+}
+
+.meta-card-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+}
+
+.meta-card-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--fe-text-main);
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.meta-card-val.text-star {
+  color: var(--fe-ochre-mid);
+}
+
+/* 6. Right Sidebar Architecture (Dual Layout: Sidebar & Bottom) */
+.prokerala-right-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prokerala-right-sidebar.layout-sidebar {
+  position: sticky;
+  top: 90px;
+  width: 100%;
+}
+
+.prokerala-right-sidebar.layout-bottom {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .prokerala-right-sidebar.layout-bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .prokerala-right-sidebar.layout-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bottom Sidebar Section in Layout 2 (Top-Bottom Body) */
+.layout-bottom-sidebar-section {
+  width: 100%;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1.5px dashed var(--fe-border-light);
+}
+
+
+.sidebar-widget-card {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-xl, 14px);
+  box-shadow: var(--shadow-xs, 0 4px 16px rgba(0, 0, 0, 0.03));
+  overflow: hidden;
+}
+
+.sidebar-widget-heading {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  padding: 12px 16px;
+  margin: 0;
+  border-bottom: 1px solid var(--fe-border-subtle);
+  line-height: 1.35;
+}
+
+/* Widget 1: Quick Horoscope Mini-form */
+.quick-horoscope-widget {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+}
+
+.widget-header-green {
+  background: var(--fe-primary-gradient);
+  color: var(--fe-text-heading);
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--fe-border-yellow-hover);
+  line-height: 1.35;
+}
+
+.quick-form-body {
+  padding: 14px 12px;
+}
+
+.quick-form-inner-grid {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.rishi-avatar-container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.rishi-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg, 12px);
+  background: var(--fe-border-yellow);
+  color: var(--fe-ochre-dark);
+  border: 1.5px solid var(--fe-border-yellow-hover);
+  box-shadow: 0 4px 12px var(--fe-primary-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.quick-inputs-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-text-input {
+  width: 100%;
+  border: 1.5px solid var(--fe-border-input);
+  border-radius: var(--radius-sm, 6px);
+  padding: 7px 10px;
+  font-size: 12.5px;
+  outline: none;
+  background: var(--fe-bg-surface);
+}
+
+.quick-text-input:focus {
+  border-color: var(--fe-border-yellow-dark);
+  box-shadow: 0 0 0 2px var(--fe-primary-shadow);
+}
+
+.quick-dropdown-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quick-row-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--fe-text-body);
+  min-width: 28px;
+}
+
+.quick-select-box {
+  flex: 1;
+  border: 1.5px solid var(--fe-border-input);
+  border-radius: 5px;
+  padding: 5px 6px;
+  font-size: 11.5px;
+  background: var(--fe-bg-surface);
+  outline: none;
+}
+
+.quick-continue-btn {
+  width: 100%;
+  background: var(--fe-primary-gradient);
+  color: var(--fe-text-heading);
+  border: none;
+  border-radius: var(--radius-pill, 50px);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 4px;
+  box-shadow: var(--fe-primary-shadow);
+  line-height: 1.35;
+}
+
+.quick-continue-btn:hover {
+  background: var(--fe-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--fe-primary-shadow-hover);
+}
+
+/* Widget 2: More from Astrology Articles */
+.article-cards-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.astrology-article-card {
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--fe-border-subtle);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.astrology-article-card:last-child {
+  border-bottom: none;
+}
+
+.astrology-article-card:hover {
+  background: var(--fe-bg-hover);
+}
+
+.article-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md, 8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--fe-text-white);
+}
+
+.thumb-bhagyank { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.thumb-love { background: linear-gradient(135deg, #ec4899, #db2777); }
+.thumb-mulank { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.thumb-planets { background: linear-gradient(135deg, #0284c7, #0369a1); }
+
+.thumb-symbol { font-size: 16px; line-height: 1; }
+.thumb-tag { font-size: 8px; font-weight: 800; text-transform: uppercase; margin-top: 1px; }
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.article-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fe-text-main);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.article-cat {
+  font-size: 10.5px;
+  color: var(--admin-primary);
+  font-weight: 600;
+}
+
+/* Widget 3: Astrology Links */
+.astrology-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 14px;
+  text-decoration: none;
+  color: var(--fe-text-body);
+  border-bottom: 1px solid var(--fe-border-subtle);
+  transition: var(--transition-fast, all 0.15s ease);
+}
+
+.astrology-links-list li:last-child .sidebar-nav-link {
+  border-bottom: none;
+}
+
+.sidebar-nav-link:hover {
+  background: var(--fe-bg-subtle);
+  color: var(--admin-primary);
+}
+
+.link-arrow-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--status-green-bg);
+  color: var(--status-green-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.link-title-text {
+  flex: 1;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.link-chevron {
+  color: var(--fe-text-subtle);
+  font-size: 14px;
+}
+
+.sidebar-nav-link.is-current-page {
+  background: var(--fe-bg-cream, #fefce8);
+  color: var(--fe-ochre-dark, #78350f);
+  font-weight: 700;
+  border-left: 3px solid var(--fe-border-yellow-dark, #facc15);
+}
+
+[data-theme="dark"] .sidebar-nav-link.is-current-page {
+  background: rgba(234, 179, 8, 0.12);
+  color: #fbbf24;
+  border-left-color: #f59e0b;
+}
+
+.link-badge-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill, 50px);
+  background: var(--fe-border-yellow, #fef08a);
+  color: var(--fe-ochre-dark, #854d0e);
+  margin-left: auto;
+  margin-right: 6px;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .link-badge-pill {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+}
+
+
+/* Widget 4: Auspicious Timings Card */
+.timings-grid-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.timing-row-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--fe-border-subtle);
+}
+
+.timing-row-item:last-child {
+  border-bottom: none;
+}
+
+.timing-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.badge-green { background: var(--status-green-bg); color: var(--status-green-text); }
+.badge-red { background: var(--status-red-bg); color: var(--status-red-text); }
+.badge-yellow { background: var(--status-yellow-bg); color: var(--status-yellow-text); }
+
+.timing-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.timing-name {
+  color: var(--fe-text-main);
+  font-weight: 700;
+}
+
+.timing-value {
+  color: var(--fe-text-muted);
+  font-weight: 600;
+}
+
+/* 7. Master Reference Tables Directory (Rasis, Nakshatras, Planets, Tithis, Yogas, Karanas, Kalachakram, Tamil Calendar) */
+.master-directory-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+.directory-hero-banner {
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  border-left: 5px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-xl, 14px);
+  padding: 18px 22px;
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.07);
+}
+
+.directory-hero-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.directory-hero-icon {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.directory-hero-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  margin: 0 0 4px 0;
+  line-height: 1.35;
+}
+
+.directory-hero-sub {
+  font-size: 13px;
+  color: var(--fe-text-label, #475569);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.directory-filter-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-lg, 12px);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-xs, 0 2px 6px rgba(0, 0, 0, 0.03));
+}
+
+.directory-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fe-bg-subtle);
+  border: 1.5px solid var(--fe-border-light);
+  border-radius: var(--radius-md, 8px);
+  padding: 0 12px;
+  flex: 1;
+  min-width: 240px;
+  max-width: 420px;
+}
+
+.directory-search-box:focus-within {
+  border-color: var(--fe-border-yellow-dark);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 0 0 2px var(--fe-primary-shadow);
+}
+
+.directory-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 13.5px;
+  color: var(--fe-text-main);
+}
+
+.directory-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-pill-btn {
+  background: var(--fe-bg-subtle);
+  border: 1px solid var(--fe-border-light);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fe-text-body);
+  cursor: pointer;
+  transition: var(--transition-fast, all 0.15s ease);
+}
+
+.filter-pill-btn:hover {
+  background: var(--fe-bg-cream);
+  border-color: var(--fe-border-yellow);
+}
+
+.filter-pill-btn.active {
+  background: var(--fe-primary-gradient);
+  color: var(--fe-text-heading);
+  border-color: var(--fe-border-yellow-hover);
+  box-shadow: 0 2px 6px var(--fe-primary-shadow);
+}
+
+.master-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.master-card {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-lg, 12px);
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.master-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(234, 179, 8, 0.15);
+  border-color: var(--fe-border-yellow-dark);
+}
+
+.master-card-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--fe-border-subtle);
+  padding-bottom: 10px;
+}
+
+.master-card-glyph-badge,
+.master-card-star-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md, 8px);
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.master-card-header-titles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.master-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.master-card-subtitle {
+  font-size: 11.5px;
+  color: var(--fe-text-muted);
+  font-weight: 600;
+}
+
+.master-id-pill {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: var(--fe-ochre-dark);
+  background: var(--fe-bg-cream);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.master-card-attributes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  font-size: 12px;
+}
+
+.attribute-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attr-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+  line-height: 1.35;
+}
+
+.attr-val {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--fe-text-main);
+  line-height: 1.4;
+}
+
+.elem-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  border: 1px solid;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.gana-badge {
+  font-size: 11.5px;
+  color: var(--fe-ochre-mid);
+  font-weight: 700;
+}
+
+.paksha-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.badge-shukla {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.badge-krishna {
+  background: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+}
+
+.gemstone-badge {
+  font-size: 11.5px;
+  color: #0369a1;
+}
+
+.master-card-desc {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--fe-text-label, #475569);
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin: 0;
+}
+
+.padas-strip-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--fe-border-subtle);
+  padding-top: 8px;
+}
+
+.padas-strip-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+}
+
+.padas-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.pada-chip {
+  font-size: 10px;
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--fe-text-body);
+}
+
+.planet-relations-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-top: 1px solid var(--fe-border-subtle);
+  padding-top: 8px;
+  font-size: 11px;
+}
+
+.relation-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rel-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.tag-friend { background: #dcfce7; color: #166534; }
+.tag-enemy { background: #fee2e2; color: #991b1b; }
+
+.rel-names {
+  color: var(--fe-text-main);
+  font-weight: 600;
+}
+
+.tithi-auspicious-box {
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.auspicious-title {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark);
+}
+
+.auspicious-text {
+  font-size: 11.5px;
+  color: var(--fe-text-main);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Kalachakram Interactive Highlight Box */
+.kalachakram-highlight-box {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 4px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-xl, 14px);
+  padding: 18px 22px;
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.degree-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fe-text-heading);
+}
+
+.current-degree-badge {
+  font-size: 16px;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  background: var(--fe-primary-gradient);
+  color: var(--fe-text-heading);
+  padding: 2px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px var(--fe-primary-shadow);
+}
+
+.degree-range-slider {
+  width: 100%;
+  accent-color: var(--fe-amber-gold);
+  cursor: pointer;
+}
+
+.degree-details-summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.deg-summary-tile {
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  border-radius: var(--radius-md, 8px);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tile-lbl {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark);
+}
+
+.tile-val {
+  font-size: 13px;
+  color: var(--fe-text-main);
+}
+
+/* KP Horary 1-249 Specific Styles */
+.kp-quick-spec-card {
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-yellow);
+  border-top: 3px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-lg, 10px);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.kp-spec-num-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--fe-primary-gradient);
+  border: 1px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-md, 8px);
+  padding: 4px 12px;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.kp-spec-num-lbl {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark);
+  line-height: 1;
+}
+
+.kp-spec-num-val {
+  font-size: 20px;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  color: var(--fe-text-heading);
+  line-height: 1.1;
+}
+
+.kp-spec-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  flex: 1;
+}
+
+.kp-spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.kp-spec-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--fe-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.kp-spec-val {
+  font-size: 12.5px;
+  color: var(--fe-text-main);
+}
+
+/* Control Toolbar & Chips */
+.kp-table-control-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--fe-bg-surface);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-lg, 10px);
+  padding: 10px 14px;
+}
+
+.kp-toolbar-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kp-view-mode-toggle {
+  display: flex;
+  margin-left: auto;
+  background: var(--fe-bg-subtle);
+  border: 1px solid var(--fe-border-light);
+  border-radius: var(--radius-md, 8px);
+  padding: 2px;
+  gap: 2px;
+}
+
+.kp-view-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--fe-text-subtle);
+  transition: all 0.15s ease;
+}
+
+.kp-view-toggle-btn.active {
+  background: var(--fe-bg-surface);
+  color: var(--fe-ochre-dark);
+  font-weight: 800;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.kp-sign-chips-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.kp-chips-lbl {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--fe-text-heading);
+  white-space: nowrap;
+  margin-right: 2px;
+}
+
+.kp-sign-chip {
+  background: var(--fe-bg-warm);
+  border: 1px solid var(--fe-border-yellow);
+  color: var(--fe-text-main);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.kp-sign-chip:hover {
+  background: var(--fe-primary-hover);
+  border-color: var(--fe-border-yellow-dark);
+}
+
+.kp-sign-chip.active {
+  background: var(--fe-amber-gold);
+  color: #1c1917;
+  border-color: var(--fe-border-yellow-dark);
+  font-weight: 800;
+}
+
+/* Authentic Compact KP Reference Table (Matching Screenshot) */
+.kp-table-scroll-wrap {
+  border: 1.5px solid var(--fe-border-yellow-dark);
+  border-radius: var(--radius-md, 8px);
+  background: var(--fe-bg-surface);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.kp-compact-reference-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--fe-text-main);
+  line-height: 1.35;
+}
+
+.kp-compact-reference-table thead th {
+  background: #fdf8e6;
+  color: #292524;
+  font-weight: 800;
+  font-size: 11.5px;
+  text-align: center;
+  padding: 6px 8px;
+  border: 1px solid #d4c5a0;
+  border-bottom: 2px solid #b45309;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+
+.kp-compact-reference-table tbody td {
+  padding: 4px 8px;
+  border: 1px solid #e7dfcc;
+  vertical-align: middle;
+  font-size: 11.5px;
+}
+
+.kp-compact-reference-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.kp-compact-reference-table tbody tr:nth-child(even) {
+  background: #faf7ee;
+}
+
+.kp-compact-reference-table tbody tr:hover td {
+  background-color: #fefce8 !important;
+}
+
+.kp-compact-reference-table tbody tr.selected-row td {
+  background-color: #fef9c3 !important;
+  color: #1c1917 !important;
+  font-weight: 700;
+  border-top-color: #d97706 !important;
+  border-bottom-color: #d97706 !important;
+}
+
+.kp-compact-reference-table tbody tr.selected-row td:first-child {
+  border-left: 3px solid #d97706 !important;
+}
+
+/* Distinct thick border when a new zodiac sign begins (e.g. Aries to Taurus) */
+.kp-compact-reference-table tbody tr.sign-boundary-row td {
+  border-top: 2px solid #a16207 !important;
+}
+
+/* Specific Cell Layouts matching screenshot */
+.kp-compact-reference-table .cell-no {
+  text-align: center;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  color: #44403c;
+  width: 50px;
+}
+
+.kp-compact-reference-table .cell-sign {
+  text-align: center;
+  font-weight: 600;
+  color: #1c1917;
+  white-space: nowrap;
+}
+
+.kp-compact-reference-table .cell-star {
+  text-align: center;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.kp-compact-reference-table .cell-from,
+.kp-compact-reference-table .cell-to {
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: #1c1917;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.kp-compact-reference-table .cell-signlord {
+  text-align: center;
+  font-weight: 600;
+  color: #292524;
+}
+
+.kp-compact-reference-table .cell-starlord {
+  text-align: center;
+  font-weight: 600;
+  color: #292524;
+}
+
+.kp-compact-reference-table .cell-sublord {
+  text-align: center;
+  font-weight: 700;
+  color: #854d0e;
+}
+
+.sublord-highlight-tag {
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(250, 204, 21, 0.2);
+}
+
+.kp-compact-reference-table .cell-long {
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.kp-compact-reference-table .cell-span {
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Kalachakram 360° Compact Reference Table
+   ========================================================================== */
+.kalachakram-table-scroll-wrap {
+  max-height: 560px;
+  overflow-y: auto;
+  border: 1.5px solid var(--fe-border-yellow-dark, #b45309);
+  border-radius: var(--radius-md, 8px);
+  background: var(--fe-bg-surface, #ffffff);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  scrollbar-width: thin;
+}
+
+.kalachakram-compact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  color: var(--fe-text-main, #1c1917);
+  line-height: 1.35;
+}
+
+.kalachakram-compact-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #fdf8e6;
+  color: #292524;
+  font-weight: 800;
+  font-size: 11.5px;
+  padding: 6px 8px;
+  border: 1px solid #d4c5a0;
+  border-bottom: 2px solid #b45309;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.kalachakram-compact-table tbody td {
+  padding: 3.5px 8px;
+  border: 1px solid #e7dfcc;
+  vertical-align: middle;
+  font-size: 11.5px;
+}
+
+.kalachakram-compact-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.kalachakram-compact-table tbody tr:nth-child(even) {
+  background: #faf7ee;
+}
+
+.kalachakram-compact-table tbody tr:hover td {
+  background-color: #fefce8 !important;
+}
+
+.kalachakram-compact-table tbody tr.selected-row td {
+  background-color: #fef9c3 !important;
+  color: #1c1917 !important;
+  font-weight: 700;
+  border-top-color: #d97706 !important;
+  border-bottom-color: #d97706 !important;
+}
+
+.kalachakram-compact-table tbody tr.selected-row td:first-child {
+  border-left: 3px solid #d97706 !important;
+}
+
+/* Thick boundary line demarcating new zodiac signs (every 30 degrees) */
+.kalachakram-compact-table tbody tr.sign-boundary-row td {
+  border-top: 2.5px solid #a16207 !important;
+}
+
+.kalachakram-compact-pada-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 4px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  white-space: nowrap;
+}
+
+.kalachakram-compact-table .cell-deg {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  color: #44403c;
+  white-space: nowrap;
+}
+
+.kalachakram-compact-table tbody tr.selected-row .cell-deg {
+  color: #b45309 !important;
+}
+
+.kalachakram-compact-table .cell-in-sign {
+  font-family: var(--font-mono, monospace);
+  color: #57534e;
+  white-space: nowrap;
+}
+
+.kalachakram-compact-table .cell-rasi,
+.kalachakram-compact-table .cell-nakshatra,
+.kalachakram-compact-table .cell-navamsa {
+  white-space: nowrap;
+  color: #1c1917;
+}
+
+.kalachakram-compact-table .cell-rasi-lord,
+.kalachakram-compact-table .cell-star-lord,
+.kalachakram-compact-table .cell-navamsa-lord {
+  white-space: nowrap;
+  color: #44403c;
+}
+
+
+

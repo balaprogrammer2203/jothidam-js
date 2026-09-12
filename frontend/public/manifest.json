@@ -1,0 +1,23 @@
+{
+  "short_name": "Jothidam",
+  "name": "Jothidam Portal - Vedic Astrology & Swiss Ephemeris Engine",
+  "description": "High-precision Vedic Kundli, D1 & D9 Navamsa Charts, KP Horary 1-249 Table, Panchangam & Astrological Ephemeris in 6 Indian Languages.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#100b05",
+  "background_color": "#100b05",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "categories": ["lifestyle", "utilities", "astrology"]
+}

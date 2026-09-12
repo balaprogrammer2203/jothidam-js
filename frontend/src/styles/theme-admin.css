@@ -1,0 +1,104 @@
+/* ==========================================================================
+   ADMIN PANEL THEME COLOR SETTINGS (theme-admin.css)
+   Dedicated color tokens for Admin Dashboard, Tables, CRUD Modals & Permissions
+   ========================================================================== */
+
+:root {
+  /* Admin Royal Purple Palette */
+  --admin-primary: #6b21a8;
+  --admin-primary-dark: #4c1d95;
+  --admin-primary-light: #faf5ff;
+  --admin-primary-accent: #7c3aed;
+  --admin-primary-border: #e9d5ff;
+  --admin-primary-border-hover: #c084fc;
+  --admin-primary-gradient: linear-gradient(135deg, #7c3aed, #6b21a8);
+  --admin-primary-gradient-hover: linear-gradient(135deg, #6d28d9, #581c87);
+  --admin-hero-gradient: linear-gradient(135deg, #4c1d95 0%, #6b21a8 100%);
+  --admin-primary-shadow: rgba(107, 33, 168, 0.25);
+  --admin-primary-shadow-lg: 0 6px 20px rgba(107, 33, 168, 0.2);
+
+  /* Admin Surfaces, Backgrounds & Cards */
+  --admin-bg-page: #f8fafc;
+  --admin-bg-surface: #ffffff;
+  --admin-bg-subtle: #f8fafc;
+  --admin-bg-muted: #f1f5f9;
+  --admin-bg-hover: #faf5ff;
+  --admin-bg-selected: #faf5ff;
+
+  /* Admin Typography Colors */
+  --admin-text-heading: #0f172a;
+  --admin-text-title: #1e293b;
+  --admin-text-body: #334155;
+  --admin-text-label: #475569;
+  --admin-text-muted: #64748b;
+  --admin-text-subtle: #94a3b8;
+  --admin-text-white: #ffffff;
+
+  /* Admin Borders & Dividers */
+  --admin-border-light: #e2e8f0;
+  --admin-border-subtle: #f1f5f9;
+  --admin-border-input: #cbd5e1;
+  --admin-border-focus: #6b21a8;
+  --admin-focus-ring: rgba(107, 33, 168, 0.1);
+
+  /* Admin Data Table System */
+  --admin-th-bg: #f8fafc;
+  --admin-th-text: #0f172a;
+  --admin-th-border: #e2e8f0;
+  --admin-td-border: #f1f5f9;
+  --admin-tr-hover: #faf5ff;
+  --admin-index-color: #94a3b8;
+  --admin-highlight-text: #6b21a8;
+
+  /* Admin Action Buttons */
+  --admin-view-hover-bg: #e0f2fe;
+  --admin-view-hover-border: #38bdf8;
+  --admin-edit-hover-bg: #fef3c7;
+  --admin-edit-hover-border: #f59e0b;
+  --admin-edit-btn-bg: #f59e0b;
+  --admin-delete-hover-bg: #fee2e2;
+  --admin-delete-hover-border: #ef4444;
+  --admin-danger-btn-bg: #dc2626;
+  --admin-danger-text: #dc2626;
+  --admin-danger-circle-bg: #fee2e2;
+
+  /* Save & Success Actions */
+  --admin-save-gradient: linear-gradient(135deg, #10b981, #059669);
+  --admin-save-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+
+  /* Role Badges */
+  --role-superadmin-bg: #fef2f2;
+  --role-superadmin-text: #dc2626;
+  --role-superadmin-border: #fecaca;
+
+  --role-admin-bg: #eff6ff;
+  --role-admin-text: #2563eb;
+  --role-admin-border: #bfdbfe;
+
+  --role-user-bg: #f0fdf4;
+  --role-user-text: #16a34a;
+  --role-user-border: #bbf7d0;
+
+  /* Admin Modals & Dark Code Editor */
+  --admin-modal-overlay-bg: rgba(15, 23, 42, 0.6);
+  --admin-json-bg: #0f172a;
+  --admin-json-text: #38bdf8;
+  --admin-json-border: #e2e8f0;
+  --admin-json-error-border: #ef4444;
+  --admin-json-error-text: #dc2626;
+
+  /* Permissions Matrix Manager */
+  --perm-banner-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+  --perm-banner-shadow: 0 6px 20px rgba(49, 46, 129, 0.2);
+  --perm-banner-subtext: #c7d2fe;
+  --perm-checkbox-accent: #4338ca;
+  --perm-grant-btn-text: #15803d;
+  --perm-grant-btn-border: #bbf7d0;
+  --perm-grant-btn-hover: #f0fdf4;
+  --perm-readonly-btn-text: #0369a1;
+  --perm-readonly-btn-border: #bae6fd;
+  --perm-readonly-btn-hover: #f0f9ff;
+  --perm-revoke-btn-text: #dc2626;
+  --perm-revoke-btn-border: #fecaca;
+  --perm-revoke-btn-hover: #fef2f2;
+}

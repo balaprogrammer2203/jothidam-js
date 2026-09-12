@@ -1,0 +1,1255 @@
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS & MEDIA QUERIES (responsive.css)
+   ========================================================================== */
+
+/* 1. Large Desktop (>= 1280px) */
+@media (min-width: 1280px) {
+  .prokerala-main-grid {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 32px;
+    width: 100%;
+  }
+}
+
+/* 2. Small Laptop / Desktop (1024px to 1279px) */
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .prokerala-main-grid {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 24px;
+    width: 100%;
+  }
+  .header-search-input {
+    width: 160px;
+  }
+  .portal-guru-mantra-pill {
+    padding: 2.5px 10px;
+    gap: 5px;
+  }
+  .guru-mantra-text {
+    font-size: 11px;
+  }
+  .guru-om-badge {
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+  }
+  .guru-pranam-icon {
+    font-size: 11.5px;
+  }
+}
+
+/* 3. Mid-Tablet Layouts (max-width: 1060px) */
+@media (max-width: 1060px) {
+  .planetary-details-horizontal-layout {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .banner-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 4. Tablet View (768px to 1023px) */
+@media (max-width: 1023px) {
+  .prokerala-layout-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 16px 40px;
+    box-sizing: border-box;
+  }
+
+  .portal-header-center-area {
+    padding: 0 8px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .portal-guru-mantra-pill {
+    padding: 2.5px 9px;
+    gap: 5px;
+  }
+
+  .guru-mantra-text {
+    font-size: 11px;
+  }
+
+  .guru-om-badge {
+    width: 14px;
+    height: 14px;
+    font-size: 8.5px;
+  }
+
+  .guru-pranam-icon {
+    font-size: 11px;
+  }
+
+  .user-name-label {
+    display: none !important;
+  }
+
+  .header-user-btn {
+    padding: 3px 6px !important;
+    gap: 0 !important;
+  }
+
+  .header-search-input {
+    width: 140px;
+  }
+
+  .header-search-input:focus {
+    width: 170px;
+  }
+
+  .prokerala-main-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 28px;
+  }
+
+  .prokerala-content-col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Tablet View (768px to 1023px): Touch-Scrollable Horizontal Category Bar & Bounded Dropdowns */
+  .portal-mobile-toggle-btn {
+    display: flex !important;
+  }
+
+  .portal-nav-menu-bar {
+    display: block !important;
+    width: 100% !important;
+    background: var(--fe-bg-warm, #fffdf5) !important;
+    border-bottom: 1px solid var(--fe-border-subtle, #f1f5f9) !important;
+    position: relative !important;
+    z-index: 1040 !important;
+  }
+
+  .portal-menu-inner {
+    max-width: 100% !important;
+    padding: 0 16px !important;
+    height: 42px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .portal-menu-inner::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .portal-main-menu-nav {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: auto !important;
+    min-width: 100% !important;
+  }
+
+  .portal-categories-list {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    height: 100% !important;
+    width: max-content !important;
+    padding: 0 4px !important;
+  }
+
+  .portal-category-item {
+    position: relative !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .portal-category-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 5px 12px !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    border-radius: 20px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    border: 1px solid rgba(245, 158, 11, 0.22) !important;
+    color: #374151 !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .portal-category-btn:hover,
+  .portal-category-item.active-dropdown .portal-category-btn {
+    background: #fef08a !important;
+    border-color: #facc15 !important;
+    color: #78350f !important;
+  }
+
+  /* Safe bounded floating mega dropdown modal for tablet */
+  .portal-mega-dropdown-menu {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 680px !important;
+    max-height: 82vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 99999 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(245, 158, 11, 0.3) !important;
+    padding: 16px !important;
+    animation: portalModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .portal-category-item:nth-last-child(-n+2) .portal-mega-dropdown-menu {
+    left: 50% !important;
+    right: auto !important;
+  }
+
+  .portal-columns-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    min-width: unset !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .portal-columns-grid.cols-1 {
+    grid-template-columns: 1fr !important;
+    min-width: unset !important;
+    width: 100% !important;
+  }
+
+  .header-search-form {
+    display: none;
+  }
+
+  .prokerala-right-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sidebar-widget-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* 5. Admin Responsive Layout (max-width: 960px) */
+@media (max-width: 960px) {
+  .admin-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    position: static;
+  }
+}
+
+/* 6. Tablet & Small Screens Charts (max-width: 820px) */
+@media (max-width: 820px) {
+  .side-by-side-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+
+  .chart-grid-container {
+    grid-template-rows: repeat(4, 90px);
+  }
+
+  .planet-name {
+    font-size: 10px;
+  }
+
+  .planet-degree {
+    font-size: 8px;
+  }
+
+  .planetary-positions-section,
+  .basic-details-section {
+    padding: 14px 16px;
+  }
+
+  .basic-lbl-cell, .basic-val-cell {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+/* 7. Mobile View (up to 767px) - 100% Full-Width Elements */
+@media (max-width: 767px) {
+  .prokerala-layout-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px 36px;
+    box-sizing: border-box;
+  }
+
+  .mobile-hamburger-btn,
+  .portal-mobile-toggle-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Mobile Horizontal Swipeable Category Navigation Bar */
+  .portal-nav-menu-bar {
+    display: block !important;
+    width: 100% !important;
+    background: var(--fe-bg-warm, #fffdf5) !important;
+    border-bottom: 1px solid var(--fe-border-subtle, #f1f5f9) !important;
+    position: relative !important;
+    z-index: 1040 !important;
+  }
+
+  .portal-menu-inner {
+    max-width: 100% !important;
+    padding: 0 8px !important;
+    height: 38px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .portal-menu-inner::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .portal-main-menu-nav {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: auto !important;
+    min-width: 100% !important;
+  }
+
+  .portal-categories-list {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 5px !important;
+    height: 100% !important;
+    width: max-content !important;
+    padding: 0 2px !important;
+  }
+
+  .portal-category-item {
+    position: relative !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .portal-category-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 4px 10px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    border-radius: 20px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    border: 1px solid rgba(245, 158, 11, 0.22) !important;
+    color: #374151 !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .portal-category-btn:hover,
+  .portal-category-item.active-dropdown .portal-category-btn {
+    background: #fef08a !important;
+    border-color: #facc15 !important;
+    color: #78350f !important;
+  }
+
+  /* Safe bounded floating modal sheet for mobile dropdown */
+  .portal-mega-dropdown-menu {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 92% !important;
+    max-width: min(500px, calc(100vw - 20px)) !important;
+    max-height: 82vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 99999 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(245, 158, 11, 0.3) !important;
+    padding: 14px !important;
+    animation: portalModalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .portal-category-item:nth-last-child(-n+2) .portal-mega-dropdown-menu {
+    left: 50% !important;
+    right: auto !important;
+  }
+
+  .portal-columns-grid.cols-2 {
+    grid-template-columns: 1fr !important;
+    min-width: unset !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .portal-columns-grid.cols-1 {
+    grid-template-columns: 1fr !important;
+    min-width: unset !important;
+    width: 100% !important;
+  }
+
+  .header-search-form {
+    display: none;
+  }
+
+  .portal-nav-inner {
+    padding: 6px 12px 6px !important;
+    height: auto !important;
+    min-height: 52px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    row-gap: 5px !important;
+  }
+
+  .portal-brand-section {
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    gap: 8px !important;
+  }
+
+  .portal-brand-title {
+    font-size: 16px !important;
+  }
+
+  .portal-brand-sub {
+    font-size: 8.5px !important;
+  }
+
+  .portal-logo-badge {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .portal-logo-glyph {
+    font-size: 15px !important;
+  }
+
+  .portal-utilities-section {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    gap: 6px !important;
+  }
+
+  .user-name-label {
+    display: none !important;
+  }
+
+  .header-user-btn {
+    padding: 3px 6px !important;
+    gap: 0 !important;
+  }
+
+  .portal-header-center-area {
+    order: 3 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 2px 0 2px !important;
+    margin: 0 auto !important;
+  }
+
+  .portal-guru-mantra-pill {
+    padding: 2.5px 10px !important;
+    gap: 5px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .guru-mantra-text {
+    font-size: 10.5px !important;
+    letter-spacing: 0.1px !important;
+  }
+
+  .guru-om-badge {
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 8.5px !important;
+    border-radius: 2.5px !important;
+  }
+
+  .guru-pranam-icon {
+    font-size: 11px !important;
+  }
+
+  .portal-brand-title {
+    font-size: 18px;
+  }
+
+  .prokerala-hero-banner-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    padding: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chart-style-options {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .prokerala-page-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .prokerala-main-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .prokerala-content-col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Saved Horoscope Profile Detail on Mobile */
+  .saved-detail-top-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .detail-top-controls {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .saved-detail-profile-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .banner-title-row {
+    justify-content: center;
+  }
+
+  .banner-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .chart-meta-infobar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  /* Full Width Right Sidebar in Mobile */
+  .prokerala-right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .sidebar-widget-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .quick-form-body {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .quick-form-inner-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+
+  .rishi-avatar-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .rishi-avatar-circle {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+    border-radius: 10px;
+  }
+
+  .quick-inputs-col {
+    width: 100%;
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quick-text-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    font-size: 12.5px;
+  }
+
+  .quick-dropdown-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-sizing: border-box;
+  }
+
+  .quick-row-label {
+    min-width: 28px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--fe-text-heading);
+    flex-shrink: 0;
+  }
+
+  .quick-select-box {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 5px 3px;
+    font-size: 11px;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .quick-continue-btn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 16px;
+    font-size: 12.5px;
+  }
+
+  .article-cards-list,
+  .astrology-article-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .astrology-links-list,
+  .sidebar-nav-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .timings-grid-box,
+  .timing-row-item {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .epanchang-form-container {
+    padding: 14px 12px;
+    box-sizing: border-box;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .form-card-header {
+    padding: 12px 14px;
+  }
+
+  .epanchang-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .epanchang-label-col {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .epanchang-input-col {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .date-select-group,
+  .time-select-group {
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .date-select-group .epanchang-select,
+  .time-select-group .epanchang-select {
+    padding: 8px 24px 8px 8px;
+    background-position: right 6px center;
+    background-size: 11px;
+    font-size: 13px;
+    min-width: 0;
+  }
+
+  .dms-field-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .dms-row-label {
+    min-width: 100%;
+    font-size: 12.5px;
+  }
+
+  .dms-inputs-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .dms-inputs-group {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    gap: 2px;
+  }
+
+  .dms-deg-input {
+    width: auto;
+    flex: 1.2;
+    min-width: 36px;
+    max-width: 50px;
+    padding: 4px 2px;
+    font-size: 12px;
+  }
+
+  .dms-min-input,
+  .dms-sec-input {
+    width: auto;
+    flex: 1;
+    min-width: 30px;
+    max-width: 40px;
+    padding: 4px 2px;
+    font-size: 12px;
+  }
+
+  .dms-unit {
+    font-size: 11px;
+    padding: 0 1px;
+  }
+
+  .dms-dir-select {
+    flex: 1.4;
+    min-width: 52px;
+    max-width: 78px;
+    padding: 4px 3px;
+    font-size: 11px;
+  }
+
+  /* Form Bottom Actions & Chart Type Toggles on Mobile */
+  .epanchang-bottom-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin-top: 6px !important;
+  }
+
+  .chart-type-options {
+    display: flex !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .chart-pill-btn {
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 9px 8px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+  }
+
+  .form-actions-group {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+  }
+
+  .epanchang-submit-btn,
+  .epanchang-save-btn {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    padding: 12px 16px !important;
+    font-size: 13.5px !important;
+    text-align: center !important;
+  }
+
+  /* Mobile Chart Grid and Center Box */
+  .chart-grid-container {
+    margin: 8px 2px;
+    grid-template-rows: repeat(4, minmax(84px, auto));
+  }
+
+  .center-cell {
+    padding: 4px 2px !important;
+  }
+
+  .center-info-container {
+    gap: 1.5px !important;
+  }
+
+  .center-date,
+  .center-time {
+    font-size: 9.5px !important;
+  }
+
+  .center-chart-name {
+    font-size: 13.5px !important;
+    margin: 1px 0 !important;
+  }
+
+  .center-meta-details {
+    padding: 2px 4px !important;
+    gap: 1.5px !important;
+    margin-top: 1px !important;
+    border-radius: 4px !important;
+    width: 98% !important;
+  }
+
+  .center-meta-row {
+    font-size: 8.5px !important;
+    line-height: 1.2 !important;
+    gap: 2px !important;
+  }
+
+  .center-meta-coords {
+    font-size: 8px !important;
+    letter-spacing: -0.2px !important;
+  }
+
+  .center-meta-ayanamsa {
+    font-size: 8px !important;
+  }
+
+  .center-meta-icon {
+    font-size: 7.5px !important;
+  }
+
+  .side-by-side-grid,
+  .planetary-details-horizontal-layout {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}
+
+/* 7b. Mobile Screens (< 460px): Centered Top Header Content */
+@media (max-width: 459px) {
+  .portal-nav-inner {
+    padding: 6px 10px 6px !important;
+    row-gap: 6px !important;
+    justify-content: center !important;
+  }
+
+  .portal-brand-section {
+    order: 1 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    padding: 2px 0 !important;
+  }
+
+  .portal-mobile-toggle-btn {
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .portal-brand-logo-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    gap: 8px !important;
+  }
+
+  .portal-utilities-section {
+    order: 2 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    gap: 8px !important;
+  }
+
+  .portal-header-center-area {
+    order: 3 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 2px 0 !important;
+    margin: 0 auto !important;
+  }
+
+  .portal-guru-mantra-pill {
+    padding: 2px 8px !important;
+  }
+}
+
+/* 8. Ultra Narrow Mobile Screens (<= 360px, e.g. 320px iPhone SE) */
+@media (max-width: 360px) {
+  .portal-nav-inner {
+    padding: 5px 8px 5px !important;
+    gap: 4px !important;
+    row-gap: 4px !important;
+  }
+
+  .portal-brand-sub {
+    display: none !important;
+  }
+
+  .portal-brand-title {
+    font-size: 14px !important;
+  }
+
+  .portal-logo-badge {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .portal-logo-glyph {
+    font-size: 13px !important;
+  }
+
+  .portal-utilities-section {
+    gap: 4px !important;
+  }
+
+  .lang-trigger-name {
+    display: none !important;
+  }
+
+  .lang-selector-trigger {
+    padding: 4px 6px !important;
+    font-size: 11px !important;
+  }
+
+  .header-logout-tiny-btn {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .portal-header-center-area {
+    order: 3 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 1px 0 !important;
+  }
+
+  .portal-guru-mantra-pill {
+    padding: 2px 7px !important;
+    gap: 4px !important;
+  }
+
+  .guru-mantra-text {
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .guru-om-badge {
+    width: 13px !important;
+    height: 13px !important;
+    font-size: 8px !important;
+  }
+
+  .guru-pranam-icon {
+    font-size: 10.5px !important;
+  }
+
+  .portal-menu-inner {
+    padding: 0 4px !important;
+    height: 36px !important;
+  }
+
+  .portal-categories-list {
+    gap: 4px !important;
+  }
+
+  .portal-category-btn {
+    padding: 3px 8px !important;
+    font-size: 11px !important;
+    gap: 3px !important;
+  }
+
+  .prokerala-layout-container {
+    padding: 4px 4px 32px !important;
+  }
+
+  /* 320px Ultra-Narrow Chart Grid and Center Box */
+  .chart-grid-container {
+    margin: 4px 0 !important;
+    grid-template-rows: repeat(4, minmax(86px, auto)) !important;
+  }
+
+  .center-cell {
+    padding: 3px 2px !important;
+  }
+
+  .center-info-container {
+    gap: 1px !important;
+  }
+
+  .center-date,
+  .center-time {
+    font-size: 8.5px !important;
+    line-height: 1.1 !important;
+  }
+
+  .center-chart-name {
+    font-size: 12px !important;
+    margin: 0 !important;
+    line-height: 1.15 !important;
+  }
+
+  .center-meta-details {
+    padding: 2px 2px !important;
+    gap: 1px !important;
+    margin-top: 1px !important;
+    width: 98% !important;
+  }
+
+  .center-meta-row {
+    font-size: 7.5px !important;
+    line-height: 1.15 !important;
+  }
+
+  .center-meta-coords {
+    font-size: 7px !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .center-meta-ayanamsa {
+    font-size: 7px !important;
+  }
+
+  .center-meta-icon {
+    font-size: 6.5px !important;
+  }
+
+  .form-card-wrapper {
+    border-radius: 10px;
+  }
+
+  .epanchang-form-container {
+    padding: 10px 6px !important;
+    gap: 10px !important;
+  }
+
+  .chart-type-options {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 6px !important;
+  }
+
+  .chart-pill-btn {
+    width: 100% !important;
+    padding: 8px 10px !important;
+    font-size: 11.5px !important;
+    gap: 6px !important;
+    justify-content: center !important;
+  }
+
+  .radio-dot {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .radio-dot-inner {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .epanchang-submit-btn,
+  .epanchang-save-btn {
+    padding: 10px 12px !important;
+    font-size: 12.5px !important;
+    border-radius: 25px !important;
+  }
+
+  .date-select-group,
+  .time-select-group {
+    gap: 3px !important;
+  }
+
+  .date-select-group .epanchang-select,
+  .time-select-group .epanchang-select {
+    padding: 7px 14px 7px 4px !important;
+    background-position: right 2px center !important;
+    background-size: 9px !important;
+    font-size: 11px !important;
+    border-radius: 5px !important;
+  }
+
+  .dms-inputs-group {
+    padding: 3px 4px !important;
+    gap: 1px !important;
+  }
+
+  .dms-deg-input {
+    min-width: 30px !important;
+    font-size: 11px !important;
+    padding: 3px 1px !important;
+  }
+
+  .dms-min-input,
+  .dms-sec-input {
+    min-width: 24px !important;
+    font-size: 11px !important;
+    padding: 3px 1px !important;
+  }
+
+  .dms-unit {
+    font-size: 10px !important;
+    padding: 0 !important;
+  }
+
+  .dms-dir-select {
+    min-width: 44px !important;
+    font-size: 10px !important;
+    padding: 3px 2px !important;
+  }
+
+  .dms-decimal-preview {
+    font-size: 9.5px !important;
+  }
+
+  .quick-form-body {
+    padding: 8px !important;
+  }
+
+  .quick-dropdown-row {
+    gap: 3px !important;
+  }
+
+  .quick-row-label {
+    min-width: 24px !important;
+    font-size: 10px !important;
+  }
+
+  .quick-select-box {
+    padding: 5px 2px !important;
+    font-size: 10.5px !important;
+  }
+
+  .quick-text-input {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+
+  .floating-scroll-top-wrapper {
+    bottom: 6px !important;
+    right: 6px !important;
+    transform: scale(0.8) !important;
+    transform-origin: bottom right !important;
+  }
+
+  .floating-scroll-top-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+

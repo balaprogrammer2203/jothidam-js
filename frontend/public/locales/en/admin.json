@@ -1,0 +1,66 @@
+{
+  "panelTitle": "Admin Control Panel",
+  "panelSubtitle": "Database & Tables Manager",
+  "dashboard": "Dashboard Overview",
+  "allTables": "Master Database Tables",
+  "permissionManager": "Role & Permissions Matrix",
+  "userManagement": "User Management",
+  "totalRecords": "Total Records",
+  "activeTables": "Active Tables",
+  "systemRoles": "System Roles",
+  "filterMenuPlaceholder": "Filter menus & tables...",
+  "categories": {
+    "system": "System & Overview",
+    "clients": "Horoscopes & Client Data",
+    "astronomy": "Planetary & Zodiac Masters",
+    "kpSystem": "KP Stellar Astrology",
+    "panchangam": "Vedic Panchangam & Calendar",
+    "prasannam": "Prasannam Astrology"
+  },
+  "stats": {
+    "kadikara": "Kadikara Prasannam",
+    "users": "Registered Users",
+    "profiles": "Saved Horoscopes",
+    "rasis": "Zodiac Signs (Rasis)",
+    "nakshatras": "Lunar Mansions (Stars)",
+    "planets": "Navagrahas (Planets)",
+    "tithis": "Lunar Tithis",
+    "yogas": "Nithya Yogas",
+    "karanas": "Karanas",
+    "years": "Tamil/Saka 60 Years",
+    "months": "Tamil Months"
+  },
+  "table": {
+    "search": "Search records...",
+    "addRecord": "Add New Record",
+    "editRecord": "Edit Record",
+    "viewRecord": "View Record",
+    "deleteRecord": "Delete Record",
+    "confirmDelete": "Are you sure you want to delete this record?",
+    "deleteWarning": "This action cannot be undone.",
+    "saveChanges": "Save Changes",
+    "createSuccess": "Record created successfully!",
+    "updateSuccess": "Record updated successfully!",
+    "deleteSuccess": "Record deleted successfully!",
+    "noPermission": "You do not have permission to perform this action."
+  },
+  "permissions": {
+    "title": "Role-Based Access Control (RBAC)",
+    "subtitle": "Configure granular permissions for roles across all database tables.",
+    "roles": {
+      "superadmin": "Super Administrator",
+      "admin": "System Administrator",
+      "user": "Standard User"
+    },
+    "tablePermissions": "Table CRUD Permissions",
+    "read": "Read",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "canAccessAdmin": "Access Admin Panel",
+    "canManageUsers": "Manage Users",
+    "canManagePermissions": "Manage Permissions Matrix",
+    "saveRoles": "Save Permission Matrix",
+    "resetDefaults": "Reset to Defaults"
+  }
+}

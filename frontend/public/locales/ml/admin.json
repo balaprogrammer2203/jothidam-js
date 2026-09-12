@@ -1,0 +1,66 @@
+{
+  "panelTitle": "അഡ്മിൻ പാനൽ",
+  "panelSubtitle": "ഡാറ്റാബേസ് & പട്ടികകളുടെ നിയന്ത്രണം",
+  "dashboard": "ഡാഷ്‌ബോർഡ് അവലോകനം",
+  "allTables": "പ്രധാന ഡാറ്റാബേസ് പട്ടികകൾ",
+  "permissionManager": "അനുമതികളുടെ മാട്രിക്സ്",
+  "userManagement": "ഉപയോക്തൃ മാനേജ്മെന്റ്",
+  "totalRecords": "ആകെ രേഖകൾ",
+  "activeTables": "സജീവ പട്ടികകൾ",
+  "systemRoles": "സിസ്റ്റം പദവികൾ",
+  "filterMenuPlaceholder": "പട്ടികകൾ ഫിൽട്ടർ ചെയ്യുക...",
+  "categories": {
+    "system": "സിസ്റ്റം & അവലോകനം",
+    "clients": "ജാതകങ്ങളും ക്ലയൻ്റ് ഡാറ്റയും",
+    "astronomy": "ഗ്രഹങ്ങളും രാശികളും",
+    "kpSystem": "കെപി ജ്യോതിഷ സംവിധാനം",
+    "panchangam": "പഞ്ചാംഗവും കലണ്ടറും",
+    "prasannam": "പ്രശ്ന ജ്യോതിഷം"
+  },
+  "stats": {
+    "kadikara": "ഘടികാര പ്രസന്നം",
+    "users": "രജിസ്റ്റർ ചെയ്ത ഉപയോക്താക്കൾ",
+    "profiles": "സംരക്ഷിച്ച ജാതകങ്ങൾ",
+    "rasis": "രാശികൾ (12 Zodiacs)",
+    "nakshatras": "നക്ഷത്രങ്ങൾ (27 Stars)",
+    "planets": "നവഗ്രഹങ്ങൾ (Planets)",
+    "tithis": "തിഥികൾ (30 Tithis)",
+    "yogas": "നിത്യ യോഗങ്ങൾ (27 Yogas)",
+    "karanas": "കരണങ്ങൾ (11 Karanas)",
+    "years": "സംവത്സരങ്ങൾ (60 Years)",
+    "months": "സൗര മാസങ്ങൾ (12 Months)"
+  },
+  "table": {
+    "search": "രേഖകൾ തിരയുക...",
+    "addRecord": "പുതിയ രേഖ ചേർക്കുക",
+    "editRecord": "രേഖ തിരുത്തുക",
+    "viewRecord": "രേഖ കാണുക",
+    "deleteRecord": "രേഖ ഇല്ലാതാക്കുക",
+    "confirmDelete": "ഈ രേഖ ഇല്ലാതാക്കാൻ നിങ്ങൾ തീർച്ചയായും ആഗ്രഹിക്കുന്നുണ്ടോ?",
+    "deleteWarning": "ഈ നടപടി പൂർവ്വസ്ഥിതിയിലാക്കാൻ കഴിയില്ല.",
+    "saveChanges": "മാറ്റങ്ങൾ സംരക്ഷിക്കുക",
+    "createSuccess": "രേഖ വിജയകരമായി സൃഷ്ടിച്ചു!",
+    "updateSuccess": "രേഖ വിജയകരമായി പുതുക്കി!",
+    "deleteSuccess": "രേഖ വിജയകരമായി ഇല്ലാതാക്കി!",
+    "noPermission": "ഈ പ്രവൃത്തി ചെയ്യാനുള്ള അനുമതി നിങ്ങൾക്കില്ല."
+  },
+  "permissions": {
+    "title": "റോൾ അടിസ്ഥാനമാക്കിയുള്ള ആക്സസ് കൺട്രോൾ (RBAC)",
+    "subtitle": "എല്ലാ ഡാറ്റാബേസ് പട്ടികകൾക്കുമുള്ള അനുമതികൾ ക്രമീകരിക്കുക.",
+    "roles": {
+      "superadmin": "മുഖ്യ അഡ്മിൻ (Super Admin)",
+      "admin": "സിസ്റ്റം അഡ്മിൻ (Admin)",
+      "user": "സാധാരണ ഉപയോക്താവ് (User)"
+    },
+    "tablePermissions": "പട്ടിക CRUD അനുമതികൾ",
+    "read": "വായിക്കുക (Read)",
+    "create": "സൃഷ്ടിക്കുക (Create)",
+    "update": "തിരുത്തുക (Update)",
+    "delete": "ഇല്ലാതാക്കുക (Delete)",
+    "canAccessAdmin": "അഡ്മിൻ പാനൽ പ്രവേശനം",
+    "canManageUsers": "ഉപയോക്താക്കളെ നിയന്ത്രിക്കുക",
+    "canManagePermissions": "അനുമതി മാട്രിക്സ് കൈകാര്യം ചെയ്യുക",
+    "saveRoles": "അനുമതികൾ സംരക്ഷിക്കുക",
+    "resetDefaults": "സ്വതവേയുള്ളതിലേക്ക് മാറ്റുക"
+  }
+}

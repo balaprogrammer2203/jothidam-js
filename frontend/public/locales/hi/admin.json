@@ -1,0 +1,66 @@
+{
+  "panelTitle": "व्यवस्थापक नियंत्रण कक्ष",
+  "panelSubtitle": "डेटाबेस एवं तालिका प्रबंधक",
+  "dashboard": "डैशबोर्ड अवलोकन",
+  "allTables": "मुख्य डेटाबेस तालिकाएँ",
+  "permissionManager": "भूमिका एवं अनुमति मैट्रिक्स",
+  "userManagement": "उपयोगकर्ता प्रबंधन",
+  "totalRecords": "कुल रिकॉर्ड्स",
+  "activeTables": "सक्रिय तालिकाएँ",
+  "systemRoles": "प्रणाली भूमिकाएँ",
+  "filterMenuPlaceholder": "तालिकाओं को फ़िल्टर करें...",
+  "categories": {
+    "system": "सिस्टम और अवलोकन",
+    "clients": "कुंडली और ग्राहक डेटा",
+    "astronomy": "ग्रह और राशियाँ",
+    "kpSystem": "केपी नक्षत्र ज्योतिष",
+    "panchangam": "पंचांग और कैलेंडर",
+    "prasannam": "प्रश्न ज्योतिष"
+  },
+  "stats": {
+    "kadikara": "घड़ी प्रश्न ज्योतिष",
+    "users": "पंजीकृत उपयोगकर्ता",
+    "profiles": "सहेजी गई कुंडलियाँ",
+    "rasis": "राशियाँ (12 Zodiacs)",
+    "nakshatras": "नक्षत्र (27 Stars)",
+    "planets": "नवग्रह (Planets)",
+    "tithis": "तिथियाँ (30 Tithis)",
+    "yogas": "नित्य योग (27 Yogas)",
+    "karanas": "करण (11 Karanas)",
+    "years": "तमिल/संवत 60 वर्ष",
+    "months": "सौर मास (12 Months)"
+  },
+  "table": {
+    "search": "रिकॉर्ड खोजें...",
+    "addRecord": "नया रिकॉर्ड जोड़ें",
+    "editRecord": "रिकॉर्ड संपादित करें",
+    "viewRecord": "रिकॉर्ड देखें",
+    "deleteRecord": "रिकॉर्ड हटाएं",
+    "confirmDelete": "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?",
+    "deleteWarning": "यह क्रिया पूर्ववत नहीं की जा सकती।",
+    "saveChanges": "परिवर्तन सहेजें",
+    "createSuccess": "रिकॉर्ड सफलतापूर्वक बनाया गया!",
+    "updateSuccess": "रिकॉर्ड सफलतापूर्वक अद्यतित किया गया!",
+    "deleteSuccess": "रिकॉर्ड सफलतापूर्वक हटा दिया गया!",
+    "noPermission": "आपके पास यह कार्य करने की अनुमति नहीं है।"
+  },
+  "permissions": {
+    "title": "भूमिका आधारित अभिगम नियंत्रण (RBAC)",
+    "subtitle": "सभी डेटाबेस तालिकाओं के लिए विस्तृत अनुमतियाँ कॉन्फ़िगर करें।",
+    "roles": {
+      "superadmin": "मुख्य व्यवस्थापक (Super Admin)",
+      "admin": "सिस्टम व्यवस्थापक (Admin)",
+      "user": "सामान्य उपयोगकर्ता (User)"
+    },
+    "tablePermissions": "तालिका CRUD अनुमतियाँ",
+    "read": "पढ़ें (Read)",
+    "create": "बनाएं (Create)",
+    "update": "संपादित करें (Update)",
+    "delete": "हटाएं (Delete)",
+    "canAccessAdmin": "व्यवस्थापक पैनल अभिगम",
+    "canManageUsers": "उपयोगकर्ता प्रबंधित करें",
+    "canManagePermissions": "अनुमति मैट्रिक्स प्रबंधित करें",
+    "saveRoles": "अनुमतियाँ सहेजें",
+    "resetDefaults": "डिफ़ॉल्ट पर रीसेट करें"
+  }
+}
