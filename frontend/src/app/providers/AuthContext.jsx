@@ -1,42 +1,72 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import authService from '../../features/auth/services/auth.service';
+import { safeLocalStorage } from '../../core/security/storage';
 import i18n from '../../i18n';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('jothidam_auth_token') || null);
+  const [token, setToken] = useState(() => safeLocalStorage.getItem('jothidam_auth_token', null));
   const [loading, setLoading] = useState(true);
+
+  const logout = useCallback(() => {
+    safeLocalStorage.removeItem('jothidam_auth_token');
+    safeLocalStorage.removeItem('jothidam_auth_user');
+    setToken(null);
+    setUser(null);
+  }, []);
+
+  // Listen to global 401 session expiry event dispatched by core/apiClient
+  useEffect(() => {
+    const handleAuthExpired = () => {
+      logout();
+    };
+
+    window.addEventListener('jothidam:auth-expired', handleAuthExpired);
+    return () => {
+      window.removeEventListener('jothidam:auth-expired', handleAuthExpired);
+    };
+  }, [logout]);
 
   // Initialize session on mount
   useEffect(() => {
+    let isMounted = true;
+
     const initAuth = async () => {
-      const savedToken = localStorage.getItem('jothidam_auth_token');
+      const savedToken = safeLocalStorage.getItem('jothidam_auth_token');
       if (savedToken) {
         try {
           const userData = await authService.getMe();
-          setUser(userData);
-          if (userData?.preferredLanguage && !localStorage.getItem('jothidam_locale')) {
-            i18n.changeLanguage(userData.preferredLanguage);
+          if (isMounted) {
+            setUser(userData);
+            if (userData?.preferredLanguage && !safeLocalStorage.getItem('jothidam_locale')) {
+              i18n.changeLanguage(userData.preferredLanguage);
+            }
           }
         } catch (err) {
           console.warn('Session expired or invalid:', err.message);
-          localStorage.removeItem('jothidam_auth_token');
-          setToken(null);
-          setUser(null);
+          if (isMounted) {
+            logout();
+          }
         }
       }
-      setLoading(false);
+      if (isMounted) {
+        setLoading(false);
+      }
     };
 
     initAuth();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [logout]);
 
   const login = async (username, password) => {
     const data = await authService.login(username, password);
     if (data.token && data.user) {
-      localStorage.setItem('jothidam_auth_token', data.token);
+      safeLocalStorage.setItem('jothidam_auth_token', data.token);
       setToken(data.token);
       setUser(data.user);
       if (data.user.preferredLanguage) {
@@ -49,7 +79,7 @@ export function AuthProvider({ children }) {
   const register = async (userData) => {
     const data = await authService.register(userData);
     if (data.token && data.user) {
-      localStorage.setItem('jothidam_auth_token', data.token);
+      safeLocalStorage.setItem('jothidam_auth_token', data.token);
       setToken(data.token);
       setUser(data.user);
       if (data.user.preferredLanguage) {
@@ -61,12 +91,6 @@ export function AuthProvider({ children }) {
 
   const resetPassword = async (resetData) => {
     return await authService.resetPassword(resetData);
-  };
-
-  const logout = () => {
-    localStorage.removeItem('jothidam_auth_token');
-    setToken(null);
-    setUser(null);
   };
 
   const hasRole = (...allowedRoles) => {
@@ -101,3 +125,5 @@ export function useAuth() {
   }
   return context;
 }
+
+export default AuthContext;

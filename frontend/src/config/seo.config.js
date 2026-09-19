@@ -118,6 +118,28 @@ export const PAGE_SEO_REGISTRY = {
     schemaType: 'CollectionPage'
   },
 
+  // 4b. 108 Nakshatra Padas Mandalam
+  nakshatraPadas: {
+    title: {
+      ta: '108 நட்சத்திர பாதங்கள் மண்டலம் (தென்னிந்திய ராசி சக்கரம்) | Jothidam Portal',
+      en: '108 Nakshatra Padas Mandalam Wheel & Degrees | Jothidam Portal',
+      hi: '108 नक्षत्र चरण मंडल चक्र और डिग्री विवरण | Jothidam Portal',
+      te: '108 నక్షత్ర పాదాల చక్రం మరియు డిగ్రీలు | Jothidam Portal',
+      kn: '108 ನಕ್ಷತ್ರ ಪಾದಗಳ ಮಂಡಲ ಚಕ್ರ | Jothidam Portal',
+      ml: '108 നക്ഷത്ര പാദങ്ങളുടെ മണ്ഡലം | Jothidam Portal'
+    },
+    description: {
+      ta: '108 நட்சத்திர பாதங்கள் கொண்ட முழு ராசி சக்கர மண்டலம், ஒவ்வொரு பாதத்தின் ஆரம்ப மற்றும் முடிவு பாகைகள், அதிபதி விவரங்கள்.',
+      en: 'Complete 108 Nakshatra Padas zodiac mandalam wheel. Explore degrees, Navamsa signs, pada lords, and attributes across all 12 signs.',
+      hi: '108 नक्षत्र चरणों का संपूर्ण वैदिक चक्र, चरण स्वामी, नवांश स्थिति और अंश सीमा।',
+      te: '108 నక్షత్ర పాదాల పూర్తి రాశి చక్రం మరియు అధిపతుల వివరణ.',
+      kn: '108 ನಕ್ಷತ್ರ ಪಾದಗಳ ಸಂಪೂರ್ಣ ಜ್ಯೋತಿಷ್ಯ ಮಂಡಲ.',
+      ml: '108 നക്ഷത്ര പാദങ്ങളുടെ സമഗ്ര രാശി ചക്രം.'
+    },
+    keywords: ['108 nakshatra padas', 'nakshatra pada degrees', 'zodiac mandalam', 'pada lords', 'navamsa pada chart'],
+    schemaType: 'CollectionPage'
+  },
+
   // 5. 9 Navagrahas & Lords
   planets: {
     title: {

@@ -1,7 +1,9 @@
 /**
  * Jothidam Portal Mega Menu Navigation Configuration
- * Multilingual Main Categories & Multi-Column Subcategories
+ * Multilingual Main Categories & Multi-Column Subcategories with SEO-Optimized URLs
  */
+
+import { ROUTES } from './routes.config';
 
 export const PORTAL_NAVIGATION_TREE = [
   {
@@ -25,7 +27,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'birth-chart',
             title: { en: 'Birth Chart Calculator (Kundli)', ta: 'ஜாதகக் கணிப்பு (D1 & D9)' },
             desc: { en: 'Precision birth chart with Navamsa', ta: 'ராசி மற்றும் நவாம்ச கட்டங்கள்' },
-            path: '/',
+            path: ROUTES.HOME,
             badge: 'Popular',
             icon: '📄'
           },
@@ -33,7 +35,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'saved-profiles',
             title: { en: 'Saved Horoscope Profiles', ta: 'சேமிக்கப்பட்ட ஜாதகங்கள்' },
             desc: { en: 'View and manage saved kundli charts', ta: 'சேமித்த ஜாதக விவரங்கள்' },
-            path: '/saved',
+            path: ROUTES.HOROSCOPE.SAVED,
             badge: 'Archive',
             icon: '⭐'
           },
@@ -41,7 +43,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'menu-kadikara-prasannam',
             title: { en: 'Kadikara Prasannam (Clock)', ta: 'கடிகார பிரசன்னம்' },
             desc: { en: 'Instant clock time horary with South Indian chart', ta: 'தென்னிந்திய ராசி சக்கரத்துடன் கூடிய பிரசன்னம்' },
-            path: '/kadikara-prasannam',
+            path: ROUTES.PRASANNAM.KADIKARA,
             badge: 'New',
             icon: '🕰️'
           }
@@ -84,7 +86,7 @@ export const PORTAL_NAVIGATION_TREE = [
               kn: 'ಘಂಟೆ ಮತ್ತು ನಿಮಿಷಗಳಿಂದ ಫಲಿತಾಂಶ',
               ml: 'മണിയും മിനിറ്റും ഉപയോഗിച്ചുള്ള പ്രശ്ന ഫലം'
             },
-            path: '/kadikara-prasannam',
+            path: ROUTES.PRASANNAM.KADIKARA,
             badge: 'New',
             icon: '🕰️'
           }
@@ -113,21 +115,21 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'rasis',
             title: { en: '12 Zodiac Signs (Rasis)', ta: '12 ராசிகள் முழு விவரம்' },
             desc: { en: 'Elements, ruling lords, and attributes', ta: 'பூதம், குணம், அதிபதி விவரங்கள்' },
-            path: '/rasis',
+            path: ROUTES.ZODIAC.RASIS,
             icon: '♈'
           },
           {
             id: 'nakshatras',
             title: { en: '27 Vedic Nakshatras', ta: '27 நட்சத்திரங்கள் & பாதங்கள்' },
             desc: { en: '108 Padas, deities, and ganas', ta: 'அதிபதி, தேவதை, கணங்கள்' },
-            path: '/nakshatras',
+            path: ROUTES.ZODIAC.NAKSHATRAS,
             icon: '✨'
           },
           {
             id: 'nakshatra-padas',
             title: { en: '108 Nakshatra Padas (Mandalam)', ta: '108 நட்சத்திர பாதங்கள் (மண்டலம்)' },
             desc: { en: 'South Indian Chart wheel & pada degrees', ta: 'ராசி சக்கரம் & பாதங்கள் பாகை விவரம்' },
-            path: '/nakshatra-padas',
+            path: ROUTES.ZODIAC.NAKSHATRA_PADAS,
             badge: '108 Padas',
             icon: '🧭'
           }
@@ -140,7 +142,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'planets',
             title: { en: '9 Navagrahas & Lords', ta: 'நவக்கிரகங்கள் & அதிபதிகள்' },
             desc: { en: 'Exaltation, debilitation & relations', ta: 'உச்சம், நீசம், ஆட்சி விவரங்கள்' },
-            path: '/planets',
+            path: ROUTES.ZODIAC.PLANETS,
             icon: '🪐'
           },
           {
@@ -161,7 +163,7 @@ export const PORTAL_NAVIGATION_TREE = [
               kn: 'ಪ್ರತಿ ಅಂಶದ ರಾಶಿ ಮತ್ತು ನಕ್ಷತ್ರ ವಿವರಗಳು',
               ml: 'ഓരോ ഡിഗ്രിയിലെയും രാശി, നക്ഷത്ര വിവരങ്ങൾ'
             },
-            path: '/kalachakram',
+            path: ROUTES.ZODIAC.KALACHAKRAM,
             icon: '🎡'
           }
         ]
@@ -189,7 +191,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'kp-horary',
             title: { en: 'KP Horary Numbers 1-249', ta: 'KP ஹோரரி 1-249 அட்டவணை' },
             desc: { en: 'Authentic 249 sub-lord reference table', ta: '249 உப அதிபதி முழு விவரம்' },
-            path: '/kp-horary',
+            path: ROUTES.KP_ASTROLOGY.HORARY,
             badge: 'KP 249',
             icon: '🔮'
           },
@@ -197,14 +199,14 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'kp-sublords',
             title: { en: 'Sub-Lord Longitudes (From/To)', ta: 'உப அதிபதி பாகை எல்லைகள்' },
             desc: { en: 'Exact degree, minute, second limits', ta: 'துல்லிய பாகை/கலை/விகலை அளவுகள்' },
-            path: '/kp-horary',
+            path: ROUTES.KP_ASTROLOGY.HORARY,
             icon: '📐'
           },
           {
             id: 'kp-boundaries',
             title: { en: 'Sign Boundary Splits', ta: 'ராசி எல்லைப் பிரிவுகள்' },
             desc: { en: 'Sign transition sub-lord divisions', ta: '30° ராசி மாறுதல் பிரிவுகள்' },
-            path: '/kp-horary',
+            path: ROUTES.KP_ASTROLOGY.HORARY,
             icon: '⚖️'
           }
         ]
@@ -232,14 +234,14 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'tithis',
             title: { en: '30 Lunar Tithis', ta: '30 திதிகள் அட்டவணை' },
             desc: { en: 'Shukla & Krishna paksha deities', ta: 'வளர்பிறை & தேய்பிறை திதிகள்' },
-            path: '/tithis',
+            path: ROUTES.PANCHANGAM.TITHIS,
             icon: '🌕'
           },
           {
             id: 'yogas',
             title: { en: '27 Nithya Yogas', ta: '27 நித்திய யோகங்கள்' },
             desc: { en: 'Auspicious & inauspicious yogas', ta: 'சுப & அசுப யோக பலன்கள்' },
-            path: '/yogas',
+            path: ROUTES.PANCHANGAM.YOGAS,
             icon: '🌀'
           }
         ]
@@ -251,14 +253,14 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'karanas',
             title: { en: '11 Vedic Karanas', ta: '11 கரணங்கள் அட்டவணை' },
             desc: { en: '7 Movable and 4 Fixed karanas', ta: 'சர & ஸ்திர கரண விவரங்கள்' },
-            path: '/karanas',
+            path: ROUTES.PANCHANGAM.KARANAS,
             icon: '⏳'
           },
           {
             id: 'tamil-calendar',
             title: { en: 'Tamil Calendar (60 Years)', ta: '60 தமிழ் வருடங்கள் & மாதங்கள்' },
             desc: { en: '60 cycle years and solar months', ta: 'பிரபவ முதல் அட்சய வரை & 12 மாதங்கள்' },
-            path: '/tamil-calendar',
+            path: ROUTES.PANCHANGAM.TAMIL_CALENDAR,
             icon: '📆'
           }
         ]
@@ -286,7 +288,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'admin-panel',
             title: { en: 'Master Tables Administration', ta: 'அட்டவணைகள் நிர்வாகம்' },
             desc: { en: 'CRUD management for 11 master collections', ta: '11 அட்டவணைகளின் தரவு மேலாண்மை' },
-            path: '/admin',
+            path: ROUTES.ADMIN.DASHBOARD,
             badge: 'Admin',
             icon: '⚙️'
           },
@@ -294,7 +296,7 @@ export const PORTAL_NAVIGATION_TREE = [
             id: 'admin-login',
             title: { en: 'Admin Portal Login', ta: 'நிர்வாக நுழைவு (Login)' },
             desc: { en: 'Secure JWT role-based credentials', ta: 'பாதுகாப்பான நிர்வாகி உள்நுழைவு' },
-            path: '/admin/login',
+            path: ROUTES.ADMIN.LOGIN,
             icon: '🔐'
           }
         ]

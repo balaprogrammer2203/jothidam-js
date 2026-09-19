@@ -10,6 +10,7 @@ import {
   getLocalizedNakshatra,
   getLocalizedPada
 } from '../../../utils/astrologyLocalization';
+import { ROUTES } from '../../../config/routes.config';
 
 export default function SavedHoroscopesList({ onSelectProfile }) {
   const { t, i18n } = useTranslation(['saved', 'common', 'horoscope']);
@@ -111,7 +112,7 @@ export default function SavedHoroscopesList({ onSelectProfile }) {
             const starDisplay = starName ? `${starName}${padaStr}` : (profile.basicDetails?.nakshatraWithPada || '-');
 
             return (
-              <div key={profile._id} className="saved-profile-card">
+              <div key={profile._id || profile.id} className="saved-profile-card">
                 <div className="profile-card-top">
                   <div className="profile-avatar">
                     {profile.personDetails?.fullName?.charAt(0) || '🕉️'}
@@ -151,10 +152,12 @@ export default function SavedHoroscopesList({ onSelectProfile }) {
                   <button
                     type="button"
                     onClick={() => {
+                      const targetId = profile._id || profile.id;
+                      if (!targetId || targetId === ':id') return;
                       if (onSelectProfile) {
                         onSelectProfile(profile);
                       } else {
-                        navigate(`/saved/${profile._id}`);
+                        navigate(ROUTES.HOROSCOPE.savedDetailPath(targetId));
                       }
                     }}
                     className="view-chart-btn"

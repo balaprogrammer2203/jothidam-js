@@ -5,6 +5,7 @@ import LanguageSelector from '../common/LanguageSelector';
 import ThemeToggle from '../common/ThemeToggle';
 import { useAuth } from '../../app/providers/AuthContext';
 import { PORTAL_NAVIGATION_TREE } from '../../config/navigation.config';
+import { ROUTES } from '../../config/routes.config';
 
 export default function Header() {
   const { t, i18n } = useTranslation(['common', 'auth']);
@@ -95,7 +96,7 @@ export default function Header() {
               )}
             </button>
 
-            <Link to="/" className="portal-brand-logo-link">
+            <Link to={ROUTES.HOME} className="portal-brand-logo-link">
               <div className="portal-logo-badge">
                 <span className="portal-logo-glyph">🕉️</span>
               </div>
@@ -143,7 +144,7 @@ export default function Header() {
             {/* User Profile / Admin Login */}
             {isAuthenticated && user ? (
               <div className="header-user-menu">
-                <Link to="/admin" className="header-user-btn" title={user.fullName}>
+                <Link to={ROUTES.ADMIN.DASHBOARD} className="header-user-btn" title={user.fullName}>
                   <span className="user-avatar-tiny">{user.username?.charAt(0).toUpperCase()}</span>
                   <span className="user-name-label">{user.fullName?.split(' ')[0] || user.username}</span>
                 </Link>
@@ -156,7 +157,7 @@ export default function Header() {
                 </button>
               </div>
             ) : (
-              <Link to="/admin/login" className="header-login-btn">
+              <Link to={ROUTES.ADMIN.LOGIN} className="header-login-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />

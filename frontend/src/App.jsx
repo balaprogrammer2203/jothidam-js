@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './app/providers/AuthContext';
-import { ThemeProvider } from './app/providers/ThemeContext';
+import AppProviders from './app/providers/AppProviders';
 import ScrollToTop from './components/common/ScrollToTop';
 import Layout from './components/layout/Layout';
 import AppRoutes from './app/AppRoutes';
@@ -10,14 +9,12 @@ import './index.css';
 export default function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <ScrollToTop />
-          <Layout>
-            <AppRoutes />
-          </Layout>
-        </AuthProvider>
-      </ThemeProvider>
+      <AppProviders>
+        <ScrollToTop />
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </AppProviders>
     </BrowserRouter>
   );
 }
