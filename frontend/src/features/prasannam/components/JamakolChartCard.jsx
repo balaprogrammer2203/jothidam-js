@@ -5,8 +5,12 @@ import {
   JAMAKKOL_UI_STRINGS,
   getLocalizedPlanetCode,
   getLocalizedCityName,
+  formatGeoDMS,
   calculateJamakkolCenterInfo,
-  getLocalizedCenterInfo
+  getLocalizedCenterInfo,
+  SUN_TIMINGS_LABELS,
+  formatSunTime12Hour,
+  formatCenterDateTime12Hour
 } from '../../../utils/jamakkol.utils';
 import {
   PRASANNAM_RASIS,
@@ -158,6 +162,16 @@ export default function JamakolChartCard({
   // Dynamically localized Panchangam & Horary center info across all 6 languages
   const rawCenterInfo = chartData.centerInfo || chartData.panchangam;
   const centerInfo = getLocalizedCenterInfo(rawCenterInfo, activeLang, chartData);
+
+  const sunLabels = SUN_TIMINGS_LABELS[activeLang] || SUN_TIMINGS_LABELS.ta;
+  const displaySunrise = formatSunTime12Hour(
+    chartData?.sunTimes?.sunrise || centerInfo?.sunrise?.time12 || centerInfo?.sunrise?.value,
+    '06:00 AM'
+  );
+  const displaySunset = formatSunTime12Hour(
+    chartData?.sunTimes?.sunset || centerInfo?.sunset?.time12 || centerInfo?.sunset?.value,
+    '06:05 PM'
+  );
 
   const udhayam = pillars?.udhayam || chartData?.udhayam || { signIndex: 8, formattedDegree: "18°25'" };
   const aarudam = pillars?.aarudam || chartData?.aarudam || { signIndex: 3, formattedDegree: "24°19'" };
@@ -809,9 +823,42 @@ export default function JamakolChartCard({
   const southIndianText = JAMAKKOL_UI_STRINGS.southIndian[activeLang] || JAMAKKOL_UI_STRINGS.southIndian.en;
   const northIndianText = JAMAKKOL_UI_STRINGS.northIndian[activeLang] || JAMAKKOL_UI_STRINGS.northIndian.en;
   const localizedCity = getLocalizedCityName(cityName, activeLang);
+  const effectiveCity = cityName || chartData?.metadata?.placeName || chartData?.placeName || 'Chennai';
+  const displayCity = getLocalizedCityName(effectiveCity, activeLang) || effectiveCity;
+
+  let displayCoords = centerInfo.location?.dms || centerInfo.coordinates?.value || centerInfo.raw?.locationDMS;
+  if (!displayCoords && centerInfo.location?.value && centerInfo.location.value.includes('°')) {
+    displayCoords = centerInfo.location.value;
+  }
+  if (!displayCoords) {
+    const lat = chartData?.metadata?.latitude ?? chartData?.latitude;
+    const lng = chartData?.metadata?.longitude ?? chartData?.longitude;
+    if (lat !== undefined && lng !== undefined) {
+      displayCoords = `${formatGeoDMS(lat, true)}, ${formatGeoDMS(lng, false)}`;
+    }
+  }
+
+  const naalLabel = (activeLang === 'ta' && (centerInfo.vaaram?.label === 'வாரம்' || !centerInfo.vaaram?.label))
+    ? 'நாள்'
+    : (centerInfo.vaaram?.label || (activeLang === 'ta' ? 'நாள்' : 'Day'));
 
   return (
     <div className="jamakol-chart-block">
+      {/* Top Sunrise & Sunset Banner Card (Exact Screenshot Reproduction) */}
+      <div className="jk-sun-timings-card">
+        <div className="jk-sun-timing-col" title={`Sunrise: ${centerInfo.sunrise?.value || displaySunrise}`}>
+          <span className="jk-sun-timing-icon">🌅</span>
+          <span className="jk-sun-timing-label">{sunLabels.sunrise}</span>
+          <span className="jk-sun-timing-time">{displaySunrise}</span>
+        </div>
+        <div className="jk-sun-timing-divider" />
+        <div className="jk-sun-timing-col" title={`Sunset: ${centerInfo.sunset?.value || displaySunset}`}>
+          <span className="jk-sun-timing-icon">🌆</span>
+          <span className="jk-sun-timing-label">{sunLabels.sunset}</span>
+          <span className="jk-sun-timing-time">{displaySunset}</span>
+        </div>
+      </div>
+
       <div className="jamakol-chart-frame-card">
         <div className="jamakol-outer-chart-wrapper">
           {/* Chart View Toggle: South Indian or North Indian */}
@@ -853,12 +900,12 @@ export default function JamakolChartCard({
                 <div className="jk-chart-center-cell">
                   {/* Row 1: Timestamp */}
                   <div className="jk-center-panchangam-header">
-                    <span className="jk-center-time-text">{centerInfo.queryDateTimeStr}</span>
+                    <span className="jk-center-time-text">{formatCenterDateTime12Hour(centerInfo?.queryDateTimeStr || dateTimeStr)}</span>
                   </div>
 
-                  {/* Row 2: Vaaram */}
+                  {/* Row 2: Naal (Day) */}
                   <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.vaaram?.label}: </span>
+                    <span className="jk-center-label">{naalLabel}: </span>
                     <span className="jk-center-val">{centerInfo.vaaram?.value}</span>
                   </div>
 
@@ -902,23 +949,18 @@ export default function JamakolChartCard({
                     </span>
                   </div>
 
-                  {/* Row 9: Sunrise */}
+                  {/* Row 9: Location (City Name) */}
                   <div className="jk-center-row">
-                    <span className="jk-center-icon">🌅 : </span>
-                    <span className="jk-center-val">{centerInfo.sunrise?.value}</span>
+                    <span className="jk-center-label">{centerInfo.location?.label || locationLabel}: </span>
+                    <span className="jk-center-val jk-val-city">{displayCity}</span>
                   </div>
 
-                  {/* Row 10: Sunset */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-icon">🌇 : </span>
-                    <span className="jk-center-val">{centerInfo.sunset?.value}</span>
-                  </div>
-
-                  {/* Row 11: Location */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.location?.label}: </span>
-                    <span className="jk-center-val">{centerInfo.location?.value}</span>
-                  </div>
+                  {/* Row 10: Geo Coordinates on the next line */}
+                  {displayCoords && (
+                    <div className="jk-center-row jk-center-coords-row">
+                      <span className="jk-center-val jk-val-coords">{displayCoords}</span>
+                    </div>
+                  )}
                 </div>
 
                 {renderSouthCell(3)}

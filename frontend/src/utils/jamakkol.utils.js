@@ -834,7 +834,7 @@ export function calculateGowri(querySec, sunriseSec, sunsetSec, dayOfWeek, activ
 }
 
 export const PANCHANGAM_LABELS_6LANG = {
-  vaaram: { ta: 'வாரம்', en: 'Weekday', hi: 'वार', te: 'వారం', kn: 'ವಾರ', ml: 'വാരം' },
+  vaaram: { ta: 'நாள்', en: 'Day', hi: 'वार', te: 'వారం', kn: 'ವಾರ', ml: 'വാരം' },
   nakshatram: { ta: 'நட்சத்திரம்', en: 'Nakshatra', hi: 'नक्षत्र', te: 'నక్షత్రం', kn: 'ನಕ್ಷತ್ರ', ml: 'നക്ഷത്രം' },
   thithi: { ta: 'திதி', en: 'Tithi', hi: 'तिथि', te: 'తిథి', kn: 'ತಿಥಿ', ml: 'തിഥി' },
   karanam: { ta: 'கரணம்', en: 'Karana', hi: 'करण', te: 'కరణం', kn: 'ಕರಣ', ml: 'കരണം' },
@@ -844,6 +844,119 @@ export const PANCHANGAM_LABELS_6LANG = {
   idam: { ta: 'இடம்', en: 'Location', hi: 'स्थान', te: 'ప్రదేశం', kn: 'ಸ್ಥಳ', ml: 'സ്ഥലം' }
 };
 
+export const SUN_TIMINGS_LABELS = {
+  ta: { sunrise: 'சூரிய உதயம்', sunset: 'சூரிய அஸ்தமனம்' },
+  en: { sunrise: 'Sunrise', sunset: 'Sunset' },
+  hi: { sunrise: 'सूर्योदय', sunset: 'सूर्यास्त' },
+  te: { sunrise: 'సూర్యోదయం', sunset: 'సూర్యాస్తమయం' },
+  kn: { sunrise: 'ಸೂರ್ಯೋದಯ', sunset: 'ಸೂರ್ಯಾಸ್ತ' },
+  ml: { sunrise: 'സൂര്യോദയം', sunset: 'സൂര്യാസ്തമയം' }
+};
+
+/**
+ * Format any sunrise/sunset input (object or string) into 12-hour AM/PM format (e.g. "06:00 AM", "06:05 PM")
+ */
+export function formatSunTime12Hour(timeInput, fallback = '06:00 AM') {
+  if (!timeInput) return fallback;
+
+  // Case 1: Object with hours and minutes
+  if (typeof timeInput === 'object') {
+    if (typeof timeInput.hours === 'number' && typeof timeInput.minutes === 'number') {
+      const h = timeInput.hours;
+      const m = timeInput.minutes;
+      const period = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      return `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${period}`;
+    }
+    if (timeInput.formatted) {
+      return formatSunTime12Hour(timeInput.formatted, fallback);
+    }
+    if (timeInput.value) {
+      return formatSunTime12Hour(timeInput.value, fallback);
+    }
+  }
+
+  // Case 2: String
+  if (typeof timeInput === 'string') {
+    const trimmed = timeInput.trim();
+
+    // Already 12-hour AM/PM (e.g., "06:00 AM" or "6:00 AM")
+    const match12 = trimmed.match(/(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)/i);
+    if (match12) {
+      const h12 = parseInt(match12[1], 10);
+      const m = match12[2];
+      const period = match12[4].toUpperCase();
+      return `${String(h12).padStart(2, '0')}:${m} ${period}`;
+    }
+
+    // Match 24-hr time like "05:57:37" or "18:02:45" or "26/09/2026, 05:57:37"
+    const match24 = trimmed.match(/(\d{1,2}):(\d{2})(?::\d{2})?/);
+    if (match24) {
+      const h = parseInt(match24[1], 10);
+      const m = match24[2];
+      const period = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      return `${String(h12).padStart(2, '0')}:${m} ${period}`;
+    }
+  }
+
+  return fallback;
+}
+
+/**
+ * Format timestamp for center cell in 12-hour AM/PM format with seconds, removing any ".0"
+ * Example: "26/09/2026, 14:34:25.0" -> "26/09/2026, 02:34:25 PM"
+ */
+export function formatCenterDateTime12Hour(dateTimeStr) {
+  if (!dateTimeStr) return '';
+  // 1. Remove trailing milliseconds or ".0"
+  let clean = String(dateTimeStr).replace(/\.\d+/g, '').trim();
+
+  // 2. If it already has AM/PM:
+  // e.g. "26/09/2026, 02:34:25 PM" or "26-09-2026 · 02:34:25 pm"
+  const matchWithAmPm = clean.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})[,·\s]+(\d{1,2}):(\d{2}):?(\d{2})?\s*(AM|PM)$/i);
+  if (matchWithAmPm) {
+    const day = matchWithAmPm[1].padStart(2, '0');
+    const mon = matchWithAmPm[2].padStart(2, '0');
+    const yr = matchWithAmPm[3];
+    const h = String(parseInt(matchWithAmPm[4], 10)).padStart(2, '0');
+    const m = matchWithAmPm[5];
+    const s = matchWithAmPm[6] || '00';
+    const p = matchWithAmPm[7].toUpperCase();
+    return `${day}/${mon}/${yr}, ${h}:${m}:${s} ${p}`;
+  }
+
+  // 3. Match 24-hr: "DD/MM/YYYY, HH:mm:ss" or "DD-MM-YYYY · HH:mm:ss"
+  const match24 = clean.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})[,·\s]+(\d{1,2}):(\d{2}):?(\d{2})?$/);
+  if (match24) {
+    const day = match24[1].padStart(2, '0');
+    const mon = match24[2].padStart(2, '0');
+    const yr = match24[3];
+    const h24 = parseInt(match24[4], 10);
+    const m = match24[5];
+    const s = match24[6] ? match24[6] : '00';
+    const period = h24 >= 12 ? 'PM' : 'AM';
+    const h12 = h24 % 12 || 12;
+    return `${day}/${mon}/${yr}, ${String(h12).padStart(2, '0')}:${m}:${String(s).padStart(2, '0')} ${period}`;
+  }
+
+  // 4. Match "YYYY-MM-DD" or similar ISO / Date string
+  const isoMatch = clean.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{1,2}):(\d{2}):?(\d{2})?)?/);
+  if (isoMatch) {
+    const day = isoMatch[3].padStart(2, '0');
+    const mon = isoMatch[2].padStart(2, '0');
+    const yr = isoMatch[1];
+    const h24 = isoMatch[4] ? parseInt(isoMatch[4], 10) : 0;
+    const m = isoMatch[5] || '00';
+    const s = isoMatch[6] || '00';
+    const period = h24 >= 12 ? 'PM' : 'AM';
+    const h12 = h24 % 12 || 12;
+    return `${day}/${mon}/${yr}, ${String(h12).padStart(2, '0')}:${m}:${String(s).padStart(2, '0')} ${period}`;
+  }
+
+  return clean;
+}
+
 /**
  * Calculate full Panchangam & Horary parameters for the center chart section
  */
@@ -852,6 +965,7 @@ export function calculateJamakkolCenterInfo({
   time,
   latitude,
   longitude,
+  cityName = 'Chennai',
   sunData,
   moonData,
   sunTimes,
@@ -866,7 +980,9 @@ export function calculateJamakkolCenterInfo({
   const querySec = h * 3600 + m * 60 + s;
 
   const dateFormatted = `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
-  const queryDateTimeStr = `${dateFormatted}, ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.0`;
+  const h12 = h % 12 || 12;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const queryDateTimeStr = `${dateFormatted}, ${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} ${period}`;
 
   const labels = {
     vaaram: PANCHANGAM_LABELS_6LANG.vaaram[lang] || PANCHANGAM_LABELS_6LANG.vaaram.ta,
@@ -934,8 +1050,9 @@ export function calculateJamakkolCenterInfo({
   const sunriseStr = `${dateFormatted}, ${sunTimes?.sunrise?.formattedWithSec || '06:02:40'}`;
   const sunsetStr = `${dateFormatted}, ${sunTimes?.sunset?.formattedWithSec || '17:41:55'}`;
 
-  // 9. Location DMS string
+  // 9. Location DMS string & City Name
   const locationDMS = `${formatGeoDMS(latitude, true)}, ${formatGeoDMS(longitude, false)}`;
+  const localizedCity = getLocalizedCityName(cityName, lang) || cityName || 'Chennai';
 
   const fullCopyText = [
     queryDateTimeStr,
@@ -946,9 +1063,8 @@ export function calculateJamakkolCenterInfo({
     `${labels.yogam}: ${yogamVal}`,
     `${labels.horai}: ${hora.display}`,
     `${labels.gowri}: ${gowri.name}`,
-    `🌅 : ${sunriseStr}`,
-    `🌇 : ${sunsetStr}`,
-    `${labels.idam}: ${locationDMS}`
+    `${labels.idam}: ${localizedCity}`,
+    locationDMS
   ].join('\n');
 
   const karanaIndex = (karanaSpanIndex === 0)
@@ -973,6 +1089,8 @@ export function calculateJamakkolCenterInfo({
     isAuspicious: gowri.isAuspicious,
     sunriseStr,
     sunsetStr,
+    cityName,
+    localizedCity,
     locationDMS
   };
 
@@ -987,9 +1105,10 @@ export function calculateJamakkolCenterInfo({
     yogam: { label: labels.yogam, value: yogamVal, yogaIndex },
     horai: { label: labels.horai, value: hora.display, color: hora.color, mainLord: hora.mainLord, subLord: hora.subLord },
     gowri: { label: labels.gowri, value: gowri.name, color: gowri.color, isAuspicious: gowri.isAuspicious, key: gowri.key },
-    sunrise: { icon: '🌅', value: sunriseStr },
-    sunset: { icon: '🌇', value: sunsetStr },
-    location: { label: labels.idam, value: locationDMS },
+    sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(sunTimes?.sunrise?.formatted || sunriseStr, '06:00 AM') },
+    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(sunTimes?.sunset?.formatted || sunsetStr, '06:05 PM') },
+    location: { label: labels.idam, value: localizedCity, cityName: localizedCity, dms: locationDMS },
+    coordinates: { value: locationDMS },
     fullCopyText
   };
 }
@@ -1190,10 +1309,14 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     idam: PANCHANGAM_LABELS_6LANG.idam[safeLang] || PANCHANGAM_LABELS_6LANG.idam.ta
   };
 
-  const queryDateTimeStr = raw.queryDateTimeStr || centerInfo.queryDateTimeStr || '';
+  const rawQueryDateTime = raw.queryDateTimeStr || centerInfo.queryDateTimeStr || '';
+  const queryDateTimeStr = formatCenterDateTime12Hour(rawQueryDateTime);
   const sunriseStr = centerInfo.sunrise?.value || raw.sunriseStr || '';
   const sunsetStr = centerInfo.sunset?.value || raw.sunsetStr || '';
-  const locationDMS = centerInfo.location?.value || raw.locationDMS || '';
+
+  const rawCity = centerInfo.location?.cityName || raw.cityName || fallbackData?.metadata?.placeName || fallbackData?.placeName || fallbackData?.cityName || '';
+  const localizedCity = rawCity ? getLocalizedCityName(rawCity, safeLang) : (centerInfo.location?.cityName || '');
+  const locationDMS = centerInfo.location?.dms || raw.locationDMS || centerInfo.coordinates?.value || (centerInfo.location?.value && centerInfo.location.value.includes('°') ? centerInfo.location.value : '') || '';
 
   return {
     raw: {
@@ -1211,6 +1334,8 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
       isAuspicious,
       sunriseStr,
       sunsetStr,
+      cityName: rawCity,
+      localizedCity,
       locationDMS
     },
     queryDateTimeStr,
@@ -1222,9 +1347,10 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     yogam: { label: labels.yogam, value: yogamVal, yogaIndex },
     horai: { label: labels.horai, value: horaDisplay, color: '#ef4444', mainLord: mainLordKey, subLord: subLordKey },
     gowri: { label: labels.gowri, value: gowriVal, color: isAuspicious ? '#22c55e' : (gowriKey === 'Uthi' ? '#f1f5f9' : '#ef4444'), isAuspicious, key: gowriKey },
-    sunrise: { icon: '🌅', value: sunriseStr },
-    sunset: { icon: '🌇', value: sunsetStr },
-    location: { label: labels.idam, value: locationDMS }
+    sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(centerInfo.sunrise?.time12 || sunriseStr, '06:00 AM') },
+    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(centerInfo.sunset?.time12 || sunsetStr, '06:05 PM') },
+    location: { label: labels.idam, value: localizedCity || centerInfo.location?.value || 'Chennai', cityName: localizedCity || 'Chennai', dms: locationDMS },
+    coordinates: { value: locationDMS }
   };
 }
 
@@ -1481,11 +1607,13 @@ export function computeLocalJamakkol({
     lagnaRasiIndex: 6,
     lagna: { rasiIndex: 6, symbol: 'La', name: 'Lagna', formattedDegree: "12°53'", isLagna: true },
     subPlanets,
+    sunTimes: calculateSunriseSunset(date, latitude, longitude),
     centerInfo: calculateJamakkolCenterInfo({
       date,
       time: formattedTimeWithSec,
       latitude,
       longitude,
+      cityName: placeName,
       sunData: { longitude: sunLong },
       moonData: { longitude: 245.22 },
       sunTimes: calculateSunriseSunset(date, latitude, longitude),
@@ -1526,5 +1654,8 @@ export default {
   calculateHora,
   calculateGowri,
   calculateJamakkolCenterInfo,
-  computeLocalJamakkol
+  computeLocalJamakkol,
+  SUN_TIMINGS_LABELS,
+  formatSunTime12Hour,
+  formatCenterDateTime12Hour
 };

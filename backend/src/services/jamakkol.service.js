@@ -432,7 +432,7 @@ export function calculateGowri(querySec, sunriseSec, sunsetSec, dayOfWeek, activ
 }
 
 export const PANCHANGAM_LABELS_6LANG = {
-  vaaram: { ta: 'வாரம்', en: 'Weekday', hi: 'वार', te: 'వారం', kn: 'ವಾರ', ml: 'വാരം' },
+  vaaram: { ta: 'நாள்', en: 'Day', hi: 'वार', te: 'వారం', kn: 'ವಾರ', ml: 'വാരം' },
   nakshatram: { ta: 'நட்சத்திரம்', en: 'Nakshatra', hi: 'नक्षत्र', te: 'నక్షత్రం', kn: 'ನಕ್ಷತ್ರ', ml: 'നക്ഷത്രം' },
   thithi: { ta: 'திதி', en: 'Tithi', hi: 'तिथि', te: 'తిథి', kn: 'ತಿಥಿ', ml: 'തിഥി' },
   karanam: { ta: 'கரணம்', en: 'Karana', hi: 'करण', te: 'కరణం', kn: 'ಕರಣ', ml: 'കരണം' },
@@ -464,7 +464,9 @@ export function calculateJamakkolCenterInfo({
   const querySec = h * 3600 + m * 60 + s;
 
   const dateFormatted = `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
-  const queryDateTimeStr = `${dateFormatted}, ${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.0`;
+  const h12 = h % 12 || 12;
+  const period = h >= 12 ? 'PM' : 'AM';
+  const queryDateTimeStr = `${dateFormatted}, ${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} ${period}`;
 
   const labels = {
     vaaram: PANCHANGAM_LABELS_6LANG.vaaram[lang] || PANCHANGAM_LABELS_6LANG.vaaram.ta,
