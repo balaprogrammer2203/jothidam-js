@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
   MASTER_TAMIL_MONTHS: '/astrology/master/tamil-months',
   MASTER_KADIKARA_PRASANNAM: '/astrology/master/kadikara-prasannam',
   MASTER_KADIKARA_BHAVA_BY_NUM: (bhava) => `/astrology/master/kadikara-prasannam/bhavas/${bhava}`,
+  MASTER_PLANET_DIGNITIES: '/astrology/master/planet-dignities',
   
   // Admin Endpoints
   ADMIN_STATS: '/admin/stats',

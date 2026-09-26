@@ -8,11 +8,13 @@ import PageLoader from '../components/feedback/PageLoader';
 // Dynamic route-level code splitting using React.lazy
 const HoroscopeCalculatorPage = lazy(() => import('../features/horoscope/pages/HoroscopeCalculatorPage'));
 const KadikaraPrasannamPage = lazy(() => import('../features/prasannam/pages/KadikaraPrasannamPage'));
+const JamakolPrasannamPage = lazy(() => import('../features/prasannam/pages/JamakolPrasannamPage'));
 const KPHoraryPage = lazy(() => import('../features/kp-astrology/pages/KPHoraryPage'));
 const RasisPage = lazy(() => import('../features/zodiac-planets/pages/RasisPage'));
 const NakshatrasPage = lazy(() => import('../features/zodiac-planets/pages/NakshatrasPage'));
 const NakshatraPadasPage = lazy(() => import('../features/zodiac-planets/pages/NakshatraPadasPage'));
 const PlanetsPage = lazy(() => import('../features/zodiac-planets/pages/PlanetsPage'));
+const PlanetDignitiesPage = lazy(() => import('../features/zodiac-planets/pages/PlanetDignitiesPage'));
 const KalachakramPage = lazy(() => import('../features/zodiac-planets/pages/KalachakramPage'));
 const TithisPage = lazy(() => import('../features/panchangam/pages/TithisPage'));
 const YogasPage = lazy(() => import('../features/panchangam/pages/YogasPage'));
@@ -58,6 +60,7 @@ export default function AppRoutes() {
               2. HORARY PRASANNAM
               ========================================================================= */}
           <Route path={ROUTES.PRASANNAM.KADIKARA} element={<KadikaraPrasannamPage />} />
+          <Route path={ROUTES.PRASANNAM.JAMAKKOL} element={<JamakolPrasannamPage />} />
 
           {/* =========================================================================
               3. ZODIAC SIGNS & PLANETARY EPHEMERIS
@@ -66,6 +69,7 @@ export default function AppRoutes() {
           <Route path={ROUTES.ZODIAC.NAKSHATRAS} element={<NakshatrasPage />} />
           <Route path={ROUTES.ZODIAC.NAKSHATRA_PADAS} element={<NakshatraPadasPage />} />
           <Route path={ROUTES.ZODIAC.PLANETS} element={<PlanetsPage />} />
+          <Route path={ROUTES.ZODIAC.PLANET_DIGNITIES} element={<PlanetDignitiesPage />} />
           <Route path={ROUTES.ZODIAC.KALACHAKRAM} element={<KalachakramPage />} />
 
           {/* =========================================================================

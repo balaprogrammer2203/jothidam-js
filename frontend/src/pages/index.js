@@ -10,6 +10,7 @@ export { default as RasisPage } from './RasisPage';
 export { default as NakshatrasPage } from './NakshatrasPage';
 export { default as NakshatraPadasPage } from './NakshatraPadasPage';
 export { default as PlanetsPage } from './PlanetsPage';
+export { default as PlanetDignitiesPage } from './PlanetDignitiesPage';
 export { default as KalachakramPage } from './KalachakramPage';
 export { default as TithisPage } from './TithisPage';
 export { default as YogasPage } from './YogasPage';

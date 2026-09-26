@@ -23,6 +23,9 @@ import {
   getMasterKadikaraPrasannam,
   getKadikaraBhavaByNumber,
   calculateKadikaraPrasannamBE,
+  calculateJamakkolPrasannamBE,
+  getMasterJamakkolPrasannam,
+  getMasterPlanetDignities,
   getNavigationMenu
 } from '../controllers/astrology.controller.js';
 
@@ -34,6 +37,9 @@ router.post('/generate-chart', generateSouthIndianChart);
 
 // Kadikara Prasannam Full Calculation & Planetary Chart Engine
 router.post('/kadikara-prasannam/calculate', calculateKadikaraPrasannamBE);
+
+// Jamakkol Prasannam Full Calculation & Astrological Divination Engine
+router.post('/jamakkol-prasannam/calculate', calculateJamakkolPrasannamBE);
 
 // User Horoscope Profile Management (CRUD)
 router.post('/save-horoscope', saveUserHoroscope);
@@ -50,6 +56,7 @@ router.get('/master/nakshatras', getMasterNakshatras);
 router.get('/master/nakshatra-padas', getMasterNakshatraPadas);
 router.get('/master/nakshatra-padas/:number', getNakshatraPadaByNumber);
 router.get('/master/planets', getMasterPlanets);
+router.get('/master/planet-dignities', getMasterPlanetDignities);
 
 // KP Horary Numbers 1-249 Master Table
 router.get('/master/kp-horary', getMasterKPHorary);
@@ -69,5 +76,8 @@ router.get('/master/tamil-months', getTamilMonthMaster);
 // Kadikara Prasannam Master Table (12 Bhavas, Sacred Rules, Concept & FAQs in 6 Languages)
 router.get('/master/kadikara-prasannam', getMasterKadikaraPrasannam);
 router.get('/master/kadikara-prasannam/bhavas/:bhava', getKadikaraBhavaByNumber);
+
+// Jamakkol Prasannam Master Table (70+ Questions, Rules, Pillars & FAQs in 6 Languages)
+router.get('/master/jamakkol-prasannam', getMasterJamakkolPrasannam);
 
 export default router;

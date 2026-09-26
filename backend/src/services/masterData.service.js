@@ -9,11 +9,15 @@ import { TamilYearMaster, TamilMonthMaster } from '../models/TamilCalendarMaster
 import KPHoraryMaster from '../models/KPHoraryMaster.js';
 import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
+import JamakkolMaster from '../models/JamakkolMaster.js';
+import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
 import { KP_HORARY_DATA } from './kpHoraryData.js';
 import { NAKSHATRA_PADAS_DATA } from './nakshatraPadaData.js';
 import { KADIKARA_PRASANNAM_MASTER_DATA } from './kadikaraData.js';
+import { JAMAKKOL_PRASANNAM_MASTER_DATA } from './jamakkolData.js';
+import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from './planetDignityData.js';
 
-export { NAKSHATRA_PADAS_DATA, KADIKARA_PRASANNAM_MASTER_DATA };
+export { NAKSHATRA_PADAS_DATA, KADIKARA_PRASANNAM_MASTER_DATA, JAMAKKOL_PRASANNAM_MASTER_DATA, PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA };
 
 export const RASIS_DATA = [
   {
@@ -562,6 +566,14 @@ export const seedMasterDataIfEmpty = async () => {
     for (const kp of KADIKARA_PRASANNAM_MASTER_DATA) {
       await KadikaraPrasannamMaster.updateOne({ key: kp.key }, { $set: kp }, { upsert: true });
     }
+
+    for (const jm of JAMAKKOL_PRASANNAM_MASTER_DATA) {
+      await JamakkolMaster.updateOne({ key: jm.key }, { $set: jm }, { upsert: true });
+    }
+
+    for (const pd of PLANET_RASI_DIGNITIES_DATA) {
+      await PlanetRasiDignityMaster.updateOne({ rasiId: pd.rasiId }, { $set: pd }, { upsert: true });
+    }
   } catch (err) {
     console.error('Error seeding master astrology data:', err.message);
   }
@@ -588,4 +600,7 @@ export const getNakshatraPadaDetails = (padaNumber) => NAKSHATRA_PADAS_DATA.find
 export const getNakshatraPadasByNakshatra = (nakshatraId) => NAKSHATRA_PADAS_DATA.filter(p => p.nakshatraId === Number(nakshatraId));
 export const getKadikaraPrasannamMasterData = () => KADIKARA_PRASANNAM_MASTER_DATA;
 export const getKadikaraBhavaDetails = (bhavaNum) => KADIKARA_PRASANNAM_MASTER_DATA.find(k => k.category === 'bhava' && k.bhava === Number(bhavaNum));
+export const getJamakkolPrasannamMasterData = () => JAMAKKOL_PRASANNAM_MASTER_DATA;
+export const getPlanetRasiDignitiesMasterData = () => PLANET_RASI_DIGNITIES_DATA;
+export const getTatkalikaRulesMasterData = () => TATKALIKA_RULES_DATA;
 

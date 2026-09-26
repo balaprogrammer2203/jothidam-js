@@ -1,0 +1,1942 @@
+/* ==========================================================================
+   Jamakkol Prasannam (ஜாமக்கோள் பிரசன்னம்) Modern & Classical Stylesheet
+   Matches exact screenshot layout: warm cream background, golden borders,
+   terracotta brown outer boxes, red La, blue underlined Mo, South/North Indian toggle.
+   ========================================================================== */
+
+:root {
+  --jk-parchment: #fffdf5;
+  --jk-parchment-deep: #fdf6e2;
+  --jk-gold-border: #caa254;
+  --jk-gold-light: #e6c878;
+  --jk-gold-dark: #a1782a;
+  --jk-brown-box: #b85c00;
+  --jk-brown-box-hover: #9e4e00;
+  --jk-text-main: #23180f;
+  --jk-text-muted: #665b52;
+  --jk-lagna-red: #dc2626;
+  --jk-moon-blue: #1d4ed8;
+  --jk-card-shadow: 0 4px 20px -2px rgba(90, 50, 10, 0.08), 0 2px 6px -1px rgba(90, 50, 10, 0.04);
+}
+
+.jamakol-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--jk-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   Page Header & Control Bar
+   -------------------------------------------------------------------------- */
+.jamakol-header {
+  margin-bottom: 1.5rem;
+}
+
+.jamakol-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.jamakol-title-group h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #431407;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.jamakol-title-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  border-radius: 9999px;
+}
+
+.jamakol-header-desc {
+  color: var(--jk-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 800px;
+}
+
+/* --------------------------------------------------------------------------
+   Jamam Status Banner (Current Active Jamam & Grahas)
+   -------------------------------------------------------------------------- */
+.jamam-banner {
+  background: linear-gradient(135deg, #78350f 0%, #9a3412 50%, #b45309 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(120, 53, 15, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.jamam-info-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.jamam-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.jamam-pill.accent {
+  background: #fef08a;
+  color: #713f12;
+  font-weight: 700;
+  border-color: #fde047;
+}
+
+.jamam-pill-label {
+  opacity: 0.85;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Input Panel (Date, Time, Live Button, City Selector, Ayanamsa)
+   -------------------------------------------------------------------------- */
+.jamakol-controls-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--jk-card-shadow);
+}
+
+.jamakol-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.jamakol-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.jamakol-form-row.jk-row-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.jamakol-form-row.jk-row-actions .jk-btn-now,
+.jamakol-form-row.jk-row-actions .jk-btn-submit {
+  width: 100%;
+  justify-content: center;
+  height: 44px;
+}
+
+@media (max-width: 640px) {
+  .jamakol-form-row,
+  .jamakol-form-row.jk-row-actions {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}
+
+.jk-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.jk-form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #44403c;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.jk-form-input,
+.jk-form-select {
+  height: 42px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  color: #1c1917;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.jk-form-input:focus,
+.jk-form-select:focus {
+  outline: none;
+  border-color: #b45309;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.15);
+}
+
+.jk-time-input {
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.jk-time-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: opacity(0.65);
+  padding: 2px;
+  margin-left: 4px;
+  transition: filter 0.2s ease;
+}
+
+.jk-time-input::-webkit-calendar-picker-indicator:hover {
+  filter: opacity(1);
+}
+
+.jk-btn-now {
+  height: 42px;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.jk-btn-now:hover {
+  background: #fde68a;
+  transform: translateY(-1px);
+}
+
+.jk-btn-submit {
+  height: 42px;
+  background: #8d3f11;
+  border: 1px solid #78350f;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jk-btn-submit:hover {
+  background: #73320c;
+  box-shadow: 0 2px 8px rgba(141, 63, 17, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Geo Location & Place Autocomplete
+   -------------------------------------------------------------------------- */
+.jk-place-field {
+  position: relative;
+}
+
+.jk-place-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.jk-place-input {
+  width: 100%;
+  padding-right: 42px !important;
+  box-sizing: border-box;
+}
+
+.btn-jk-gps {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 3;
+  line-height: 1;
+}
+
+.btn-jk-gps:hover {
+  background-color: rgba(180, 83, 9, 0.12);
+  transform: scale(1.12);
+}
+
+.btn-jk-gps:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.jk-coords-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin-top: 4px;
+  align-self: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.jk-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1.5px solid #d6d3d1;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+}
+
+.jk-suggestion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid #f5f5f4;
+  text-align: left;
+}
+
+.jk-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.jk-suggestion-item:hover {
+  background-color: #fef3c7;
+}
+
+.jk-suggestion-main-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.jk-suggestion-city-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.jk-suggestion-region-name {
+  font-size: 0.75rem;
+  color: #78716c;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jk-suggestion-latlng-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   CHART CARD: Exact Screenshot Reproduction
+   -------------------------------------------------------------------------- */
+.jamakol-chart-block {
+  width: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.jamakol-chart-frame-card {
+  background: var(--jk-parchment);
+  border: 2px solid var(--jk-gold-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--jk-card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Outer layout that wraps the chart and 8 outer boxes */
+.jamakol-outer-chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4.75rem 5.25rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Containers for South and North Indian charts */
+.jamakol-south-container,
+.jamakol-north-container {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* The 8 Outer Brown Square Boxes matching exact user screenshot with ample spacing */
+.jk-outer-box,
+.jk-outer-badge {
+  position: absolute;
+  width: 62px;
+  height: 54px;
+  background-color: var(--jk-brown-box);
+  color: #ffffff;
+  border-radius: 0 !important; /* Exact sharp 90-degree square corners */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 4px 5px;
+  z-index: 10;
+  user-select: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+  transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--scale, 1));
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  overflow: visible;
+}
+
+.jk-outer-box:hover,
+.jk-outer-badge:hover {
+  background-color: var(--jk-brown-box-hover);
+  --scale: 1.05;
+  z-index: 100;
+}
+
+.jk-box-sym,
+.jk-outer-badge .planet-sym {
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* For multi-glyph or longer symbols like 'பாம்பு' ensuring ample horizontal padding */
+.jk-box-sym.is-long,
+.jk-outer-badge .planet-sym.is-long {
+  font-size: 0.78rem;
+  letter-spacing: -0.01em;
+}
+
+.jk-box-deg,
+.jk-outer-badge .deg-text {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1;
+  font-family: inherit;
+  opacity: 0.96;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* Positions for the 8 Outer Boxes mathematically mapped to the 4x4 chart: */
+
+/* 1. Top-left (Pisces / Sign 11) - Corner box */
+.jk-box-pisces,
+.jk-badge-pisces {
+  top: 0;
+  left: 0;
+  --tx: calc(-100% - 6px);
+  --ty: calc(-100% - 6px);
+}
+
+/* 2. Top-center (Aries / Sign 0) - Centered above Column 2 (37.5%) */
+.jk-box-aries,
+.jk-badge-aries-taurus {
+  top: 0;
+  left: 37.5%;
+  --tx: -50%;
+  --ty: calc(-100% - 6px);
+}
+
+/* 3. Top-right (Gemini / Sign 2) - Corner box */
+.jk-box-gemini,
+.jk-badge-gemini {
+  top: 0;
+  left: 100%;
+  --tx: 6px;
+  --ty: calc(-100% - 6px);
+}
+
+/* 4. Right-center (Cancer / Sign 3) - Centered right of Row 2 (37.5%) */
+.jk-box-cancer,
+.jk-badge-cancer-leo {
+  top: 37.5%;
+  left: 100%;
+  --tx: 6px;
+  --ty: -50%;
+}
+
+/* 5. Bottom-right (Virgo / Sign 5) - Corner box */
+.jk-box-virgo,
+.jk-badge-virgo {
+  top: 100%;
+  left: 100%;
+  --tx: 6px;
+  --ty: 6px;
+}
+
+/* 6. Bottom-center (Libra / Sign 6) - Centered below Column 3 (62.5%) */
+.jk-box-libra,
+.jk-badge-libra-scorpio {
+  top: 100%;
+  left: 62.5%;
+  --tx: -50%;
+  --ty: 6px;
+}
+
+/* 7. Bottom-left (Sagittarius / Sign 8) - Corner box */
+.jk-box-sagittarius,
+.jk-badge-sagittarius {
+  top: 100%;
+  left: 0;
+  --tx: calc(-100% - 6px);
+  --ty: 6px;
+}
+
+/* 8. Left-center (Capricorn / Sign 9) - Centered left of Row 3 (62.5%) */
+.jk-box-capricorn,
+.jk-badge-capricorn-aquarius {
+  top: 62.5%;
+  left: 0;
+  --tx: calc(-100% - 6px);
+  --ty: -50%;
+}
+
+/* Responsive adjustments for tablets and mobile screens */
+@media (max-width: 640px) {
+  .jamakol-outer-chart-wrapper {
+    padding: 3.75rem 3.85rem;
+  }
+  .jk-outer-box,
+  .jk-outer-badge {
+    width: 52px;
+    height: 46px;
+    padding: 2px 3px;
+  }
+  .jk-box-sym,
+  .jk-outer-badge .planet-sym {
+    font-size: 0.78rem;
+    margin-bottom: 1px;
+  }
+  .jk-box-sym.is-long,
+  .jk-outer-badge .planet-sym.is-long {
+    font-size: 0.68rem;
+  }
+  .jk-box-deg,
+  .jk-outer-badge .deg-text {
+    font-size: 0.64rem;
+  }
+  .jk-box-pisces,
+  .jk-badge-pisces {
+    --tx: calc(-100% - 4px);
+    --ty: calc(-100% - 4px);
+  }
+  .jk-box-aries,
+  .jk-badge-aries-taurus {
+    --ty: calc(-100% - 4px);
+  }
+  .jk-box-gemini,
+  .jk-badge-gemini {
+    --tx: 4px;
+    --ty: calc(-100% - 4px);
+  }
+  .jk-box-cancer,
+  .jk-badge-cancer-leo {
+    --tx: 4px;
+  }
+  .jk-box-virgo,
+  .jk-badge-virgo {
+    --tx: 4px;
+    --ty: 4px;
+  }
+  .jk-box-libra,
+  .jk-badge-libra-scorpio {
+    --ty: 4px;
+  }
+  .jk-box-sagittarius,
+  .jk-badge-sagittarius {
+    --tx: calc(-100% - 4px);
+    --ty: 4px;
+  }
+  .jk-box-capricorn,
+  .jk-badge-capricorn-aquarius {
+    --tx: calc(-100% - 4px);
+  }
+}
+
+@media (max-width: 440px) {
+  .jamakol-outer-chart-wrapper {
+    padding: 3rem 3rem;
+  }
+  .jk-outer-box,
+  .jk-outer-badge {
+    width: 46px;
+    height: 42px;
+    padding: 2px 2px;
+  }
+  .jk-box-sym,
+  .jk-outer-badge .planet-sym {
+    font-size: 0.70rem;
+  }
+  .jk-box-sym.is-long,
+  .jk-outer-badge .planet-sym.is-long {
+    font-size: 0.60rem;
+  }
+  .jk-box-deg,
+  .jk-outer-badge .deg-text {
+    font-size: 0.56rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   South Indian 4x4 Grid
+   -------------------------------------------------------------------------- */
+.jamakol-grid-south {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, minmax(88px, auto));
+  border: 2px solid var(--jk-gold-border);
+  background: var(--jk-parchment-deep);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+.jk-rasi-cell {
+  border: 1px solid var(--jk-gold-border);
+  background: #fffefb;
+  padding: 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 88px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.jk-rasi-cell:hover {
+  background: #fefce8;
+  z-index: 50;
+}
+
+.jk-cell-header,
+.kadikara-rasi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.jk-cell-header:hover,
+.kadikara-rasi-header:hover {
+  z-index: 100;
+}
+
+.jk-rasi-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #78716c; /* Lighter subtle tone matching screenshot */
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+
+.jk-rasi-tamil-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #a16207;
+}
+
+.jk-cell-planets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.jk-planet-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+}
+
+.jk-planet-entry:hover {
+  z-index: 100;
+}
+
+/* Red font for Lagna */
+.jk-planet-lagna {
+  color: var(--jk-lagna-red) !important;
+  font-weight: 800;
+}
+
+/* Kochara Moon: Standard dark planet color without underline */
+.jk-planet-moon {
+  color: #1c1917 !important;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Highlight colors & badges for 3 Pillars (Udhayam, Aarudam, Kavippu)
+   -------------------------------------------------------------------------- */
+.jk-point-udhayam {
+  color: #6d28d9 !important;
+  font-weight: 800;
+}
+
+.jk-point-udhayam .jk-sym-code {
+  color: #6d28d9;
+  background: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  border-radius: 4px;
+  padding: 0.5px 5px;
+  font-weight: 800;
+}
+
+.jk-point-aarudam {
+  color: #0284c7 !important;
+  font-weight: 800;
+}
+
+.jk-point-aarudam .jk-sym-code {
+  color: #0369a1;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  padding: 0.5px 5px;
+  font-weight: 800;
+}
+
+.jk-point-kavippu {
+  color: #dc2626 !important;
+  font-weight: 800;
+}
+
+.jk-point-kavippu .jk-sym-code {
+  color: #b91c1c;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  padding: 0.5px 5px;
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   Sub-Planets (Upagrahas): Yamakandam, Rahu Kalam, Maandi, Mrityu
+   -------------------------------------------------------------------------- */
+.jk-sub-yamakandam,
+.jk-sub-rahukalam,
+.jk-sub-maandi {
+  color: #8b0000 !important;
+  font-weight: 700;
+}
+
+.jk-sub-yamakandam .jk-sym-code,
+.jk-sub-rahukalam .jk-sym-code,
+.jk-sub-maandi .jk-sym-code {
+  color: #8b0000;
+  font-weight: 700;
+}
+
+.jk-sub-mrityu {
+  color: #800080 !important;
+  font-weight: 700;
+}
+
+.jk-sub-mrityu .jk-sym-code {
+  color: #800080;
+  font-weight: 700;
+}
+
+.jk-planet-deg {
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: #78716c !important; /* Small, light color with bracket */
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* Retrograde symbol indicator */
+.jk-retro-star {
+  color: #b91c1c;
+  font-weight: 800;
+  margin-left: 1px;
+}
+
+/* Center 2x2 Cell in South Indian Chart: Light Mode (Default) matching warm cream Vedic palette */
+.jk-chart-center-cell {
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 2;
+  border: 1px solid var(--jk-gold-border, #caa254);
+  background: linear-gradient(145deg, #fffdf8 0%, #fef8eb 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.55rem 0.5rem;
+  box-sizing: border-box;
+  color: #1c1917;
+  box-shadow: inset 0 0 10px rgba(202, 162, 84, 0.08);
+  overflow: hidden;
+  user-select: text;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.jk-center-panchangam-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(202, 162, 84, 0.35);
+  width: 100%;
+  text-align: center;
+}
+
+.jk-center-time-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #451a03;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.jk-center-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 0.18rem;
+  width: 100%;
+  line-height: 1.25;
+}
+
+.jk-center-row:last-child {
+  margin-bottom: 0;
+}
+
+.jk-center-label,
+.jk-center-icon {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: #78350f;
+  white-space: nowrap;
+}
+
+.jk-center-val {
+  font-size: 0.77rem;
+  font-weight: 700;
+  color: #1c1917;
+  white-space: nowrap;
+}
+
+.jk-val-horai {
+  color: #dc2626 !important; /* Bold Cardinal Red */
+  font-weight: 800;
+}
+
+.jk-val-gowri {
+  font-weight: 800;
+}
+
+.jk-val-gowri.auspicious {
+  color: #16a34a !important; /* Rich Green */
+}
+
+.jk-val-gowri.inauspicious {
+  color: #dc2626 !important; /* Red */
+}
+
+.jk-val-gowri.neutral {
+  color: #475569 !important; /* Slate */
+}
+
+@media (max-width: 640px) {
+  .jk-chart-center-cell {
+    padding: 0.35rem 0.25rem;
+  }
+  .jk-center-time-text {
+    font-size: 0.68rem;
+  }
+  .jk-center-label,
+  .jk-center-icon,
+  .jk-center-val {
+    font-size: 0.64rem;
+  }
+  .jk-center-row {
+    margin-bottom: 0.1rem;
+    gap: 0.15rem;
+  }
+  .jk-center-panchangam-header {
+    gap: 0.25rem;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.12rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .jk-center-time-text {
+    font-size: 0.58rem;
+  }
+  .jk-center-label,
+  .jk-center-icon,
+  .jk-center-val {
+    font-size: 0.54rem;
+  }
+  .jk-center-row {
+    margin-bottom: 0.06rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Center Section & Chart Dark Theme Adaptations
+   -------------------------------------------------------------------------- */
+html[data-theme="dark"] .jk-chart-center-cell,
+[data-theme="dark"] .jk-chart-center-cell,
+body.dark-theme .jk-chart-center-cell,
+.dark .jk-chart-center-cell {
+  background: linear-gradient(145deg, #18120b 0%, #241b12 100%) !important;
+  border-color: #78350f !important;
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5) !important;
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .jk-center-panchangam-header,
+[data-theme="dark"] .jk-center-panchangam-header,
+body.dark-theme .jk-center-panchangam-header,
+.dark .jk-center-panchangam-header {
+  border-bottom-color: rgba(245, 158, 11, 0.22) !important;
+}
+
+html[data-theme="dark"] .jk-center-time-text,
+[data-theme="dark"] .jk-center-time-text,
+body.dark-theme .jk-center-time-text,
+.dark .jk-center-time-text {
+  color: #fef08a !important;
+}
+
+
+
+html[data-theme="dark"] .jk-center-label,
+html[data-theme="dark"] .jk-center-icon,
+[data-theme="dark"] .jk-center-label,
+[data-theme="dark"] .jk-center-icon,
+body.dark-theme .jk-center-label,
+body.dark-theme .jk-center-icon,
+.dark .jk-center-label,
+.dark .jk-center-icon {
+  color: #fde68a !important;
+}
+
+html[data-theme="dark"] .jk-center-val,
+[data-theme="dark"] .jk-center-val,
+body.dark-theme .jk-center-val,
+.dark .jk-center-val {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .jk-val-horai,
+[data-theme="dark"] .jk-val-horai,
+body.dark-theme .jk-val-horai,
+.dark .jk-val-horai {
+  color: #f87171 !important;
+}
+
+html[data-theme="dark"] .jk-val-gowri.auspicious,
+[data-theme="dark"] .jk-val-gowri.auspicious,
+body.dark-theme .jk-val-gowri.auspicious,
+.dark .jk-val-gowri.auspicious {
+  color: #4ade80 !important;
+}
+
+html[data-theme="dark"] .jk-val-gowri.inauspicious,
+[data-theme="dark"] .jk-val-gowri.inauspicious,
+body.dark-theme .jk-val-gowri.inauspicious,
+.dark .jk-val-gowri.inauspicious {
+  color: #f87171 !important;
+}
+
+html[data-theme="dark"] .jk-val-gowri.neutral,
+[data-theme="dark"] .jk-val-gowri.neutral,
+body.dark-theme .jk-val-gowri.neutral,
+.dark .jk-val-gowri.neutral {
+  color: #cbd5e1 !important;
+}
+
+/* Jamakkol Chart Frame & Grid in Dark Mode */
+html[data-theme="dark"] .jamakol-chart-frame-card,
+[data-theme="dark"] .jamakol-chart-frame-card,
+body.dark-theme .jamakol-chart-frame-card,
+.dark .jamakol-chart-frame-card {
+  background: #1c150e !important;
+  border-color: #54391e !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+html[data-theme="dark"] .jamakol-grid-south,
+[data-theme="dark"] .jamakol-grid-south,
+body.dark-theme .jamakol-grid-south,
+.dark .jamakol-grid-south {
+  background: #241b12 !important;
+  border-color: #54391e !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .jk-rasi-cell,
+[data-theme="dark"] .jk-rasi-cell,
+body.dark-theme .jk-rasi-cell,
+.dark .jk-rasi-cell {
+  background: #18120b !important;
+  border-color: #3d2b1b !important;
+}
+
+html[data-theme="dark"] .jk-rasi-cell:hover,
+[data-theme="dark"] .jk-rasi-cell:hover,
+body.dark-theme .jk-rasi-cell:hover,
+.dark .jk-rasi-cell:hover {
+  background: #241b12 !important;
+}
+
+html[data-theme="dark"] .jk-rasi-title,
+[data-theme="dark"] .jk-rasi-title,
+body.dark-theme .jk-rasi-title,
+.dark .jk-rasi-title {
+  color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .jk-rasi-tamil-title,
+[data-theme="dark"] .jk-rasi-tamil-title,
+body.dark-theme .jk-rasi-tamil-title,
+.dark .jk-rasi-tamil-title {
+  color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .jk-planet-entry,
+[data-theme="dark"] .jk-planet-entry,
+body.dark-theme .jk-planet-entry,
+.dark .jk-planet-entry {
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .jk-planet-moon,
+[data-theme="dark"] .jk-planet-moon,
+body.dark-theme .jk-planet-moon,
+.dark .jk-planet-moon {
+  color: #93c5fd !important;
+}
+
+html[data-theme="dark"] .jk-planet-deg,
+[data-theme="dark"] .jk-planet-deg,
+body.dark-theme .jk-planet-deg,
+.dark .jk-planet-deg {
+  color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .jamakol-container,
+[data-theme="dark"] .jamakol-container,
+body.dark-theme .jamakol-container,
+.dark .jamakol-container {
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .jamakol-title-group h1,
+[data-theme="dark"] .jamakol-title-group h1,
+body.dark-theme .jamakol-title-group h1,
+.dark .jamakol-title-group h1 {
+  color: #fef08a !important;
+}
+
+html[data-theme="dark"] .jamakol-controls-card,
+[data-theme="dark"] .jamakol-controls-card,
+body.dark-theme .jamakol-controls-card,
+.dark .jamakol-controls-card {
+  background: #1c150e !important;
+  border-color: #2c2015 !important;
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .jk-input-control,
+[data-theme="dark"] .jk-input-control,
+body.dark-theme .jk-input-control,
+.dark .jk-input-control {
+  background: #241b12 !important;
+  border-color: #3d2b1b !important;
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .jk-field-group label,
+[data-theme="dark"] .jk-field-group label,
+body.dark-theme .jk-field-group label,
+.dark .jk-field-group label {
+  color: #fde68a !important;
+}
+
+/* --------------------------------------------------------------------------
+   Chart Outer Footer (Below & outside chart: South / North Indian Toggle)
+   -------------------------------------------------------------------------- */
+.jamakol-chart-outer-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .jamakol-chart-outer-footer {
+    justify-content: center;
+  }
+}
+
+.jamakol-chart-footer-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(202, 162, 84, 0.4);
+}
+
+.jk-footer-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #44403c;
+}
+
+.jk-footer-location .loc-label {
+  font-weight: 600;
+}
+
+.jk-footer-location .loc-city {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.jk-btn-change-city {
+  background: transparent;
+  border: none;
+  color: #0284c7;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.jk-btn-change-city:hover {
+  color: #0369a1;
+}
+
+/* Toggle Pill: South Indian / North Indian */
+.jk-chart-style-toggle {
+  display: inline-flex;
+  background: #f5f5f4;
+  border: 1px solid #d6d3d1;
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.jk-toggle-btn {
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #57534e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jk-toggle-btn.active {
+  background: var(--jk-brown-box);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(141, 63, 17, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   North Indian Diamond Chart View
+   -------------------------------------------------------------------------- */
+.jamakol-north-chart-container {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.jk-north-svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.06));
+}
+
+/* --------------------------------------------------------------------------
+   Quick Verdict & 3 Pillars Card (Udhayam, Aarudam, Kavippu)
+   -------------------------------------------------------------------------- */
+.jamakol-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.jk-summary-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--jk-card-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.jk-summary-card.pillar-udhayam {
+  border-top: 4px solid #b45309;
+}
+
+.jk-summary-card.pillar-aarudam {
+  border-top: 4px solid #0284c7;
+}
+
+.jk-summary-card.pillar-kavippu {
+  border-top: 4px solid #dc2626;
+}
+
+.jk-pillar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.jk-pillar-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #292524;
+}
+
+.jk-pillar-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.jk-pillar-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed #f5f5f4;
+  font-size: 0.88rem;
+}
+
+.jk-pillar-lbl {
+  color: #78716c;
+}
+
+.jk-pillar-val {
+  font-weight: 600;
+  color: #1c1917;
+}
+
+/* --------------------------------------------------------------------------
+   8 Jama Grahas Details Table
+   -------------------------------------------------------------------------- */
+.jamakol-table-card {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--jk-card-shadow);
+  overflow-x: auto;
+}
+
+.jk-table-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.jk-table-title-row h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #431407;
+  margin: 0;
+}
+
+.jk-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.jk-data-table th {
+  background: #fdfaf3;
+  color: #78350f;
+  font-weight: 700;
+  padding: 0.75rem 0.85rem;
+  border-bottom: 2px solid #fed7aa;
+}
+
+.jk-data-table td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid #f5f5f4;
+  color: #292524;
+}
+
+.jk-data-table tr:hover td {
+  background: #fffbeb;
+}
+
+/* --------------------------------------------------------------------------
+   Event Timing (சம்பவ கால நிர்ணயம்) Section
+   -------------------------------------------------------------------------- */
+.jk-timing-card {
+  background: linear-gradient(135deg, #fefce8 0%, #fffbeb 100%);
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--jk-card-shadow);
+}
+
+.jk-timing-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  color: #78350f;
+}
+
+.jk-timing-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   70+ Classical Questions Advisor
+   -------------------------------------------------------------------------- */
+.jk-questions-section {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--jk-card-shadow);
+}
+
+.jk-questions-header {
+  margin-bottom: 1.25rem;
+}
+
+.jk-questions-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #431407;
+  margin: 0 0 0.4rem 0;
+}
+
+.jk-questions-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.jk-search-input {
+  flex: 1;
+  min-width: 240px;
+  height: 40px;
+  padding: 0 0.85rem;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+.jk-search-input:focus {
+  outline: none;
+  border-color: #b45309;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.15);
+}
+
+.jk-category-pill {
+  border: 1px solid #e7e5e4;
+  background: #fafaf9;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #57534e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.jk-category-pill:hover,
+.jk-category-pill.active {
+  background: #8d3f11;
+  color: #ffffff;
+  border-color: #78350f;
+}
+
+.jk-questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  max-height: 580px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.jk-question-card {
+  border: 1px solid #e7e5e4;
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fafaf9;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.jk-question-card:hover {
+  border-color: #f59e0b;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.jk-q-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.jk-q-number {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #78350f;
+  background: #fef3c7;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.jk-q-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1c1917;
+  flex: 1;
+}
+
+.jk-verdict-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.jk-verdict-favorable {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.jk-verdict-unfavorable {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.jk-verdict-neutral {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.jk-verdict-delayed {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.jk-q-condition {
+  font-size: 0.82rem;
+  color: #44403c;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.jk-q-explanation {
+  font-size: 0.8rem;
+  color: #78716c;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   Classical Accordion & FAQs
+   -------------------------------------------------------------------------- */
+.jk-faq-section {
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: var(--jk-card-shadow);
+}
+
+.jk-faq-item {
+  border-bottom: 1px solid #f5f5f4;
+  padding: 0.85rem 0;
+}
+
+.jk-faq-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #292524;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.jk-faq-ans {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: #57534e;
+  line-height: 1.55;
+}
+
+/* =========================================================================
+   RICH FLOATING TOOLTIPS (RAASI, ATHIPATHI, NATCHATHIRAM, PADAM, ETC.)
+   ========================================================================= */
+.kadikara-tooltip-card {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 9px 13px;
+  min-width: 250px;
+  max-width: 330px;
+  width: max-content;
+  box-sizing: border-box;
+  box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.65), 0 4px 12px -2px rgba(0, 0, 0, 0.45);
+  z-index: 99999;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  text-align: left;
+  line-height: 1.45;
+  white-space: normal;
+}
+
+.kadikara-tooltip-card::after {
+  content: '';
+  position: absolute;
+  border-width: 6px;
+  border-style: solid;
+}
+
+/* Tooltip Show Triggers on Hover */
+.jk-planet-entry:hover .kadikara-tooltip-card,
+.jk-cell-header:hover .kadikara-tooltip-card,
+.kadikara-rasi-header:hover .kadikara-tooltip-card,
+.jk-outer-box:hover .kadikara-tooltip-card {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Directional positions with smooth micro-animation */
+.kadikara-tooltip-card.pos-top-mid {
+  top: calc(100% + 6px);
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-top-mid,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-top-mid,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-top-mid,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-top-mid {
+  transform: translateX(-50%) translateY(0);
+}
+.kadikara-tooltip-card.pos-top-mid::after {
+  bottom: 100%;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: transparent transparent #0f172a transparent;
+}
+
+.kadikara-tooltip-card.pos-top-left {
+  top: calc(100% + 6px);
+  bottom: auto;
+  left: 0;
+  transform: translateY(-4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-top-left,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-top-left,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-top-left,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-top-left {
+  transform: translateY(0);
+}
+.kadikara-tooltip-card.pos-top-left::after {
+  bottom: 100%;
+  top: auto;
+  left: 16px;
+  border-color: transparent transparent #0f172a transparent;
+}
+
+.kadikara-tooltip-card.pos-top-right {
+  top: calc(100% + 6px);
+  bottom: auto;
+  right: 0;
+  left: auto;
+  transform: translateY(-4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-top-right,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-top-right,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-top-right,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-top-right {
+  transform: translateY(0);
+}
+.kadikara-tooltip-card.pos-top-right::after {
+  bottom: 100%;
+  top: auto;
+  right: 16px;
+  left: auto;
+  border-color: transparent transparent #0f172a transparent;
+}
+
+.kadikara-tooltip-card.pos-bottom-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-bottom-mid,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-bottom-mid,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-bottom-mid,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-bottom-mid {
+  transform: translateX(-50%) translateY(0);
+}
+.kadikara-tooltip-card.pos-bottom-mid::after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: #0f172a transparent transparent transparent;
+}
+
+.kadikara-tooltip-card.pos-bottom-left,
+.kadikara-tooltip-card.pos-left-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  left: 0;
+  transform: translateY(4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-bottom-left,
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-left-mid,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-bottom-left,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-left-mid,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-bottom-left,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-left-mid,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-bottom-left,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-left-mid {
+  transform: translateY(0);
+}
+.kadikara-tooltip-card.pos-bottom-left::after,
+.kadikara-tooltip-card.pos-left-mid::after {
+  top: 100%;
+  bottom: auto;
+  left: 16px;
+  border-color: #0f172a transparent transparent transparent;
+}
+
+.kadikara-tooltip-card.pos-bottom-right,
+.kadikara-tooltip-card.pos-right-mid {
+  bottom: calc(100% + 6px);
+  top: auto;
+  right: 0;
+  left: auto;
+  transform: translateY(4px);
+}
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-bottom-right,
+.jk-planet-entry:hover .kadikara-tooltip-card.pos-right-mid,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-bottom-right,
+.jk-cell-header:hover .kadikara-tooltip-card.pos-right-mid,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-bottom-right,
+.kadikara-rasi-header:hover .kadikara-tooltip-card.pos-right-mid,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-bottom-right,
+.jk-outer-box:hover .kadikara-tooltip-card.pos-right-mid {
+  transform: translateY(0);
+}
+.kadikara-tooltip-card.pos-bottom-right::after,
+.kadikara-tooltip-card.pos-right-mid::after {
+  top: 100%;
+  bottom: auto;
+  right: 16px;
+  left: auto;
+  border-color: #0f172a transparent transparent transparent;
+}
+
+/* Tooltip Interior Styles */
+.kadikara-rasi-info-pill {
+  font-size: 10px;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.kadikara-rasi-header:hover .kadikara-rasi-info-pill,
+.jk-cell-header:hover .kadikara-rasi-info-pill {
+  background: #b45309;
+  border-color: #b45309;
+  color: #ffffff;
+}
+
+.kadikara-tooltip-card .tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 5px;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.kadikara-tooltip-card .tooltip-planet-name {
+  font-weight: 800;
+  font-size: 12.5px;
+  color: #38bdf8;
+  letter-spacing: 0.2px;
+}
+
+.kadikara-tooltip-card .tooltip-deg-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.kadikara-tooltip-card .tooltip-retro-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  background: #7f1d1d;
+  color: #fecaca;
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.kadikara-tooltip-card .tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kadikara-tooltip-card .tooltip-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.kadikara-tooltip-card .tooltip-lbl {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 10.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.kadikara-tooltip-card .tooltip-val {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.kadikara-tooltip-card .tooltip-stars-divider {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #38bdf8;
+  border-top: 1px dashed #334155;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+.kadikara-tooltip-card .tooltip-stars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.kadikara-tooltip-card .tooltip-star-item {
+  background: rgba(30, 41, 59, 0.7);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 10.5px;
+  border-left: 2.5px solid #38bdf8;
+}
+
+.kadikara-tooltip-card .star-title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.kadikara-tooltip-card .star-name {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.kadikara-tooltip-card .star-lord-badge {
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.kadikara-tooltip-card .star-padas-row {
+  display: flex;
+  gap: 4px;
+  color: #cbd5e1;
+  font-size: 10px;
+  flex-wrap: wrap;
+}
+
+.kadikara-tooltip-card .star-pada-lbl {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.kadikara-tooltip-card .star-pada-val {
+  color: #f1f5f9;
+  font-weight: 600;
+}

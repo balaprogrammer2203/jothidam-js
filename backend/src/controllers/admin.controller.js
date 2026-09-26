@@ -10,6 +10,8 @@ import { TamilYearMaster, TamilMonthMaster } from '../models/TamilCalendarMaster
 import KPHoraryMaster from '../models/KPHoraryMaster.js';
 import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
+import JamakkolMaster from '../models/JamakkolMaster.js';
+import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 
@@ -154,6 +156,46 @@ export const MODEL_REGISTRY = {
       'desc.en', 'desc.ta', 'desc.hi', 'desc.te', 'desc.kn', 'desc.ml'
     ],
     defaultSort: { order: 1, bhava: 1 }
+  },
+  'jamakkol-prasannam': {
+    model: JamakkolMaster,
+    name: 'Jamakkol Prasannam (Aarudam Master)',
+    nameTa: 'ஜாமக்கோள் பிரசன்னம்',
+    searchFields: [
+      'key', 'category', 'domain', 'ratingType',
+      'title.en', 'title.ta', 'title.hi', 'title.te', 'title.kn', 'title.ml',
+      'status.en', 'status.ta', 'status.hi', 'status.te', 'status.kn', 'status.ml',
+      'desc.en', 'desc.ta', 'desc.hi', 'desc.te', 'desc.kn', 'desc.ml',
+      'question.en', 'question.ta', 'answer.en', 'answer.ta'
+    ],
+    defaultSort: { order: 1 }
+  },
+  jamakkol_prasannam: {
+    model: JamakkolMaster,
+    name: 'Jamakkol Prasannam (Aarudam Master)',
+    nameTa: 'ஜாமக்கோள் பிரசன்னம்',
+    searchFields: [
+      'key', 'category', 'domain', 'ratingType',
+      'title.en', 'title.ta', 'title.hi', 'title.te', 'title.kn', 'title.ml',
+      'status.en', 'status.ta', 'status.hi', 'status.te', 'status.kn', 'status.ml',
+      'desc.en', 'desc.ta', 'desc.hi', 'desc.te', 'desc.kn', 'desc.ml',
+      'question.en', 'question.ta', 'answer.en', 'answer.ta'
+    ],
+    defaultSort: { order: 1 }
+  },
+  'planet-dignities': {
+    model: PlanetRasiDignityMaster,
+    name: 'Planet Dignities (ஆட்சி, உச்சம், நீசம், நட்பு, பகை, சமம்)',
+    nameTa: 'கிரக நிலைகள்',
+    searchFields: ['rasiName', 'rasiNameTa', 'rasiNameHi', 'rasiNameTe', 'rasiNameKn', 'rasiNameMl', 'athipathiName', 'athipathiNameTa'],
+    defaultSort: { order: 1 }
+  },
+  planet_dignities: {
+    model: PlanetRasiDignityMaster,
+    name: 'Planet Dignities (ஆட்சி, உச்சம், நீசம், நட்பு, பகை, சமம்)',
+    nameTa: 'கிரக நிலைகள்',
+    searchFields: ['rasiName', 'rasiNameTa', 'rasiNameHi', 'rasiNameTe', 'rasiNameKn', 'rasiNameMl', 'athipathiName', 'athipathiNameTa'],
+    defaultSort: { order: 1 }
   }
 };
 

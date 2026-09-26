@@ -675,6 +675,156 @@ export const TABLE_CONFIGS = [
       { name: 'answer.en', labelEn: 'FAQ Answer (English)', labelTa: 'பதில் (English)', type: 'textarea' },
       { name: 'answer.ta', labelEn: 'FAQ Answer (Tamil)', labelTa: 'பதில் (தமிழ்)', type: 'textarea' }
     ]
+  },
+  {
+    key: 'jamakkol-prasannam',
+    name: 'Jamakkol Prasannam (8 Jamams & 70+ Questions Master)',
+    nameEn: 'Jamakkol Prasannam',
+    nameTa: 'ஜாமக்கோள் பிரசன்னம்',
+    nameHi: 'जामक्कोल प्रश्न ज्योतिष',
+    nameTe: 'జామక్కోల్ ప్రసన్నం',
+    nameKn: 'ಜಾಮಕ್ಕೋಲ್ ಪ್ರಸನ್ನ',
+    nameMl: 'ജാമക്കോൾ പ്രസന്നം',
+    icon: 'Compass',
+    color: '#d97706',
+    primaryKey: '_id',
+    modalSize: 'large',
+    columns: [
+      {
+        key: 'key',
+        labelEn: 'Identifier Key',
+        labelTa: 'அடையாளக் குறியீடு',
+        labelHi: 'पहचान कुंजी',
+        labelTe: 'గుర్తింపు కీ',
+        labelKn: 'ಗುರುತಿನ ಕೀ',
+        labelMl: 'ഐഡന്റിഫയർ കീ',
+        path: 'key',
+        isHighlight: true
+      },
+      {
+        key: 'category',
+        labelEn: 'Category',
+        labelTa: 'பிரிவு',
+        labelHi: 'श्रेणी',
+        labelTe: 'వర్గం',
+        labelKn: 'ವರ್ಗ',
+        labelMl: 'വിഭാഗം',
+        path: 'category',
+        format: (val) => (val ? String(val).toUpperCase() : '-')
+      },
+      {
+        key: 'order',
+        labelEn: 'Order / Q#',
+        labelTa: 'வரிசை / கேள்வி #',
+        labelHi: 'क्रम / प्रश्न #',
+        labelTe: 'క్రమం / ప్రశ్న #',
+        labelKn: 'ಕ್ರಮ / ಪ್ರಶ್ನೆ #',
+        labelMl: 'ക്രമം / ചോദ്യം #',
+        path: 'order',
+        format: (val, row) => (row?.questionNumber ? `Q#${row.questionNumber}` : `#${val}`)
+      },
+      {
+        key: 'title',
+        labelEn: 'Title / Question',
+        labelTa: 'தலைப்பு / கேள்வி',
+        labelHi: 'शीर्षक / प्रश्न',
+        labelTe: 'శీర్షిక / ప్రశ్న',
+        labelKn: 'ಶೀರ್ಷಿಕೆ / ಪ್ರಶ್ನೆ',
+        labelMl: 'തലക്കെട്ട് / ചോദ്യം',
+        path: 'title',
+        format: (val, row) => {
+          return row?.title?.ta || row?.title?.en || row?.key || '-';
+        }
+      },
+      {
+        key: 'resultVerdict',
+        labelEn: 'Verdict',
+        labelTa: 'தீர்ப்பு பலன்',
+        labelHi: 'निर्णय',
+        labelTe: 'తీర్పు',
+        labelKn: 'ತೀರ್ಪು',
+        labelMl: 'തീർപ്പ്',
+        path: 'resultVerdict',
+        format: (val) => (val ? String(val).toUpperCase() : 'NEUTRAL')
+      },
+      {
+        key: 'successPercentage',
+        labelEn: 'Success Rate',
+        labelTa: 'வெற்றி விகிதம்',
+        labelHi: 'सफलता दर',
+        labelTe: 'విజయ శాతం',
+        labelKn: 'ಯಶಸ್ಸಿನ ಪ್ರಮಾಣ',
+        labelMl: 'വിജയ നിരക്ക്',
+        path: 'successPercentage',
+        format: (val) => (val !== undefined && val !== null ? `${val}%` : '-')
+      },
+      {
+        key: 'karakaPlanet',
+        labelEn: 'Karaka Planet',
+        labelTa: 'காரக கிரகம்',
+        labelHi: 'कारक ग्रह',
+        labelTe: 'కారక గ్రహం',
+        labelKn: 'ಕಾರಕ ಗ್ರಹ',
+        labelMl: 'കാരക ഗ്രഹം',
+        path: 'karakaPlanet',
+        format: (val) => (val ? String(val).toUpperCase() : '-')
+      }
+    ],
+    formFields: [
+      { name: 'key', labelEn: 'Key Code (e.g. q_marriage_1, rule_ar_ud)', labelTa: 'குறியீட்டுப் பெயர்', type: 'text', required: true },
+      { name: 'category', labelEn: 'Category', labelTa: 'பிரிவு', type: 'select', options: ['question', 'rule', 'pillar', 'concept', 'planet_rays'], required: true },
+      { name: 'order', labelEn: 'Display Order', labelTa: 'காட்சி வரிசை', type: 'number', required: true },
+      { name: 'questionNumber', labelEn: 'Question Number (1-70+)', labelTa: 'கேள்வி எண் (1-70+)', type: 'number' },
+      { name: 'house', labelEn: 'Bhava House Number (1-12)', labelTa: 'பாவக எண் (1-12)', type: 'number' },
+      { name: 'karakaPlanet', labelEn: 'Karaka Planet', labelTa: 'காரக கிரகம்', type: 'text' },
+      { name: 'resultVerdict', labelEn: 'Verdict', labelTa: 'தீர்ப்பு பலன்', type: 'select', options: ['favorable', 'unfavorable', 'neutral', 'delayed'], required: true },
+      { name: 'successPercentage', labelEn: 'Success Percentage (0-100)', labelTa: 'வெற்றி சதவீதம் (0-100)', type: 'number' },
+      { name: 'title.en', labelEn: 'Title (English)', labelTa: 'தலைப்பு (English)', type: 'text' },
+      { name: 'title.ta', labelEn: 'Title (Tamil)', labelTa: 'தலைப்பு (தமிழ்)', type: 'text' },
+      { name: 'title.hi', labelEn: 'Title (Hindi)', labelTa: 'शीर्षक (हिन्दी)', type: 'text' },
+      { name: 'condition.en', labelEn: 'Rule Condition (English)', labelTa: 'விதி நிபந்தனை (English)', type: 'textarea' },
+      { name: 'condition.ta', labelEn: 'Rule Condition (Tamil)', labelTa: 'விதி நிபந்தனை (தமிழ்)', type: 'textarea' },
+      { name: 'explanation.en', labelEn: 'Explanation (English)', labelTa: 'விளக்கம் (English)', type: 'textarea' },
+      { name: 'explanation.ta', labelEn: 'Explanation (Tamil)', labelTa: 'விளக்கம் (தமிழ்)', type: 'textarea' },
+      { name: 'explanation.hi', labelEn: 'Explanation (Hindi)', labelTa: 'விளக்கம் (Hindi)', type: 'textarea' },
+      { name: 'remedy.en', labelEn: 'Remedy / Pariharam (English)', labelTa: 'பரிகாரம் (English)', type: 'text' },
+      { name: 'remedy.ta', labelEn: 'Remedy / Pariharam (Tamil)', labelTa: 'பரிகாரம் (தமிழ்)', type: 'text' }
+    ]
+  },
+  {
+    key: 'planet-dignities',
+    name: 'Planetary Dignities (ஆட்சி, உச்சம், நீசம், நட்பு, பகை, சமம்)',
+    nameEn: 'Planetary Dignities',
+    nameTa: 'கிரக ஆட்சி உச்ச நீச அட்டவணை',
+    nameHi: 'ग्रह उच्च नीच शत्रु मित्र स्थिति',
+    nameTe: 'గ్రహ ఉచ్ఛ నీచ శత్రు మిత్ర స్థితులు',
+    nameKn: 'ಗ್ರಹ ಉಚ್ಛ ನೀಚ ಶತ್ರು ಮಿತ್ರ ಸ್ಥಿತಿಗಳು',
+    nameMl: 'ഗ്രഹ ഉച്ച നീച ശത്രു മിത്ര സ്ഥിതികൾ',
+    icon: 'Sun',
+    color: '#d97706',
+    primaryKey: 'rasiId',
+    columns: [
+      { key: 'rasiId', labelEn: 'Rasi ID', labelTa: 'ராசி எண்', path: 'rasiId' },
+      { key: 'order', labelEn: 'Order', labelTa: 'வரிசை', path: 'order' },
+      { key: 'rasiName', labelEn: 'Rasi Name', labelTa: 'ராசி பெயர்', path: 'rasiName', isHighlight: true },
+      { key: 'rasiNameTa', labelEn: 'Tamil Name', labelTa: 'தமிழ் பெயர்', path: 'rasiNameTa' },
+      { key: 'athipathiNameTa', labelEn: 'Lord (Ta)', labelTa: 'அதிபதி', path: 'athipathiNameTa' },
+      {
+        key: 'planetsCount',
+        labelEn: 'Total Planets',
+        labelTa: 'கிரகங்கள் எண்ணிக்கை',
+        path: 'planets',
+        format: (val) => (Array.isArray(val) ? `${val.length} Planets` : '-')
+      }
+    ],
+    formFields: [
+      { name: 'rasiId', labelEn: 'Rasi ID (0-11)', labelTa: 'ராசி எண் (0-11)', type: 'number', required: true },
+      { name: 'order', labelEn: 'Order (1-12)', labelTa: 'வரிசை (1-12)', type: 'number', required: true },
+      { name: 'rasiName', labelEn: 'Rasi Name (English)', labelTa: 'ராசி பெயர் (English)', type: 'text', required: true },
+      { name: 'rasiNameTa', labelEn: 'Rasi Name (Tamil)', labelTa: 'ராசி பெயர் (தமிழ்)', type: 'text', required: true },
+      { name: 'athipathiName', labelEn: 'Lord Name (English)', labelTa: 'அதிபதி (English)', type: 'text', required: true },
+      { name: 'athipathiNameTa', labelEn: 'Lord Name (Tamil)', labelTa: 'அதிபதி (தமிழ்)', type: 'text', required: true }
+    ]
   }
 ];
 

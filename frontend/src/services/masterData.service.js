@@ -1,6 +1,7 @@
 import apiClient from './apiClient';
 import { API_ENDPOINTS } from '../config/api.config';
 import { RASIS_6LANG, NAKSHATRAS_6LANG, PLANETS_6LANG } from '../utils/astrologyLocalization';
+import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from '../features/zodiac-planets/data/planetDignityData';
 
 // Robust local fallback datasets in case backend server is unreachable
 export const FALLBACK_RASIS = [
@@ -601,6 +602,24 @@ export const masterDataService = {
       // ignore
     }
     return null;
+  },
+
+  async getPlanetDignities(params = {}) {
+    try {
+      const res = await apiClient.get(API_ENDPOINTS.MASTER_PLANET_DIGNITIES, { params });
+      if (res.data?.data && res.data.data.length > 0) {
+        return {
+          data: res.data.data,
+          rules: res.data.rules || TATKALIKA_RULES_DATA
+        };
+      }
+    } catch {
+      // ignore
+    }
+    return {
+      data: PLANET_RASI_DIGNITIES_DATA,
+      rules: TATKALIKA_RULES_DATA
+    };
   }
 };
 

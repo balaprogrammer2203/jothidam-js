@@ -44,8 +44,16 @@ export const PORTAL_NAVIGATION_TREE = [
             title: { en: 'Kadikara Prasannam (Clock)', ta: 'கடிகார பிரசன்னம்' },
             desc: { en: 'Instant clock time horary with South Indian chart', ta: 'தென்னிந்திய ராசி சக்கரத்துடன் கூடிய பிரசன்னம்' },
             path: ROUTES.PRASANNAM.KADIKARA,
-            badge: 'New',
+            badge: 'Clock',
             icon: '🕰️'
+          },
+          {
+            id: 'menu-jamakol-prasannam',
+            title: { en: 'Jamakol Prasannam (Aarudam)', ta: 'ஜாமக்கோள் பிரசன்னம்' },
+            desc: { en: 'Udhayam, Aarudam, Kavippu with South Indian Chart', ta: 'உதயம், ஆரூடம், கவிப்பு மற்றும் 8 ஜாம கிரகங்கள்' },
+            path: ROUTES.PRASANNAM.JAMAKKOL,
+            badge: 'New',
+            icon: '🧭'
           }
         ]
       }
@@ -87,8 +95,30 @@ export const PORTAL_NAVIGATION_TREE = [
               ml: 'മണിയും മിനിറ്റും ഉപയോഗിച്ചുള്ള പ്രശ്ന ഫലം'
             },
             path: ROUTES.PRASANNAM.KADIKARA,
-            badge: 'New',
+            badge: 'Clock',
             icon: '🕰️'
+          },
+          {
+            id: 'jamakol-prasannam',
+            title: {
+              en: 'Jamakol Prasannam (Aarudam)',
+              ta: 'ஜாமக்கோள் பிரசன்னம்',
+              hi: 'जामाकोल प्रश्न कुंडली',
+              te: 'జామకోల్ ప్రశ్న శాస్త్రం',
+              kn: 'ಜಾಮಕೋಲ್ ಪ್ರಶ್ನ ಜ್ಯೋತಿಷ್ಯ',
+              ml: 'ജാമക്കോൾ പ്രശ്നം'
+            },
+            desc: {
+              en: 'Instant Udhayam, Aarudam, Kavippu & 8 Outer Jama Grahas',
+              ta: 'உதயம், ஆரூடம், கவிப்பு மற்றும் 8 ஜாம கிரகங்களுடன் கூடிய துல்லிய பிரசன்னம்',
+              hi: 'उदय, आरूढ़, कविप्पु और 8 जामा ग्रहों से सटीक प्रश्न फल',
+              te: 'ఉదయం, ఆరూఢం, కవిప్పు మరియు 8 జామా గ్రహాలతో ఖచ్చితమైన ప్రశ్న ఫలం',
+              kn: 'ಉದಯ, ಆರೂಢ, ಕವಿಪ್ಪು ಮತ್ತು 8 ಜಾಮಾ ಗ್ರಹಗಳೊಂದಿಗೆ ಫಲಿತಾಂಶ',
+              ml: 'ഉദയം, ആരൂഢം, കവിപ്പു, 8 ജാമ ഗ്രഹങ്ങൾ എന്നിവയോടുകൂടിയ കൃത്യമായ ഫലം'
+            },
+            path: ROUTES.PRASANNAM.JAMAKKOL,
+            badge: 'New',
+            icon: '🧭'
           }
         ]
       }
@@ -144,6 +174,28 @@ export const PORTAL_NAVIGATION_TREE = [
             desc: { en: 'Exaltation, debilitation & relations', ta: 'உச்சம், நீசம், ஆட்சி விவரங்கள்' },
             path: ROUTES.ZODIAC.PLANETS,
             icon: '🪐'
+          },
+          {
+            id: 'planet-dignities',
+            title: {
+              en: 'Planetary Dignities (Aatchi/Ucham)',
+              ta: 'கிரக ஆட்சி, உச்ச, நீச அட்டவணை',
+              hi: 'ग्रह उच्च नीच शत्रु मित्र स्थिति',
+              te: 'గ్రహ ఉచ్ఛ నీచ శత్రు మిత్ర స్థితులు',
+              kn: 'ಗ್ರಹ ಉಚ್ಛ ನೀಚ ಶತ್ರು ಮಿತ್ರ ಸ್ಥಿತಿಗಳು',
+              ml: 'ഗ്രഹ ഉച്ച നീച ശത്രു മിത്ര സ്ഥിതികൾ'
+            },
+            desc: {
+              en: '12 Signs × 9 Planets dignities & Panchadha Maitri',
+              ta: '12 ராசி கட்டங்கள், 9 கிரக நிலைகள் & பஞ்சதா மைத்ரி',
+              hi: '12 राशि × 9 ग्रह स्थिति एवं पंचधा मैत्री',
+              te: '12 రాశులు × 9 గ్రహాల స్థితులు మరియు పంచధా మైత్రి',
+              kn: '12 ರಾಶಿ × 9 ಗ್ರಹಗಳ ಸ್ಥಿತಿ ಮತ್ತು ಪಂಚಧಾ ಮೈತ್ರಿ',
+              ml: '12 രാശി × 9 ഗ്രഹങ്ങളുടെ അവസ്ഥകളും പഞ്ചധാ മൈത്രിയും'
+            },
+            path: ROUTES.ZODIAC.PLANET_DIGNITIES,
+            badge: 'Chart',
+            icon: '👑'
           },
           {
             id: 'kalachakram',

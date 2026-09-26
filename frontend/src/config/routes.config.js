@@ -15,7 +15,8 @@ export const ROUTES = {
 
   // 2. Horary Prasannam Astrology
   PRASANNAM: {
-    KADIKARA: '/prasannam/kadikara-clock'
+    KADIKARA: '/prasannam/kadikara-clock',
+    JAMAKKOL: '/prasannam/jamakol'
   },
 
   // 3. Zodiac Signs & Planetary Ephemeris
@@ -24,6 +25,7 @@ export const ROUTES = {
     NAKSHATRAS: '/zodiac/nakshatras',
     NAKSHATRA_PADAS: '/zodiac/nakshatra-padas',
     PLANETS: '/zodiac/navagraha-planets',
+    PLANET_DIGNITIES: '/zodiac/planet-dignities',
     KALACHAKRAM: '/zodiac/kalachakram-360'
   },
 
@@ -56,10 +58,16 @@ export const ROUTES = {
 export const LEGACY_ROUTE_REDIRECTS = [
   { from: '/saved', to: ROUTES.HOROSCOPE.SAVED },
   { from: '/kadikara-prasannam', to: ROUTES.PRASANNAM.KADIKARA },
+  { from: '/jamakol', to: ROUTES.PRASANNAM.JAMAKKOL },
+  { from: '/jamakkol', to: ROUTES.PRASANNAM.JAMAKKOL },
+  { from: '/jamakol-prasannam', to: ROUTES.PRASANNAM.JAMAKKOL },
+  { from: '/jamakkol-prasannam', to: ROUTES.PRASANNAM.JAMAKKOL },
   { from: '/rasis', to: ROUTES.ZODIAC.RASIS },
   { from: '/nakshatras', to: ROUTES.ZODIAC.NAKSHATRAS },
   { from: '/nakshatra-padas', to: ROUTES.ZODIAC.NAKSHATRA_PADAS },
   { from: '/planets', to: ROUTES.ZODIAC.PLANETS },
+  { from: '/planet-dignities', to: ROUTES.ZODIAC.PLANET_DIGNITIES },
+  { from: '/dignities', to: ROUTES.ZODIAC.PLANET_DIGNITIES },
   { from: '/kalachakram', to: ROUTES.ZODIAC.KALACHAKRAM },
   { from: '/kp-horary', to: ROUTES.KP_ASTROLOGY.HORARY },
   { from: '/tithis', to: ROUTES.PANCHANGAM.TITHIS },

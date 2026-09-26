@@ -10,9 +10,14 @@ import { TamilYearMaster, TamilMonthMaster } from '../models/TamilCalendarMaster
 import KPHoraryMaster from '../models/KPHoraryMaster.js';
 import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
+import JamakkolMaster from '../models/JamakkolMaster.js';
+import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
 import { KP_HORARY_DATA } from '../services/kpHoraryData.js';
 import { NAKSHATRA_PADAS_DATA } from '../services/nakshatraPadaData.js';
 import { KADIKARA_PRASANNAM_MASTER_DATA } from '../services/kadikaraData.js';
+import { JAMAKKOL_PRASANNAM_MASTER_DATA } from '../services/jamakkolData.js';
+import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from '../services/planetDignityData.js';
+import { calculateJamakkolPrasannam } from '../services/jamakkol.service.js';
 import { calculateVedicChart, AYANAMSA_MODES } from '../services/ephemeris.service.js';
 import { getPlaceCoordinates, searchPlaces } from '../services/geo.service.js';
 import { calculateBasicHoroscopeDetails } from '../services/panchangam.service.js';
@@ -1501,6 +1506,120 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
         rasiGrid,
         rasiHouses
       }
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Jamakkol Prasannam Calculation & Astrological Divination Engine (BE)
+ */
+export const calculateJamakkolPrasannamBE = async (req, res) => {
+  try {
+    const {
+      date = new Date().toISOString().split('T')[0],
+      time = '09:19',
+      latitude = 28.6139,
+      longitude = 77.2090,
+      placeName = 'New Delhi',
+      ayanamsa = 'lahiri',
+      lang = 'ta'
+    } = req.body;
+
+    const latNum = parseFloat(latitude) || 28.6139;
+    const lngNum = parseFloat(longitude) || 77.2090;
+
+    const result = await calculateJamakkolPrasannam({
+      date,
+      time,
+      latitude: latNum,
+      longitude: lngNum,
+      placeName,
+      ayanamsa,
+      lang
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Master Data Endpoint: Jamakkol Prasannam Rules, 70+ Questions & FAQs
+ */
+export const getMasterJamakkolPrasannam = async (req, res) => {
+  try {
+    const { category, domain, search } = req.query;
+    let records;
+    try {
+      const query = {};
+      if (category && category !== 'all') query.category = category;
+      if (domain && domain !== 'all') query.domain = domain;
+      if (search && search.trim()) {
+        const regex = new RegExp(search.trim(), 'i');
+        query.$or = [
+          { 'title.en': regex },
+          { 'title.ta': regex },
+          { 'desc.en': regex },
+          { 'desc.ta': regex },
+          { 'question.en': regex },
+          { 'question.ta': regex },
+          { key: regex }
+        ];
+      }
+      records = await JamakkolMaster.find(query).sort({ order: 1 });
+    } catch {
+      records = null;
+    }
+
+    if (!records || records.length === 0) {
+      let fallback = JAMAKKOL_PRASANNAM_MASTER_DATA;
+      if (category && category !== 'all') {
+        fallback = fallback.filter(r => r.category === category);
+      }
+      if (domain && domain !== 'all') {
+        fallback = fallback.filter(r => r.domain === domain);
+      }
+      records = fallback;
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: records.length,
+      data: records
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Master Data Endpoint: Planet Rasi Dignities (Atchi, Uchcham, Neecham, Natpu, Pagai, Samam)
+ * and Tatkalika Mitra-Satru & Panchadha Maitri Rules
+ */
+export const getMasterPlanetDignities = async (req, res) => {
+  try {
+    let records;
+    try {
+      records = await PlanetRasiDignityMaster.find({}).sort({ order: 1 });
+    } catch {
+      records = null;
+    }
+
+    if (!records || records.length === 0) {
+      records = PLANET_RASI_DIGNITIES_DATA;
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: records.length,
+      data: records,
+      rules: TATKALIKA_RULES_DATA
     });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });

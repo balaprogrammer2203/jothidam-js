@@ -1,0 +1,1706 @@
+/* ==========================================================================
+   PLANETARY DIGNITIES & PANCHADHA MAITRI (planetDignities.css)
+   Full-featured, responsive, rich aesthetic styles
+   ========================================================================== */
+
+.dignity-page-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   1. HERO BANNER
+   -------------------------------------------------------------------------- */
+.dignity-hero-banner {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+  border: 1px solid #fcd34d;
+  border-left: 6px solid #d97706;
+  border-radius: 14px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.08);
+}
+
+.dignity-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dignity-hero-icon {
+  width: 52px;
+  height: 52px;
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  flex-shrink: 0;
+}
+
+.dignity-hero-titles h1 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #78350f;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.dignity-hero-titles p {
+  font-size: 13.5px;
+  color: #92400e;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dignity-hero-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dignity-hero-pill {
+  background: #ffffff;
+  border: 1px solid #fde68a;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #78350f;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   2. TOP CARD: TATKALIKA MITRA-SATRU & PANCHADHA MAITRI RULES
+   (Placed at the TOP of the box / table as requested)
+   -------------------------------------------------------------------------- */
+.tatkalika-rules-card {
+  background: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(234, 88, 12, 0.07);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.tatkalika-card-header {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #ffffff;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tatkalika-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.tatkalika-header-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.tatkalika-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Main Principle Box */
+.tatkalika-principle-banner {
+  background: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-left: 4px solid #ea580c;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #7c2d12;
+}
+
+.tatkalika-principle-banner strong {
+  color: #9a3412;
+}
+
+/* Houses Indicator Pills */
+.tatkalika-houses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.houses-box {
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.houses-box.friendly {
+  background: #ecfdf5;
+  border: 1.5px solid #a7f3d0;
+}
+
+.houses-box.enemy {
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+}
+
+.houses-box-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.houses-box-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.houses-box.friendly h4 {
+  color: #065f46;
+}
+
+.houses-box.enemy h4 {
+  color: #991b1b;
+}
+
+.houses-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.house-num-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.houses-box.friendly .house-num-pill {
+  background: #d1fae5;
+  color: #064e3b;
+  border: 1px solid #6ee7b7;
+}
+
+.houses-box.enemy .house-num-pill {
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fca5a5;
+}
+
+/* Stacked 1-by-1 Layout: Compound Table + Classical Example */
+.tatkalika-details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tatkalika-subpanel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subpanel-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Compound Formula Mini Table */
+.compound-formula-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.compound-formula-table th {
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 700;
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1.5px solid #cbd5e1;
+}
+
+.compound-formula-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.compound-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* Example Box */
+.example-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.example-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 4px 0 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.example-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.step-bullet {
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.example-conclusion {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #065f46;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTROLS & FILTER TOOLBAR
+   -------------------------------------------------------------------------- */
+.dignity-controls-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.controls-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* View Mode Switcher (Chart vs Table) */
+.view-toggle-group {
+  display: inline-flex;
+  background: #f1f5f9;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.view-toggle-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.view-toggle-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.view-toggle-btn:hover:not(.active) {
+  color: #0f172a;
+}
+
+/* Search Box */
+.dignity-search-input {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  min-width: 200px;
+  transition: border-color 0.15s ease;
+}
+
+.dignity-search-input:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15);
+}
+
+/* Planet Filter Pills Bar */
+.filter-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 6px;
+}
+
+.planet-filter-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.planet-filter-pill {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.planet-filter-pill:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.planet-filter-pill.active {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #78350f;
+  box-shadow: 0 1px 4px rgba(245, 158, 11, 0.18);
+}
+
+/* Status Filter Pills */
+.status-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.status-filter-pill {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-filter-pill:hover {
+  border-color: #cbd5e1;
+}
+
+.status-filter-pill.active {
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   4. DIGNITY STATUS BADGES (Color definitions matching reference image)
+   -------------------------------------------------------------------------- */
+.badge-atchi {
+  background: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fde68a;
+}
+
+.badge-ucham {
+  background: #ecfdf5;
+  color: #064e3b;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-neecham {
+  background: #fef2f2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+}
+
+.badge-natpu {
+  background: #f0f9ff;
+  color: #0c4a6e;
+  border: 1px solid #bae6fd;
+}
+
+.badge-pagai {
+  background: #fff7ed;
+  color: #7c2d12;
+  border: 1px solid #fed7aa;
+}
+
+.badge-samam {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   5. CONTROLS BAR & SEGMENTED CONTROLS (NAKSHATRA PADAS STYLE)
+   -------------------------------------------------------------------------- */
+.option-segmented-control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--fe-card-bg, #f1f5f9);
+  border: 1px solid var(--fe-border, #e2e8f0);
+  border-radius: 8px;
+  padding: 2px 3px;
+  gap: 2px;
+}
+
+.seg-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.seg-btn:hover {
+  color: #0f172a;
+}
+
+.seg-btn.active {
+  background: #ffffff;
+  color: #b45309;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-only-toggle {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. SOUTH INDIAN 4x4 CHART GRID (AUTHENTIC NAKSHATRA PADAS DESIGN VIEW)
+   -------------------------------------------------------------------------- */
+.dignity-chart-card,
+.mandalam-chart-card {
+  background: var(--fe-card-bg, #ffffff);
+  border: 1px solid var(--fe-border, #cbd5e1);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chart-header-bar {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chart-header-title {
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+}
+
+.chart-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.compact-badge-pill {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fef08a;
+  padding: 2.5px 9px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reset-filter-btn {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #fecaca;
+  border-radius: 12px;
+  padding: 2.5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.reset-filter-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #ffffff;
+}
+
+/* Horizontal scroll wrapper */
+.dignity-chart-scroll-wrapper,
+.mandalam-chart-scroll-wrapper {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-scroll-indicator-banner {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px dashed #fde68a;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Authentic South Indian Chart 4x4 Grid - 100% full width */
+.dignity-kundli-grid,
+.mandalam-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(130px, auto));
+  gap: 2px;
+  background-color: #1e293b;
+  border: 2px solid #1e293b;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Individual Rasi Box */
+.dignity-rasi-cell,
+.mandalam-cell {
+  background-color: var(--fe-card-bg, #ffffff);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  position: relative;
+  user-select: none;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dignity-rasi-cell:hover,
+.mandalam-cell:hover {
+  background-color: #fffdf0;
+}
+
+.dignity-rasi-cell.active-selected,
+.mandalam-cell.active-selected {
+  background-color: #fef9c3;
+  outline: 2px solid #d97706;
+  outline-offset: -2px;
+}
+
+.dignity-rasi-cell.highlighted-sign {
+  background-color: #fffbeb;
+  box-shadow: inset 0 0 0 1.5px #f59e0b;
+}
+
+/* Cell Header matching Nakshatra Mandalam reference */
+.dignity-cell-header,
+.mandalam-cell-header {
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  border-bottom: 1.5px solid #e2e8f0;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.header-primary-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-primary-line .rasi-title {
+  color: #0f172a;
+}
+
+.header-primary-line .header-hyphen {
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.header-primary-line .rasi-lord {
+  color: #b45309;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.header-degrees-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.deg-pill {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.deg-pill.rasi-pill {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.deg-pill.zodiac-pill {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* 9 Planets Vertical List inside box */
+.dignity-planets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dignity-planet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  min-height: 18px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dignity-planet-row:hover {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.dignity-planet-row.row-highlighted {
+  background: #fffbeb;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 1.5px #d97706;
+  font-weight: 800;
+  z-index: 2;
+}
+
+.dignity-planet-row.row-dimmed {
+  opacity: 0.22;
+}
+
+.planet-row-left {
+  display: flex;
+  align-items: center;
+  gap: 3.5px;
+  color: #1e293b;
+  min-width: 0;
+  flex: 1;
+}
+
+.planet-row-symbol {
+  font-size: 10px;
+  line-height: 1;
+  display: inline-block;
+  width: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.planet-row-name {
+  font-size: 9.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dignity-badge-pill {
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 1px 4.5px;
+  border-radius: 3px;
+  line-height: 1.15;
+  white-space: nowrap;
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+/* Center 2x2 Box matching Nakshatra Mandalam centerpiece */
+.dignity-center-box,
+.mandalam-center-box {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  background: linear-gradient(135deg, #fffdf8 0%, #fef3c7 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 12px 14px;
+  position: relative;
+  border: 1px dashed rgba(245, 158, 11, 0.45);
+  box-sizing: border-box;
+  overflow: hidden;
+  gap: 5px;
+}
+
+.center-mandalam-title,
+.center-dignity-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: 0.4px;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.center-mandalam-subtitle,
+.center-dignity-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #b45309;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.center-metrics-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.center-metric-tag {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #fde68a;
+  padding: 2px 7px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+}
+
+.center-legend-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: 320px;
+}
+
+.center-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 8.5px;
+  font-weight: 700;
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.center-legend-item:hover {
+  transform: scale(1.05);
+}
+
+.center-legend-item.active-legend {
+  box-shadow: 0 0 0 2px #d97706;
+  font-weight: 800;
+  transform: scale(1.05);
+}
+
+.center-hint-text {
+  margin-top: 2px;
+  font-size: 9.5px;
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   7. SELECTED RASI DETAILED PLANET INSPECTION PANEL (NAKSHATRA PADAS STYLE)
+   -------------------------------------------------------------------------- */
+.selected-rasi-dignity-panel,
+.selected-rasi-padas-panel {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: var(--fe-card-bg, #ffffff);
+  border: 1.5px solid #fde68a;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.08);
+  margin-top: 4px;
+}
+
+.rasi-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid #f1f5f9;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rasi-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.rasi-badge-highlight {
+  font-size: 11px;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+.close-panel-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.close-panel-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.dignity-inspect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.planet-inspect-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.planet-inspect-card:hover {
+  background: #fffdf5;
+  border-color: #fcd34d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.planet-inspect-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 5px;
+}
+
+.planet-inspect-identity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.planet-inspect-symbol {
+  font-size: 14px;
+}
+
+.planet-inspect-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inspect-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #475569;
+}
+
+.inspect-lbl {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   8. TABLE VIEW (MATCHING 108 PADAS MASTER TABLE)
+   -------------------------------------------------------------------------- */
+.dignity-table-wrapper {
+  background: var(--fe-card-bg, #ffffff);
+  border: 1px solid var(--fe-border, #cbd5e1);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.table-grid-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: var(--fe-card-bg, #ffffff);
+  border: 1px solid var(--fe-border, #e2e8f0);
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.dignity-cross-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  text-align: left;
+}
+
+.dignity-cross-table thead th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 800;
+  padding: 8px 10px;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.dignity-cross-table thead th.col-rasi {
+  text-align: left;
+  padding-left: 12px;
+  width: 16%;
+}
+
+.dignity-cross-table tbody td {
+  padding: 7px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dignity-cross-table tbody tr:hover {
+  background-color: #fffdf5;
+}
+
+.dignity-cross-table td.cell-rasi {
+  text-align: left;
+  padding-left: 12px;
+  font-weight: 700;
+  background: #fafafa;
+}
+
+.table-badge {
+  display: inline-block;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  font-size: 9.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.table-badge:hover {
+  transform: scale(1.06);
+}
+
+/* --------------------------------------------------------------------------
+   9. TABLET & MOBILE RESPONSIVE RULES (NAKSHATRA PADAS RESPONSIVE SYSTEM)
+   -------------------------------------------------------------------------- */
+
+/* Tablet View (601px to 1024px) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .dignity-kundli-grid,
+  .mandalam-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(120px, auto));
+    width: 100%;
+  }
+
+  .dignity-rasi-cell,
+  .mandalam-cell {
+    padding: 5px 6px;
+  }
+
+  .header-primary-line {
+    font-size: 11.5px;
+  }
+
+  .planet-row-name {
+    font-size: 9px;
+  }
+
+  .dignity-badge-pill {
+    font-size: 8px;
+    padding: 1px 3.5px;
+  }
+
+  .center-mandalam-title,
+  .center-dignity-title {
+    font-size: 17px;
+  }
+}
+
+/* Mobile Devices (<= 768px) */
+@media (max-width: 768px) {
+  .mobile-only-toggle {
+    display: flex;
+  }
+
+  .dignity-page-container {
+    padding: 8px 6px 36px;
+    gap: 12px;
+  }
+
+  .dignity-chart-card,
+  .mandalam-chart-card {
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .dignity-hero-banner {
+    padding: 10px 12px;
+  }
+
+  .dignity-hero-titles h1 {
+    font-size: 16px;
+  }
+
+  .dignity-controls-bar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .controls-top-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .view-toggle-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .dignity-search-input {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+    font-size: 11.5px;
+  }
+
+  /* FIT MODE: Fits 100% without scrollbar (matching Nakshatra Padas) */
+  .dignity-kundli-grid.is-mobile-fit-grid,
+  .mandalam-grid.is-mobile-fit-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0 !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(110px, auto));
+    gap: 1.5px;
+    border-width: 1.5px;
+    margin: 0;
+  }
+
+  .is-mobile-fit-grid .dignity-rasi-cell,
+  .is-mobile-fit-grid .mandalam-cell {
+    padding: 3px 2.5px;
+  }
+
+  .is-mobile-fit-grid .header-primary-line {
+    font-size: 9.5px;
+    line-height: 1.15;
+  }
+
+  .is-mobile-fit-grid .header-primary-line .rasi-title {
+    font-size: 9.5px;
+  }
+
+  .is-mobile-fit-grid .header-primary-line .header-hyphen {
+    font-size: 8px;
+  }
+
+  .is-mobile-fit-grid .header-primary-line .rasi-lord {
+    font-size: 8.5px;
+  }
+
+  .is-mobile-fit-grid .header-degrees-badge {
+    gap: 2px;
+    margin-top: 1px;
+  }
+
+  .is-mobile-fit-grid .deg-pill {
+    font-size: 7.5px;
+    padding: 0 2.5px;
+  }
+
+  .is-mobile-fit-grid .dignity-planets-list {
+    gap: 1px;
+  }
+
+  .is-mobile-fit-grid .dignity-planet-row {
+    padding: 1px 2px;
+    min-height: 13px;
+    gap: 2px;
+  }
+
+  .is-mobile-fit-grid .planet-row-symbol {
+    font-size: 8px;
+    width: 8px;
+  }
+
+  .is-mobile-fit-grid .planet-row-name {
+    font-size: 8px;
+  }
+
+  .is-mobile-fit-grid .dignity-badge-pill {
+    font-size: 7px;
+    padding: 0.5px 2px;
+  }
+
+  .is-mobile-fit-grid .center-mandalam-title,
+  .is-mobile-fit-grid .center-dignity-title {
+    font-size: 13px;
+  }
+
+  .is-mobile-fit-grid .center-mandalam-subtitle,
+  .is-mobile-fit-grid .center-dignity-subtitle {
+    font-size: 7.5px;
+  }
+
+  .is-mobile-fit-grid .center-metrics-strip {
+    gap: 2px;
+  }
+
+  .is-mobile-fit-grid .center-metric-tag {
+    font-size: 7px;
+    padding: 1px 3px;
+  }
+
+  .is-mobile-fit-grid .center-legend-wrap {
+    gap: 2px;
+  }
+
+  .is-mobile-fit-grid .center-legend-item {
+    font-size: 6.5px;
+    padding: 0.5px 3px;
+  }
+
+  .is-mobile-fit-grid .center-hint-text {
+    display: none;
+  }
+
+  /* SCROLL MODE: Full HD, allows horizontal swipe (matching Nakshatra Padas) */
+  .dignity-kundli-grid.is-mobile-scroll-grid,
+  .mandalam-grid.is-mobile-scroll-grid {
+    min-width: 660px;
+    width: 660px;
+    grid-template-columns: repeat(4, 160px);
+    grid-template-rows: repeat(4, minmax(130px, auto));
+  }
+
+  /* Inspection panel on mobile */
+  .dignity-inspect-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. DARK MODE STYLES (NAKSHATRA PADAS HARMONIOUS DARK THEME)
+   -------------------------------------------------------------------------- */
+html[data-theme="dark"] .dignity-hero-banner,
+[data-theme="dark"] .dignity-hero-banner,
+body.dark-theme .dignity-hero-banner {
+  background: #1c150e !important;
+  border-color: #54391e !important;
+  border-left: 5px solid #f59e0b !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+html[data-theme="dark"] .dignity-hero-icon,
+[data-theme="dark"] .dignity-hero-icon,
+body.dark-theme .dignity-hero-icon {
+  background: rgba(245, 158, 11, 0.16) !important;
+  border-color: #b45309 !important;
+}
+
+html[data-theme="dark"] .dignity-hero-titles h1,
+[data-theme="dark"] .dignity-hero-titles h1,
+body.dark-theme .dignity-hero-titles h1 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .dignity-hero-titles p,
+[data-theme="dark"] .dignity-hero-titles p,
+body.dark-theme .dignity-hero-titles p {
+  color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .dignity-hero-pill,
+[data-theme="dark"] .dignity-hero-pill,
+body.dark-theme .dignity-hero-pill {
+  background: #241b12 !important;
+  border-color: #3d2b1b !important;
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .dignity-controls-bar,
+[data-theme="dark"] .dignity-controls-bar,
+body.dark-theme .dignity-controls-bar {
+  background: #1c150e !important;
+  border-color: #2c2015 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .view-toggle-group,
+[data-theme="dark"] .view-toggle-group,
+body.dark-theme .view-toggle-group {
+  background: #140e08 !important;
+  border: 1px solid #2c2015 !important;
+}
+
+html[data-theme="dark"] .view-toggle-btn,
+[data-theme="dark"] .view-toggle-btn,
+body.dark-theme .view-toggle-btn {
+  color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .view-toggle-btn.active,
+[data-theme="dark"] .view-toggle-btn.active,
+body.dark-theme .view-toggle-btn.active {
+  background: #271d14 !important;
+  color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .option-segmented-control,
+[data-theme="dark"] .option-segmented-control,
+body.dark-theme .option-segmented-control {
+  background: #140e08 !important;
+  border-color: #2c2015 !important;
+}
+
+html[data-theme="dark"] .seg-btn,
+[data-theme="dark"] .seg-btn,
+body.dark-theme .seg-btn {
+  color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .seg-btn.active,
+[data-theme="dark"] .seg-btn.active,
+body.dark-theme .seg-btn.active {
+  background: #271d14 !important;
+  color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .dignity-chart-card,
+[data-theme="dark"] .dignity-chart-card,
+body.dark-theme .dignity-chart-card,
+html[data-theme="dark"] .dignity-table-wrapper,
+[data-theme="dark"] .dignity-table-wrapper,
+body.dark-theme .dignity-table-wrapper {
+  background: #1c150e !important;
+  border-color: #2c2015 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .dignity-kundli-grid,
+[data-theme="dark"] .dignity-kundli-grid,
+body.dark-theme .dignity-kundli-grid {
+  background-color: #54391e !important;
+  border-color: #54391e !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .dignity-rasi-cell,
+[data-theme="dark"] .dignity-rasi-cell,
+body.dark-theme .dignity-rasi-cell {
+  background-color: #18120b !important;
+}
+
+html[data-theme="dark"] .dignity-rasi-cell:hover,
+[data-theme="dark"] .dignity-rasi-cell:hover,
+body.dark-theme .dignity-rasi-cell:hover {
+  background-color: #241b12 !important;
+}
+
+html[data-theme="dark"] .dignity-rasi-cell.active-selected,
+[data-theme="dark"] .dignity-rasi-cell.active-selected,
+body.dark-theme .dignity-rasi-cell.active-selected {
+  background-color: #2c1e10 !important;
+  outline: 2px solid #f59e0b !important;
+}
+
+html[data-theme="dark"] .dignity-cell-header,
+[data-theme="dark"] .dignity-cell-header,
+body.dark-theme .dignity-cell-header {
+  border-bottom-color: #2c2015 !important;
+}
+
+html[data-theme="dark"] .header-primary-line .rasi-title,
+[data-theme="dark"] .header-primary-line .rasi-title,
+body.dark-theme .header-primary-line .rasi-title {
+  color: #fde047 !important;
+}
+
+html[data-theme="dark"] .header-primary-line .header-hyphen,
+[data-theme="dark"] .header-primary-line .header-hyphen,
+body.dark-theme .header-primary-line .header-hyphen {
+  color: #78716c !important;
+}
+
+html[data-theme="dark"] .header-primary-line .rasi-lord,
+[data-theme="dark"] .header-primary-line .rasi-lord,
+body.dark-theme .header-primary-line .rasi-lord {
+  color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .dignity-planet-row,
+[data-theme="dark"] .dignity-planet-row,
+body.dark-theme .dignity-planet-row {
+  background: rgba(32, 23, 15, 0.85) !important;
+  border-color: #2c2015 !important;
+}
+
+html[data-theme="dark"] .dignity-planet-row:hover,
+[data-theme="dark"] .dignity-planet-row:hover,
+body.dark-theme .dignity-planet-row:hover {
+  background: #291c10 !important;
+  border-color: #63380c !important;
+}
+
+html[data-theme="dark"] .planet-row-name,
+[data-theme="dark"] .planet-row-name,
+body.dark-theme .planet-row-name {
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .dignity-center-box,
+[data-theme="dark"] .dignity-center-box,
+body.dark-theme .dignity-center-box {
+  background: radial-gradient(circle at 50% 50%, #291c10 0%, #18120b 100%) !important;
+  border-color: #63380c !important;
+}
+
+html[data-theme="dark"] .center-dignity-title,
+[data-theme="dark"] .center-dignity-title,
+body.dark-theme .center-dignity-title {
+  color: #fde047 !important;
+}
+
+html[data-theme="dark"] .center-dignity-subtitle,
+[data-theme="dark"] .center-dignity-subtitle,
+body.dark-theme .center-dignity-subtitle {
+  color: #fbbf24 !important;
+}
+
+html[data-theme="dark"] .center-metric-tag,
+[data-theme="dark"] .center-metric-tag,
+body.dark-theme .center-metric-tag {
+  background: #20170f !important;
+  border-color: #3d2b1b !important;
+  color: #d6d3d1 !important;
+}
+
+html[data-theme="dark"] .selected-rasi-dignity-panel,
+[data-theme="dark"] .selected-rasi-dignity-panel,
+body.dark-theme .selected-rasi-dignity-panel {
+  background: #1c150e !important;
+  border-color: #54391e !important;
+}
+
+html[data-theme="dark"] .planet-inspect-card,
+[data-theme="dark"] .planet-inspect-card,
+body.dark-theme .planet-inspect-card {
+  background: #241b12 !important;
+  border-color: #3d2b1b !important;
+}
+
+html[data-theme="dark"] .planet-inspect-identity,
+[data-theme="dark"] .planet-inspect-identity,
+body.dark-theme .planet-inspect-identity {
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .rasi-panel-title,
+[data-theme="dark"] .rasi-panel-title,
+body.dark-theme .rasi-panel-title {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .table-grid-container,
+[data-theme="dark"] .table-grid-container,
+body.dark-theme .table-grid-container {
+  background: #18120b !important;
+  border-color: #2c2015 !important;
+}
+
+html[data-theme="dark"] .dignity-cross-table thead th,
+[data-theme="dark"] .dignity-cross-table thead th,
+body.dark-theme .dignity-cross-table thead th {
+  background: #20170f !important;
+  color: #fbbf24 !important;
+  border-bottom-color: #3d2b1b !important;
+}
+
+html[data-theme="dark"] .dignity-cross-table tbody td,
+[data-theme="dark"] .dignity-cross-table tbody td,
+body.dark-theme .dignity-cross-table tbody td {
+  border-bottom-color: #2c2015 !important;
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .dignity-cross-table tbody tr:hover,
+[data-theme="dark"] .dignity-cross-table tbody tr:hover,
+body.dark-theme .dignity-cross-table tbody tr:hover {
+  background-color: #241b12 !important;
+}
+
+html[data-theme="dark"] .dignity-cross-table td.cell-rasi,
+[data-theme="dark"] .dignity-cross-table td.cell-rasi,
+body.dark-theme .dignity-cross-table td.cell-rasi {
+  background: #1c150e !important;
+  color: #fde047 !important;
+}
+
+/* Dark mode for Tatkalika Rules Card */
+html[data-theme="dark"] .tatkalika-rules-card,
+[data-theme="dark"] .tatkalika-rules-card,
+body.dark-theme .tatkalika-rules-card {
+  background: #1c150e !important;
+  border-color: #54391e !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .tatkalika-principle-banner,
+[data-theme="dark"] .tatkalika-principle-banner,
+body.dark-theme .tatkalika-principle-banner {
+  background: #271d14 !important;
+  border-color: #54391e !important;
+  border-left-color: #f59e0b !important;
+  color: #fed7aa !important;
+}
+
+html[data-theme="dark"] .tatkalika-subpanel,
+[data-theme="dark"] .tatkalika-subpanel,
+body.dark-theme .tatkalika-subpanel {
+  background: #241b12 !important;
+  border-color: #3d2b1b !important;
+}
+
+html[data-theme="dark"] .subpanel-title,
+[data-theme="dark"] .subpanel-title,
+body.dark-theme .subpanel-title {
+  color: #fde047 !important;
+}
+
+html[data-theme="dark"] .compound-formula-table th,
+[data-theme="dark"] .compound-formula-table th,
+body.dark-theme .compound-formula-table th {
+  background: #291c10 !important;
+  color: #fbbf24 !important;
+  border-bottom-color: #54391e !important;
+}
+
+html[data-theme="dark"] .compound-formula-table td,
+[data-theme="dark"] .compound-formula-table td,
+body.dark-theme .compound-formula-table td {
+  border-bottom-color: #3d2b1b !important;
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .example-box,
+[data-theme="dark"] .example-box,
+body.dark-theme .example-box {
+  background: #1c150e !important;
+  border-color: #3d2b1b !important;
+  color: #e7e5e4 !important;
+}
+
+html[data-theme="dark"] .example-step-item,
+[data-theme="dark"] .example-step-item,
+body.dark-theme .example-step-item {
+  color: #d6d3d1 !important;
+}
+
+html[data-theme="dark"] .step-bullet,
+[data-theme="dark"] .step-bullet,
+body.dark-theme .step-bullet {
+  background: #3d2b1b !important;
+  color: #fbbf24 !important;
+}
