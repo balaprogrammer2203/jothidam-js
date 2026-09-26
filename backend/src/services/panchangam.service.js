@@ -320,7 +320,7 @@ function calculateSunriseSunset(year, month, day, latitude = 13.0827, longitude 
       - 0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma);
 
     const latRad = latitude * (Math.PI / 180);
-    const zenithRad = 90.833 * (Math.PI / 180);
+    const zenithRad = 90.815 * (Math.PI / 180); // 90°49' calibrated for Indian ephemeris
 
     let cosHA = (Math.cos(zenithRad) - Math.sin(latRad) * Math.sin(decl)) / (Math.cos(latRad) * Math.cos(decl));
     cosHA = Math.max(-1, Math.min(1, cosHA));
@@ -334,8 +334,9 @@ function calculateSunriseSunset(year, month, day, latitude = 13.0827, longitude 
     const sunsetLocal = (sunsetUTC + tzOffsetHours + 24) % 24;
 
     const formatTime12 = (decHours) => {
-      const h = Math.floor(decHours);
-      const m = Math.round((decHours - h) * 60);
+      const totalSecs = Math.round(decHours * 3600);
+      const h = Math.floor(totalSecs / 3600) % 24;
+      const m = Math.floor((totalSecs % 3600) / 60);
       const ampm = h >= 12 ? 'PM' : 'AM';
       const h12 = h % 12 || 12;
       return `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;

@@ -10,7 +10,9 @@ import {
   getLocalizedCenterInfo,
   SUN_TIMINGS_LABELS,
   formatSunTime12Hour,
-  formatCenterDateTime12Hour
+  formatCenterDateTime12Hour,
+  getRasiDegreeFromStr,
+  getRasiDegree45FromStr
 } from '../../../utils/jamakkol.utils';
 import {
   PRASANNAM_RASIS,
@@ -170,7 +172,7 @@ export default function JamakolChartCard({
   );
   const displaySunset = formatSunTime12Hour(
     chartData?.sunTimes?.sunset || centerInfo?.sunset?.time12 || centerInfo?.sunset?.value,
-    '06:05 PM'
+    '06:11 PM'
   );
 
   const udhayam = pillars?.udhayam || chartData?.udhayam || { signIndex: 8, formattedDegree: "18°25'" };
@@ -194,14 +196,14 @@ export default function JamakolChartCard({
 
   // Prepare normalized 8 outer cards with proper fallback symbols
   const outerCards = [
-    { key: 'topLeft', box: outerBoxes?.topLeft, posClass: 'jk-box-pisces jk-badge-pisces', fallbackSymbol: 'Me', fallbackDeg: "19°27'" },
-    { key: 'topCenter', box: outerBoxes?.topCenter, posClass: 'jk-box-aries jk-badge-aries-taurus', fallbackSymbol: 'Ju', fallbackDeg: "23°09'" },
-    { key: 'topRight', box: outerBoxes?.topRight, posClass: 'jk-box-gemini jk-badge-gemini', fallbackSymbol: 'Ma', fallbackDeg: "0°25'" },
-    { key: 'rightCenter', box: outerBoxes?.rightCenter, posClass: 'jk-box-cancer jk-badge-cancer-leo', fallbackSymbol: 'Su', fallbackDeg: "2°01'" },
-    { key: 'bottomRight', box: outerBoxes?.bottomRight, posClass: 'jk-box-virgo jk-badge-virgo', fallbackSymbol: 'Sn', fallbackDeg: "4°07'" },
-    { key: 'bottomCenter', box: outerBoxes?.bottomCenter, posClass: 'jk-box-libra jk-badge-libra-scorpio', fallbackSymbol: 'Mo', fallbackDeg: "5°14'" },
-    { key: 'bottomLeft', box: outerBoxes?.bottomLeft, posClass: 'jk-box-sagittarius jk-badge-sagittarius', fallbackSymbol: 'Sa', fallbackDeg: "18°15'" },
-    { key: 'leftCenter', box: outerBoxes?.leftCenter, posClass: 'jk-box-capricorn jk-badge-capricorn-aquarius', fallbackSymbol: 'Ve', fallbackDeg: "10°45'" }
+    { key: 'topLeft', box: outerBoxes?.topLeft, posClass: 'jk-box-pisces jk-badge-pisces', fallbackSymbol: 'Sn', fallbackDeg: "319° 07'", fallbackDegRasi: 19 },
+    { key: 'topCenter', box: outerBoxes?.topCenter, posClass: 'jk-box-aries jk-badge-aries-taurus', fallbackSymbol: 'Mo', fallbackDeg: "4° 07'", fallbackDegRasi: 4 },
+    { key: 'topRight', box: outerBoxes?.topRight, posClass: 'jk-box-gemini jk-badge-gemini', fallbackSymbol: 'Sa', fallbackDeg: "49° 07'", fallbackDegRasi: 19 },
+    { key: 'rightCenter', box: outerBoxes?.rightCenter, posClass: 'jk-box-cancer jk-badge-cancer-leo', fallbackSymbol: 'Ve', fallbackDeg: "94° 07'", fallbackDegRasi: 4 },
+    { key: 'bottomRight', box: outerBoxes?.bottomRight, posClass: 'jk-box-virgo jk-badge-virgo', fallbackSymbol: 'Me', fallbackDeg: "139° 07'", fallbackDegRasi: 19 },
+    { key: 'bottomCenter', box: outerBoxes?.bottomCenter, posClass: 'jk-box-libra jk-badge-libra-scorpio', fallbackSymbol: 'Ju', fallbackDeg: "184° 07'", fallbackDegRasi: 4 },
+    { key: 'bottomLeft', box: outerBoxes?.bottomLeft, posClass: 'jk-box-sagittarius jk-badge-sagittarius', fallbackSymbol: 'Ma', fallbackDeg: "229° 07'", fallbackDegRasi: 19 },
+    { key: 'leftCenter', box: outerBoxes?.leftCenter, posClass: 'jk-box-capricorn jk-badge-capricorn-aquarius', fallbackSymbol: 'Su', fallbackDeg: "274° 07'", fallbackDegRasi: 4 }
   ];
 
   /**
@@ -369,11 +371,12 @@ export default function JamakolChartCard({
    * Render rich tooltip card for perimeter 8 Jama planet boxes
    */
   const renderOuterTooltip = (item) => {
-    const outerSign = item.box?.sign !== undefined ? item.box.sign : (item.box?.rasiIndex ?? 0);
+    const outerSign = item.box?.sign !== undefined ? item.box.sign : (item.box?.rasiIndex ?? (item.box?.signIndex ?? 0));
     const rawItem = {
       name: item.box?.name || item.fallbackSymbol,
+      symbol: item.box?.symbol || item.fallbackSymbol,
       formattedDegree: item.box?.formattedDegree || item.fallbackDeg,
-      isRetrograde: item.box?.isRetrograde
+      isRetrograde: false
     };
     const planet = enrichPlanetAstrology(rawItem, outerSign, activeLang);
     if (!planet) return null;
@@ -869,8 +872,9 @@ export default function JamakolChartCard({
                 const rawSym = item.box?.symbol || item.fallbackSymbol;
                 const localizedSym = getLocalizedPlanetCode(rawSym, activeLang);
                 const deg = item.box?.formattedDegree || item.fallbackDeg;
-                const isRetro = item.box?.isRetrograde;
-                const retroStar = isRetro ? '*' : '';
+                const degRasi = item.box?.degreeInRasiInt !== undefined
+                  ? item.box.degreeInRasiInt
+                  : (item.fallbackDegRasi ?? getRasiDegreeFromStr(deg));
                 const isLong = (localizedSym || '').length >= 3;
                 return (
                   <div
@@ -878,9 +882,11 @@ export default function JamakolChartCard({
                     className={`jk-outer-box ${item.posClass}`}
                   >
                     <span className={`jk-box-sym ${isLong ? 'is-long' : ''}`}>
-                      {localizedSym}{retroStar}
+                      {localizedSym}
                     </span>
-                    <span className="jk-box-deg">{deg}</span>
+                    <span className="jk-box-deg">
+                      {deg} <span className="jk-box-deg-45">({degRasi})</span>
+                    </span>
                     {renderOuterTooltip(item)}
                   </div>
                 );
@@ -982,8 +988,9 @@ export default function JamakolChartCard({
                 const rawSym = item.box?.symbol || item.fallbackSymbol;
                 const localizedSym = getLocalizedPlanetCode(rawSym, activeLang);
                 const deg = item.box?.formattedDegree || item.fallbackDeg;
-                const isRetro = item.box?.isRetrograde;
-                const retroStar = isRetro ? '*' : '';
+                const degRasi = item.box?.degreeInRasiInt !== undefined
+                  ? item.box.degreeInRasiInt
+                  : (item.fallbackDegRasi ?? getRasiDegreeFromStr(deg));
                 const isLong = (localizedSym || '').length >= 3;
                 return (
                   <div
@@ -991,9 +998,11 @@ export default function JamakolChartCard({
                     className={`jk-outer-box ${item.posClass}`}
                   >
                     <span className={`jk-box-sym ${isLong ? 'is-long' : ''}`}>
-                      {localizedSym}{retroStar}
+                      {localizedSym}
                     </span>
-                    <span className="jk-box-deg">{deg}</span>
+                    <span className="jk-box-deg">
+                      {deg} <span className="jk-box-deg-45">({degRasi})</span>
+                    </span>
                     {renderOuterTooltip(item)}
                   </div>
                 );

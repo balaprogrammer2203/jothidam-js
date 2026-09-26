@@ -12,7 +12,7 @@ export const jamakkolService = {
    */
   async calculate(params = {}) {
     try {
-      const response = await apiClient.post('/api/v1/astrology/jamakkol-prasannam/calculate', params);
+      const response = await apiClient.post('/astrology/jamakkol-prasannam/calculate', params);
       if (response?.data?.success && response?.data?.data) {
         return response.data.data;
       }
@@ -27,7 +27,7 @@ export const jamakkolService = {
    */
   async fetchMasterData(params = {}) {
     try {
-      const response = await apiClient.get('/api/v1/astrology/master/jamakkol-prasannam', { params });
+      const response = await apiClient.get('/astrology/master/jamakkol-prasannam', { params });
       if (response?.data?.success && response?.data?.data) {
         return response.data.data;
       }

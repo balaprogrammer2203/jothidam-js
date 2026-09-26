@@ -781,6 +781,14 @@ export default function JamakolPrasannamPage() {
               {getLocalizedPlanetCode(pillars.udhayam?.rasi?.lord, currentLang)}
             </span>
           </div>
+          {pillars.udhayam?.star && (
+            <div className="jk-pillar-detail-row">
+              <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
+              <span className="jk-pillar-val" style={{ color: '#6d28d9', fontWeight: 700 }}>
+                {currentLang === 'ta' ? pillars.udhayam.star.formattedTa : pillars.udhayam.star.formattedEn}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* 2. Aarudam */}
@@ -809,6 +817,14 @@ export default function JamakolPrasannamPage() {
               {getLocalizedPlanetCode(pillars.aarudam?.rasi?.lord, currentLang)}
             </span>
           </div>
+          {pillars.aarudam?.star && (
+            <div className="jk-pillar-detail-row">
+              <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
+              <span className="jk-pillar-val" style={{ color: '#0369a1', fontWeight: 700 }}>
+                {currentLang === 'ta' ? pillars.aarudam.star.formattedTa : pillars.aarudam.star.formattedEn}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* 3. Kavippu */}
@@ -837,6 +853,14 @@ export default function JamakolPrasannamPage() {
               {currentLang === 'ta' ? (pillars.kavippu?.veedhiNameTa || 'ரிஷப வீதி') : (pillars.kavippu?.veedhiName || 'Rishaba Veedhi')}
             </span>
           </div>
+          {pillars.kavippu?.star && (
+            <div className="jk-pillar-detail-row">
+              <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
+              <span className="jk-pillar-val" style={{ color: '#b91c1c', fontWeight: 700 }}>
+                {currentLang === 'ta' ? pillars.kavippu.star.formattedTa : pillars.kavippu.star.formattedEn}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 

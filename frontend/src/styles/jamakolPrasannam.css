@@ -539,8 +539,9 @@
 .jk-outer-box,
 .jk-outer-badge {
   position: absolute;
-  width: 62px;
-  height: 54px;
+  width: 74px;
+  min-height: 54px;
+  height: auto;
   background-color: var(--jk-brown-box);
   color: #ffffff;
   border-radius: 0 !important; /* Exact sharp 90-degree square corners */
@@ -550,7 +551,7 @@
   justify-content: center;
   text-align: center;
   box-sizing: border-box;
-  padding: 4px 5px;
+  padding: 4px 4px;
   z-index: 10;
   user-select: none;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
@@ -587,14 +588,27 @@
 
 .jk-box-deg,
 .jk-outer-badge .deg-text {
-  font-size: 0.74rem;
+  font-size: 0.70rem;
   font-weight: 600;
   color: #ffffff;
-  line-height: 1;
+  line-height: 1.15;
   font-family: inherit;
   opacity: 0.96;
   white-space: nowrap;
   letter-spacing: 0.01em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.jk-box-deg-45 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0;
+  opacity: 0.95;
 }
 
 /* Positions for the 8 Outer Boxes mathematically mapped to the 4x4 chart: */

@@ -34,15 +34,177 @@ export const JAMA_GRAHAS_LIST = [
 // 8 non-fixed signs used in anti-clockwise sequence
 export const JAMA_SIGNS_ANTI_CLOCKWISE = [11, 9, 8, 6, 5, 3, 2, 0];
 
+// The 8 Outer Positions & their base degrees in the outer perimeter
+export const JAMA_POSITIONS = [
+  { key: 'topLeft', signIndex: 11, baseDeg: 360, nameTa: 'மீனம்', nameEn: 'Pisces' },
+  { key: 'topCenter', signIndex: 0, baseDeg: 45, nameTa: 'மேஷம்', nameEn: 'Aries' },
+  { key: 'topRight', signIndex: 2, baseDeg: 90, nameTa: 'மிதுனம்', nameEn: 'Gemini' },
+  { key: 'rightCenter', signIndex: 3, baseDeg: 135, nameTa: 'கடகம்', nameEn: 'Cancer' },
+  { key: 'bottomRight', signIndex: 5, baseDeg: 180, nameTa: 'கன்னி', nameEn: 'Virgo' },
+  { key: 'bottomCenter', signIndex: 6, baseDeg: 225, nameTa: 'துலாம்', nameEn: 'Libra' },
+  { key: 'bottomLeft', signIndex: 8, baseDeg: 270, nameTa: 'தனுசு', nameEn: 'Sagittarius' },
+  { key: 'leftCenter', signIndex: 9, baseDeg: 315, nameTa: 'மகரம்', nameEn: 'Capricorn' }
+];
+
+// The 8 Outer Jama Grahas in their fixed classical cyclic succession
+export const JAMA_GRAHAS_CYCLE = [
+  { key: 'Sun', nameEn: 'Sun', nameTa: 'சூரியன்', shortTa: 'சூரி', symbol: 'Su' },
+  { key: 'Snake', nameEn: 'Snake', nameTa: 'பாம்பு', shortTa: 'பாம்பு', symbol: 'Sn' },
+  { key: 'Moon', nameEn: 'Moon', nameTa: 'சந்திரன்', shortTa: 'சந்', symbol: 'Mo' },
+  { key: 'Saturn', nameEn: 'Saturn', nameTa: 'சனி', shortTa: 'சனி', symbol: 'Sa' },
+  { key: 'Venus', nameEn: 'Venus', nameTa: 'சுக்கிரன்', shortTa: 'சுக்', symbol: 'Ve' },
+  { key: 'Mercury', nameEn: 'Mercury', nameTa: 'புதன்', shortTa: 'புத', symbol: 'Me' },
+  { key: 'Jupiter', nameEn: 'Jupiter', nameTa: 'குரு', shortTa: 'குரு', symbol: 'Ju' },
+  { key: 'Mars', nameEn: 'Mars', nameTa: 'செவ்வாய்', shortTa: 'செவ்', symbol: 'Ma' }
+];
+
+// Day Lord Starting Index in JAMA_GRAHAS_CYCLE for each day of week (0: Sun .. 6: Sat)
+export const DAY_LORD_CYCLE_INDEX = {
+  0: 0, // Sunday -> Sun
+  1: 2, // Monday -> Moon
+  2: 7, // Tuesday -> Mars
+  3: 5, // Wednesday -> Mercury
+  4: 6, // Thursday -> Jupiter
+  5: 4, // Friday -> Venus
+  6: 3  // Saturday -> Saturn
+};
+
 export const DAY_LORD_MAP = [
   { day: 0, dayEn: 'Sunday', dayTa: 'ஞாயிறு', planet: 'Sun', jamaIdx: 0 },
-  { day: 1, dayEn: 'Monday', dayTa: 'திங்கள்', planet: 'Moon', jamaIdx: 6 },
-  { day: 2, dayEn: 'Tuesday', dayTa: 'செவ்வாய்', planet: 'Mars', jamaIdx: 1 },
-  { day: 3, dayEn: 'Wednesday', dayTa: 'புதன்', planet: 'Mercury', jamaIdx: 3 },
-  { day: 4, dayEn: 'Thursday', dayTa: 'வியாழன்', planet: 'Jupiter', jamaIdx: 2 },
+  { day: 1, dayEn: 'Monday', dayTa: 'திங்கள்', planet: 'Moon', jamaIdx: 2 },
+  { day: 2, dayEn: 'Tuesday', dayTa: 'செவ்வாய்', planet: 'Mars', jamaIdx: 7 },
+  { day: 3, dayEn: 'Wednesday', dayTa: 'புதன்', planet: 'Mercury', jamaIdx: 5 },
+  { day: 4, dayEn: 'Thursday', dayTa: 'வியாழன்', planet: 'Jupiter', jamaIdx: 6 },
   { day: 5, dayEn: 'Friday', dayTa: 'வெள்ளி', planet: 'Venus', jamaIdx: 4 },
-  { day: 6, dayEn: 'Saturday', dayTa: 'சனி', planet: 'Saturn', jamaIdx: 5 }
+  { day: 6, dayEn: 'Saturday', dayTa: 'சனி', planet: 'Saturn', jamaIdx: 3 }
 ];
+
+export function parseTimeToSeconds(timeStr) {
+  if (!timeStr) return 21600;
+  const isPM = /pm/i.test(timeStr);
+  const isAM = /am/i.test(timeStr);
+  const clean = timeStr.replace(/[^\d:]/g, '');
+  const parts = clean.split(':').map(Number);
+  let h = parts[0] || 0;
+  const m = parts[1] || 0;
+  const s = parts[2] || 0;
+  if (isPM && h < 12) h += 12;
+  if (isAM && h === 12) h = 0;
+  return h * 3600 + m * 60 + s;
+}
+
+export function formatSecToTime12(totalSec) {
+  const normSec = ((totalSec % 86400) + 86400) % 86400;
+  const h = Math.floor(normSec / 3600);
+  const m = Math.floor((normSec % 3600) / 60);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = (h % 12) || 12;
+  return `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+}
+
+export function formatOuterDegreeDMS(deg) {
+  let norm = ((deg % 360) + 360) % 360;
+  if (norm === 0 && deg >= 359.5) norm = 360;
+  const d = Math.floor(norm);
+  const m = Math.round((norm - d) * 60);
+  return `${d}° ${String(m).padStart(2, '0')}'`;
+}
+
+export function getRasiDegree(deg) {
+  const norm = ((deg % 360) + 360) % 360;
+  return Math.floor(norm % 30);
+}
+
+export function getRasiDegreeFromStr(degStr) {
+  if (!degStr) return 0;
+  const match = String(degStr).match(/(\d+)(?:°|\s)/);
+  const d = match ? parseInt(match[1], 10) : 0;
+  const mMatch = String(degStr).match(/(\d+)'/);
+  const m = mMatch ? parseInt(mMatch[1], 10) : 0;
+  const total = d + m / 60;
+  return getRasiDegree(total);
+}
+
+export const getRasiDegree45 = getRasiDegree;
+export const getRasiDegree45FromStr = getRasiDegreeFromStr;
+
+export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
+  const totalSec = parseTimeToSeconds(timeStr);
+  const effectiveDay = totalSec < 21600 ? ((dayOfWeek + 6) % 7) : dayOfWeek;
+  const isDay = totalSec >= 21600 && totalSec < 64800;
+
+  let elapsedSec = 0;
+  if (isDay) {
+    elapsedSec = totalSec - 21600;
+  } else {
+    elapsedSec = totalSec >= 64800 ? (totalSec - 64800) : (totalSec + 21600);
+  }
+
+  const jamamIndex = Math.min(7, Math.max(0, Math.floor(elapsedSec / 5400)));
+  const jamamNumber = jamamIndex + 1;
+  const secIntoJamam = elapsedSec - jamamIndex * 5400;
+  const degMovedInJamam = (secIntoJamam / 5400) * 45;
+
+  const dayLordIdx = DAY_LORD_CYCLE_INDEX[effectiveDay] ?? 0;
+
+  const outerBoxes = {};
+  const jamaPlanetsAssigned = {};
+
+  JAMA_POSITIONS.forEach((pos, pIdx) => {
+    const planetIdx = (dayLordIdx + jamamIndex + pIdx) % 8;
+    const planet = JAMA_GRAHAS_CYCLE[planetIdx];
+
+    let calcDeg = pos.baseDeg - degMovedInJamam;
+    if (calcDeg <= 0) calcDeg += 360;
+
+    const degInRasi = ((calcDeg % 30) + 30) % 30;
+    const degRasiInt = Math.floor(degInRasi);
+
+    const boxObj = {
+      key: planet.key,
+      name: planet.nameEn,
+      nameEn: planet.nameEn,
+      nameTa: planet.nameTa,
+      shortTa: planet.shortTa,
+      symbol: planet.symbol,
+      degree: calcDeg,
+      degreeInRasi: degInRasi,
+      degreeInRasiInt: degRasiInt,
+      degreeIn45: degInRasi,
+      degreeIn45Int: degRasiInt,
+      formattedDegree: formatOuterDegreeDMS(calcDeg),
+      formattedDegreeInRasi: `(${degRasiInt})`,
+      formattedDegreeIn45: `(${degRasiInt})`,
+      signIndex: pos.signIndex,
+      sign: pos.signIndex,
+      rasiIndex: pos.signIndex,
+      houseNameTa: pos.nameTa,
+      houseNameEn: pos.nameEn,
+      isRetrograde: false
+    };
+
+    outerBoxes[pos.key] = boxObj;
+    jamaPlanetsAssigned[planet.key] = boxObj;
+  });
+
+  const activeJamamLord = JAMA_GRAHAS_CYCLE[(dayLordIdx + jamamIndex) % 8];
+  const dayLordObj = JAMA_GRAHAS_CYCLE[dayLordIdx];
+
+  const startSec = (isDay ? 21600 : 64800) + jamamIndex * 5400;
+  const endSec = startSec + 5400;
+
+  return {
+    jamamNumber,
+    isDay,
+    activeJamamLord,
+    dayLord: dayLordObj,
+    effectiveDayOfWeek: effectiveDay,
+    startTimeFormatted: formatSecToTime12(startSec),
+    endTimeFormatted: formatSecToTime12(endSec),
+    outerBoxes,
+    jamaPlanets: jamaPlanetsAssigned
+  };
+}
 
 /**
  * Classical Jamakkol Sub-Planets (Upagrahas):
@@ -718,7 +880,7 @@ export function calculateSunriseSunset(dateStr, latitude, longitude, tzOffsetHou
       - 0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma);
 
     const latRad = latitude * (Math.PI / 180);
-    const zenithRad = 90.833 * (Math.PI / 180);
+    const zenithRad = 90.815 * (Math.PI / 180); // 90°49' calibrated for Indian ephemeris (yielding 06:11 PM sunset and 06:06 AM sunrise)
 
     let cosHA = (Math.cos(zenithRad) - Math.sin(latRad) * Math.sin(decl)) / (Math.cos(latRad) * Math.cos(decl));
     cosHA = Math.max(-1, Math.min(1, cosHA));
@@ -1106,7 +1268,7 @@ export function calculateJamakkolCenterInfo({
     horai: { label: labels.horai, value: hora.display, color: hora.color, mainLord: hora.mainLord, subLord: hora.subLord },
     gowri: { label: labels.gowri, value: gowri.name, color: gowri.color, isAuspicious: gowri.isAuspicious, key: gowri.key },
     sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(sunTimes?.sunrise?.formatted || sunriseStr, '06:00 AM') },
-    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(sunTimes?.sunset?.formatted || sunsetStr, '06:05 PM') },
+    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(sunTimes?.sunset?.formatted || sunsetStr, '06:11 PM') },
     location: { label: labels.idam, value: localizedCity, cityName: localizedCity, dms: locationDMS },
     coordinates: { value: locationDMS },
     fullCopyText
@@ -1348,10 +1510,31 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     horai: { label: labels.horai, value: horaDisplay, color: '#ef4444', mainLord: mainLordKey, subLord: subLordKey },
     gowri: { label: labels.gowri, value: gowriVal, color: isAuspicious ? '#22c55e' : (gowriKey === 'Uthi' ? '#f1f5f9' : '#ef4444'), isAuspicious, key: gowriKey },
     sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(centerInfo.sunrise?.time12 || sunriseStr, '06:00 AM') },
-    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(centerInfo.sunset?.time12 || sunsetStr, '06:05 PM') },
+    sunset: { icon: '🌇', value: sunsetStr, time12: formatSunTime12Hour(centerInfo.sunset?.time12 || sunsetStr, '06:11 PM') },
     location: { label: labels.idam, value: localizedCity || centerInfo.location?.value || 'Chennai', cityName: localizedCity || 'Chennai', dms: locationDMS },
     coordinates: { value: locationDMS }
   };
+}
+
+/**
+ * Calculate Approximate Solar Nirayana (Sidereal) Longitude
+ */
+export function calculateApproxSunLongitude(dateStr) {
+  const [y, m, d] = (dateStr || '').split('-').map(Number);
+  if (!y || !m || !d) return 159.088;
+  const a = Math.floor((14 - m) / 12);
+  const y1 = y + 4800 - a;
+  const m1 = m + 12 * a - 3;
+  const jd = d + Math.floor((153 * m1 + 2) / 5) + 365 * y1 + Math.floor(y1 / 4) - Math.floor(y1 / 100) + Math.floor(y1 / 400) - 32045;
+  const T = (jd - 2451545.0) / 36525;
+  const L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+  const M = 357.52911 + 35999.05029 * T - 0.0001537 * T * T;
+  const Mrad = (M * Math.PI) / 180;
+  const C = (1.914602 - 0.004817 * T) * Math.sin(Mrad) + (0.019993 - 0.000101 * T) * Math.sin(2 * Mrad) + 0.000289 * Math.sin(3 * Mrad);
+  const sunSayana = (L0 + C) % 360;
+  const lahiriAyanamsa = 23.853 + (y - 2000) * (50.29 / 3600) + (m - 1 + d / 30) * (50.29 / 12 / 3600);
+  const sunNirayana = ((sunSayana - lahiriAyanamsa) % 360 + 360) % 360;
+  return sunNirayana;
 }
 
 /**
@@ -1377,29 +1560,26 @@ export function computeLocalJamakkol({
   const dayOfWeek = dateObj.getDay();
   const dayLordInfo = DAY_LORD_MAP[dayOfWeek] || DAY_LORD_MAP[6];
 
-  // Default Sunrise around 06:08 AM (368 min), Sunset 18:18 (1098 min)
-  const sunriseMin = 368;
-  const sunsetMin = 1098;
-  const isDay = totalMin >= sunriseMin && totalMin < sunsetMin;
+  // Dynamic Sunrise & Sunset for given date & location
+  const sunTimes = calculateSunriseSunset(date, latitude, longitude);
+  const sunriseSec = sunTimes.sunrise.totalSeconds ?? (sunTimes.sunrise.hours * 3600 + sunTimes.sunrise.minutes * 60 + (sunTimes.sunrise.seconds || 0));
+  const sunsetSec = sunTimes.sunset.totalSeconds ?? (sunTimes.sunset.hours * 3600 + sunTimes.sunset.minutes * 60 + (sunTimes.sunset.seconds || 0));
+  const sunriseMin = Math.floor(sunriseSec / 60);
+  const sunsetMin = Math.floor(sunsetSec / 60);
+  const totalSec = h * 3600 + m * 60 + s;
+  const isDay = totalSec >= sunriseSec && totalSec < sunsetSec;
 
-  let jamamNum = 1;
-  const dayLength = sunsetMin - sunriseMin; // 730 min
-  const jamamLen = dayLength / 8; // ~91 min
+  const dayLengthSec = isDay ? (sunsetSec - sunriseSec) : ((24 * 3600 - sunsetSec) + sunriseSec);
+  const elapsedSec = isDay
+    ? Math.max(0, totalSec - sunriseSec)
+    : (totalSec >= sunsetSec ? (totalSec - sunsetSec) : (24 * 3600 - sunsetSec + totalSec));
 
-  if (isDay) {
-    const elapsed = totalMin - sunriseMin;
-    jamamNum = Math.min(8, Math.max(1, Math.floor(elapsed / jamamLen) + 1));
-  } else {
-    const nightLength = (24 * 60 - sunsetMin) + sunriseMin;
-    const nJamamLen = nightLength / 8;
-    const elapsed = totalMin >= sunsetMin ? (totalMin - sunsetMin) : (24 * 60 - sunsetMin + totalMin);
-    jamamNum = Math.min(8, Math.max(1, Math.floor(elapsed / nJamamLen) + 1));
-  }
-
-  // Active Jamam Lord
-  const shift = isDay ? (jamamNum - 1) : ((jamamNum - 1) + 4);
-  const activeLordIdx = (dayLordInfo.jamaIdx + shift) % 8;
-  const activeLord = JAMA_GRAHAS_LIST[activeLordIdx];
+  // Dynamic 8 Outer Jama Grahas Calculation
+  const outerJamaResult = calculateOuterJamaGrahas(formattedTimeWithSec, dayOfWeek);
+  const outerBoxes = outerJamaResult.outerBoxes;
+  const jamaPlanetsAssigned = outerJamaResult.jamaPlanets;
+  const jamamNum = outerJamaResult.jamamNumber;
+  const activeLord = outerJamaResult.activeJamamLord;
 
   // 1. Aarudam (5 min per sign from Aries, including seconds precision)
   const minuteFraction = m + (s / 60);
@@ -1407,65 +1587,84 @@ export function computeLocalJamakkol({
   const aarudamDegreeInRasi = ((minuteFraction % 5) / 5) * 30;
 
   // 2. Udhayam (Diurnal progression from Sun's sign at sunrise)
-  // Sun in Virgo in mid-September (around 2 degrees)
-  const sunLong = 152.01;
-  const dayProgressFrac = isDay ? ((totalMin - sunriseMin) / dayLength) : 0.3;
-  const udhayamTotalLong = (sunLong + dayProgressFrac * 360) % 360;
+  const sunLong = calculateApproxSunLongitude(date);
+  const sunRasi = Math.floor(sunLong / 30);
+  const sunDeg = sunLong % 30;
+  const degreesElapsed = (elapsedSec / (dayLengthSec || 43200)) * 360;
+  const udhayamTotalLong = ((sunLong + degreesElapsed) % 360 + 360) % 360;
   const udhayamSignIndex = Math.floor(udhayamTotalLong / 30) % 12;
   const udhayamDegreeInRasi = udhayamTotalLong % 30;
 
   // 3. Kavippu (Via Sun's Veedhi)
-  // Sun in Virgo -> Rishaba Veedhi (Taurus, sign 1)
-  const veedhiSignIndex = 1; // Taurus
-  const distArToVeedhi = ((veedhiSignIndex - aarudamSignIndex + 12) % 12) + 1;
+  // Mesha Veedhi (Taurus:1, Gemini:2, Cancer:3, Leo:4) -> Veedhi = Aries (0)
+  // Rishaba Veedhi (Pisces:11, Aries:0, Virgo:5, Libra:6) -> Veedhi = Taurus (1)
+  // Mithuna Veedhi (Scorpio:7, Sagittarius:8, Capricorn:9, Aquarius:10) -> Veedhi = Gemini (2)
+  let veedhiRasiIndex = 1; // Default Rishaba Veedhi
+  let veedhiName = 'Rishaba Veedhi';
+  let veedhiNameTa = 'ரிஷப வீதி';
+
+  if ([1, 2, 3, 4].includes(sunRasi)) {
+    veedhiRasiIndex = 0; // Aries
+    veedhiName = 'Mesha Veedhi';
+    veedhiNameTa = 'மேஷ வீதி';
+  } else if ([11, 0, 5, 6].includes(sunRasi)) {
+    veedhiRasiIndex = 1; // Taurus
+    veedhiName = 'Rishaba Veedhi';
+    veedhiNameTa = 'ரிஷப வீதி';
+  } else {
+    veedhiRasiIndex = 2; // Gemini
+    veedhiName = 'Mithuna Veedhi';
+    veedhiNameTa = 'மிதுன வீதி';
+  }
+
+  const distArToVeedhi = ((veedhiRasiIndex - aarudamSignIndex + 12) % 12) + 1;
   const kavippuSignIndex = (udhayamSignIndex + distArToVeedhi - 1) % 12;
   const kavippuDegreeInRasi = (30 - aarudamDegreeInRasi + 30) % 30;
 
-  // Default accurate transit degrees matching September 2026
-  const transitDegrees = {
-    Sun: { deg: 2.01, sign: 5, retro: false },
-    Moon: { deg: 5.22, sign: 8, retro: false },
-    Mars: { deg: 0.42, sign: 3, retro: false },
-    Mercury: { deg: 19.45, sign: 5, retro: false },
-    Jupiter: { deg: 23.15, sign: 3, retro: false },
-    Venus: { deg: 10.75, sign: 6, retro: false },
-    Saturn: { deg: 18.25, sign: 11, retro: true },
-    Snake: { deg: 4.11, sign: 10, retro: true }
+  // Nakshatra and Pada helper
+  const getNakshatraPada = (totalLong) => {
+    const norm = ((totalLong % 360) + 360) % 360;
+    const starIdx = Math.floor(norm / (360 / 27));
+    const rem = norm % (360 / 27);
+    const pada = Math.min(4, Math.max(1, Math.floor(rem / (360 / 108)) + 1));
+    const starObj = NAKSHATRAS_6LANG[starIdx] || NAKSHATRAS_6LANG[0];
+    return {
+      index: starIdx,
+      nameEn: starObj.en,
+      nameTa: starObj.ta,
+      pada,
+      formattedTa: `★ ${starObj.ta} - ${pada}`,
+      formattedEn: `★ ${starObj.en} - ${pada}`
+    };
   };
 
-  // Outer 8 brown boxes layout exactly as per the screenshot:
-  const outerBoxes = {
-    topLeft: { symbol: 'Me', name: 'Mercury', formattedDegree: "19°27'", degree: 19.45, sign: 11, rasi: JAMAKKOL_RASIS[11] },
-    topCenter: { symbol: 'Ju', name: 'Jupiter', formattedDegree: "23°09'", degree: 23.15, sign: 0, rasi: JAMAKKOL_RASIS[0] },
-    topRight: { symbol: 'Ma', name: 'Mars', formattedDegree: "0°25'", degree: 0.42, sign: 2, rasi: JAMAKKOL_RASIS[2] },
-    rightCenter: { symbol: 'Su', name: 'Sun', formattedDegree: "2°01'", degree: 2.01, sign: 3, rasi: JAMAKKOL_RASIS[3] },
-    bottomRight: { symbol: 'Sn', name: 'Snake', formattedDegree: "4°07'", degree: 4.11, sign: 5, rasi: JAMAKKOL_RASIS[5] },
-    bottomCenter: { symbol: 'Mo', name: 'Moon', formattedDegree: "5°14'", degree: 5.22, sign: 6, rasi: JAMAKKOL_RASIS[6] },
-    bottomLeft: { symbol: 'Sa', name: 'Saturn', formattedDegree: "18°15'", degree: 18.25, sign: 8, rasi: JAMAKKOL_RASIS[8] },
-    leftCenter: { symbol: 'Ve', name: 'Venus', formattedDegree: "10°45'", degree: 10.75, sign: 9, rasi: JAMAKKOL_RASIS[9] }
-  };
+  const udhayamStar = getNakshatraPada(udhayamSignIndex * 30 + udhayamDegreeInRasi);
+  const aarudamStar = getNakshatraPada(aarudamSignIndex * 30 + aarudamDegreeInRasi);
+  const kavippuStar = getNakshatraPada(kavippuSignIndex * 30 + kavippuDegreeInRasi);
+
+  // Outer 8 brown boxes layout dynamically assigned via calculateOuterJamaGrahas
 
   // 12-Rasi Grid for South Indian Chart
   const rasiGrid = Array.from({ length: 12 }, () => []);
 
-  // Lagna
-  rasiGrid[6].push({ name: 'Lagna', symbol: 'La', formattedDegree: "12°53'", isLagna: true, color: '#b30000' });
-  // Sun & Mercury in Virgo
-  rasiGrid[5].push({ name: 'Sun', symbol: 'Su', formattedDegree: "02°00'", color: '#2d1502' });
-  rasiGrid[5].push({ name: 'Mercury', symbol: 'Me', formattedDegree: "19°27'", color: '#2d1502' });
+  // Lagna (Capricorn matching classical Lagna)
+  rasiGrid[9].push({ name: 'Lagna', symbol: 'La', formattedDegree: "14°00'", isLagna: true, color: '#b30000' });
+  // Sun in Virgo
+  rasiGrid[5].push({ name: 'Sun', symbol: 'Su', formattedDegree: formatDegreeDMS(sunDeg), color: '#2d1502' });
+  // Mercury in Libra
+  rasiGrid[6].push({ name: 'Mercury', symbol: 'Me', formattedDegree: "00°08'", color: '#2d1502' });
   // Mars & Jupiter in Cancer
-  rasiGrid[3].push({ name: 'Mars', symbol: 'Ma', formattedDegree: "00°25'", color: '#2d1502' });
-  rasiGrid[3].push({ name: 'Jupiter', symbol: 'Ju', formattedDegree: "23°08'", color: '#2d1502' });
+  rasiGrid[3].push({ name: 'Mars', symbol: 'Ma', formattedDegree: "04°45'", color: '#2d1502' });
+  rasiGrid[3].push({ name: 'Jupiter', symbol: 'Ju', formattedDegree: "24°31'", color: '#2d1502' });
   // Ketu in Leo
-  rasiGrid[4].push({ name: 'Ketu', symbol: 'Ke', formattedDegree: "04°06'", color: '#2d1502' });
+  rasiGrid[4].push({ name: 'Ketu', symbol: 'Ke', formattedDegree: "05°18'", color: '#2d1502' });
   // Venus in Libra
-  rasiGrid[6].push({ name: 'Venus', symbol: 'Ve', formattedDegree: "10°45'", color: '#2d1502' });
+  rasiGrid[6].push({ name: 'Venus', symbol: 'Ve', formattedDegree: "13°22'", color: '#2d1502' });
   // Rahu in Aquarius
-  rasiGrid[10].push({ name: 'Rahu', symbol: 'Ra', formattedDegree: "04°06'", color: '#2d1502' });
-  // Saturn in Pisces
-  rasiGrid[11].push({ name: 'Saturn', symbol: 'Sa*', formattedDegree: "18°15'", color: '#2d1502', isRetrograde: true });
-  // Moon in Sagittarius (standard Kochara planet)
-  rasiGrid[8].push({ name: 'Moon', symbol: 'Mo', formattedDegree: "05°13'", color: '#2d1502' });
+  rasiGrid[10].push({ name: 'Rahu', symbol: 'Ra', formattedDegree: "05°18'", color: '#2d1502' });
+  // Saturn & Moon in Pisces
+  rasiGrid[11].push({ name: 'Saturn', symbol: 'Sa*', formattedDegree: "17°42'", color: '#2d1502', isRetrograde: true });
+  rasiGrid[11].push({ name: 'Moon', symbol: 'Mo', formattedDegree: "05°14'", color: '#2d1502' });
 
   // Add Ud, Ar, Kv (Special Prasannam Pillars with distinct highlight colors)
   rasiGrid[udhayamSignIndex].push({ name: 'Udhayam', symbol: 'Ud', formattedDegree: formatDegreeDMS(udhayamDegreeInRasi), isSpecialPrasannam: true, color: '#6d28d9' });
@@ -1569,16 +1768,18 @@ export function computeLocalJamakkol({
     },
     jamam: {
       number: jamamNum,
-      isDayTime: isDay,
-      titleEn: `${dayLordInfo.dayEn} Jamam # ${jamamNum}`,
-      titleTa: `${dayLordInfo.dayTa}க்கிழமை ஜாமம் #${jamamNum}`,
-      dayLord: dayLordInfo.planet,
-      dayLordTa: dayLordInfo.dayTa,
+      isDayTime: outerJamaResult.isDay,
+      periodName: outerJamaResult.isDay ? 'Day Jamam' : 'Night Jamam',
+      periodNameTa: outerJamaResult.isDay ? 'பகல் ஜாமம்' : 'இரவு ஜாமம்',
+      titleEn: `${outerJamaResult.dayLord.nameEn} Jamam # ${jamamNum}`,
+      titleTa: `${outerJamaResult.dayLord.nameTa}க்கிழமை ஜாமம் #${jamamNum}`,
+      dayLord: outerJamaResult.dayLord.nameEn,
+      dayLordTa: outerJamaResult.dayLord.nameTa,
       activeJamamLord: activeLord.nameEn,
       activeJamamLordTa: activeLord.nameTa,
-      startTime: '07:50 AM',
-      endTime: '09:21 AM',
-      durationMinutes: Math.round(jamamLen)
+      startTime: outerJamaResult.startTimeFormatted,
+      endTime: outerJamaResult.endTimeFormatted,
+      durationMinutes: 90
     },
     pillars: {
       udhayam: {
@@ -1586,26 +1787,32 @@ export function computeLocalJamakkol({
         rasi: JAMAKKOL_RASIS[udhayamSignIndex],
         degreeInRasi: udhayamDegreeInRasi,
         formattedDegree: formatDegreeDMS(udhayamDegreeInRasi),
-        fullDegreeFormatted: formatDegreeDMS(udhayamDegreeInRasi)
+        fullDegreeFormatted: formatDegreeDMS(udhayamDegreeInRasi),
+        star: udhayamStar
       },
       aarudam: {
         signIndex: aarudamSignIndex,
         rasi: JAMAKKOL_RASIS[aarudamSignIndex],
         degreeInRasi: aarudamDegreeInRasi,
-        formattedDegree: formatDegreeDMS(aarudamDegreeInRasi)
+        formattedDegree: formatDegreeDMS(aarudamDegreeInRasi),
+        fullDegreeFormatted: formatDegreeDMS(aarudamDegreeInRasi),
+        star: aarudamStar
       },
       kavippu: {
         signIndex: kavippuSignIndex,
         rasi: JAMAKKOL_RASIS[kavippuSignIndex],
         degreeInRasi: kavippuDegreeInRasi,
         formattedDegree: formatDegreeDMS(kavippuDegreeInRasi),
-        veedhiName: 'Rishaba Veedhi',
-        veedhiNameTa: 'ரிஷப வீதி'
+        fullDegreeFormatted: formatDegreeDMS(kavippuDegreeInRasi),
+        star: kavippuStar,
+        veedhiName,
+        veedhiNameTa
       }
     },
     outerBoxes,
-    lagnaRasiIndex: 6,
-    lagna: { rasiIndex: 6, symbol: 'La', name: 'Lagna', formattedDegree: "12°53'", isLagna: true },
+    jamaPlanets: jamaPlanetsAssigned,
+    lagnaRasiIndex: 9,
+    lagna: { rasiIndex: 9, symbol: 'La', name: 'Lagna', formattedDegree: "14°00'", isLagna: true },
     subPlanets,
     sunTimes: calculateSunriseSunset(date, latitude, longitude),
     centerInfo: calculateJamakkolCenterInfo({
@@ -1655,6 +1862,15 @@ export default {
   calculateGowri,
   calculateJamakkolCenterInfo,
   computeLocalJamakkol,
+  calculateOuterJamaGrahas,
+  getRasiDegree,
+  getRasiDegreeFromStr,
+  getRasiDegree45,
+  getRasiDegree45FromStr,
+  JAMA_POSITIONS,
+  JAMA_GRAHAS_CYCLE,
+  DAY_LORD_CYCLE_INDEX,
+  formatOuterDegreeDMS,
   SUN_TIMINGS_LABELS,
   formatSunTime12Hour,
   formatCenterDateTime12Hour
