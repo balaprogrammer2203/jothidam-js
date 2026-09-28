@@ -246,6 +246,11 @@ export default function KadikaraPrasannamPage() {
     return String(now.getMinutes());
   });
 
+  const [inputSecond, setInputSecond] = useState(() => {
+    const now = new Date();
+    return String(now.getSeconds());
+  });
+
   const [inputAmPm, setInputAmPm] = useState(() => {
     const now = new Date();
     return now.getHours() >= 12 ? 'PM' : 'AM';
@@ -392,7 +397,7 @@ export default function KadikaraPrasannamPage() {
 
   // Re-calculate when language or customBhavaMap changes
   useEffect(() => {
-    performCalculation(inputDate, inputHour, inputMinute, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+    performCalculation(inputDate, inputHour, inputMinute, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
   }, [currentLang, customBhavaMap]);
 
   // Place selection handler
@@ -452,41 +457,51 @@ export default function KadikaraPrasannamPage() {
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
-    setInputDate(`${yyyy}-${mm}-${dd}`);
+    const newDate = `${yyyy}-${mm}-${dd}`;
+    setInputDate(newDate);
 
     const h = now.getHours();
     const h12 = h % 12 || 12;
-    setInputHour(String(h12));
-    setInputMinute(String(now.getMinutes()));
-    setInputAmPm(h >= 12 ? 'PM' : 'AM');
+    const newHour = String(h12);
+    const newMin = String(now.getMinutes());
+    const newSec = String(now.getSeconds());
+    const newAmPm = h >= 12 ? 'PM' : 'AM';
 
-    performCalculation(`${yyyy}-${mm}-${dd}`, String(h12), String(now.getMinutes()), h >= 12 ? 'PM' : 'AM', inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+    setInputHour(newHour);
+    setInputMinute(newMin);
+    setInputSecond(newSec);
+    setInputAmPm(newAmPm);
+
+    performCalculation(newDate, newHour, newMin, newSec, newAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
   };
 
   // Handle Ayanamsa Dropdown Change
   const handleAyanamsaChange = (newAyanamsa) => {
     setInputAyanamsa(newAyanamsa);
-    performCalculation(inputDate, inputHour, inputMinute, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, newAyanamsa, customBhavaMap, currentLang);
+    performCalculation(inputDate, inputHour, inputMinute, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, newAyanamsa, customBhavaMap, currentLang);
   };
 
   // Perform Calculation & Fetch Ephemeris Planets dynamically
   const performCalculation = async (
-    dateVal,
-    hourVal,
-    minVal,
-    ampmVal,
-    placeVal,
-    mode,
+    dateVal = inputDate,
+    hourVal = inputHour,
+    minVal = inputMinute,
+    secVal = inputSecond,
+    ampmVal = inputAmPm,
+    placeVal = inputPlace,
+    mode = calculationMode,
     latVal = inputLat,
     lngVal = inputLng,
     ayanamsaVal = inputAyanamsa,
     bhavasMap = customBhavaMap,
     langCode = currentLang
   ) => {
+    const parsedSec = Math.max(0, Math.min(59, parseInt(secVal, 10) || 0));
     const res = calculateKadikaraPrasannam({
       date: dateVal,
       hour: hourVal,
       minute: minVal,
+      second: parsedSec,
       ampm: ampmVal,
       calculationMode: mode,
       lang: langCode,
@@ -495,11 +510,11 @@ export default function KadikaraPrasannamPage() {
 
     setChartResult(res);
 
-    // Format TOB for Ephemeris API (HH:mm:00)
+    // Format TOB for Ephemeris API (HH:mm:ss)
     let h24 = parseInt(hourVal, 10);
     if (ampmVal.toUpperCase() === 'PM' && h24 < 12) h24 += 12;
     if (ampmVal.toUpperCase() === 'AM' && h24 === 12) h24 = 0;
-    const tobFormatted = `${String(h24).padStart(2, '0')}:${String(minVal).padStart(2, '0')}:00`;
+    const tobFormatted = `${String(h24).padStart(2, '0')}:${String(minVal).padStart(2, '0')}:${String(parsedSec).padStart(2, '0')}`;
 
     // Attempt Ephemeris Fetch from backend API
     try {
@@ -509,6 +524,7 @@ export default function KadikaraPrasannamPage() {
         date: dateVal,
         hour: hourVal,
         minute: minVal,
+        second: parsedSec,
         ampm: ampmVal,
         calculationMode: mode,
         placeName: placeVal || 'Chennai',
@@ -557,15 +573,15 @@ export default function KadikaraPrasannamPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsPlaceDropdownOpen(false);
-    performCalculation(inputDate, inputHour, inputMinute, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+    performCalculation(inputDate, inputHour, inputMinute, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
     if (resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  // Format date time string matching screenshot "04/07/2025 15:03"
+  // Format date time string matching screenshot "04/07/2025 15:03:00"
   const formattedDateTimeStr = (() => {
-    if (!inputDate) return '04/07/2025 15:03';
+    if (!inputDate) return '04/07/2025 15:03:00';
     const parts = inputDate.split('-');
     if (parts.length !== 3) return inputDate;
     const [yyyy, mm, dd] = parts;
@@ -575,7 +591,7 @@ export default function KadikaraPrasannamPage() {
     if (inputAmPm === 'AM' && h24 === 12) h24 = 0;
     const pad = (n) => String(n).padStart(2, '0');
 
-    return `${pad(dd)}/${pad(mm)}/${yyyy} ${pad(h24)}:${pad(inputMinute)}`;
+    return `${pad(dd)}/${pad(mm)}/${yyyy} ${pad(h24)}:${pad(inputMinute)}:${pad(inputSecond || 0)}`;
   })();
 
   const toggleFaq = (idx) => {
@@ -663,7 +679,7 @@ export default function KadikaraPrasannamPage() {
                       onChange={(e) => {
                         const newHour = e.target.value;
                         setInputHour(newHour);
-                        performCalculation(inputDate, newHour, inputMinute, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+                        performCalculation(inputDate, newHour, inputMinute, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
                       }}
                       required
                     >
@@ -686,13 +702,36 @@ export default function KadikaraPrasannamPage() {
                       onChange={(e) => {
                         const newMin = e.target.value;
                         setInputMinute(newMin);
-                        performCalculation(inputDate, inputHour, newMin, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+                        performCalculation(inputDate, inputHour, newMin, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
                       }}
                       required
                     >
                       {Array.from({ length: 60 }, (_, i) => i).map((m) => (
                         <option key={m} value={m}>
                           {String(m).padStart(2, '0')}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <span className="kadikara-time-colon">:</span>
+
+                  {/* Second Selector (0-59) */}
+                  <div className="kadikara-select-group">
+                    <label className="kadikara-select-label">{t('astrology:kadikara.second', 'வினாடி')}</label>
+                    <select
+                      className="kadikara-select"
+                      value={inputSecond}
+                      onChange={(e) => {
+                        const newSec = e.target.value;
+                        setInputSecond(newSec);
+                        performCalculation(inputDate, inputHour, inputMinute, newSec, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+                      }}
+                      required
+                    >
+                      {Array.from({ length: 60 }, (_, i) => i).map((s) => (
+                        <option key={s} value={s}>
+                          {String(s).padStart(2, '0')}
                         </option>
                       ))}
                     </select>
@@ -707,7 +746,7 @@ export default function KadikaraPrasannamPage() {
                       onChange={(e) => {
                         const newAmPm = e.target.value;
                         setInputAmPm(newAmPm);
-                        performCalculation(inputDate, inputHour, inputMinute, newAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+                        performCalculation(inputDate, inputHour, inputMinute, inputSecond, newAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
                       }}
                       required
                     >
@@ -729,7 +768,7 @@ export default function KadikaraPrasannamPage() {
                       onChange={(e) => {
                         const newDate = e.target.value;
                         setInputDate(newDate);
-                        performCalculation(newDate, inputHour, inputMinute, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
+                        performCalculation(newDate, inputHour, inputMinute, inputSecond, inputAmPm, inputPlace, calculationMode, inputLat, inputLng, inputAyanamsa, customBhavaMap, currentLang);
                       }}
                       title={t('astrology:kadikara.date', 'தேதி')}
                     />

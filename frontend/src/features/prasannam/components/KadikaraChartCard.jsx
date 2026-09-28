@@ -61,7 +61,7 @@ export default function KadikaraChartCard({
     badgeText = '#ffffff'
   } = chartData || {};
 
-  // Extract minute for degree calculation fallback if needed
+  // Extract minute and second for degree calculation fallback if needed
   let parsedMin = chartData?.minute;
   if (parsedMin === undefined && dateTimeStr) {
     const mMatch = dateTimeStr.match(/:(\d{2})/);
@@ -69,16 +69,27 @@ export default function KadikaraChartCard({
   }
   const effectiveMin = (parsedMin !== undefined && !isNaN(parsedMin)) ? parsedMin : 0;
 
-  // Udhayam degree: (minute / 60) * 30 -> 0.5 deg per min
-  const uDegVal = udhayamDegreeInRasi !== undefined ? udhayamDegreeInRasi : ((effectiveMin / 60) * 30);
+  let parsedSec = chartData?.second;
+  if (parsedSec === undefined && dateTimeStr) {
+    const sMatch = dateTimeStr.match(/:(\d{2}):(\d{2})/);
+    if (sMatch) parsedSec = parseInt(sMatch[2], 10);
+  }
+  const effectiveSec = (parsedSec !== undefined && !isNaN(parsedSec)) ? parsedSec : 0;
+
+  // Udhayam degree: ((minute + second / 60) / 60) * 30 -> 0.5 deg per min
+  const uDegVal = udhayamDegreeInRasi !== undefined
+    ? udhayamDegreeInRasi
+    : (((effectiveMin + effectiveSec / 60) / 60) * 30);
   const uDegFormatted = udhayamFormattedDegree || (() => {
     const ud = Math.floor(uDegVal);
     const um = Math.round((uDegVal - ud) * 60);
     return `${ud}°${String(um).padStart(2, '0')}'`;
   })();
 
-  // Aarudam degree: ((minute % 5) / 5) * 30 -> 6 deg per min
-  const aDegVal = aarudamDegreeInRasi !== undefined ? aarudamDegreeInRasi : ((effectiveMin % 5) * 6);
+  // Aarudam degree: (((minute % 5) * 60 + second) / 300) * 30 -> 6 deg per min
+  const aDegVal = aarudamDegreeInRasi !== undefined
+    ? aarudamDegreeInRasi
+    : ((((effectiveMin % 5) * 60 + effectiveSec) / 300) * 30);
   const aDegFormatted = aarudamFormattedDegree || (() => {
     const ad = Math.floor(aDegVal);
     const am = Math.round((aDegVal - ad) * 60);
@@ -86,7 +97,7 @@ export default function KadikaraChartCard({
   })();
 
   // Format date & time display for center cell
-  const displayDateTime = dateTimeStr || '04/07/2025 15:03';
+  const displayDateTime = dateTimeStr || '04/07/2025 15:03:00';
   const displayPlace = placeName || 'Chennai';
   const displayTitle = title || t('kadikara.chartTitle', 'கடிகார பிரசன்னம்');
 

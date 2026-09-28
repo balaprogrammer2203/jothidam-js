@@ -1399,6 +1399,25 @@
     margin-bottom: 24px;
   }
 
+  .kadikara-selectors-row {
+    gap: 8px;
+  }
+
+  .kadikara-select {
+    padding: 10px 8px;
+    font-size: 16px;
+    min-width: 66px;
+  }
+
+  .kadikara-select-label {
+    font-size: 12px;
+  }
+
+  .kadikara-time-colon {
+    font-size: 22px;
+    margin-top: 14px;
+  }
+
   /* Chart Card Mobile Container */
   .kadikara-chart-card-section {
     width: 100%;
@@ -1549,6 +1568,25 @@
 @media (max-width: 380px) {
   .kadikara-page-container {
     padding: 8px 4px 40px;
+  }
+
+  .kadikara-selectors-row {
+    gap: 4px;
+  }
+
+  .kadikara-select {
+    padding: 8px 4px;
+    font-size: 15px;
+    min-width: 52px;
+  }
+
+  .kadikara-select-label {
+    font-size: 11px;
+  }
+
+  .kadikara-time-colon {
+    font-size: 18px;
+    margin-top: 12px;
   }
 
   .kadikara-chart-wrapper {

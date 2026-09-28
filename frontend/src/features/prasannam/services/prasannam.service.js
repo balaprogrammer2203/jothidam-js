@@ -11,8 +11,17 @@ export const prasannamService = {
   /**
    * Calculates Kadikara (Clock) Prasannam locally using classical rules
    */
-  calculateClockPrasannam(hours, minutes, customOptions = {}) {
-    return calculateKadikaraPrasannam(hours, minutes, customOptions);
+  calculateClockPrasannam(hours, minutes, seconds = 0, customOptions = {}) {
+    if (typeof seconds === 'object' && seconds !== null) {
+      customOptions = seconds;
+      seconds = customOptions.second || customOptions.seconds || 0;
+    }
+    return calculateKadikaraPrasannam({
+      hour: hours,
+      minute: minutes,
+      second: seconds,
+      ...customOptions
+    });
   },
 
   /**

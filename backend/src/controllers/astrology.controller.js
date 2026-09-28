@@ -1219,6 +1219,7 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
       date,
       hour,
       minute,
+      second = 0,
       ampm = 'AM',
       calculationMode = 'runningHour',
       placeName = 'Chennai',
@@ -1230,6 +1231,7 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
 
     const parsedHour = parseInt(hour, 10) || 12;
     const parsedMinute = Math.max(0, Math.min(59, parseInt(minute, 10) || 0));
+    const parsedSecond = Math.max(0, Math.min(59, parseInt(second, 10) || 0));
 
     let h24 = parsedHour;
     if (String(ampm).toUpperCase() === 'PM' && parsedHour < 12) {
@@ -1240,7 +1242,7 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
 
     const h12 = (parsedHour % 12) || 12;
     const pad = (n) => String(n).padStart(2, '0');
-    const tobFormatted = `${pad(h24)}:${pad(parsedMinute)}:00`;
+    const tobFormatted = `${pad(h24)}:${pad(parsedMinute)}:${pad(parsedSecond)}`;
 
     // 1. Aarudam (Minute: every 5 min = 1 Rasi)
     const aarudamIndex = Math.min(11, Math.floor(parsedMinute / 5));
@@ -1249,7 +1251,7 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
     let udhayamIndex = 0;
     if (calculationMode === 'runningHour') {
       const hourMod12 = (h24 % 12);
-      if (parsedMinute > 0) {
+      if (parsedMinute > 0 || parsedSecond > 0) {
         udhayamIndex = hourMod12 % 12;
       } else {
         udhayamIndex = (hourMod12 - 1 + 12) % 12;
@@ -1454,15 +1456,16 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
     });
 
     // Degree calculations for Udhayam & Aarudam (30° per Rasi)
-    // Udhayam (Hour hand: 30° across 60 min -> 0.5° or 30' per min)
-    const udhayamDegreeInRasi = Number(((parsedMinute / 60) * 30).toFixed(4));
+    // Udhayam (Hour hand: 30° across 60 min -> 0.5° or 30' per min; seconds provide fine progression)
+    const totalMinutes = parsedMinute + (parsedSecond / 60);
+    const udhayamDegreeInRasi = Number(((totalMinutes / 60) * 30).toFixed(4));
     const uDeg = Math.floor(udhayamDegreeInRasi);
     const uMin = Math.round((udhayamDegreeInRasi - uDeg) * 60);
     const udhayamFormattedDegree = `${uDeg}°${String(uMin).padStart(2, '0')}'`;
 
-    // Aarudam (Minute hand: 30° across 5 min -> 6° per min)
-    const minuteInRasi = parsedMinute % 5;
-    const aarudamDegreeInRasi = Number(((minuteInRasi / 5) * 30).toFixed(4));
+    // Aarudam (Minute hand: 30° across 5 min -> 6° per min; seconds provide fine progress inside the 5-min Rasi)
+    const totalSecInRasi = (parsedMinute % 5) * 60 + parsedSecond;
+    const aarudamDegreeInRasi = Number(((totalSecInRasi / 300) * 30).toFixed(4));
     const aDeg = Math.floor(aarudamDegreeInRasi);
     const aMin = Math.round((aarudamDegreeInRasi - aDeg) * 60);
     const aarudamFormattedDegree = `${aDeg}°${String(aMin).padStart(2, '0')}'`;
@@ -1486,6 +1489,7 @@ export const calculateKadikaraPrasannamBE = async (req, res) => {
       date: date || new Date().toISOString().split('T')[0],
       hour: parsedHour,
       minute: parsedMinute,
+      second: parsedSecond,
       ampm: String(ampm).toUpperCase(),
       placeName,
       latitude: latNum,

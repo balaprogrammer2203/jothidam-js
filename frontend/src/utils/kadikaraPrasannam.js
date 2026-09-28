@@ -739,17 +739,38 @@ export function getLocalizedBhavaPrediction(bhavaNum, lang = 'ta', customPredict
  * @param {Object} [params.customBhavaPredictions] - Loaded Master Predictions from DB
  * @returns {Object} Prasannam calculation results
  */
-export function calculateKadikaraPrasannam({
-  date = new Date(),
-  hour,
-  minute,
-  ampm = 'AM',
-  calculationMode = 'runningHour',
-  lang = 'ta',
-  customBhavaPredictions = null
-}) {
+export function calculateKadikaraPrasannam(arg1, arg2, arg3, arg4) {
+  let params = {};
+  if (arg1 && typeof arg1 === 'object' && !(arg1 instanceof Date)) {
+    params = arg1;
+  } else {
+    // Positional call support: (hours, minutes, seconds/options, options)
+    params = {
+      hour: arg1,
+      minute: arg2
+    };
+    if (typeof arg3 === 'number' || (typeof arg3 === 'string' && !isNaN(Number(arg3)))) {
+      params.second = Number(arg3);
+      if (typeof arg4 === 'object') Object.assign(params, arg4);
+    } else if (typeof arg3 === 'object') {
+      Object.assign(params, arg3);
+    }
+  }
+
+  const {
+    date = new Date(),
+    hour,
+    minute,
+    second = 0,
+    ampm = 'AM',
+    calculationMode = 'runningHour',
+    lang = 'ta',
+    customBhavaPredictions = null
+  } = params;
+
   const parsedHour = parseInt(hour, 10);
   const parsedMinute = Math.max(0, Math.min(59, parseInt(minute, 10) || 0));
+  const parsedSecond = Math.max(0, Math.min(59, parseInt(second, 10) || 0));
 
   let h24 = parsedHour;
   if (ampm.toUpperCase() === 'PM' && parsedHour < 12) {
@@ -772,7 +793,7 @@ export function calculateKadikaraPrasannam({
     // In running hour mode (standard in clock horary and matching reference screenshot):
     // e.g. 15:03 -> hour 15 (3 PM) running hour is 4 -> Cancer (கடகம், index 3).
     const hourMod12 = (h24 % 12);
-    if (parsedMinute > 0) {
+    if (parsedMinute > 0 || parsedSecond > 0) {
       udhayamIndex = hourMod12 % 12;
     } else {
       udhayamIndex = (hourMod12 - 1 + 12) % 12;
@@ -833,15 +854,16 @@ export function calculateKadikaraPrasannam({
   const statusLocalized = prediction.statusLocalized || (lang === 'en' ? statusEn : statusTa);
 
   // Degree calculations for Udhayam & Aarudam (30° per Rasi)
-  // Udhayam (Hour hand: 30° across 60 min -> 0.5° or 30' per min)
-  const udhayamDegreeInRasi = Number(((parsedMinute / 60) * 30).toFixed(4));
+  // Udhayam (Hour hand: 30° across 60 min -> 0.5° or 30' per min; seconds provide fine progression)
+  const totalMinutes = parsedMinute + (parsedSecond / 60);
+  const udhayamDegreeInRasi = Number(((totalMinutes / 60) * 30).toFixed(4));
   const uDeg = Math.floor(udhayamDegreeInRasi);
   const uMin = Math.round((udhayamDegreeInRasi - uDeg) * 60);
   const udhayamFormattedDegree = `${uDeg}°${String(uMin).padStart(2, '0')}'`;
 
-  // Aarudam (Minute hand: 30° across 5 min -> 6° per min)
-  const minuteInRasi = parsedMinute % 5;
-  const aarudamDegreeInRasi = Number(((minuteInRasi / 5) * 30).toFixed(4));
+  // Aarudam (Minute hand: 30° across 5 min -> 6° per min; seconds provide fine progress inside the 5-min Rasi)
+  const totalSecInRasi = (parsedMinute % 5) * 60 + parsedSecond;
+  const aarudamDegreeInRasi = Number(((totalSecInRasi / 300) * 30).toFixed(4));
   const aDeg = Math.floor(aarudamDegreeInRasi);
   const aMin = Math.round((aarudamDegreeInRasi - aDeg) * 60);
   const aarudamFormattedDegree = `${aDeg}°${String(aMin).padStart(2, '0')}'`;
@@ -870,6 +892,7 @@ export function calculateKadikaraPrasannam({
     h12,
     h24,
     minute: parsedMinute,
+    second: parsedSecond,
     ampm: ampm.toUpperCase(),
     date
   };
