@@ -1,184 +1,25 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '../../../components/common/SEOHead';
 import Breadcrumbs from '../../../components/common/Breadcrumbs';
 import JamakolChartCard from '../components/JamakolChartCard';
 import JamakolKeyNotesCard from '../components/JamakolKeyNotesCard';
+import JamakolPlanetaryStatusTables from '../components/JamakolPlanetaryStatusTables';
+import JamakolRaysTable from '../components/JamakolRaysTable';
+import JamakolPositionsAndSphutasTables from '../components/JamakolPositionsAndSphutasTables';
+import JamakolIndicatorsSection from '../components/JamakolIndicatorsSection';
+import JamakolTimingSection from '../components/JamakolTimingSection';
+import JamakolQuestionsSection from '../components/JamakolQuestionsSection';
+import JamakolFaqSection from '../components/JamakolFaqSection';
 import jamakkolService from '../services/jamakkol.service';
 import horoscopeService from '../../horoscope/services/horoscope.service';
 import {
   computeLocalJamakkol,
-  generateJamakkolIndicators,
   PRESET_CITIES,
   AYANAMSA_OPTIONS,
-  getLocalizedPlanetCode,
-  getLocalizedCityName
+  getLocalizedPlanetCode
 } from '../../../utils/jamakkol.utils';
 import '../../../styles/jamakolPrasannam.css';
-
-// 70+ Classical Questions Seed Data for instant client advisory
-const DEFAULT_QUESTIONS = [
-  {
-    id: 1,
-    category: 'marriage',
-    categoryTa: 'திருமணம்',
-    titleEn: 'Will the proposed marriage alliance materialize successfully?',
-    titleTa: 'பேசப்படும் திருமண வரன் கைகூடுமா?',
-    house: 7,
-    karaka: 'Venus',
-    karakaTa: 'சுக்கிரன்',
-    verdict: 'delayed',
-    successPct: 65,
-    conditionEn: '7th lord / Venus vs Kavippu and Jamam Saturn aspect',
-    conditionTa: '7-ஆம் அதிபதி மற்றும் சுக்கிரன் மீது கவிப்பு பார்வை உள்ளதா என்று பார்க்கவும்.',
-    explanationEn: 'Venus is well positioned, but 7th lord is impacted by Jamam Saturn. Moderate delay indicated; proceed with calm negotiations.',
-    explanationTa: 'சுக்கிரன் சுப வீட்டில் இருந்தாலும் 7-ஆம் அதிபதி மீது சனி தொடர்பு உள்ளது. சிறிது தாமதத்திற்குப் பின் சுபமாக முடியும்.'
-  },
-  {
-    id: 2,
-    category: 'marriage',
-    categoryTa: 'திருமணம்',
-    titleEn: 'Is there any third-party interference in love/marriage negotiations?',
-    titleTa: 'திருமணப் பேச்சில் மறைமுக எதிர்ப்புகள் அல்லது குழப்பங்கள் உள்ளதா?',
-    house: 7,
-    karaka: 'Rahu',
-    karakaTa: 'ராகு / பாம்பு',
-    verdict: 'unfavorable',
-    successPct: 35,
-    conditionEn: 'Kavippu in 7th or conjunct Aarudam',
-    conditionTa: 'கவிப்பு 7-ஆம் வீட்டில் அல்லது ஆருடத்தில் உள்ளதா என ஆய்வு.',
-    explanationEn: 'Kavippu creates hidden obstacles or deceptive rumors. Verify all facts through trusted relatives before making commitments.',
-    explanationTa: 'கவிப்பின் தாக்கத்தால் மறைமுக எதிர்ப்புகள் வர வாய்ப்புண்டு. நம்பகமான உறவினர்கள் மூலம் உண்மை நிலையை அறிந்து முடிவெடுக்கவும்.'
-  },
-  {
-    id: 3,
-    category: 'career',
-    categoryTa: 'தொழில் / வேலை',
-    titleEn: 'Will I secure the new job/promotion I recently interviewed for?',
-    titleTa: 'விண்ணப்பித்த புதிய வேலை அல்லது பதவி உயர்வு கிடைக்குமா?',
-    house: 10,
-    karaka: 'Sun',
-    karakaTa: 'சூரியன் / புதன்',
-    verdict: 'favorable',
-    successPct: 88,
-    conditionEn: '10th House free of Kavippu and aspected by benefic Jama Jupiter',
-    conditionTa: '10-ஆம் வீடு கவிப்பு நீங்கி சுப ஜாம குருவின் பார்வையில் உள்ளது.',
-    explanationEn: 'Jama Jupiter favorably influences the 10th house while Aarudam aligns with Udhayam. Excellent prospect of job offer within days.',
-    explanationTa: 'ஜாம குரு பத்தாம் பாவத்திற்கு நலம் பயக்கிறார். உதயத்திற்கு ஆருடம் சுப ஸ்தானத்தில் இருப்பதால் விரைவில் நல்ல வேலை ஆணை வரும்.'
-  },
-  {
-    id: 4,
-    category: 'career',
-    categoryTa: 'தொழில் / வேலை',
-    titleEn: 'Should I start a new business partnership at this moment?',
-    titleTa: 'புதிய கூட்டுத் தொழில் ஆரம்பிக்கலாமா?',
-    house: 7,
-    karaka: 'Mercury',
-    karakaTa: 'புதன்',
-    verdict: 'unfavorable',
-    successPct: 30,
-    conditionEn: 'Mercury under debilitation / 7th lord aspected by Jama Snake',
-    conditionTa: 'புதன் நீச நிலை அல்லது ஜாம பாம்பு தொடர்பில் உள்ளது.',
-    explanationEn: 'Jamakkol rule advises avoiding new partnership agreements under current planetary configurations. Postpone until next auspicious Jamam.',
-    explanationTa: 'ஜாமக்கோள் விதியின்படி தற்போதைய ஜாமத்தில் கூட்டு ஒப்பந்தங்கள் செய்வதைத் தவிர்ப்பது நலம்.'
-  },
-  {
-    id: 5,
-    category: 'finance',
-    categoryTa: 'தனம் / பணம்',
-    titleEn: 'Will pending financial payments or loans be recovered?',
-    titleTa: 'வர வேண்டிய பண பாக்கிகள் மற்றும் கடன்கள் வசூலாகுமா?',
-    house: 2,
-    karaka: 'Jupiter',
-    karakaTa: 'குரு',
-    verdict: 'favorable',
-    successPct: 75,
-    conditionEn: '2nd / 11th Lord in Kendra to Udhayam',
-    conditionTa: '2 மற்றும் 11-ஆம் அதிபதிகள் உதயத்திற்கு கேந்திரத்தில் உள்ளனர்.',
-    explanationEn: 'Strong recovery indicated. Money will be remitted in multiple installments without severe litigation.',
-    explanationTa: 'தன ஸ்தானம் வலிமையாக இருப்பதால் நிலுவைத் தொகை தவணைகளாக வந்து சேரும்.'
-  },
-  {
-    id: 6,
-    category: 'health',
-    categoryTa: 'உடல்நலம்',
-    titleEn: 'Will the ailing patient recover health speedily?',
-    titleTa: 'நோயாளி விரைவில் பூரண குணமடைவாரா?',
-    house: 1,
-    karaka: 'Moon',
-    karakaTa: 'சந்திரன் / சூரியன்',
-    verdict: 'favorable',
-    successPct: 82,
-    conditionEn: 'Udhayam received benefic rays, Kavippu away from Lagna Lord',
-    conditionTa: 'உதயத்திற்கு சுப கிரக கதிர்கள் வருகின்றன, கவிப்பு எட்டாம் வீட்டில் இல்லை.',
-    explanationEn: 'Patient will respond positively to current medical treatment and regain vitality rapidly.',
-    explanationTa: 'தற்போதைய மருத்துவ சிகிச்சை நல்ல பலன் தரும். விரைவில் பூரண நலம் பெறுவார்.'
-  },
-  {
-    id: 7,
-    category: 'lost_items',
-    categoryTa: 'காணாமல் போனவை',
-    titleEn: 'Will the misplaced / lost valuable item be found?',
-    titleTa: 'தொலைந்துபோன நகை அல்லது ஆவணங்கள் மீண்டும் கிடைக்குமா?',
-    house: 4,
-    karaka: 'Moon',
-    karakaTa: 'சந்திரன்',
-    verdict: 'favorable',
-    successPct: 78,
-    conditionEn: 'Aarudam in fixed or movable sign; Moon with positive rays',
-    conditionTa: 'ஆருடம் சுப வீட்டில் உள்ளது, சந்திரன் 21 கதிர்களுடன் சுப தொடர்பு.',
-    explanationEn: 'Item is situated within the domestic premises towards the directional quadrant of Aarudam (North / East). Will be retrieved.',
-    explanationTa: 'பொருள் வீட்டின் உள்ளேயே பாதுகாப்பாக உள்ளது. ஆருட திசையை நோக்கித் தேடினால் நிச்சயம் கிடைக்கும்.'
-  },
-  {
-    id: 8,
-    category: 'travel',
-    categoryTa: 'பயணம் / வெளிநாடு',
-    titleEn: 'Will the planned foreign travel or relocation be successful?',
-    titleTa: 'வெளிநாட்டுப் பயணம் மற்றும் விசா காரியங்கள் கைகூடுமா?',
-    house: 9,
-    karaka: 'Rahu',
-    karakaTa: 'ராகு / சந்திரன்',
-    verdict: 'favorable',
-    successPct: 85,
-    conditionEn: '9th and 12th houses unafflicted, Aarudam in water/movable sign',
-    conditionTa: '9 மற்றும் 12-ஆம் பாவகங்கள் சுப நிலையில் உள்ளன.',
-    explanationEn: 'Travel sanctions and visa clearances are favored. Journey will be auspicious and yield profitable returns.',
-    explanationTa: 'பயணத்திற்கான ஏற்பாடுகள் தடையின்றி முடியும். வெளிநாட்டு பயணம் அனுகூலமாக அமையும்.'
-  },
-  {
-    id: 9,
-    category: 'court',
-    categoryTa: 'வழக்கு / வெற்றி',
-    titleEn: 'Will the court litigation or dispute conclude in my favor?',
-    titleTa: 'நீதிமன்ற வழக்கு அல்லது அரசு விவகாரங்கள் எனக்கு சாதகமாக அமையுமா?',
-    house: 6,
-    karaka: 'Mars',
-    karakaTa: 'செவ்வாய்',
-    verdict: 'favorable',
-    successPct: 70,
-    conditionEn: '6th lord weaker than Udhaya lord; Mars in Upachaya house',
-    conditionTa: 'எதிரி ஸ்தானாதிபதியை விட உதயாதிபதி அதிக பலத்துடன் உள்ளார்.',
-    explanationEn: 'Favorable settlement or verdict indicated through arbitration or legal victory.',
-    explanationTa: 'உதயாதிபதியின் பலத்தால் வழக்கின் இறுதித் தீர்ப்பு அல்லது சமரசம் உங்களுக்கு சாதகமாகும்.'
-  },
-  {
-    id: 10,
-    category: 'property',
-    categoryTa: 'சொத்து / பூமி',
-    titleEn: 'Is this an auspicious time to purchase land or real estate property?',
-    titleTa: 'நிலம் அல்லது வீடு வாங்குவதற்கு இது நல்ல நேரமா?',
-    house: 4,
-    karaka: 'Mars',
-    karakaTa: 'செவ்வாய் / சுக்கிரன்',
-    verdict: 'delayed',
-    successPct: 60,
-    conditionEn: '4th house aspected by Mars; verify encumbrance certificates',
-    conditionTa: '4-ஆம் பாவகத்தில் செவ்வாய் பார்வை; வில்லங்க சான்றிதழை சரிபார்க்கவும்.',
-    explanationEn: 'Property acquisition is viable, but thorough verification of legal title deeds is strongly urged due to minor delays.',
-    explanationTa: 'சொத்து வாங்குவது நன்மையே ஆயினும், பத்திரங்கள் மற்றும் வில்லங்கங்களை இருமுறை சரிபார்ப்பது உத்தமம்.'
-  }
-];
 
 // Helpers to pre-fill current date, time, and default location (Chennai) like in Kadikara Prasannam page
 const getInitialDate = () => {
@@ -387,16 +228,6 @@ export default function JamakolPrasannamPage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // Questions Filter & Search
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [activeFaq, setActiveFaq] = useState(null);
-
-  // Indicators filter, expander, and copy feedback state
-  const [indicatorFilter, setIndicatorFilter] = useState('all'); // 'all' | 'positive' | 'negative'
-  const [expandedIndicatorId, setExpandedIndicatorId] = useState(null);
-  const [indicatorCopied, setIndicatorCopied] = useState(false);
-
   // Perform Calculation
   const handleCalculate = async (customDate, customTime, customCity, customAyanamsa) => {
     const calcDate = customDate || inputDate;
@@ -512,18 +343,6 @@ export default function JamakolPrasannamPage() {
     }
   };
 
-  // Filter questions
-  const filteredQuestions = DEFAULT_QUESTIONS.filter((q) => {
-    const matchesCat = activeCategory === 'all' || q.category === activeCategory;
-    const kw = searchKeyword.toLowerCase().trim();
-    if (!kw) return matchesCat;
-    const matchesKw =
-      q.titleEn.toLowerCase().includes(kw) ||
-      q.titleTa.toLowerCase().includes(kw) ||
-      q.explanationEn.toLowerCase().includes(kw) ||
-      q.explanationTa.toLowerCase().includes(kw);
-    return matchesCat && matchesKw;
-  });
 
   const breadcrumbs = [
     { label: t('common:nav.home', currentLang === 'ta' ? 'முகப்பு' : 'Home'), link: '/' },
@@ -533,106 +352,6 @@ export default function JamakolPrasannamPage() {
 
   const jamam = chartData?.jamam || {};
   const pillars = chartData?.pillars || {};
-  const timing = chartData?.eventTiming || {};
-
-  // Dynamic Indicators calculation synthesized from current chartData & currentLang
-  const dynamicIndicators = useMemo(() => {
-    if (!chartData) return [];
-    return generateJamakkolIndicators(chartData, currentLang);
-  }, [chartData, currentLang]);
-
-  // Positive & caution (warning/negative) lists
-  const positiveIndicators = useMemo(() => {
-    return dynamicIndicators.filter((ind) => ind.type === 'positive');
-  }, [dynamicIndicators]);
-
-  const cautionIndicators = useMemo(() => {
-    return dynamicIndicators.filter((ind) => ind.type === 'negative' || ind.type === 'warning');
-  }, [dynamicIndicators]);
-
-  // Filtered indicators based on active tab
-  const filteredIndicators = useMemo(() => {
-    if (indicatorFilter === 'positive') return positiveIndicators;
-    if (indicatorFilter === 'negative') return cautionIndicators;
-    return dynamicIndicators;
-  }, [indicatorFilter, dynamicIndicators, positiveIndicators, cautionIndicators]);
-
-  // Overall Prasannam Auspicious Score & Verdict
-  const { scorePct, verdictTitle, verdictDesc, verdictColor, verdictBg } = useMemo(() => {
-    if (!dynamicIndicators || dynamicIndicators.length === 0) {
-      return { scorePct: 50, verdictTitle: '', verdictDesc: '', verdictColor: '#475569', verdictBg: '#f1f5f9' };
-    }
-    let totalScore = 0;
-    let maxPossible = 0;
-    dynamicIndicators.forEach((ind) => {
-      const weight = Math.abs(ind.weight || 1);
-      maxPossible += weight;
-      if (ind.type === 'positive') totalScore += weight;
-      else if (ind.type === 'warning') totalScore += weight * 0.4;
-      else totalScore -= weight * 0.2;
-    });
-    const pct = Math.max(15, Math.min(95, Math.round((Math.max(0, totalScore) / (maxPossible || 1)) * 100)));
-
-    let vTitle = '';
-    let vDesc = '';
-    let vColor = '#166534';
-    let vBg = '#f0fdf4';
-
-    if (pct >= 70) {
-      vTitle = currentLang === 'ta' ? 'அனுகூலமான சாதகமான சூழல் (சுப பிரசன்னம்)' : 'Highly Favorable & Auspicious Chart';
-      vDesc = currentLang === 'ta'
-        ? 'உதயம் மற்றும் ஆருட நிலைகள் வலுவாக உள்ளன; திட்டமிட்ட காரியங்களை நம்பிக்கையுடன் துவங்கலாம்.'
-        : 'Udhayam and Aarudam are well positioned; you can confidently proceed with your planned endeavor.';
-      vColor = '#15803d';
-      vBg = '#dcfce7';
-    } else if (pct >= 45) {
-      vTitle = currentLang === 'ta' ? 'மிதமான பலன் (முயற்சி மற்றும் விவேகம் தேவை)' : 'Moderate Outcome - Effort & Discretion Needed';
-      vDesc = currentLang === 'ta'
-        ? 'சில தாமதங்கள் மற்றும் ஆரம்ப இழுபறிகள் ஏற்படலாம். நிதானமாக ஆலோசித்து முடிவெடுப்பது நலம்.'
-        : 'Some initial friction or obstacles may arise. Careful planning and patience are advised.';
-      vColor = '#b45309';
-      vBg = '#fef3c7';
-    } else {
-      vTitle = currentLang === 'ta' ? 'தடைகள் அதிகம் (எச்சரிக்கையுடனும் கவனத்துடனும் செயல்படவும்)' : 'Obstacles & Delays Forewarned';
-      vDesc = currentLang === 'ta'
-        ? 'கவிப்பு அல்லது அசுபக் கிரகங்களின் நேரடி தாக்கம் உள்ளது. முக்கிய ஒப்பந்தங்கள் மற்றும் புதிய முயற்சிகளை ஒத்திவைப்பது நலம்.'
-        : 'Afflictions from Kavippu or malefic placements present. Defer high-stakes commitments.';
-      vColor = '#b91c1c';
-      vBg = '#fee2e2';
-    }
-
-    return { scorePct: pct, verdictTitle: vTitle, verdictDesc: vDesc, verdictColor: vColor, verdictBg: vBg };
-  }, [dynamicIndicators, currentLang]);
-
-  // Action: Copy Indicators & Findings to clipboard
-  const handleCopyIndicators = () => {
-    if (!dynamicIndicators || dynamicIndicators.length === 0) return;
-    const header = currentLang === 'ta'
-      ? `ஜாமக்கோள் பிரசன்னக் குறிப்புகள் (${chartData?.metadata?.displayDateTimeStr || ''} - ${inputPlace || selectedCity?.name || 'Chennai'})`
-      : `Jamakkol Prasannam Indicators (${chartData?.metadata?.displayDateTimeStr || ''} - ${inputPlace || selectedCity?.name || 'Chennai'})`;
-    
-    const verdictLine = `${currentLang === 'ta' ? 'ஒட்டுமொத்த கணிப்பு' : 'Overall Verdict'}: ${scorePct}% - ${verdictTitle}`;
-    
-    const lines = dynamicIndicators.map((ind, i) => {
-      return `${i + 1}. [${ind.symbol}] ${ind.title}\n   ${ind.desc}\n   (${currentLang === 'ta' ? 'காரணம்' : 'Cause'}: ${ind.rationale})`;
-    });
-
-    const fullText = `${header}\n${verdictLine}\n\n` + lines.join('\n\n');
-    navigator.clipboard?.writeText(fullText).then(() => {
-      setIndicatorCopied(true);
-      setTimeout(() => setIndicatorCopied(false), 2500);
-    }).catch(() => {});
-  };
-
-  // Action: Refresh for live current minute
-  const handleRefreshIndicators = () => {
-    const now = new Date();
-    const curDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const curTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-    setInputDate(curDate);
-    setInputTime(curTime);
-    handleCalculate(curDate, curTime);
-  };
 
   return (
     <div className="jamakol-container">
@@ -902,156 +621,31 @@ export default function JamakolPrasannamPage() {
         lang={currentLang}
       />
 
+      {/* Planetary Status in Pillars & Pillar Lords (புள்ளி & அதிபதி நிலைகள்) */}
+      <JamakolPlanetaryStatusTables
+        chartData={chartData}
+        lang={currentLang}
+      />
+
+      {/* Current Prasannam's Rasi & Planet Rays Table (தற்போதைய பிரசன்னத்தின் ராசி மற்றும் கிரக கதிர்கள்) */}
+      <JamakolRaysTable
+        chartData={chartData}
+        lang={currentLang}
+      />
+
+      {/* Gochara, Jama & Prasanna Sphutas Tables (கோச்சாரம், ஜாமம், பிரசன்ன ஸ்புடங்கள்) */}
+      <JamakolPositionsAndSphutasTables
+        chartData={chartData}
+        lang={currentLang}
+      />
+
       {/* Dynamic & Workable Prasannam Indicators & Verdict Section */}
-      <div className="jk-indicators-section">
-        {/* Header with Title and Workable Actions */}
-        <div className="jk-indicators-header">
-          <div className="jk-ind-title-group">
-            <span className="jk-ind-title-icon">🔍</span>
-            <div>
-              <h3 className="jk-ind-main-title">
-                {currentLang === 'ta' ? 'பிரசன்னக் குறிப்புகள் & சுப/அசுப அறிகுறிகள்' : 'Prasannam Indicators & Observations'}
-              </h3>
-              <p className="jk-ind-subtitle">
-                {currentLang === 'ta'
-                  ? 'உதயம், ஆருடம், கவிப்பு மற்றும் 8 ஜாமக் கிரகங்களின் தற்போதைய நிலையின் நேரடி ஜோதிட ஆய்வு.'
-                  : 'Live horary diagnosis synthesized from Udhayam, Aarudam, Kavippu, and Jama Graha dynamics.'}
-              </p>
-            </div>
-          </div>
-
-          <div className="jk-ind-actions">
-            <button
-              type="button"
-              className="jk-ind-action-btn jk-btn-refresh"
-              onClick={handleRefreshIndicators}
-              title={currentLang === 'ta' ? 'தற்போதைய நேரத்திற்குப் புதுப்பி' : 'Refresh for current live time'}
-            >
-              <span className="jk-spin-icon">🔄</span>
-              <span>{currentLang === 'ta' ? 'இப்போது புதுப்பி' : 'Refresh Now'}</span>
-            </button>
-            <button
-              type="button"
-              className={`jk-ind-action-btn jk-btn-copy ${indicatorCopied ? 'copied' : ''}`}
-              onClick={handleCopyIndicators}
-              title={currentLang === 'ta' ? 'குறிப்புகளை நகலெடு' : 'Copy indicators to clipboard'}
-            >
-              <span>{indicatorCopied ? '✓' : '📋'}</span>
-              <span>{indicatorCopied ? (currentLang === 'ta' ? 'நகலெடுக்கப்பட்டது!' : 'Copied!') : (currentLang === 'ta' ? 'குறிப்புகளை நகலெடு' : 'Copy Notes')}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Verdict & Score Banner */}
-        <div className="jk-verdict-banner" style={{ background: verdictBg, borderColor: verdictColor }}>
-          <div className="jk-verdict-content">
-            <div className="jk-verdict-score-box">
-              <span className="jk-verdict-score-num" style={{ color: verdictColor }}>{scorePct}%</span>
-              <span className="jk-verdict-score-lbl">{currentLang === 'ta' ? 'சாதக சதவீதம்' : 'Favorable Score'}</span>
-            </div>
-            <div className="jk-verdict-text-box">
-              <div className="jk-verdict-headline" style={{ color: verdictColor }}>
-                <span>{scorePct >= 70 ? '🌟' : scorePct >= 45 ? '⚖️' : '⚠️'}</span>
-                <span>{verdictTitle}</span>
-              </div>
-              <p className="jk-verdict-desc">{verdictDesc}</p>
-              {/* Progress bar */}
-              <div className="jk-verdict-meter-track">
-                <div
-                  className="jk-verdict-meter-fill"
-                  style={{
-                    width: `${scorePct}%`,
-                    background: scorePct >= 70 ? 'linear-gradient(90deg, #22c55e, #16a34a)' : scorePct >= 45 ? 'linear-gradient(90deg, #f59e0b, #d97706)' : 'linear-gradient(90deg, #ef4444, #dc2626)'
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Filter Bar */}
-        <div className="jk-ind-filter-bar">
-          <div className="jk-ind-tabs">
-            <button
-              type="button"
-              className={`jk-ind-tab ${indicatorFilter === 'all' ? 'active' : ''}`}
-              onClick={() => setIndicatorFilter('all')}
-            >
-              <span>{currentLang === 'ta' ? 'அனைத்தும்' : 'All'}</span>
-              <span className="jk-ind-tab-badge">{dynamicIndicators.length}</span>
-            </button>
-            <button
-              type="button"
-              className={`jk-ind-tab tab-positive ${indicatorFilter === 'positive' ? 'active' : ''}`}
-              onClick={() => setIndicatorFilter('positive')}
-            >
-              <span>✅ {currentLang === 'ta' ? 'சுப அறிகுறிகள்' : 'Auspicious'}</span>
-              <span className="jk-ind-tab-badge positive">{positiveIndicators.length}</span>
-            </button>
-            <button
-              type="button"
-              className={`jk-ind-tab tab-caution ${indicatorFilter === 'negative' ? 'active' : ''}`}
-              onClick={() => setIndicatorFilter('negative')}
-            >
-              <span>⚠️ {currentLang === 'ta' ? 'எச்சரிக்கைகள் & தடைகள்' : 'Cautions & Obstacles'}</span>
-              <span className="jk-ind-tab-badge caution">{cautionIndicators.length}</span>
-            </button>
-          </div>
-          <span className="jk-ind-hint">
-            {currentLang === 'ta' ? 'காரணம் அறிய கார்டை கிளிக் செய்யவும்' : 'Click card to view astrological rationale'}
-          </span>
-        </div>
-
-        {/* Dynamic Cards Grid */}
-        <div className="jk-ind-cards-grid">
-          {filteredIndicators.map((ind, i) => {
-            const isExpanded = expandedIndicatorId === (ind.id || i);
-            const isPos = ind.type === 'positive';
-            const isWarn = ind.type === 'warning';
-            const cardClass = isPos ? 'pos' : isWarn ? 'warn' : 'neg';
-
-            return (
-              <div
-                key={ind.id || i}
-                className={`jk-indicator-card ${cardClass} ${isExpanded ? 'expanded' : ''}`}
-                onClick={() => setExpandedIndicatorId(isExpanded ? null : (ind.id || i))}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setExpandedIndicatorId(isExpanded ? null : (ind.id || i));
-                  }
-                }}
-              >
-                <div className="jk-ind-card-main">
-                  <div className="jk-ind-icon-wrap">{ind.symbol}</div>
-                  <div className="jk-ind-body">
-                    <div className="jk-ind-top-row">
-                      <span className="jk-ind-category-tag">{ind.categoryLabel || ind.category}</span>
-                      <span className="jk-ind-toggle-icon">
-                        {isExpanded ? (currentLang === 'ta' ? '▲ சுருக்கு' : '▲ Less') : (currentLang === 'ta' ? '▼ காரணம்' : '▼ More')}
-                      </span>
-                    </div>
-                    <div className="jk-ind-card-title">{ind.title}</div>
-                    {isExpanded && (
-                      <div className="jk-ind-expanded-content">
-                        {ind.desc && <p className="jk-ind-expanded-desc">{ind.desc}</p>}
-                        {ind.rationale && (
-                          <div className="jk-ind-rationale-box">
-                            <strong>{currentLang === 'ta' ? 'ஜோதிடக் காரணம்:' : 'Astrological Rationale:'}</strong>{' '}
-                            <span>{ind.rationale}</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <JamakolIndicatorsSection
+        chartData={chartData}
+        lang={currentLang}
+        cityName={inputPlace || selectedCity.name || 'Chennai'}
+        onRefreshLiveTime={handleSetNow}
+      />
 
       {/* 3 Pillars Summary (Udhayam, Aarudam, Kavippu) */}
       <div className="jamakol-summary-grid">
@@ -1165,237 +759,20 @@ export default function JamakolPrasannamPage() {
       </div>
 
       {/* Sambhava Kala Nirnayam (Event Timing / கால நிர்ணயம்) */}
-      <div className="jk-timing-card">
-        <div className="jk-timing-header">
-          <span>⏳</span>
-          <h3>
-            {currentLang === 'ta' ? 'சம்பவ கால நிர்ணயம் (Event Timing via Moon Rays)' : 'Event Timing (Sambhava Kala Nirnayam)'}
-          </h3>
-        </div>
-        <p style={{ margin: '0 0 1rem 0', fontSize: '0.88rem', color: '#78350f' }}>
-          {currentLang === 'ta'
-            ? 'சந்திரனின் 21 கதிர்கள் அடிப்படையில் ஆரூடம் மற்றும் உதயத்தின் இடைவெளி கொண்டு காரியம் எப்போது நிறைவேறும் என்பதைக் கணிக்கும் பாரம்பரிய முறை.'
-            : "Classical temporal prognosis synthesized using the Moon's 21 Rays applied across the sign interval between Udhayam and Aarudam."}
-        </p>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
-          <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid #fed7aa' }}>
-            <div style={{ fontSize: '0.75rem', color: '#9a3412', fontWeight: 600, textTransform: 'uppercase' }}>
-              {currentLang === 'ta' ? 'உடனடி பலன்' : 'Immediate Window'}
-            </div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#431407', marginTop: '0.2rem' }}>
-              {currentLang === 'ta' ? timing.immediate?.textTa : timing.immediate?.textEn || '231 நிமிடங்கள் (இன்றே)'}
-            </div>
-          </div>
-
-          <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid #fed7aa' }}>
-            <div style={{ fontSize: '0.75rem', color: '#9a3412', fontWeight: 600, textTransform: 'uppercase' }}>
-              {currentLang === 'ta' ? 'குறுகிய கால பலன்' : 'Short-Term Window'}
-            </div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#431407', marginTop: '0.2rem' }}>
-              {currentLang === 'ta' ? timing.short?.textTa : timing.short?.textEn || '23 மணி நேரம்'}
-            </div>
-          </div>
-
-          <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid #fed7aa' }}>
-            <div style={{ fontSize: '0.75rem', color: '#9a3412', fontWeight: 600, textTransform: 'uppercase' }}>
-              {currentLang === 'ta' ? 'நடுத்தர கால பலன்' : 'Medium-Term Window'}
-            </div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#431407', marginTop: '0.2rem' }}>
-              {currentLang === 'ta' ? timing.medium?.textTa : timing.medium?.textEn || '23 நாட்கள்'}
-            </div>
-          </div>
-        </div>
-      </div>
+      <JamakolTimingSection
+        timing={chartData?.eventTiming}
+        lang={currentLang}
+      />
 
       {/* 70+ Questions Advisor Section */}
-      <div className="jk-questions-section">
-        <div className="jk-questions-header">
-          <h3>
-            <span>📋</span> {currentLang === 'ta' ? '70+ பிரசன்ன கேள்விகள் மற்றும் உடனடி தீர்ப்புகள்' : '70+ Classical Questions & Instant Verdicts'}
-          </h3>
-          <p style={{ margin: 0, fontSize: '0.88rem', color: '#78716c' }}>
-            {currentLang === 'ta'
-              ? 'உங்கள் கேள்விக்கான துறையைத் தேர்ந்தெடுத்து, தற்போதைய ஜாமக்கோள் கிரக அமைப்புகளின் அடிப்படையிலான உடனடி பலனைக் காண்க.'
-              : 'Select your inquiry category to inspect automated classical verdicts synthesized against the active Jamakkol chart.'}
-          </p>
-        </div>
-
-        {/* Category Pills & Search */}
-        <div className="jk-questions-filter-row">
-          <input
-            type="text"
-            className="jk-search-input"
-            placeholder={currentLang === 'ta' ? 'கேள்வியைத் தேடவும் (எ.கா: திருமணம், வேலை, பணம்)...' : 'Search question (e.g. marriage, job, travel)...'}
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-          />
-
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('all')}
-          >
-            {currentLang === 'ta' ? 'அனைத்தும் (All)' : 'All Questions'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'marriage' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('marriage')}
-          >
-            {currentLang === 'ta' ? '💍 திருமணம்' : 'Marriage'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'career' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('career')}
-          >
-            {currentLang === 'ta' ? '💼 தொழில் / வேலை' : 'Career / Job'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'finance' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('finance')}
-          >
-            {currentLang === 'ta' ? '💰 தனம் / பணம்' : 'Finance'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'health' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('health')}
-          >
-            {currentLang === 'ta' ? '🩺 உடல்நலம்' : 'Health'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'lost_items' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('lost_items')}
-          >
-            {currentLang === 'ta' ? '🔑 காணாமல் போனவை' : 'Lost Items'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'travel' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('travel')}
-          >
-            {currentLang === 'ta' ? '✈️ பயணம்' : 'Travel'}
-          </button>
-          <button
-            type="button"
-            className={`jk-category-pill ${activeCategory === 'court' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('court')}
-          >
-            {currentLang === 'ta' ? '⚖️ வழக்கு' : 'Litigation'}
-          </button>
-        </div>
-
-        {/* Questions Grid */}
-        <div className="jk-questions-grid">
-          {filteredQuestions.map((q) => {
-            const verdictCls =
-              q.verdict === 'favorable'
-                ? 'jk-verdict-favorable'
-                : q.verdict === 'unfavorable'
-                ? 'jk-verdict-unfavorable'
-                : q.verdict === 'delayed'
-                ? 'jk-verdict-delayed'
-                : 'jk-verdict-neutral';
-
-            const verdictText =
-              q.verdict === 'favorable'
-                ? currentLang === 'ta' ? 'சாதகம் (Favorable)' : 'Favorable'
-                : q.verdict === 'unfavorable'
-                ? currentLang === 'ta' ? 'பாதகம் (Unfavorable)' : 'Unfavorable'
-                : q.verdict === 'delayed'
-                ? currentLang === 'ta' ? 'தாமதம் (Delayed)' : 'Delayed'
-                : currentLang === 'ta' ? 'மத்திமம் (Neutral)' : 'Neutral';
-
-            return (
-              <div key={q.id} className="jk-question-card">
-                <div>
-                  <div className="jk-q-top">
-                    <span className="jk-q-number">Q#{q.id}</span>
-                    <span className={`jk-verdict-tag ${verdictCls}`}>{verdictText}</span>
-                  </div>
-                  <h4 className="jk-q-title">
-                    {currentLang === 'ta' ? q.titleTa : q.titleEn}
-                  </h4>
-                  <div className="jk-q-condition">
-                    <strong>{currentLang === 'ta' ? 'காரக கிரகம்: ' : 'Significator: '}</strong>
-                    {currentLang === 'ta' ? q.karakaTa : q.karaka} (பாவம் {q.house})
-                  </div>
-                  <div className="jk-q-explanation">
-                    {currentLang === 'ta' ? q.explanationTa : q.explanationEn}
-                  </div>
-                </div>
-                <div style={{ marginTop: '0.75rem', paddingTop: '0.5rem', borderTop: '1px dashed #e7e5e4', display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#78716c' }}>
-                  <span>{currentLang === 'ta' ? 'வெற்றி சாத்தியக்கூறு' : 'Probability'}:</span>
-                  <strong style={{ color: q.successPct > 70 ? '#166534' : q.successPct > 50 ? '#b45309' : '#991b1b' }}>
-                    {q.successPct}%
-                  </strong>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <JamakolQuestionsSection
+        lang={currentLang}
+      />
 
       {/* Classical Principles & FAQs Accordion */}
-      <div className="jk-faq-section">
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#431407', margin: '0 0 1rem 0' }}>
-          <span>📖</span> {currentLang === 'ta' ? 'ஜாமக்கோள் பிரசன்ன சாஸ்திர ரகசியங்கள்' : 'Classical Jamakkol Principles & FAQs'}
-        </h3>
-
-        {[
-          {
-            id: 'faq1',
-            qEn: 'Who originated the Jamakkol Prasannam system?',
-            qTa: 'ஜாமக்கோள் பிரசன்ன முறையை உருவாக்கியவர் யார்?',
-            aEn: 'The system was codified by the revered Tamil astrological sage Sri Upendra Achariyar. It synthesizes instantaneous planetary transits with fixed 8 Jamam diurnal divisions for infallible day-to-day horary predictions.',
-            aTa: 'இம்முறையை ஸ்ரீ உபேந்திர ஆச்சாரியார் அருளிச்செய்தார். பகல் 8 ஜாமங்கள், இரவு 8 ஜாமங்கள் என பிரித்து, கோச்சார கிரகங்களுடன் 8 ஜாமக் கிரகங்களை இணைத்து மிகத் துல்லியமாக பலன் சொல்லும் முறை இதுவாகும்.'
-          },
-          {
-            id: 'faq2',
-            qEn: 'Why are the 4 fixed signs (Taurus, Leo, Scorpio, Aquarius) excluded from outer Jama Grahas?',
-            qTa: 'ஜாமக் கிரகங்கள் சுழற்சியில் 4 ஸ்திர ராசிகள் (ரிஷபம், சிம்மம், விருச்சிகம், கும்பம்) சேர்க்கப்படாதது ஏன்?',
-            aEn: 'Classical Jamakkol assigns outer rotating grahas exclusively to the 4 cardinal (Chara) and 4 dual (Dwiswabhava) signs. Fixed (Sthira) signs represent immutable permanence and are preserved as the fixed cardinal pivots.',
-            aTa: 'ஜாமக் கிரகங்கள் சரம் மற்றும் உபய ராசிகளான 8 வீடுகளில் மட்டுமே வலம் வருகின்றன. ஸ்திர ராசிகள் நிலைத்தன்மை கொண்டவையாக இருப்பதால் அவை சுழற்சியில் சேர்க்கப்படாமல் உள்வட்டக் கோச்சாரத்திற்கு மட்டுமே பயன்படுத்தப்படுகின்றன.'
-          },
-          {
-            id: 'faq3',
-            qEn: 'What is the significance of Kavippu (கவிப்பு)?',
-            qTa: 'கவிப்பு என்பதன் முக்கியத்துவம் என்ன?',
-            aEn: 'Kavippu literally translates to an invisible covering or eclipse shroud. Any planet, house, or significator falling under the degree of Kavippu suffers temporary paralysis or hidden obstacles. Never inaugurate discussions when the querent significator is in Kavippu.',
-            aTa: 'கவிப்பு என்பது இருள் அல்லது கவிந்து மூடுவது ஆகும். எந்த ஒரு கிரகமோ அல்லது பாவகமோ கவிப்பில் சிக்கினால் அந்த காரியம் தற்காலிக முடக்கத்தை அல்லது மறைமுகத் தடையைச் சந்திக்கும். பேசப்போகும் காரக கிரகம் கவிப்பில் இருக்கும்போது உடன்படிக்கைகள் செய்யக்கூடாது.'
-          },
-          {
-            id: 'faq4',
-            qEn: 'How does the Sambhava Kala Nirnayam determine timing?',
-            qTa: 'சம்பவ கால நிர்ணயம் எவ்வாறு கணக்கிடப்படுகிறது?',
-            aEn: "Timing is derived using the Moon's 21 Ray Matrix multiplied across the house distance between Udhayam and Aarudam. Depending on whether signs are movable, fixed, or dual, the units resolve into minutes, hours, days, or months.",
-            aTa: 'சந்திரனின் 21 கதிர்களைக் கொண்டு உதயம் முதல் ஆருடம் வரையிலான இடைவெளியைப் பெருக்கி, அது சரம், ஸ்திரம், உபய ராசிகளுக்கு ஏற்ப நிமிடங்கள், மணி நேரங்கள், நாட்கள் அல்லது மாதங்களாக பலன் தரும் காலத்தை அறியலாம்.'
-          }
-        ].map((item) => {
-          const isOpen = activeFaq === item.id;
-          return (
-            <div key={item.id} className="jk-faq-item">
-              <button
-                type="button"
-                className="jk-faq-btn"
-                onClick={() => setActiveFaq(isOpen ? null : item.id)}
-              >
-                <span>{currentLang === 'ta' ? item.qTa : item.qEn}</span>
-                <span style={{ fontSize: '1.2rem', color: '#b45309' }}>{isOpen ? '−' : '+'}</span>
-              </button>
-              {isOpen && (
-                <div className="jk-faq-ans">
-                  {currentLang === 'ta' ? item.aTa : item.aEn}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      <JamakolFaqSection
+        lang={currentLang}
+      />
     </div>
   );
 }

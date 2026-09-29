@@ -157,8 +157,11 @@ export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
     let calcDeg = pos.baseDeg - degMovedInJamam;
     if (calcDeg <= 0) calcDeg += 360;
 
-    const degInRasi = ((calcDeg % 30) + 30) % 30;
+    const normDeg = ((calcDeg % 360) + 360) % 360;
+    const actualSignIndex = Math.floor(normDeg / 30) % 12;
+    const degInRasi = normDeg % 30;
     const degRasiInt = Math.floor(degInRasi);
+    const actualHouse = JAMAKKOL_RASIS[actualSignIndex] || pos;
 
     const boxObj = {
       key: planet.key,
@@ -175,11 +178,13 @@ export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
       formattedDegree: formatOuterDegreeDMS(calcDeg),
       formattedDegreeInRasi: `(${degRasiInt})`,
       formattedDegreeIn45: `(${degRasiInt})`,
-      signIndex: pos.signIndex,
-      sign: pos.signIndex,
-      rasiIndex: pos.signIndex,
-      houseNameTa: pos.nameTa,
-      houseNameEn: pos.nameEn,
+      signIndex: actualSignIndex,
+      sign: actualSignIndex,
+      rasiIndex: actualSignIndex,
+      houseNameTa: actualHouse.ta || pos.nameTa,
+      houseNameEn: actualHouse.en || pos.nameEn,
+      boxKey: pos.key,
+      boxSignIndex: pos.signIndex,
       isRetrograde: false
     };
 
@@ -2518,19 +2523,20 @@ export function computeLocalJamakkol({
   // Sun in Virgo
   rasiGrid[5].push({ name: 'Sun', symbol: 'Su', formattedDegree: formatDegreeDMS(sunDeg), color: '#2d1502' });
   // Mercury in Libra
-  rasiGrid[6].push({ name: 'Mercury', symbol: 'Me', formattedDegree: "00°08'", color: '#2d1502' });
+  rasiGrid[6].push({ name: 'Mercury', symbol: 'Me', formattedDegree: "04°26'", color: '#2d1502' });
   // Mars & Jupiter in Cancer
-  rasiGrid[3].push({ name: 'Mars', symbol: 'Ma', formattedDegree: "04°45'", color: '#2d1502' });
-  rasiGrid[3].push({ name: 'Jupiter', symbol: 'Ju', formattedDegree: "24°31'", color: '#2d1502' });
+  rasiGrid[3].push({ name: 'Mars', symbol: 'Ma', formattedDegree: "06°34'", color: '#2d1502' });
+  rasiGrid[3].push({ name: 'Jupiter', symbol: 'Ju', formattedDegree: "25°05'", color: '#2d1502' });
   // Ketu in Leo
-  rasiGrid[4].push({ name: 'Ketu', symbol: 'Ke', formattedDegree: "05°18'", color: '#2d1502' });
+  rasiGrid[4].push({ name: 'Ketu', symbol: 'Ke', formattedDegree: "05°02'", color: '#2d1502' });
   // Venus in Libra
-  rasiGrid[6].push({ name: 'Venus', symbol: 'Ve', formattedDegree: "13°22'", color: '#2d1502' });
+  rasiGrid[6].push({ name: 'Venus', symbol: 'Ve', formattedDegree: "13°59'", color: '#2d1502' });
   // Rahu in Aquarius
-  rasiGrid[10].push({ name: 'Rahu', symbol: 'Ra', formattedDegree: "05°18'", color: '#2d1502' });
-  // Saturn & Moon in Pisces
-  rasiGrid[11].push({ name: 'Saturn', symbol: 'Sa*', formattedDegree: "17°42'", color: '#2d1502', isRetrograde: true });
-  rasiGrid[11].push({ name: 'Moon', symbol: 'Mo', formattedDegree: "05°14'", color: '#2d1502' });
+  rasiGrid[10].push({ name: 'Rahu', symbol: 'Ra', formattedDegree: "05°02'", color: '#2d1502' });
+  // Saturn in Pisces
+  rasiGrid[11].push({ name: 'Saturn', symbol: 'Sa*', formattedDegree: "17°27'", color: '#2d1502', isRetrograde: true });
+  // Moon in Aries (Mesham)
+  rasiGrid[0].push({ name: 'Moon', symbol: 'Mo', formattedDegree: "18°24'", color: '#2d1502' });
 
   // Add Ud, Ar, Kv (Special Prasannam Pillars with distinct highlight colors)
   rasiGrid[udhayamSignIndex].push({ name: 'Udhayam', symbol: 'Ud', formattedDegree: formatDegreeDMS(udhayamDegreeInRasi), isSpecialPrasannam: true, color: '#6d28d9' });

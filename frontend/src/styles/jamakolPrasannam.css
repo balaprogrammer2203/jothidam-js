@@ -2906,3 +2906,439 @@ body.dark-theme .jk-field-group label,
   }
 }
 
+/* --------------------------------------------------------------------------
+   Planetary Status in Pillars & Pillar Lords Tables (புள்ளி & அதிபதி நிலைகள்)
+   Matches exact screenshot layout: Deep terracotta header, clean borders,
+   red status text in Table 1, green status text in Table 2.
+   -------------------------------------------------------------------------- */
+.jk-planetary-status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.jk-status-card {
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(90, 50, 10, 0.05);
+}
+
+.jk-status-card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #3e1806;
+  letter-spacing: -0.01em;
+}
+
+.jk-status-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e7ded8;
+  background: #ffffff;
+}
+
+.jk-status-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.92rem;
+  min-width: 580px;
+}
+
+.jk-status-table thead tr {
+  background-color: #6c2205;
+}
+
+.jk-status-table th {
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.8rem 0.6rem;
+  text-align: center;
+  border: 1px solid #5a1c06;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.jk-status-table tbody tr {
+  background-color: #ffffff;
+  transition: background-color 0.15s ease;
+}
+
+.jk-status-table tbody tr:hover {
+  background-color: #fffaf5;
+}
+
+.jk-status-table td {
+  padding: 0.75rem 0.6rem;
+  border: 1px solid #f0e4dc;
+  color: #292524;
+  font-weight: 600;
+  text-align: center;
+}
+
+.jk-cell-pillar {
+  color: #431407;
+  font-weight: 700;
+}
+
+.jk-cell-planet {
+  color: #1c1917;
+  font-weight: 600;
+}
+
+.jk-cell-sign {
+  color: #44403c;
+  font-weight: 600;
+}
+
+.jk-cell-type {
+  color: #57534e;
+  font-weight: 500;
+}
+
+/* Table 1 Dignity: Red accent matching screenshot */
+.jk-cell-dignity-t1 {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.jk-cell-dignity-t1.dash {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* Table 2 Dignity: Green accent matching screenshot */
+.jk-cell-dignity-t2 {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.jk-cell-dignity-t2.dash {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .jk-status-card {
+    background: #1c1917;
+    border-color: #7c2d12;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .jk-status-card-title {
+    color: #fb923c;
+  }
+
+  .jk-status-table-wrap {
+    border-color: #44403c;
+    background: #1c1917;
+  }
+
+  .jk-status-table thead tr {
+    background-color: #451a03;
+  }
+
+  .jk-status-table th {
+    border-color: #292524;
+    color: #fed7aa;
+  }
+
+  .jk-status-table tbody tr {
+    background-color: #1c1917;
+  }
+
+  .jk-status-table tbody tr:hover {
+    background-color: #292524;
+  }
+
+  .jk-status-table td {
+    border-color: #292524;
+    color: #e7e5e4;
+  }
+
+  .jk-cell-pillar {
+    color: #fdba74;
+  }
+
+  .jk-cell-planet {
+    color: #f5f5f4;
+  }
+
+  .jk-cell-sign {
+    color: #d6d3d1;
+  }
+
+  .jk-cell-type {
+    color: #a8a29e;
+  }
+
+  .jk-cell-dignity-t1 {
+    color: #f87171;
+  }
+
+  .jk-cell-dignity-t1.dash {
+    color: #ef4444;
+  }
+
+  .jk-cell-dignity-t2 {
+    color: #4ade80;
+  }
+
+  .jk-cell-dignity-t2.dash {
+    color: #22c55e;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Gochara, Jama, and Prasanna Sphutas Tables (கோச்சாரம், ஜாமம், பிரசன்ன ஸ்புடங்கள்)
+   Matches exact reference screenshots: Red (வ) retrograde text, clean centered cells
+   -------------------------------------------------------------------------- */
+.jk-positions-sphutas-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.jk-cell-planet-title {
+  color: #292524;
+  font-weight: 700;
+  text-align: center;
+}
+
+.jk-cell-degree {
+  color: #44403c;
+  font-weight: 600;
+  text-align: center;
+}
+
+.jk-cell-star {
+  color: #1c1917;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Red (வ) Retrograde indicator */
+.jk-retro-tag {
+  color: #dc2626;
+  font-weight: 700;
+  margin-left: 0.2rem;
+}
+
+/* Dignity column for Gochara & Jama tables (நிலைகள்) */
+.jk-cell-dignity {
+  text-align: center;
+  font-weight: 700;
+}
+
+.jk-dignity-dash {
+  color: #15803d; /* Vibrant green dash matching screenshot */
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.jk-dignity-text {
+  color: #292524; /* Bold classical text: நீசம், ஆட்சி, உச்சம் */
+  font-weight: 700;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .jk-cell-planet-title {
+    color: #f5f5f4;
+  }
+
+  .jk-cell-degree {
+    color: #d6d3d1;
+  }
+
+  .jk-cell-star {
+    color: #e7e5e4;
+  }
+
+  .jk-retro-tag {
+    color: #ef4444;
+  }
+
+  .jk-dignity-dash {
+    color: #4ade80;
+  }
+
+  .jk-dignity-text {
+    color: #f5f5f4;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Special Notes Box (★ சிறப்புக் குறிப்புகள்)
+   Matches exact reference screenshot: warm cream bg, orange left bar, purple/green notes
+   -------------------------------------------------------------------------- */
+.jk-special-notes-box {
+  margin-top: 1.25rem;
+  background-color: #fffbf2;
+  border: 1px solid #fed7aa;
+  border-left: 4.5px solid #ea580c;
+  border-radius: 4px;
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(234, 88, 12, 0.05);
+}
+
+.jk-special-notes-title {
+  color: #ea580c;
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.jk-special-notes-star {
+  color: #ea580c;
+  font-size: 1.05rem;
+}
+
+.jk-special-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.jk-note-item {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.jk-note-bullet {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.jk-note-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* Purple Parivartana row */
+.jk-note-parivartana {
+  color: #7e22ce;
+}
+
+/* Green Exalted Jama planets row */
+.jk-note-exalted {
+  color: #15803d;
+}
+
+/* Red Debilitated Jama planets row */
+.jk-note-debilitated {
+  color: #dc2626;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .jk-special-notes-box {
+    background-color: #27170c;
+    border-color: #7c2d12;
+    border-left-color: #f97316;
+  }
+
+  .jk-special-notes-title,
+  .jk-special-notes-star {
+    color: #fb923c;
+  }
+
+  .jk-note-parivartana {
+    color: #c084fc;
+  }
+
+  .jk-note-exalted {
+    color: #4ade80;
+  }
+
+  .jk-note-debilitated {
+    color: #f87171;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Current Prasannam's Rasi & Planet Rays Table (ராசி மற்றும் கிரக கதிர்கள்)
+   Matches exact reference screenshot & jamakkolprasannam.com styling
+   -------------------------------------------------------------------------- */
+.jk-rays-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.jk-status-table tbody tr.jk-ray-highlight-row {
+  background-color: #fff3e0 !important;
+}
+
+.jk-status-table tbody tr.jk-ray-highlight-row td {
+  color: #6e2c00 !important;
+}
+
+.jk-status-table tbody tr.jk-ray-highlight-row .jk-cell-planet-title {
+  color: #6e2c00 !important;
+}
+
+.jk-status-table tbody tr.jk-ray-highlight-row .jk-cell-sign {
+  color: #a16207 !important;
+  font-weight: 600;
+}
+
+.jk-status-table tbody tr.jk-ray-highlight-row:hover {
+  background-color: #ffedd5 !important;
+}
+
+.jk-ray-occ-text {
+  color: #6e2c00;
+  font-weight: 700;
+}
+
+.jk-cell-ray-number {
+  color: #1c1917;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Dark mode support for Rays Table */
+@media (prefers-color-scheme: dark) {
+  .jk-status-table tbody tr.jk-ray-highlight-row {
+    background-color: rgba(245, 158, 11, 0.16) !important;
+  }
+
+  .jk-status-table tbody tr.jk-ray-highlight-row td {
+    color: #fde68a !important;
+  }
+
+  .jk-status-table tbody tr.jk-ray-highlight-row .jk-cell-planet-title {
+    color: #fde68a !important;
+  }
+
+  .jk-status-table tbody tr.jk-ray-highlight-row .jk-cell-sign {
+    color: #fef08a !important;
+  }
+
+  .jk-ray-occ-text {
+    color: #fde68a;
+  }
+
+  .jk-cell-ray-number {
+    color: #f5f5f4;
+  }
+}
