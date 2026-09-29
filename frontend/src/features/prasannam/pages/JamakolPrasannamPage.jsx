@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '../../../components/common/SEOHead';
 import Breadcrumbs from '../../../components/common/Breadcrumbs';
 import JamakolChartCard from '../components/JamakolChartCard';
+import JamakolKeyNotesCard from '../components/JamakolKeyNotesCard';
 import jamakkolService from '../services/jamakkol.service';
 import horoscopeService from '../../horoscope/services/horoscope.service';
 import {
   computeLocalJamakkol,
+  generateJamakkolIndicators,
   PRESET_CITIES,
   AYANAMSA_OPTIONS,
   getLocalizedPlanetCode,
@@ -209,19 +211,55 @@ const DEFAULT_CITY = PRESET_CITIES.find((c) => c.name === 'Chennai') || PRESET_C
   }
 };
 
+const JAMAKOL_CITY_STORAGE_KEY = 'jothidam_jamakol_city';
+
+// Long-term storage helper: defaults to Chennai for first-time user, otherwise recalls user's selected city
+const getSavedCity = () => {
+  if (typeof window === 'undefined') return DEFAULT_CITY;
+  try {
+    const saved = localStorage.getItem(JAMAKOL_CITY_STORAGE_KEY) || localStorage.getItem('jothidam_user_city');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && parsed.name && typeof parsed.lat === 'number' && typeof parsed.lng === 'number') {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to read saved city preference:', e);
+  }
+  return DEFAULT_CITY;
+};
+
+// Store selected city long-term in localStorage for subsequent visits
+const saveCityPreference = (city) => {
+  if (typeof window === 'undefined' || !city || !city.name) return;
+  try {
+    const toSave = {
+      name: city.name,
+      lat: Number(city.lat),
+      lng: Number(city.lng),
+      names: city.names || { en: city.name, ta: city.name }
+    };
+    localStorage.setItem(JAMAKOL_CITY_STORAGE_KEY, JSON.stringify(toSave));
+    localStorage.setItem('jothidam_user_city', JSON.stringify(toSave));
+  } catch (e) {
+    console.warn('Failed to save city preference:', e);
+  }
+};
+
 export default function JamakolPrasannamPage() {
   const { t, i18n } = useTranslation(['astrology', 'common']);
   const currentLang = i18n.language || 'ta';
   const cityInputRef = useRef(null);
 
-  // Form Inputs - Pre-filled with current date, time, and Chennai location
+  // Form Inputs - Pre-filled with current date, time, and saved city (or Chennai default for first-time visitors)
   const [inputDate, setInputDate] = useState(getInitialDate);
   const [inputTime, setInputTime] = useState(getInitialTime);
-  const [selectedCity, setSelectedCity] = useState(DEFAULT_CITY);
-  const [inputPlace, setInputPlace] = useState('Chennai');
-  const [selectedPlaceName, setSelectedPlaceName] = useState('Chennai');
-  const [inputLat, setInputLat] = useState(13.0827);
-  const [inputLng, setInputLng] = useState(80.2707);
+  const [selectedCity, setSelectedCity] = useState(getSavedCity);
+  const [inputPlace, setInputPlace] = useState(() => getSavedCity().name);
+  const [selectedPlaceName, setSelectedPlaceName] = useState(() => getSavedCity().name);
+  const [inputLat, setInputLat] = useState(() => getSavedCity().lat);
+  const [inputLng, setInputLng] = useState(() => getSavedCity().lng);
   const [isSearchingPlace, setIsSearchingPlace] = useState(false);
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [isPlaceDropdownOpen, setIsPlaceDropdownOpen] = useState(false);
@@ -281,14 +319,15 @@ export default function JamakolPrasannamPage() {
     const cityName = item.city || item.description?.split(',')[0] || item.formattedAddress;
     setInputPlace(cityName);
     setSelectedPlaceName(cityName);
-    const newLat = item.lat !== undefined ? item.lat : inputLat;
-    const newLng = item.lng !== undefined ? item.lng : inputLng;
+    const newLat = item.lat !== undefined ? Number(item.lat) : inputLat;
+    const newLng = item.lng !== undefined ? Number(item.lng) : inputLng;
     if (item.lat !== undefined && item.lng !== undefined) {
-      setInputLat(item.lat);
-      setInputLng(item.lng);
+      setInputLat(newLat);
+      setInputLng(newLng);
     }
     const updatedCity = { name: cityName, lat: newLat, lng: newLng };
     setSelectedCity(updatedCity);
+    saveCityPreference(updatedCity);
     setIsPlaceDropdownOpen(false);
     setPlaceSuggestions([]);
     handleCalculate(inputDate, inputTime, updatedCity);
@@ -321,6 +360,7 @@ export default function JamakolPrasannamPage() {
         setSelectedPlaceName(detectedCity);
         const updatedCity = { name: detectedCity, lat, lng };
         setSelectedCity(updatedCity);
+        saveCityPreference(updatedCity);
         setIsDetectingLocation(false);
         handleCalculate(inputDate, inputTime, updatedCity);
       },
@@ -333,16 +373,17 @@ export default function JamakolPrasannamPage() {
     );
   };
 
-  // Chart & Calculation Data - Initialized with current date, time, and Chennai
-  const [chartData, setChartData] = useState(() =>
-    computeLocalJamakkol({
+  // Chart & Calculation Data - Initialized with current date, time, and saved or default Chennai
+  const [chartData, setChartData] = useState(() => {
+    const initCity = getSavedCity();
+    return computeLocalJamakkol({
       date: getInitialDate(),
       time: getInitialTime(),
-      placeName: DEFAULT_CITY.name,
-      latitude: DEFAULT_CITY.lat,
-      longitude: DEFAULT_CITY.lng
-    })
-  );
+      placeName: initCity.name,
+      latitude: initCity.lat,
+      longitude: initCity.lng
+    });
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -350,6 +391,11 @@ export default function JamakolPrasannamPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchKeyword, setSearchKeyword] = useState('');
   const [activeFaq, setActiveFaq] = useState(null);
+
+  // Indicators filter, expander, and copy feedback state
+  const [indicatorFilter, setIndicatorFilter] = useState('all'); // 'all' | 'positive' | 'negative'
+  const [expandedIndicatorId, setExpandedIndicatorId] = useState(null);
+  const [indicatorCopied, setIndicatorCopied] = useState(false);
 
   // Perform Calculation
   const handleCalculate = async (customDate, customTime, customCity, customAyanamsa) => {
@@ -365,7 +411,29 @@ export default function JamakolPrasannamPage() {
     } else if (timeParts.length === 3) {
       calcTime = `${timeParts[0].padStart(2, '0')}:${timeParts[1].padStart(2, '0')}:${timeParts[2].padStart(2, '0')}`;
     }
-    const city = customCity || { name: inputPlace || selectedCity.name, lat: inputLat, lng: inputLng };
+
+    let city = customCity;
+    if (!city) {
+      const match = PRESET_CITIES.find(
+        (c) => c.name.toLowerCase() === (inputPlace || '').trim().toLowerCase()
+      );
+      if (match) {
+        city = match;
+        setInputLat(match.lat);
+        setInputLng(match.lng);
+      } else {
+        city = {
+          name: inputPlace || selectedCity.name || 'Chennai',
+          lat: Number(inputLat),
+          lng: Number(inputLng)
+        };
+      }
+    }
+
+    if (city && city.name && !isNaN(city.lat) && !isNaN(city.lng)) {
+      saveCityPreference(city);
+    }
+
     const calcAyanamsa = customAyanamsa || ayanamsa;
 
     setIsLoading(true);
@@ -406,9 +474,10 @@ export default function JamakolPrasannamPage() {
     }
   };
 
-  // Pre-fill and trigger calculation with current date, time, and location on page load
+  // Pre-fill and trigger calculation with current date, time, and saved/default location on page load
   useEffect(() => {
-    handleCalculate(getInitialDate(), getInitialTime(), DEFAULT_CITY, ayanamsa);
+    const initCity = getSavedCity();
+    handleCalculate(getInitialDate(), getInitialTime(), initCity, ayanamsa);
   }, []);
 
   // Handle Ayanamsa Dropdown Change
@@ -465,7 +534,105 @@ export default function JamakolPrasannamPage() {
   const jamam = chartData?.jamam || {};
   const pillars = chartData?.pillars || {};
   const timing = chartData?.eventTiming || {};
-  const indicators = chartData?.indicators || [];
+
+  // Dynamic Indicators calculation synthesized from current chartData & currentLang
+  const dynamicIndicators = useMemo(() => {
+    if (!chartData) return [];
+    return generateJamakkolIndicators(chartData, currentLang);
+  }, [chartData, currentLang]);
+
+  // Positive & caution (warning/negative) lists
+  const positiveIndicators = useMemo(() => {
+    return dynamicIndicators.filter((ind) => ind.type === 'positive');
+  }, [dynamicIndicators]);
+
+  const cautionIndicators = useMemo(() => {
+    return dynamicIndicators.filter((ind) => ind.type === 'negative' || ind.type === 'warning');
+  }, [dynamicIndicators]);
+
+  // Filtered indicators based on active tab
+  const filteredIndicators = useMemo(() => {
+    if (indicatorFilter === 'positive') return positiveIndicators;
+    if (indicatorFilter === 'negative') return cautionIndicators;
+    return dynamicIndicators;
+  }, [indicatorFilter, dynamicIndicators, positiveIndicators, cautionIndicators]);
+
+  // Overall Prasannam Auspicious Score & Verdict
+  const { scorePct, verdictTitle, verdictDesc, verdictColor, verdictBg } = useMemo(() => {
+    if (!dynamicIndicators || dynamicIndicators.length === 0) {
+      return { scorePct: 50, verdictTitle: '', verdictDesc: '', verdictColor: '#475569', verdictBg: '#f1f5f9' };
+    }
+    let totalScore = 0;
+    let maxPossible = 0;
+    dynamicIndicators.forEach((ind) => {
+      const weight = Math.abs(ind.weight || 1);
+      maxPossible += weight;
+      if (ind.type === 'positive') totalScore += weight;
+      else if (ind.type === 'warning') totalScore += weight * 0.4;
+      else totalScore -= weight * 0.2;
+    });
+    const pct = Math.max(15, Math.min(95, Math.round((Math.max(0, totalScore) / (maxPossible || 1)) * 100)));
+
+    let vTitle = '';
+    let vDesc = '';
+    let vColor = '#166534';
+    let vBg = '#f0fdf4';
+
+    if (pct >= 70) {
+      vTitle = currentLang === 'ta' ? 'அனுகூலமான சாதகமான சூழல் (சுப பிரசன்னம்)' : 'Highly Favorable & Auspicious Chart';
+      vDesc = currentLang === 'ta'
+        ? 'உதயம் மற்றும் ஆருட நிலைகள் வலுவாக உள்ளன; திட்டமிட்ட காரியங்களை நம்பிக்கையுடன் துவங்கலாம்.'
+        : 'Udhayam and Aarudam are well positioned; you can confidently proceed with your planned endeavor.';
+      vColor = '#15803d';
+      vBg = '#dcfce7';
+    } else if (pct >= 45) {
+      vTitle = currentLang === 'ta' ? 'மிதமான பலன் (முயற்சி மற்றும் விவேகம் தேவை)' : 'Moderate Outcome - Effort & Discretion Needed';
+      vDesc = currentLang === 'ta'
+        ? 'சில தாமதங்கள் மற்றும் ஆரம்ப இழுபறிகள் ஏற்படலாம். நிதானமாக ஆலோசித்து முடிவெடுப்பது நலம்.'
+        : 'Some initial friction or obstacles may arise. Careful planning and patience are advised.';
+      vColor = '#b45309';
+      vBg = '#fef3c7';
+    } else {
+      vTitle = currentLang === 'ta' ? 'தடைகள் அதிகம் (எச்சரிக்கையுடனும் கவனத்துடனும் செயல்படவும்)' : 'Obstacles & Delays Forewarned';
+      vDesc = currentLang === 'ta'
+        ? 'கவிப்பு அல்லது அசுபக் கிரகங்களின் நேரடி தாக்கம் உள்ளது. முக்கிய ஒப்பந்தங்கள் மற்றும் புதிய முயற்சிகளை ஒத்திவைப்பது நலம்.'
+        : 'Afflictions from Kavippu or malefic placements present. Defer high-stakes commitments.';
+      vColor = '#b91c1c';
+      vBg = '#fee2e2';
+    }
+
+    return { scorePct: pct, verdictTitle: vTitle, verdictDesc: vDesc, verdictColor: vColor, verdictBg: vBg };
+  }, [dynamicIndicators, currentLang]);
+
+  // Action: Copy Indicators & Findings to clipboard
+  const handleCopyIndicators = () => {
+    if (!dynamicIndicators || dynamicIndicators.length === 0) return;
+    const header = currentLang === 'ta'
+      ? `ஜாமக்கோள் பிரசன்னக் குறிப்புகள் (${chartData?.metadata?.displayDateTimeStr || ''} - ${inputPlace || selectedCity?.name || 'Chennai'})`
+      : `Jamakkol Prasannam Indicators (${chartData?.metadata?.displayDateTimeStr || ''} - ${inputPlace || selectedCity?.name || 'Chennai'})`;
+    
+    const verdictLine = `${currentLang === 'ta' ? 'ஒட்டுமொத்த கணிப்பு' : 'Overall Verdict'}: ${scorePct}% - ${verdictTitle}`;
+    
+    const lines = dynamicIndicators.map((ind, i) => {
+      return `${i + 1}. [${ind.symbol}] ${ind.title}\n   ${ind.desc}\n   (${currentLang === 'ta' ? 'காரணம்' : 'Cause'}: ${ind.rationale})`;
+    });
+
+    const fullText = `${header}\n${verdictLine}\n\n` + lines.join('\n\n');
+    navigator.clipboard?.writeText(fullText).then(() => {
+      setIndicatorCopied(true);
+      setTimeout(() => setIndicatorCopied(false), 2500);
+    }).catch(() => {});
+  };
+
+  // Action: Refresh for live current minute
+  const handleRefreshIndicators = () => {
+    const now = new Date();
+    const curDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const curTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    setInputDate(curDate);
+    setInputTime(curTime);
+    handleCalculate(curDate, curTime);
+  };
 
   return (
     <div className="jamakol-container">
@@ -599,6 +766,13 @@ export default function JamakolPrasannamPage() {
                     setInputPlace(e.target.value);
                     setSelectedPlaceName('');
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      setIsPlaceDropdownOpen(false);
+                      handleCalculate();
+                    }
+                  }}
                   onFocus={() => {
                     if (placeSuggestions.length > 0) setIsPlaceDropdownOpen(true);
                   }}
@@ -722,34 +896,160 @@ export default function JamakolPrasannamPage() {
         lang={currentLang}
       />
 
-      {/* Quick Indicators Section */}
-      <div className="jamakol-controls-card" style={{ marginBottom: '2rem' }}>
-        <div className="jk-table-title-row">
-          <h3>
-            <span>🔍</span> {currentLang === 'ta' ? 'பிரசன்னக் குறிப்புகள் & சுப/அசுப அறிகுறிகள்' : 'Prasannam Indicators & Observations'}
-          </h3>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '0.75rem' }}>
-          {indicators.map((ind, i) => (
-            <div
-              key={i}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0.6rem 0.85rem',
-                borderRadius: '8px',
-                background: ind.type === 'positive' ? '#f0fdf4' : '#fef2f2',
-                border: `1px solid ${ind.type === 'positive' ? '#bbf7d0' : '#fecaca'}`,
-                fontSize: '0.88rem',
-                color: ind.type === 'positive' ? '#166534' : '#991b1b',
-                fontWeight: 600
-              }}
-            >
-              <span style={{ fontSize: '1.1rem' }}>{ind.symbol}</span>
-              <span>{currentLang === 'ta' ? ind.textTa : ind.textEn}</span>
+      {/* Key Prasanna Notes (முக்கிய பிரசன்ன குறிப்புகள்) */}
+      <JamakolKeyNotesCard
+        chartData={chartData}
+        lang={currentLang}
+      />
+
+      {/* Dynamic & Workable Prasannam Indicators & Verdict Section */}
+      <div className="jk-indicators-section">
+        {/* Header with Title and Workable Actions */}
+        <div className="jk-indicators-header">
+          <div className="jk-ind-title-group">
+            <span className="jk-ind-title-icon">🔍</span>
+            <div>
+              <h3 className="jk-ind-main-title">
+                {currentLang === 'ta' ? 'பிரசன்னக் குறிப்புகள் & சுப/அசுப அறிகுறிகள்' : 'Prasannam Indicators & Observations'}
+              </h3>
+              <p className="jk-ind-subtitle">
+                {currentLang === 'ta'
+                  ? 'உதயம், ஆருடம், கவிப்பு மற்றும் 8 ஜாமக் கிரகங்களின் தற்போதைய நிலையின் நேரடி ஜோதிட ஆய்வு.'
+                  : 'Live horary diagnosis synthesized from Udhayam, Aarudam, Kavippu, and Jama Graha dynamics.'}
+              </p>
             </div>
-          ))}
+          </div>
+
+          <div className="jk-ind-actions">
+            <button
+              type="button"
+              className="jk-ind-action-btn jk-btn-refresh"
+              onClick={handleRefreshIndicators}
+              title={currentLang === 'ta' ? 'தற்போதைய நேரத்திற்குப் புதுப்பி' : 'Refresh for current live time'}
+            >
+              <span className="jk-spin-icon">🔄</span>
+              <span>{currentLang === 'ta' ? 'இப்போது புதுப்பி' : 'Refresh Now'}</span>
+            </button>
+            <button
+              type="button"
+              className={`jk-ind-action-btn jk-btn-copy ${indicatorCopied ? 'copied' : ''}`}
+              onClick={handleCopyIndicators}
+              title={currentLang === 'ta' ? 'குறிப்புகளை நகலெடு' : 'Copy indicators to clipboard'}
+            >
+              <span>{indicatorCopied ? '✓' : '📋'}</span>
+              <span>{indicatorCopied ? (currentLang === 'ta' ? 'நகலெடுக்கப்பட்டது!' : 'Copied!') : (currentLang === 'ta' ? 'குறிப்புகளை நகலெடு' : 'Copy Notes')}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Verdict & Score Banner */}
+        <div className="jk-verdict-banner" style={{ background: verdictBg, borderColor: verdictColor }}>
+          <div className="jk-verdict-content">
+            <div className="jk-verdict-score-box">
+              <span className="jk-verdict-score-num" style={{ color: verdictColor }}>{scorePct}%</span>
+              <span className="jk-verdict-score-lbl">{currentLang === 'ta' ? 'சாதக சதவீதம்' : 'Favorable Score'}</span>
+            </div>
+            <div className="jk-verdict-text-box">
+              <div className="jk-verdict-headline" style={{ color: verdictColor }}>
+                <span>{scorePct >= 70 ? '🌟' : scorePct >= 45 ? '⚖️' : '⚠️'}</span>
+                <span>{verdictTitle}</span>
+              </div>
+              <p className="jk-verdict-desc">{verdictDesc}</p>
+              {/* Progress bar */}
+              <div className="jk-verdict-meter-track">
+                <div
+                  className="jk-verdict-meter-fill"
+                  style={{
+                    width: `${scorePct}%`,
+                    background: scorePct >= 70 ? 'linear-gradient(90deg, #22c55e, #16a34a)' : scorePct >= 45 ? 'linear-gradient(90deg, #f59e0b, #d97706)' : 'linear-gradient(90deg, #ef4444, #dc2626)'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="jk-ind-filter-bar">
+          <div className="jk-ind-tabs">
+            <button
+              type="button"
+              className={`jk-ind-tab ${indicatorFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setIndicatorFilter('all')}
+            >
+              <span>{currentLang === 'ta' ? 'அனைத்தும்' : 'All'}</span>
+              <span className="jk-ind-tab-badge">{dynamicIndicators.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`jk-ind-tab tab-positive ${indicatorFilter === 'positive' ? 'active' : ''}`}
+              onClick={() => setIndicatorFilter('positive')}
+            >
+              <span>✅ {currentLang === 'ta' ? 'சுப அறிகுறிகள்' : 'Auspicious'}</span>
+              <span className="jk-ind-tab-badge positive">{positiveIndicators.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`jk-ind-tab tab-caution ${indicatorFilter === 'negative' ? 'active' : ''}`}
+              onClick={() => setIndicatorFilter('negative')}
+            >
+              <span>⚠️ {currentLang === 'ta' ? 'எச்சரிக்கைகள் & தடைகள்' : 'Cautions & Obstacles'}</span>
+              <span className="jk-ind-tab-badge caution">{cautionIndicators.length}</span>
+            </button>
+          </div>
+          <span className="jk-ind-hint">
+            {currentLang === 'ta' ? 'காரணம் அறிய கார்டை கிளிக் செய்யவும்' : 'Click card to view astrological rationale'}
+          </span>
+        </div>
+
+        {/* Dynamic Cards Grid */}
+        <div className="jk-ind-cards-grid">
+          {filteredIndicators.map((ind, i) => {
+            const isExpanded = expandedIndicatorId === (ind.id || i);
+            const isPos = ind.type === 'positive';
+            const isWarn = ind.type === 'warning';
+            const cardClass = isPos ? 'pos' : isWarn ? 'warn' : 'neg';
+
+            return (
+              <div
+                key={ind.id || i}
+                className={`jk-indicator-card ${cardClass} ${isExpanded ? 'expanded' : ''}`}
+                onClick={() => setExpandedIndicatorId(isExpanded ? null : (ind.id || i))}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setExpandedIndicatorId(isExpanded ? null : (ind.id || i));
+                  }
+                }}
+              >
+                <div className="jk-ind-card-main">
+                  <div className="jk-ind-icon-wrap">{ind.symbol}</div>
+                  <div className="jk-ind-body">
+                    <div className="jk-ind-top-row">
+                      <span className="jk-ind-category-tag">{ind.categoryLabel || ind.category}</span>
+                      <span className="jk-ind-toggle-icon">
+                        {isExpanded ? (currentLang === 'ta' ? '▲ சுருக்கு' : '▲ Less') : (currentLang === 'ta' ? '▼ காரணம்' : '▼ More')}
+                      </span>
+                    </div>
+                    <div className="jk-ind-card-title">{ind.title}</div>
+                    {isExpanded && (
+                      <div className="jk-ind-expanded-content">
+                        {ind.desc && <p className="jk-ind-expanded-desc">{ind.desc}</p>}
+                        {ind.rationale && (
+                          <div className="jk-ind-rationale-box">
+                            <strong>{currentLang === 'ta' ? 'ஜோதிடக் காரணம்:' : 'Astrological Rationale:'}</strong>{' '}
+                            <span>{ind.rationale}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -761,7 +1061,7 @@ export default function JamakolPrasannamPage() {
             <span className="jk-pillar-title">
               {currentLang === 'ta' ? 'உதயம் (Udhayam)' : 'Udhayam (Querent)'}
             </span>
-            <span className="jk-pillar-badge" style={{ background: '#fef3c7', color: '#92400e' }}>
+            <span className="jk-pillar-badge" style={{ background: '#ede9fe', color: '#3b0764', border: '1px solid #7c3aed' }}>
               {currentLang === 'ta' ? 'கேட்பவர் நிலை' : 'Querent Indicator'}
             </span>
           </div>
@@ -784,7 +1084,7 @@ export default function JamakolPrasannamPage() {
           {pillars.udhayam?.star && (
             <div className="jk-pillar-detail-row">
               <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
-              <span className="jk-pillar-val" style={{ color: '#6d28d9', fontWeight: 700 }}>
+              <span className="jk-pillar-val" style={{ color: '#3b0764', fontWeight: 800 }}>
                 {currentLang === 'ta' ? pillars.udhayam.star.formattedTa : pillars.udhayam.star.formattedEn}
               </span>
             </div>
@@ -797,7 +1097,7 @@ export default function JamakolPrasannamPage() {
             <span className="jk-pillar-title">
               {currentLang === 'ta' ? 'ஆரூடம் (Aarudam)' : 'Aarudam (Outcome)'}
             </span>
-            <span className="jk-pillar-badge" style={{ background: '#e0f2fe', color: '#0369a1' }}>
+            <span className="jk-pillar-badge" style={{ background: '#e0f2fe', color: '#075985', border: '1px solid #0284c7' }}>
               {currentLang === 'ta' ? 'காரிய வெற்றி நிலை' : 'Matter Outcome'}
             </span>
           </div>
@@ -820,7 +1120,7 @@ export default function JamakolPrasannamPage() {
           {pillars.aarudam?.star && (
             <div className="jk-pillar-detail-row">
               <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
-              <span className="jk-pillar-val" style={{ color: '#0369a1', fontWeight: 700 }}>
+              <span className="jk-pillar-val" style={{ color: '#075985', fontWeight: 800 }}>
                 {currentLang === 'ta' ? pillars.aarudam.star.formattedTa : pillars.aarudam.star.formattedEn}
               </span>
             </div>
@@ -833,7 +1133,7 @@ export default function JamakolPrasannamPage() {
             <span className="jk-pillar-title">
               {currentLang === 'ta' ? 'கவிப்பு (Kavippu)' : 'Kavippu (Obstacle)'}
             </span>
-            <span className="jk-pillar-badge" style={{ background: '#fee2e2', color: '#991b1b' }}>
+            <span className="jk-pillar-badge" style={{ background: '#fee2e2', color: '#7f1d1d', border: '1px solid #dc2626' }}>
               {currentLang === 'ta' ? 'மறைமுகத் தடை' : 'Hidden Blockage'}
             </span>
           </div>
@@ -856,7 +1156,7 @@ export default function JamakolPrasannamPage() {
           {pillars.kavippu?.star && (
             <div className="jk-pillar-detail-row">
               <span className="jk-pillar-lbl">{currentLang === 'ta' ? 'நட்சத்திரம்' : 'Nakshatra'}:</span>
-              <span className="jk-pillar-val" style={{ color: '#b91c1c', fontWeight: 700 }}>
+              <span className="jk-pillar-val" style={{ color: '#7f1d1d', fontWeight: 800 }}>
                 {currentLang === 'ta' ? pillars.kavippu.star.formattedTa : pillars.kavippu.star.formattedEn}
               </span>
             </div>

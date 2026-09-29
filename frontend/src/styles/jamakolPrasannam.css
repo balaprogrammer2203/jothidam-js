@@ -823,6 +823,24 @@
   letter-spacing: 0.01em;
 }
 
+.jk-cell-header-titles {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.jk-rasi-degree-range {
+  font-size: 0.56rem;
+  font-weight: 400;
+  color: #a8a29e;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  line-height: 1;
+  opacity: 0.9;
+}
+
 .jk-rasi-tamil-title {
   font-size: 0.7rem;
   font-weight: 600;
@@ -867,45 +885,99 @@
    Highlight colors & badges for 3 Pillars (Udhayam, Aarudam, Kavippu)
    -------------------------------------------------------------------------- */
 .jk-point-udhayam {
-  color: #6d28d9 !important;
-  font-weight: 800;
+  color: #3b0764 !important;
+  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 1px 0;
 }
 
 .jk-point-udhayam .jk-sym-code {
-  color: #6d28d9;
-  background: #f3e8ff;
-  border: 1px solid #d8b4fe;
+  color: #3b0764;
+  background: #ede9fe;
+  border: 1.5px solid #7c3aed;
+  box-shadow: 0 1px 3px rgba(109, 40, 217, 0.22), inset 0 0 0 0.5px rgba(255, 255, 255, 0.7);
   border-radius: 4px;
-  padding: 0.5px 5px;
-  font-weight: 800;
+  padding: 1px 6px;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+  transition: all 0.15s ease-in-out;
+}
+
+.jk-point-udhayam:hover .jk-sym-code {
+  background: #ddd6fe;
+  border-color: #6d28d9;
+  box-shadow: 0 2px 5px rgba(109, 40, 217, 0.32);
+}
+
+.jk-point-udhayam .jk-planet-deg {
+  color: #4c1d95 !important;
+  font-weight: 650;
 }
 
 .jk-point-aarudam {
-  color: #0284c7 !important;
-  font-weight: 800;
+  color: #075985 !important;
+  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 1px 0;
 }
 
 .jk-point-aarudam .jk-sym-code {
-  color: #0369a1;
+  color: #075985;
   background: #e0f2fe;
-  border: 1px solid #bae6fd;
+  border: 1.5px solid #0284c7;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.22), inset 0 0 0 0.5px rgba(255, 255, 255, 0.7);
   border-radius: 4px;
-  padding: 0.5px 5px;
-  font-weight: 800;
+  padding: 1px 6px;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+  transition: all 0.15s ease-in-out;
+}
+
+.jk-point-aarudam:hover .jk-sym-code {
+  background: #bae6fd;
+  border-color: #0369a1;
+  box-shadow: 0 2px 5px rgba(2, 132, 199, 0.32);
+}
+
+.jk-point-aarudam .jk-planet-deg {
+  color: #0c4a6e !important;
+  font-weight: 650;
 }
 
 .jk-point-kavippu {
-  color: #dc2626 !important;
-  font-weight: 800;
+  color: #7f1d1d !important;
+  font-weight: 850;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 1px 0;
 }
 
 .jk-point-kavippu .jk-sym-code {
-  color: #b91c1c;
+  color: #7f1d1d;
   background: #fee2e2;
-  border: 1px solid #fca5a5;
+  border: 1.5px solid #dc2626;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.22), inset 0 0 0 0.5px rgba(255, 255, 255, 0.7);
   border-radius: 4px;
-  padding: 0.5px 5px;
-  font-weight: 800;
+  padding: 1px 6px;
+  font-weight: 850;
+  letter-spacing: 0.01em;
+  transition: all 0.15s ease-in-out;
+}
+
+.jk-point-kavippu:hover .jk-sym-code {
+  background: #fecaca;
+  border-color: #b91c1c;
+  box-shadow: 0 2px 5px rgba(220, 38, 38, 0.32);
+}
+
+.jk-point-kavippu .jk-planet-deg {
+  color: #991b1b !important;
+  font-weight: 650;
 }
 
 /* --------------------------------------------------------------------------
@@ -946,10 +1018,28 @@
 }
 
 /* Retrograde symbol indicator */
-.jk-retro-star {
+.jk-retro-star,
+.jk-planet-retro {
   color: #b91c1c;
-  font-weight: 800;
-  margin-left: 1px;
+  font-weight: 700;
+  font-size: 0.8em;
+  margin-left: 2px;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Udhaya Bhava number (1-12 from Udhayam) positioned at bottom-right corner */
+.jk-udhaya-bhava-num {
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+  color: #a8a29e;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 /* Center 2x2 Cell in South Indian Chart: Light Mode (Default) matching warm cream Vedic palette */
@@ -1220,6 +1310,14 @@ body.dark-theme .jk-rasi-tamil-title,
   color: #fbbf24 !important;
 }
 
+html[data-theme="dark"] .jk-rasi-degree-range,
+[data-theme="dark"] .jk-rasi-degree-range,
+body.dark-theme .jk-rasi-degree-range,
+.dark .jk-rasi-degree-range {
+  color: #94a3b8 !important;
+  opacity: 0.85;
+}
+
 html[data-theme="dark"] .jk-planet-entry,
 [data-theme="dark"] .jk-planet-entry,
 body.dark-theme .jk-planet-entry,
@@ -1239,6 +1337,98 @@ html[data-theme="dark"] .jk-planet-deg,
 body.dark-theme .jk-planet-deg,
 .dark .jk-planet-deg {
   color: #a8a29e !important;
+}
+
+html[data-theme="dark"] .jk-retro-star,
+html[data-theme="dark"] .jk-planet-retro,
+[data-theme="dark"] .jk-retro-star,
+[data-theme="dark"] .jk-planet-retro,
+body.dark-theme .jk-retro-star,
+body.dark-theme .jk-planet-retro,
+.dark .jk-retro-star,
+.dark .jk-planet-retro {
+  color: #f87171 !important;
+}
+
+html[data-theme="dark"] .jk-udhaya-bhava-num,
+[data-theme="dark"] .jk-udhaya-bhava-num,
+body.dark-theme .jk-udhaya-bhava-num,
+.dark .jk-udhaya-bhava-num {
+  color: #94a3b8 !important;
+  opacity: 0.85;
+}
+
+/* Dark mode highlights for 3 Pillars (Udhayam, Aarudam, Kavippu) */
+html[data-theme="dark"] .jk-point-udhayam,
+[data-theme="dark"] .jk-point-udhayam,
+body.dark-theme .jk-point-udhayam,
+.dark .jk-point-udhayam {
+  color: #f3e8ff !important;
+}
+
+html[data-theme="dark"] .jk-point-udhayam .jk-sym-code,
+[data-theme="dark"] .jk-point-udhayam .jk-sym-code,
+body.dark-theme .jk-point-udhayam .jk-sym-code,
+.dark .jk-point-udhayam .jk-sym-code {
+  color: #f5f3ff !important;
+  background: #581c87 !important;
+  border-color: #a855f7 !important;
+  box-shadow: 0 1px 4px rgba(168, 85, 247, 0.4) !important;
+}
+
+html[data-theme="dark"] .jk-point-udhayam .jk-planet-deg,
+[data-theme="dark"] .jk-point-udhayam .jk-planet-deg,
+body.dark-theme .jk-point-udhayam .jk-planet-deg,
+.dark .jk-point-udhayam .jk-planet-deg {
+  color: #d8b4fe !important;
+}
+
+html[data-theme="dark"] .jk-point-aarudam,
+[data-theme="dark"] .jk-point-aarudam,
+body.dark-theme .jk-point-aarudam,
+.dark .jk-point-aarudam {
+  color: #f0f9ff !important;
+}
+
+html[data-theme="dark"] .jk-point-aarudam .jk-sym-code,
+[data-theme="dark"] .jk-point-aarudam .jk-sym-code,
+body.dark-theme .jk-point-aarudam .jk-sym-code,
+.dark .jk-point-aarudam .jk-sym-code {
+  color: #f0f9ff !important;
+  background: #075985 !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 1px 4px rgba(56, 189, 248, 0.4) !important;
+}
+
+html[data-theme="dark"] .jk-point-aarudam .jk-planet-deg,
+[data-theme="dark"] .jk-point-aarudam .jk-planet-deg,
+body.dark-theme .jk-point-aarudam .jk-planet-deg,
+.dark .jk-point-aarudam .jk-planet-deg {
+  color: #7dd3fc !important;
+}
+
+html[data-theme="dark"] .jk-point-kavippu,
+[data-theme="dark"] .jk-point-kavippu,
+body.dark-theme .jk-point-kavippu,
+.dark .jk-point-kavippu {
+  color: #fff1f2 !important;
+}
+
+html[data-theme="dark"] .jk-point-kavippu .jk-sym-code,
+[data-theme="dark"] .jk-point-kavippu .jk-sym-code,
+body.dark-theme .jk-point-kavippu .jk-sym-code,
+.dark .jk-point-kavippu .jk-sym-code {
+  color: #fff1f2 !important;
+  background: #991b1b !important;
+  border-color: #f87171 !important;
+  box-shadow: 0 1px 4px rgba(248, 113, 113, 0.4) !important;
+}
+
+html[data-theme="dark"] .jk-point-kavippu .jk-planet-deg,
+[data-theme="dark"] .jk-point-kavippu .jk-planet-deg,
+body.dark-theme .jk-point-kavippu .jk-planet-deg,
+.dark .jk-point-kavippu .jk-planet-deg {
+  color: #fca5a5 !important;
 }
 
 html[data-theme="dark"] .jamakol-container,
@@ -1387,6 +1577,525 @@ body.dark-theme .jk-field-group label,
 }
 
 /* --------------------------------------------------------------------------
+   Dynamic & Workable Prasannam Indicators & Verdict Section
+   -------------------------------------------------------------------------- */
+.jk-indicators-section {
+  background: #ffffff;
+  border: 1.5px solid var(--jk-gold-border, #caa254);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--jk-card-shadow, 0 4px 20px -2px rgba(90, 50, 10, 0.08));
+  position: relative;
+}
+
+/* Header */
+.jk-indicators-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.jk-ind-title-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.jk-ind-title-icon {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.jk-ind-main-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #431407;
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.jk-ind-subtitle {
+  font-size: 0.86rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.jk-ind-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.jk-ind-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.jk-ind-action-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.jk-ind-action-btn.jk-btn-refresh:hover .jk-spin-icon {
+  display: inline-block;
+  transform: rotate(180deg);
+  transition: transform 0.4s ease;
+}
+
+.jk-ind-action-btn.jk-btn-copy.copied {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+/* Verdict & Score Banner */
+.jk-verdict-banner {
+  border-radius: 12px;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.25rem;
+  border: 1.5px solid;
+  transition: all 0.3s ease;
+}
+
+.jk-verdict-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.jk-verdict-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(4px);
+}
+
+.jk-verdict-score-num {
+  font-size: 1.9rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.jk-verdict-score-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+  letter-spacing: 0.04em;
+}
+
+.jk-verdict-text-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.jk-verdict-headline {
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.jk-verdict-desc {
+  font-size: 0.88rem;
+  color: #334155;
+  margin: 0 0 0.65rem 0;
+  line-height: 1.45;
+}
+
+.jk-verdict-meter-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.jk-verdict-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Filter Bar */
+.jk-ind-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.jk-ind-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.jk-ind-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jk-ind-tab:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.jk-ind-tab.active {
+  background: #78350f;
+  color: #ffffff;
+  border-color: #78350f;
+  box-shadow: 0 2px 8px rgba(120, 53, 15, 0.25);
+}
+
+.jk-ind-tab.tab-positive.active {
+  background: #15803d;
+  border-color: #15803d;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
+}
+
+.jk-ind-tab.tab-caution.active {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(185, 28, 28, 0.25);
+}
+
+.jk-ind-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.12);
+  color: inherit;
+}
+
+.jk-ind-tab:not(.active) .jk-ind-tab-badge.positive {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.jk-ind-tab:not(.active) .jk-ind-tab-badge.caution {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.jk-ind-hint {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Cards Grid */
+.jk-ind-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 0.85rem;
+}
+
+.jk-indicator-card {
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+  user-select: none;
+  position: relative;
+}
+
+.jk-indicator-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.08);
+}
+
+.jk-indicator-card.pos {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  border-left: 4.5px solid #16a34a;
+}
+
+.jk-indicator-card.warn {
+  background: #fffbeb;
+  border-color: #fde68a;
+  border-left: 4.5px solid #d97706;
+}
+
+.jk-indicator-card.neg {
+  background: #fef2f2;
+  border-color: #fecaca;
+  border-left: 4.5px solid #dc2626;
+}
+
+.jk-ind-card-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.jk-ind-icon-wrap {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  padding-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.jk-ind-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.jk-ind-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+  gap: 0.5rem;
+}
+
+.jk-ind-category-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.jk-indicator-card.pos .jk-ind-category-tag {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.jk-indicator-card.warn .jk-ind-category-tag {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.jk-indicator-card.neg .jk-ind-category-tag {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.jk-ind-toggle-icon {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.jk-indicator-card:hover .jk-ind-toggle-icon {
+  background: rgba(0, 0, 0, 0.08);
+  color: #1e293b;
+}
+
+.jk-ind-card-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.jk-indicator-card.pos .jk-ind-card-title {
+  color: #14532d;
+}
+
+.jk-indicator-card.warn .jk-ind-card-title {
+  color: #78350f;
+}
+
+.jk-indicator-card.neg .jk-ind-card-title {
+  color: #7f1d1d;
+}
+
+/* Expanded Content */
+.jk-ind-expanded-content {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  animation: jkFadeIn 0.25s ease-out;
+}
+
+@keyframes jkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jk-ind-expanded-desc {
+  font-size: 0.84rem;
+  line-height: 1.48;
+  color: #334155;
+  margin: 0 0 0.5rem 0;
+}
+
+.jk-ind-rationale-box {
+  font-size: 0.78rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .jk-indicators-section {
+  background: #1e293b;
+  border-color: #92400e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .jk-indicators-header {
+  border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .jk-ind-main-title {
+  color: #fef3c7;
+}
+
+[data-theme="dark"] .jk-ind-subtitle {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .jk-ind-action-btn {
+  background: #0f172a;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .jk-ind-action-btn:hover {
+  background: #1e293b;
+  border-color: #64748b;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .jk-ind-action-btn.jk-btn-copy.copied {
+  background: #064e3b;
+  border-color: #059669;
+  color: #a7f3d0;
+}
+
+[data-theme="dark"] .jk-verdict-score-box {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .jk-verdict-desc {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .jk-ind-tab {
+  background: #0f172a;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .jk-ind-tab:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .jk-indicator-card.pos {
+  background: rgba(22, 101, 52, 0.15);
+  border-color: #166534;
+}
+
+[data-theme="dark"] .jk-indicator-card.pos .jk-ind-card-title {
+  color: #86efac;
+}
+
+[data-theme="dark"] .jk-indicator-card.warn {
+  background: rgba(180, 83, 9, 0.15);
+  border-color: #92400e;
+}
+
+[data-theme="dark"] .jk-indicator-card.warn .jk-ind-card-title {
+  color: #fde047;
+}
+
+[data-theme="dark"] .jk-indicator-card.neg {
+  background: rgba(185, 28, 28, 0.15);
+  border-color: #991b1b;
+}
+
+[data-theme="dark"] .jk-indicator-card.neg .jk-ind-card-title {
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .jk-ind-expanded-desc {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .jk-ind-rationale-box {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
    Quick Verdict & 3 Pillars Card (Udhayam, Aarudam, Kavippu)
    -------------------------------------------------------------------------- */
 .jamakol-summary-grid {
@@ -1407,15 +2116,15 @@ body.dark-theme .jk-field-group label,
 }
 
 .jk-summary-card.pillar-udhayam {
-  border-top: 4px solid #b45309;
+  border-top: 4px solid #3b0764;
 }
 
 .jk-summary-card.pillar-aarudam {
-  border-top: 4px solid #0284c7;
+  border-top: 4px solid #075985;
 }
 
 .jk-summary-card.pillar-kavippu {
-  border-top: 4px solid #dc2626;
+  border-top: 4px solid #7f1d1d;
 }
 
 .jk-pillar-header {
@@ -2059,3 +2768,141 @@ body.dark-theme .jk-field-group label,
   color: #f1f5f9;
   font-weight: 600;
 }
+
+/* ==========================================================================
+   Key Prasanna Notes Card (முக்கிய பிரசன்ன குறிப்புகள்)
+   ========================================================================== */
+.jk-key-notes-card {
+  background: #fffdf9;
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 1.35rem 1.5rem;
+  margin: 1.75rem 0;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.06);
+  transition: all 0.25s ease;
+}
+
+.jk-key-notes-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.5rem;
+}
+
+.jk-key-notes-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.jk-key-notes-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #c2410c;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.jk-key-notes-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.jk-kn-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem 0 0.65rem 0;
+}
+
+.jk-kn-group:not(:last-child) {
+  border-bottom: 1px dotted #e2e8f0;
+  margin-bottom: 0.4rem;
+}
+
+.jk-kn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #292524;
+  padding: 0.25rem 0;
+  border-bottom: 1px dotted #f8fafc;
+}
+
+.jk-kn-row:last-child {
+  border-bottom: none;
+}
+
+.jk-kn-label {
+  font-weight: 600;
+  color: #292524;
+  margin-right: 0.35rem;
+}
+
+.jk-kn-val {
+  font-weight: 700;
+}
+
+.jk-val-pairs {
+  color: #c2410c;
+}
+
+.jk-val-aspects {
+  color: #15803d;
+}
+
+.jk-val-number {
+  color: #1e3a8a;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.jk-val-touch {
+  color: #c2410c;
+}
+
+.jk-kn-retro {
+  font-weight: 700;
+  color: #c2410c;
+  margin-left: 0.25rem;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .jk-key-notes-card {
+    background: #1c1917;
+    border-color: #7c2d12;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .jk-key-notes-title {
+    color: #fb923c;
+  }
+
+  .jk-kn-label {
+    color: #e7e5e4;
+  }
+
+  .jk-kn-row {
+    color: #d6d3d1;
+    border-bottom-color: #292524;
+  }
+
+  .jk-kn-group:not(:last-child) {
+    border-bottom-color: #44403c;
+  }
+
+  .jk-val-pairs, .jk-val-touch, .jk-kn-retro {
+    color: #f97316;
+  }
+
+  .jk-val-aspects {
+    color: #4ade80;
+  }
+
+  .jk-val-number {
+    color: #60a5fa;
+  }
+}
+

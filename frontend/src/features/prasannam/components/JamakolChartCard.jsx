@@ -132,6 +132,20 @@ const TOOLTIP_LABELS = {
   }
 };
 
+const RETROGRADE_SYMBOLS = {
+  ta: '(வ)',
+  hi: '(व)',
+  te: '(వ)',
+  kn: '(ವ)',
+  ml: '(വ)',
+  en: '(R)'
+};
+
+const getRetroSymbol = (lang) => {
+  const safe = (lang || 'ta').split('-')[0].toLowerCase();
+  return RETROGRADE_SYMBOLS[safe] || '(வ)';
+};
+
 /**
  * JamakolChartCard
  * Recreates the exact screenshot design:
@@ -194,6 +208,23 @@ export default function JamakolChartCard({
     ? foundLagnaRasi
     : (propLagnaRasiIndex ?? chartData.lagnaRasiIndex ?? innerChart.lagnaRasiIndex ?? chartData.lagna?.rasiIndex ?? 6);
 
+  // Determine true Udhayam Rasi Index (0 to 11) for house 1-12 numbering
+  let foundUdhayamRasi = -1;
+  for (let r = 0; r < 12; r++) {
+    const list = rasiGrid[r] || [];
+    if (list.some((p) => p && (p.isUdhayam || (p.name || '').toLowerCase() === 'udhayam' || (p.symbol || '').toLowerCase() === 'ud'))) {
+      foundUdhayamRasi = r;
+      break;
+    }
+  }
+  const effectiveUdhayamRasi = foundUdhayamRasi !== -1
+    ? foundUdhayamRasi
+    : (udhayam.signIndex !== undefined
+        ? udhayam.signIndex
+        : (udhayam.rasiIndex !== undefined
+            ? udhayam.rasiIndex
+            : (pillars?.udhayam?.signIndex ?? pillars?.udhayam?.rasiIndex ?? 0)));
+
   // Prepare normalized 8 outer cards with proper fallback symbols
   const outerCards = [
     { key: 'topLeft', box: outerBoxes?.topLeft, posClass: 'jk-box-pisces jk-badge-pisces', fallbackSymbol: 'Sn', fallbackDeg: "319° 07'", fallbackDegRasi: 19 },
@@ -209,7 +240,7 @@ export default function JamakolChartCard({
   /**
    * Render Rasi details hover tooltip showing sign lord + constituent stars & padas
    */
-  const renderRasiTooltip = (rasiId, displayName) => {
+  const renderRasiTooltip = (rasiId, displayName, degreeRange = '') => {
     const rasiObj = PRASANNAM_RASIS[rasiId] || {};
     const rasiLordName = getLocalizedPrasannamRasiLord(rasiId, activeLang);
     const houseStars = RASI_CONSTITUENT_STARS[rasiId] || [];
@@ -220,12 +251,12 @@ export default function JamakolChartCard({
       <div className={`kadikara-tooltip-card kadikara-rasi-tooltip ${tooltipClass}`}>
         <div className="tooltip-header">
           <span className="tooltip-planet-name">{displayName} ({rasiObj.nameEn || ''})</span>
-          <span className="tooltip-deg-badge">{activeLang === 'ta' ? 'ராசி' : 'Rasi'}</span>
+          <span className="tooltip-deg-badge">{degreeRange || (activeLang === 'ta' ? 'ராசி' : 'Rasi')}</span>
         </div>
         <div className="tooltip-body">
           <div className="tooltip-item">
             <span className="tooltip-lbl">{labels.rasi}</span>
-            <span className="tooltip-val">{displayName}</span>
+            <span className="tooltip-val">{displayName} {degreeRange}</span>
           </div>
           <div className="tooltip-item">
             <span className="tooltip-lbl">{labels.rasiLord}</span>
@@ -273,7 +304,7 @@ export default function JamakolChartCard({
     const labels = TOOLTIP_LABELS[activeLang] || TOOLTIP_LABELS.ta;
     const tooltipClass = getTooltipPos(rasiId);
     const degStr = planet.formattedDegree || rawItem.formattedDegree || '';
-    const isRetro = !!planet.isRetrograde && rawItem.type !== 'lagna' && planet.name !== 'Rahu' && planet.name !== 'Ketu';
+    const isRetro = !!planet.isRetrograde && rawItem.type !== 'lagna';
 
     let displayName = planet.planetFullName;
     if (rawItem.type === 'lagna') {
@@ -610,20 +641,28 @@ export default function JamakolChartCard({
       });
     }
 
+    const startDeg = rasiId * 30;
+    const endDeg = (rasiId + 1) * 30;
+    const degreeRange = `(${startDeg}-${endDeg})`;
+    const houseNumFromUdhayam = ((rasiId - effectiveUdhayamRasi + 12) % 12) + 1;
+
     return (
       <div key={rasiId} className={`jk-rasi-cell rasi-${rasiId}`}>
         <div className="jk-cell-header kadikara-rasi-header">
-          <span className="jk-rasi-title">{displayName}</span>
+          <div className="jk-cell-header-titles">
+            <span className="jk-rasi-title">{displayName}</span>
+            <span className="jk-rasi-degree-range">{degreeRange}</span>
+          </div>
           <span className="kadikara-rasi-info-pill" title={activeLang === 'ta' ? 'ராசி & நட்சத்திர விபரம்' : 'Rasi & Star Details'}>
             ⓘ
           </span>
-          {renderRasiTooltip(rasiId, displayName)}
+          {renderRasiTooltip(rasiId, displayName, degreeRange)}
         </div>
 
         <div className="jk-cell-planets">
           {items.map((it, idx) => {
-            const isRetro = it.isRetrograde;
-            const retroStar = isRetro ? '*' : '';
+            const isRetro = !!it.isRetrograde;
+            const retroSymbol = getRetroSymbol(activeLang);
             const cleanDeg = it.formattedDegree ? String(it.formattedDegree).replace(/[()]/g, '').trim() : '';
             const degDisplay = cleanDeg ? `(${cleanDeg})` : '';
 
@@ -712,7 +751,14 @@ export default function JamakolChartCard({
               <div key={idx} className="jk-planet-entry">
                 <span>
                   {code}
-                  {retroStar && <span className="jk-retro-star">*</span>}
+                  {isRetro && (
+                    <span
+                      className="jk-planet-retro"
+                      title={activeLang === 'ta' ? 'வக்ரம் (Retrograde)' : 'Retrograde'}
+                    >
+                      {' '}{retroSymbol}
+                    </span>
+                  )}
                 </span>
                 {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
                 {renderPlanetTooltip(it, rasiId)}
@@ -720,6 +766,12 @@ export default function JamakolChartCard({
             );
           })}
         </div>
+        <span
+          className="jk-udhaya-bhava-num"
+          title={activeLang === 'ta' ? `உதய பாவம்: ${houseNumFromUdhayam}` : `Udhaya Bhava: ${houseNumFromUdhayam}`}
+        >
+          {houseNumFromUdhayam}
+        </span>
       </div>
     );
   };
@@ -785,9 +837,9 @@ export default function JamakolChartCard({
                 {/* Planets listing */}
                 <text x="0" y="2" fontSize="9" textAnchor="middle" fill="#1e293b">
                   {h.num === 1 && <tspan fill="#dc2626" fontWeight="bold">{localizedLa} </tspan>}
-                  {isUd && <tspan fill="#6d28d9" fontWeight="bold">{localizedUd} </tspan>}
-                  {isAr && <tspan fill="#0284c7" fontWeight="bold">{localizedAr} </tspan>}
-                  {isKv && <tspan fill="#dc2626" fontWeight="bold">{localizedKv} </tspan>}
+                  {isUd && <tspan fill="#3b0764" fontWeight="900">{localizedUd} </tspan>}
+                  {isAr && <tspan fill="#075985" fontWeight="900">{localizedAr} </tspan>}
+                  {isKv && <tspan fill="#7f1d1d" fontWeight="900">{localizedKv} </tspan>}
                   {planets.map((p) => {
                     const name = (p.name || '').toLowerCase();
                     const isSpecial = name === 'lagna' || name === 'udhayam' || name === 'aarudam' || name === 'kavippu';
@@ -805,7 +857,7 @@ export default function JamakolChartCard({
                         textDecoration="none"
                         fontWeight={weight}
                       >
-                        {code}{p.isRetrograde ? '*' : ''}{' '}
+                        {code}{p.isRetrograde ? ` ${getRetroSymbol(activeLang)}` : ''}{' '}
                       </tspan>
                     );
                   })}

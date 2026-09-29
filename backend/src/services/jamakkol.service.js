@@ -811,6 +811,225 @@ export function formatSubPlanetDeg(degreeInRasi) {
 
 
 /**
+ * Classical Jamakkol Key Prasanna Notes (முக்கிய பிரசன்ன குறிப்புகள்)
+ */
+export function calculateJamakkolKeyNotes(input, lang = 'ta') {
+  const chart = input?.chartData || input || {};
+  const pillars = chart.pillars || {};
+  const udhayam = pillars.udhayam || {};
+  const aarudam = pillars.aarudam || {};
+  const kavippu = pillars.kavippu || {};
+  const rasiGrid = chart.rasiGrid || [];
+  const jamaPlanets = chart.jamaPlanets || {};
+
+  const isTa = lang === 'ta';
+
+  const PLANET_NAMES_MAP = {
+    Sun: { ta: 'சூரியன்', en: 'Sun' },
+    Moon: { ta: 'சந்திரன்', en: 'Moon' },
+    Mars: { ta: 'செவ்வாய்', en: 'Mars' },
+    Mercury: { ta: 'புதன்', en: 'Mercury' },
+    Jupiter: { ta: 'குரு', en: 'Jupiter' },
+    Venus: { ta: 'சுக்கிரன்', en: 'Venus' },
+    Saturn: { ta: 'சனி', en: 'Saturn' },
+    Rahu: { ta: 'ராகு', en: 'Rahu' },
+    Ketu: { ta: 'கேது', en: 'Ketu' },
+    Snake: { ta: 'ராகு', en: 'Rahu' }
+  };
+
+  const formatGocharaPlanetNameLocal = (name) => {
+    if (!name) return '';
+    const lower = String(name).trim().toLowerCase();
+    const match = Object.keys(PLANET_NAMES_MAP).find(k => k.toLowerCase() === lower);
+    const base = match ? (isTa ? PLANET_NAMES_MAP[match].ta : PLANET_NAMES_MAP[match].en) : name;
+    return `${isTa ? 'கோ.' : 'Ko.'}${base}`;
+  };
+
+  const formatJamaPlanetNameLocal = (name) => {
+    if (!name) return '';
+    const lower = String(name).trim().toLowerCase();
+    let base = name;
+    if (lower === 'snake' || lower === 'paambu' || lower === 'rahu' || lower === 'பாம்பு') {
+      base = isTa ? 'ராகு' : 'Rahu';
+    } else {
+      const match = Object.keys(PLANET_NAMES_MAP).find(k => k.toLowerCase() === lower);
+      base = match ? (isTa ? PLANET_NAMES_MAP[match].ta : PLANET_NAMES_MAP[match].en) : name;
+    }
+    return `${isTa ? 'ஜா.' : 'Jaa.'}${base}`;
+  };
+
+  const GOCHARA_NAMES = {
+    sun: 'Sun', moon: 'Moon', mars: 'Mars', mercury: 'Mercury',
+    jupiter: 'Jupiter', venus: 'Venus', saturn: 'Saturn', rahu: 'Rahu', ketu: 'Ketu'
+  };
+
+  const PLANET_ASPECT_OFFSETS = {
+    sun: [6], moon: [6], mars: [3, 6, 7], mercury: [6],
+    jupiter: [4, 6, 8], venus: [6], saturn: [2, 6, 9],
+    rahu: [4, 6, 8], ketu: [4, 6, 8], snake: [4, 6, 8]
+  };
+
+  function getAspectOffsets(name) {
+    const k = (name || '').toLowerCase();
+    for (const [key, off] of Object.entries(PLANET_ASPECT_OFFSETS)) {
+      if (k.includes(key)) return off;
+    }
+    return [6];
+  }
+
+  function getAspectedSigns(planetName, sourceSign) {
+    const offsets = getAspectOffsets(planetName);
+    return offsets.map(off => (sourceSign + off) % 12);
+  }
+
+  const allPlanets = [];
+
+  // 1. Collect Gochara planets
+  rasiGrid.forEach((cell, s) => {
+    (cell || []).forEach(p => {
+      if (p.isSubPlanet || p.isSpecialPrasannam || p.isLagna) return;
+      const clean = (p.name || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
+      if (GOCHARA_NAMES[clean]) {
+        let degInRasi = 15;
+        if (p.degreeInRasi !== undefined) {
+          degInRasi = p.degreeInRasi;
+        } else if (p.formattedDegree) {
+          const match = String(p.formattedDegree).match(/(\d+)(?:°|\s)(\d+)?/);
+          if (match) degInRasi = parseInt(match[1], 10) + (match[2] ? parseInt(match[2], 10) / 60 : 0);
+        }
+        allPlanets.push({
+          rawName: p.name,
+          standardKey: clean,
+          signIndex: s,
+          degreeInRasi: degInRasi,
+          totalLongitude: (s * 30 + degInRasi) % 360,
+          displayName: formatGocharaPlanetNameLocal(clean),
+          isJama: false
+        });
+      }
+    });
+  });
+
+  // 2. Collect Jama Grahas
+  Object.values(jamaPlanets || {}).forEach(box => {
+    const clean = (box.name || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
+    const signIdx = box.signIndex !== undefined ? box.signIndex : 0;
+    const degInRasi = box.degreeInRasi !== undefined ? box.degreeInRasi : 0;
+    const totalDeg = box.degree !== undefined ? ((box.degree % 360) + 360) % 360 : (signIdx * 30 + degInRasi);
+    allPlanets.push({
+      rawName: box.name,
+      standardKey: clean,
+      signIndex: signIdx,
+      degreeInRasi: degInRasi,
+      totalLongitude: totalDeg,
+      displayName: formatJamaPlanetNameLocal(box.name),
+      isJama: true
+    });
+  });
+
+  allPlanets.sort((a, b) => a.signIndex - b.signIndex || a.totalLongitude - b.totalLongitude);
+
+  const udSign = udhayam.signIndex !== undefined ? udhayam.signIndex : 0;
+  const arSign = aarudam.signIndex !== undefined ? aarudam.signIndex : 0;
+  const kvSign = kavippu.signIndex !== undefined ? kavippu.signIndex : 0;
+
+  const udLong = (udSign * 30 + (udhayam.degreeInRasi || 0)) % 360;
+  const arLong = (arSign * 30 + (aarudam.degreeInRasi || 0)) % 360;
+  const kvLong = (kvSign * 30 + (kavippu.degreeInRasi || 0)) % 360;
+
+  const noneText = isTa ? 'இல்லை' : 'None';
+
+  // Row 1
+  const udStanding = allPlanets.filter(p => p.signIndex === udSign);
+  const udStandingPairs = udStanding.map(sp => {
+    const aspSigns = getAspectedSigns(sp.standardKey, udSign);
+    const targetPlanets = allPlanets.filter(tp => aspSigns.includes(tp.signIndex));
+    if (targetPlanets.length === 0) return null;
+    return `(${sp.displayName} -> ${targetPlanets.map(t => t.displayName).join(', ')})`;
+  }).filter(Boolean);
+
+  // Row 2
+  const udAspecting = allPlanets.filter(p => p.signIndex !== udSign && getAspectedSigns(p.standardKey, p.signIndex).includes(udSign));
+
+  // Row 3
+  const arFromUd = ((arSign - udSign + 12) % 12) + 1;
+
+  // Row 4
+  const udFromAr = ((udSign - arSign + 12) % 12) + 1;
+
+  // Row 5
+  const arStanding = allPlanets.filter(p => p.signIndex === arSign);
+  const arStandingPairs = arStanding.map(sp => {
+    const aspSigns = getAspectedSigns(sp.standardKey, arSign);
+    const targetPlanets = allPlanets.filter(tp => aspSigns.includes(tp.signIndex));
+    if (targetPlanets.length === 0) return null;
+    return `(${sp.displayName} -> ${targetPlanets.map(t => t.displayName).join(', ')})`;
+  }).filter(Boolean);
+
+  // Row 6
+  const arAspecting = allPlanets.filter(p => p.signIndex !== arSign && getAspectedSigns(p.standardKey, p.signIndex).includes(arSign));
+
+  // Row 7 (Forward)
+  let nextUd = null, minUdDist = 999;
+  allPlanets.forEach(p => {
+    const dist = ((p.totalLongitude - udLong) % 360 + 360) % 360;
+    if (dist > 0.05 && dist < minUdDist) {
+      minUdDist = dist;
+      nextUd = p;
+    }
+  });
+
+  // Row 8 (Forward)
+  let nextAr = null, minArDist = 999;
+  allPlanets.forEach(p => {
+    const dist = ((p.totalLongitude - arLong) % 360 + 360) % 360;
+    if (dist > 0.05 && dist < minArDist) {
+      minArDist = dist;
+      nextAr = p;
+    }
+  });
+
+  // Row 9
+  const kvAspecting = allPlanets.filter(p => p.signIndex !== kvSign && getAspectedSigns(p.standardKey, p.signIndex).includes(kvSign));
+
+  // Row 10
+  const kvStanding = allPlanets.filter(p => p.signIndex === kvSign);
+  const kvStandingPairs = kvStanding.map(sp => {
+    const aspSigns = getAspectedSigns(sp.standardKey, kvSign);
+    const targetPlanets = allPlanets.filter(tp => aspSigns.includes(tp.signIndex));
+    if (targetPlanets.length === 0) return null;
+    return `(${sp.displayName} -> ${targetPlanets.map(t => t.displayName).join(', ')})`;
+  }).filter(Boolean);
+
+  // Row 11 (Retrograde)
+  let nextKv = null, minKvDist = 999;
+  allPlanets.forEach(p => {
+    const dist = ((kvLong - p.totalLongitude) % 360 + 360) % 360;
+    if (dist > 0.05 && dist < minKvDist) {
+      minKvDist = dist;
+      nextKv = p;
+    }
+  });
+
+  return {
+    udhayamStandingAspects: udStandingPairs.length > 0 ? udStandingPairs.join(', ') : noneText,
+    udhayamAspectingPlanets: udAspecting.length > 0 ? udAspecting.map(p => p.displayName).join(', ') : noneText,
+    arudamFromUdhayam: arFromUd,
+    udhayamFromArudam: udFromAr,
+    aarudamStandingAspects: arStandingPairs.length > 0 ? arStandingPairs.join(', ') : noneText,
+    aarudamAspectingPlanets: arAspecting.length > 0 ? arAspecting.map(p => p.displayName).join(', ') : noneText,
+    udhayamNextTouch: nextUd ? `${nextUd.displayName} (${Math.round(nextUd.totalLongitude)}°)` : noneText,
+    aarudamNextTouch: nextAr ? `${nextAr.displayName} (${Math.round(nextAr.totalLongitude)}°)` : noneText,
+    kavippuAspectingPlanets: kvAspecting.length > 0 ? kvAspecting.map(p => p.displayName).join(', ') : noneText,
+    kavippuStandingAspects: kvStandingPairs.length > 0 ? kvStandingPairs.join(', ') : noneText,
+    kavippuNextTouchPlanet: nextKv ? nextKv.displayName : noneText,
+    kavippuNextTouchDegree: nextKv ? `(${Math.round(nextKv.totalLongitude)}°)` : '',
+    kavippuNextTouchRetro: nextKv ? (isTa ? '(பின்னோக்கி)' : '(Retrograde)') : '',
+    kavippuNextTouch: nextKv ? `${nextKv.displayName} (${Math.round(nextKv.totalLongitude)}°) ${isTa ? '(பின்னோக்கி)' : '(Retrograde)'}` : noneText
+  };
+}
+
+/**
  * Primary Jamakkol Prasannam Calculation Engine
  */
 export async function calculateJamakkolPrasannam({
@@ -1136,78 +1355,6 @@ export async function calculateJamakkolPrasannam({
   const longMonths = Math.round(eventTimingMultiplier / 10);
   const longDate = new Date(queryTimestamp + longMonths * 30.4 * 24 * 60 * 60 * 1000);
 
-  // 9. Astrological Indicators & Rule Verification
-  const indicators = [];
-
-  // Check 7th Lord strength
-  const seventhSignIdx = (udhayamSignIndex + 6) % 12;
-  const seventhLord = RASIS[seventhSignIdx].lord;
-  // Mercury in Pisces is debilitated (or 7th lord debilitated check)
-  const mercuryDebilitated = (mercuryData.rasiIndex === 11);
-  if (seventhLord === 'Mercury' && (mercuryDebilitated || seventhSignIdx === 11)) {
-    indicators.push({
-      type: 'negative',
-      symbol: '❌',
-      textEn: '7th Lord (Mercury) is debilitated in Pisces.',
-      textTa: '7-ஆம் அதிபதி (புதன்) நீசமாக உள்ளார்.'
-    });
-  } else {
-    indicators.push({
-      type: 'positive',
-      symbol: '✅',
-      textEn: '7th House Lord is in good dignified position.',
-      textTa: '7-ஆம் அதிபதி நல்ல நிலையில் உள்ளார்.'
-    });
-  }
-
-  // Check if Udhaya Lord is in Kavippu
-  const udhayaLord = RASIS[udhayamSignIndex].lord;
-  const planetsInKavippu = rasiGrid[kavippuSignIndex].map(p => p.name);
-  const udhayaLordInKavippu = (udhayamSignIndex === kavippuSignIndex || planetsInKavippu.includes(udhayaLord));
-  if (udhayaLordInKavippu) {
-    indicators.push({
-      type: 'negative',
-      symbol: '❌',
-      textEn: 'Udhaya Lord is caught under the shadow of Kavippu.',
-      textTa: 'உதயாதிபதி கவிப்பில் சிக்கியுள்ளார்.'
-    });
-  } else {
-    indicators.push({
-      type: 'positive',
-      symbol: '✅',
-      textEn: 'Udhaya Lord is endowed with sound planetary strength.',
-      textTa: 'உதயாதிபதி நல்ல வலிமையுடன் உள்ளார்.'
-    });
-  }
-
-  // General Negotiation Caution
-  indicators.push({
-    type: 'negative',
-    symbol: '❌',
-    textEn: 'Caution: If the significator of the contact person is in Kavippu, avoid discussions.',
-    textTa: 'பொதுக் குறிப்பு: பேசப்போகும் நபர் சார்ந்த காரக கிரகம் கவிப்பில் இருந்தால் பேசுவதைத் தவிர்க்கவும்.'
-  });
-
-  // Benefics approaching Udhayam
-  indicators.push({
-    type: 'positive',
-    symbol: '✅',
-    textEn: 'Benefic planets are actively advancing towards Udhayam.',
-    textTa: 'உதயத்தை நோக்கி சுப கிரகங்கள் வருகின்றன (சிறப்பு).'
-  });
-
-  // Aarudam in 2nd house check
-  const udhayamToAarudamHouses = ((aarudamSignIndex - udhayamSignIndex + 12) % 12) + 1;
-  const aarudamToUdhayamHouses = ((udhayamSignIndex - aarudamSignIndex + 12) % 12) + 1;
-  if (udhayamToAarudamHouses !== 2) {
-    indicators.push({
-      type: 'positive',
-      symbol: '✅',
-      textEn: 'Aarudam is not placed in the 2nd house from Udhayam.',
-      textTa: 'உதயத்திற்கு 2-ல் ஆருடம் இல்லை.'
-    });
-  }
-
   // 10. Center Chart Panchangam & Horary Info (Matching center cell screenshot)
   const centerInfo = calculateJamakkolCenterInfo({
     date,
@@ -1220,6 +1367,479 @@ export async function calculateJamakkolPrasannam({
     dayOfWeek,
     lang
   });
+
+  // 9. Astrological Indicators & Dynamic Rule Synthesis
+  const indicators = [];
+
+  const PLANET_EXALTATION = {
+    Sun: 0, Moon: 1, Mars: 9, Mercury: 5, Jupiter: 3, Venus: 11, Saturn: 6
+  };
+  const PLANET_DEBILITATION = {
+    Sun: 6, Moon: 7, Mars: 3, Mercury: 11, Jupiter: 9, Venus: 5, Saturn: 0
+  };
+  const PLANET_OWN_HOUSES = {
+    Sun: [4], Moon: [3], Mars: [0, 7], Mercury: [2, 5], Jupiter: [8, 11], Venus: [1, 6], Saturn: [9, 10]
+  };
+
+  const PLANET_NAMES_MAP = {
+    Sun: { ta: 'சூரியன்', en: 'Sun' },
+    Moon: { ta: 'சந்திரன்', en: 'Moon' },
+    Mars: { ta: 'செவ்வாய்', en: 'Mars' },
+    Mercury: { ta: 'புதன்', en: 'Mercury' },
+    Jupiter: { ta: 'குரு', en: 'Jupiter' },
+    Venus: { ta: 'சுக்கிரன்', en: 'Venus' },
+    Saturn: { ta: 'சனி', en: 'Saturn' },
+    Rahu: { ta: 'ராகு', en: 'Rahu' },
+    Ketu: { ta: 'கேது', en: 'Ketu' },
+    Snake: { ta: 'பாம்பு', en: 'Snake' }
+  };
+
+  const formatGocharaPlanetName = (name, isTa = true) => {
+    if (!name) return '';
+    const lower = String(name).trim().toLowerCase();
+    const match = Object.keys(PLANET_NAMES_MAP).find(k => k.toLowerCase() === lower);
+    const base = match ? (isTa ? PLANET_NAMES_MAP[match].ta : PLANET_NAMES_MAP[match].en) : name;
+    return `${isTa ? 'கோ.' : 'Ko.'}${base}`;
+  };
+
+  const formatJamaPlanetName = (name, isTa = true) => {
+    if (!name) return '';
+    const lower = String(name).trim().toLowerCase();
+    let base = name;
+    if (lower === 'snake' || lower === 'paambu' || lower === 'rahu' || lower === 'பாம்பு') {
+      base = isTa ? 'ராகு' : 'Rahu';
+    } else {
+      const match = Object.keys(PLANET_NAMES_MAP).find(k => k.toLowerCase() === lower);
+      base = match ? (isTa ? PLANET_NAMES_MAP[match].ta : PLANET_NAMES_MAP[match].en) : name;
+    }
+    return `${isTa ? 'ஜா.' : 'Jaa.'}${base}`;
+  };
+
+  const udhayamToAarudamHouses = ((aarudamSignIndex - udhayamSignIndex + 12) % 12) + 1;
+  const aarudamToUdhayamHouses = ((udhayamSignIndex - aarudamSignIndex + 12) % 12) + 1;
+  const udName = RASIS[udhayamSignIndex].ta;
+  const arName = RASIS[aarudamSignIndex].ta;
+  const udNameEn = RASIS[udhayamSignIndex].en;
+  const arNameEn = RASIS[aarudamSignIndex].en;
+
+  // 1. Udhayam - Aarudam Bhava relationship
+  if (udhayamToAarudamHouses === 1) {
+    indicators.push({
+      id: 'ud-ar-1',
+      type: 'positive',
+      symbol: '🌟',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: 'உதயத்திலேயே ஆருடம் (1-ஆம் பாவம் - உடனடி வெற்றி)',
+      textEn: 'Aarudam on Udhayam (1st House - Immediate Success)',
+      textTa: 'உதயத்திலேயே ஆருடம் (1-ஆம் பாவம் - உடனடி வெற்றி)',
+      desc: `உதயமும் ஆருடமும் ${udName} ராசியில் இணைந்துள்ளன. நினைத்த காரியம் எவ்விதத் தடையுமின்றி உடனடியாக நிறைவேறும்.`,
+      rationale: `உதயம் & ஆருடம்: ${udName} (1-ஆம் பாவம்).`,
+      weight: 3
+    });
+  } else if (udhayamToAarudamHouses === 2) {
+    indicators.push({
+      id: 'ud-ar-2',
+      type: 'warning',
+      symbol: '⚠️',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: 'உதயத்திற்கு 2-ல் ஆருடம் (துவிதுவாதசம் - ஆரம்பத் தடை)',
+      textEn: 'Aarudam in 2nd House (2-12 Axis - Initial Delay)',
+      textTa: 'உதயத்திற்கு 2-ல் ஆருடம் (துவிதுவாதசம் - ஆரம்பத் தடை)',
+      desc: `ஆருடம் உதயத்திற்கு 2-ஆம் வீட்டில் (${arName}) உள்ளது. பண வரவு வாய்ப்பு இருப்பினும் ஆரம்பத் தடைகளும் இழுபறியும் ஏற்படும்.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (2-ஆம் இடம்).`,
+      weight: -2
+    });
+  } else if (udhayamToAarudamHouses === 3 || udhayamToAarudamHouses === 11) {
+    indicators.push({
+      id: `ud-ar-${udhayamToAarudamHouses}`,
+      type: 'positive',
+      symbol: '✅',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (${udhayamToAarudamHouses === 3 ? 'தைரிய வீரியம்' : 'லாப ஸ்தானம்'} - வெற்றி நிச்சயம்)`,
+      textEn: `Aarudam in ${udhayamToAarudamHouses}th House (${udhayamToAarudamHouses === 3 ? 'Courage' : 'Gains'} - High Success)`,
+      textTa: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (${udhayamToAarudamHouses === 3 ? 'தைரிய வீரியம்' : 'லாப ஸ்தானம்'} - வெற்றி நிச்சயம்)`,
+      desc: `ஆருடம் உதயத்திற்கு ${udhayamToAarudamHouses}-ஆம் வீட்டில் (${arName}) அமைந்துள்ளது. விடாமுயற்சியால் காரியம் முழு வெற்றி பெறும்.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (${udhayamToAarudamHouses}-ஆம் உபசய ஸ்தானம்).`,
+      weight: 2
+    });
+  } else if (udhayamToAarudamHouses === 4 || udhayamToAarudamHouses === 10) {
+    indicators.push({
+      id: `ud-ar-${udhayamToAarudamHouses}`,
+      type: 'positive',
+      symbol: '✅',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (கேந்திர சுபம் - சாதகமான சூழல்)`,
+      textEn: `Aarudam in ${udhayamToAarudamHouses}th House (Kendra - Favorable Support)`,
+      textTa: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (கேந்திர சுபம் - சாதகமான சூழல்)`,
+      desc: `ஆருடம் கேந்திர ஸ்தானத்தில் அமைந்திருப்பதால் நலம் விளையும்; காரியத்தில் முன்னேற்றம் இருக்கும்.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (${udhayamToAarudamHouses}-ஆம் கேந்திரம்).`,
+      weight: 2
+    });
+  } else if (udhayamToAarudamHouses === 5 || udhayamToAarudamHouses === 9) {
+    indicators.push({
+      id: `ud-ar-${udhayamToAarudamHouses}`,
+      type: 'positive',
+      symbol: '🌟',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (பூர்வ புண்ணிய திரிகோணம் - அதிர்ஷ்ட வெற்றி)`,
+      textEn: `Aarudam in ${udhayamToAarudamHouses}th House (Trikona - Divine Grace & High Fortune)`,
+      textTa: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (பூர்வ புண்ணிய திரிகோணம் - அதிர்ஷ்ட வெற்றி)`,
+      desc: `ஆருடம் தர்ம திரிகோணத்தில் இருப்பதால் தெய்வ அனுகூலமும் எதிர்பாராத அதிர்ஷ்டமும் கிடைத்து காரியம் இனிதே முடியும்.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (${udhayamToAarudamHouses}-ஆம் திரிகோணம்).`,
+      weight: 3
+    });
+  } else if (udhayamToAarudamHouses === 6 || udhayamToAarudamHouses === 8 || udhayamToAarudamHouses === 12) {
+    indicators.push({
+      id: `ud-ar-${udhayamToAarudamHouses}`,
+      type: 'negative',
+      symbol: '❌',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (${udhayamToAarudamHouses === 6 ? 'எதிர்ப்பு/கடன்' : udhayamToAarudamHouses === 8 ? 'தடை/அவமானம்' : 'விரயம்'} - மறைவு ஸ்தானம்)`,
+      textEn: `Aarudam in ${udhayamToAarudamHouses}th House (Dusthana - Severe Obstacle / Loss)`,
+      textTa: `உதயத்திற்கு ${udhayamToAarudamHouses}-ல் ஆருடம் (${udhayamToAarudamHouses === 6 ? 'எதிர்ப்பு/கடன்' : udhayamToAarudamHouses === 8 ? 'தடை/அவமானம்' : 'விரயம்'} - மறைவு ஸ்தானம்)`,
+      desc: `ஆருடம் மறைவு ஸ்தானத்தில் சிக்கியுள்ளதால் காரியத்தில் கடும் சோதனைகள் மற்றும் விரயங்கள் நேரலாம்; விழிப்புணர்வு தேவை.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (${udhayamToAarudamHouses}-ஆம் மறைவிடம்).`,
+      weight: -3
+    });
+  } else if (udhayamToAarudamHouses === 7) {
+    indicators.push({
+      id: 'ud-ar-7',
+      type: 'positive',
+      symbol: '⚖️',
+      category: 'ud-ar',
+      categoryLabel: 'உதயம் - ஆருடம்',
+      title: 'உதயத்திற்கு 7-ல் ஆருடம் (சமசப்தமம் - இருதரப்பு உடன்படிக்கை)',
+      textEn: 'Aarudam in 7th House (Direct Aspect - Balanced Negotiations)',
+      textTa: 'உதயத்திற்கு 7-ல் ஆருடம் (சமசப்தமம் - இருதரப்பு உடன்படிக்கை)',
+      desc: `ஆருடம் நேரெதிரே இருப்பதால் கூட்டுத் தொழில், திருமணம் மற்றும் பேச்சுவார்த்தைகள் சமரச உடன்படிக்கையுடன் முடியும்.`,
+      rationale: `உதயம்: ${udName}, ஆருடம்: ${arName} (7-ஆம் சமசப்தம பார்வை).`,
+      weight: 1
+    });
+  }
+
+  // 2. Kavippu Obstacle Verification
+  const kvName = RASIS[kavippuSignIndex].ta;
+  if (kavippuSignIndex === udhayamSignIndex) {
+    indicators.push({
+      id: 'kv-on-ud',
+      type: 'negative',
+      symbol: '❌',
+      category: 'kavippu',
+      categoryLabel: 'கவிப்புத் தடை',
+      title: 'உதயத்தின் மீதே கவிப்பு (கேட்பவருக்கு முழுத் தடை & மனக்குழப்பம்)',
+      textEn: 'Kavippu Directly on Udhayam (Affliction on Querent)',
+      textTa: 'உதயத்தின் மீதே கவிப்பு (கேட்பவருக்கு முழுத் தடை & மனக்குழப்பம்)',
+      desc: `கவிப்பு உதய ராசியிலேயே (${kvName}) உள்ளதால் திட்டமிட்ட செயல்களில் பெரிய தடை, கண் திருஷ்டி அல்லது ஆபத்து நேரலாம்.`,
+      rationale: `கவிப்பு ${kvName} ராசியில் (உதயம் மீது).`,
+      weight: -3
+    });
+  } else if (kavippuSignIndex === aarudamSignIndex) {
+    indicators.push({
+      id: 'kv-on-ar',
+      type: 'negative',
+      symbol: '❌',
+      category: 'kavippu',
+      categoryLabel: 'கவிப்புத் தடை',
+      title: 'ஆருடத்தின் மீதே கவிப்பு (காரியத் தோல்வி / ஸ்தம்பிக்கும் நிலை)',
+      textEn: 'Kavippu Directly on Aarudam (Affliction on Query Outcome)',
+      textTa: 'ஆருடத்தின் மீதே கவிப்பு (காரியத் தோல்வி / ஸ்தம்பிக்கும் நிலை)',
+      desc: `கவிப்பு ஆருட ராசியில் (${kvName}) அமர்ந்திருப்பதால் கேட்கப்பட்ட காரியம் கைநழுவலாம்; புதிய முடிவுகளைத் தவிர்க்கவும்.`,
+      rationale: `கவிப்பு ${kvName} ராசியில் (ஆருடம் மீது).`,
+      weight: -3
+    });
+  } else {
+    indicators.push({
+      id: 'kv-free',
+      type: 'positive',
+      symbol: '✅',
+      category: 'kavippu',
+      categoryLabel: 'கவிப்புத் தடை',
+      title: `உதயம் மற்றும் ஆருடம் கவிப்புத் தடையின்றி விடுபட்டுள்ளன (${kvName}-ல் கவிப்பு)`,
+      textEn: `Udhayam & Aarudam Free from Kavippu (Kavippu in ${RASIS[kavippuSignIndex].en})`,
+      textTa: `உதயம் மற்றும் ஆருடம் கவிப்புத் தடையின்றி விடுபட்டுள்ளன (${kvName}-ல் கவிப்பு)`,
+      desc: 'கவிப்பு முக்கியமான உதயம் மற்றும் ஆருட ராசிகளை பாதிக்கவில்லை. காரியப் பாதையில் முட்டுக்கட்டைகள் இல்லை.',
+      rationale: `கவிப்பு: ${kvName} (${RASIS[kavippuSignIndex].en}).`,
+      weight: 2
+    });
+  }
+
+  // 3. Kavippu Trapped Planets (Both Gochara 9 planets and 8 Jama Grahas)
+  const gocharaInKv = (rasiGrid[kavippuSignIndex] || []).filter(p => {
+    const n = (p.name || '').toLowerCase();
+    const t = (p.type || '').toLowerCase();
+    const isSpecial = ['lagna', 'udhayam', 'aarudam', 'kavippu'].includes(n) || ['lagna', 'udhayam', 'aarudam', 'kavippu'].includes(t);
+    const isSub = p.isSubPlanet || ['yamakandam', 'rahukalam', 'maandi', 'mrityu'].includes(n);
+    return !isSpecial && !isSub;
+  });
+
+  const jamaInKv = Object.values(jamaPlanetsAssigned || {}).filter(jp => jp && jp.signIndex === kavippuSignIndex);
+
+  const trappedListTa = [
+    ...jamaInKv.map(jp => formatJamaPlanetName(jp.key || jp.name, true)),
+    ...gocharaInKv.map(p => formatGocharaPlanetName(p.name, true))
+  ].join(', ');
+
+  const trappedListEn = [
+    ...jamaInKv.map(jp => formatJamaPlanetName(jp.key || jp.name, false)),
+    ...gocharaInKv.map(p => formatGocharaPlanetName(p.name, false))
+  ].join(', ');
+
+  if (trappedListTa.length > 0) {
+    indicators.push({
+      id: 'kv-trapped',
+      type: 'negative',
+      symbol: '❌',
+      category: 'kavippu',
+      categoryLabel: 'கவிப்புத் தடை',
+      title: `கவிப்பில் கிரகங்கள் சேர்க்கை: ${trappedListTa}`,
+      textEn: `Planets Trapped in Kavippu: ${trappedListEn}`,
+      textTa: `கவிப்பில் கிரகங்கள் சேர்க்கை: ${trappedListTa}`,
+      desc: `கவிப்பு இருக்கும் ${kvName} ராசியில் உள்ள கிரகங்கள் (${trappedListTa}) சார்ந்த காரகங்களில் இழப்பு அல்லது ஏமாற்றம் வரலாம்.`,
+      rationale: `கவிப்பு ராசியில் கிரகங்கள்: ${trappedListTa}.`,
+      weight: -2
+    });
+  }
+
+  // 4. Udhaya Lord Strength (கோட்சார உதயாதிபதி)
+  const udhayaLord = RASIS[udhayamSignIndex].lord;
+  const udLordKoTa = formatGocharaPlanetName(udhayaLord, true);
+  const udLordKoEn = formatGocharaPlanetName(udhayaLord, false);
+
+  let udLordPlanetData = null;
+  for (let s = 0; s < 12; s++) {
+    const match = (rasiGrid[s] || []).find(p => (p.name || '').toLowerCase() === udhayaLord.toLowerCase());
+    if (match) {
+      udLordPlanetData = { ...match, signIndex: s };
+      break;
+    }
+  }
+
+  if (udLordPlanetData) {
+    const sIdx = udLordPlanetData.signIndex;
+    const isExalted = PLANET_EXALTATION[udhayaLord] === sIdx;
+    const isOwnHouse = (PLANET_OWN_HOUSES[udhayaLord] || []).includes(sIdx);
+    const isDebilitated = PLANET_DEBILITATION[udhayaLord] === sIdx;
+    const isInKavippu = sIdx === kavippuSignIndex;
+    const bhavaFromUd = ((sIdx - udhayamSignIndex + 12) % 12) + 1;
+    const isInDusthana = bhavaFromUd === 6 || bhavaFromUd === 8 || bhavaFromUd === 12;
+
+    if (isInKavippu) {
+      indicators.push({
+        id: 'ud-lord-kavippu',
+        type: 'negative',
+        symbol: '❌',
+        category: 'lord',
+        categoryLabel: 'உதய அதிபதி',
+        title: `உதயாதிபதி (${udLordKoTa}) கவிப்பில் சிக்கியுள்ளார்`,
+        textEn: `Udhaya Lord (${udLordKoEn}) Trapped in Kavippu`,
+        textTa: `உதயாதிபதி (${udLordKoTa}) கவிப்பில் சிக்கியுள்ளார்`,
+        desc: 'உதயாதிபதி கவிப்பில் இருப்பதால் கேட்பவருக்கு ஆற்றல் குறைவு, உடல்நலக் கோளாறு அல்லது செயல்திறன் முடக்கம் உண்டாகலாம்.',
+        rationale: `உதயாதிபதி ${udLordKoTa} கவிப்பு நின்ற ${kvName} ராசியில்.`,
+        weight: -3
+      });
+    } else if (isDebilitated) {
+      indicators.push({
+        id: 'ud-lord-debilitated',
+        type: 'negative',
+        symbol: '❌',
+        category: 'lord',
+        categoryLabel: 'உதய அதிபதி',
+        title: `உதயாதிபதி (${udLordKoTa}) ${RASIS[sIdx].ta}-ல் நீசமடைந்துள்ளார்`,
+        textEn: `Udhaya Lord (${udLordKoEn}) is Debilitated in ${RASIS[sIdx].en}`,
+        textTa: `உதயாதிபதி (${udLordKoTa}) ${RASIS[sIdx].ta}-ல் நீசமடைந்துள்ளார்`,
+        desc: 'உதயாதிபதி நீச பலவீனமடைந்திருப்பதால் காரியத்தை முன்னின்று நடத்தும் வல்லமை குறையும்; மற்றவர்களின் உதவி தேவைப்படும்.',
+        rationale: `உதயாதிபதி ${udLordKoTa} நீச ராசியில் (${RASIS[sIdx].ta}).`,
+        weight: -2
+      });
+    } else if (isInDusthana) {
+      indicators.push({
+        id: 'ud-lord-dusthana',
+        type: 'warning',
+        symbol: '⚠️',
+        category: 'lord',
+        categoryLabel: 'உதய அதிபதி',
+        title: `உதயாதிபதி (${udLordKoTa}) ${bhavaFromUd}-ஆம் மறைவிடத்தில் உள்ளார்`,
+        textEn: `Udhaya Lord (${udLordKoEn}) in ${bhavaFromUd}th House (Dusthana)`,
+        textTa: `உதயாதிபதி (${udLordKoTa}) ${bhavaFromUd}-ஆம் மறைவிடத்தில் உள்ளார்`,
+        desc: 'உதயாதிபதி மறைவு ஸ்தானத்தில் இருப்பதால் அலைச்சலும் தேவையற்ற செலவுகளும் நேரலாம்.',
+        rationale: `உதயாதிபதி ${udLordKoTa} உதயத்திற்கு ${bhavaFromUd}-ல் (${RASIS[sIdx].ta}).`,
+        weight: -1
+      });
+    } else if (isExalted || isOwnHouse) {
+      indicators.push({
+        id: 'ud-lord-strong',
+        type: 'positive',
+        symbol: '🌟',
+        category: 'lord',
+        categoryLabel: 'உதய அதிபதி',
+        title: `உதயாதிபதி (${udLordKoTa}) ${isExalted ? 'உச்ச' : 'ஆட்சி'} பலத்துடன் நல்ல வலிமையுடன் உள்ளார்`,
+        textEn: `Udhaya Lord (${udLordKoEn}) is Highly Dignified (${isExalted ? 'Exalted' : 'Own Sign'})`,
+        textTa: `உதயாதிபதி (${udLordKoTa}) ${isExalted ? 'உச்ச' : 'ஆட்சி'} பலத்துடன் நல்ல வலிமையுடன் உள்ளார்`,
+        desc: 'உதயாதிபதி உச்சம்/ஆட்சி பெற்று முழு பலத்துடன் இருப்பதால் கேட்பவரின் முயற்சி வெல்லும்; செல்வாக்கு கூடும்.',
+        rationale: `உதயாதிபதி ${udLordKoTa} ${isExalted ? 'உச்சம்' : 'ஆட்சி'} (${RASIS[sIdx].ta}).`,
+        weight: 3
+      });
+    } else {
+      indicators.push({
+        id: 'ud-lord-normal',
+        type: 'positive',
+        symbol: '✅',
+        category: 'lord',
+        categoryLabel: 'உதய அதிபதி',
+        title: `உதயாதிபதி (${udLordKoTa}) நல்ல நிலையில் உள்ளார்`,
+        textEn: `Udhaya Lord (${udLordKoEn}) in Stable Position`,
+        textTa: `உதயாதிபதி (${udLordKoTa}) நல்ல நிலையில் உள்ளார்`,
+        desc: 'உதயாதிபதி எவ்விதக் கடுமையான தோஷமுமின்றி இயல்பான சுப பலத்துடன் அமர்ந்துள்ளார்.',
+        rationale: `உதயாதிபதி ${udLordKoTa} ${RASIS[sIdx].ta} ராசியில்.`,
+        weight: 1
+      });
+    }
+  }
+
+  // 5. 7th House Lord (கோட்சார 7-ஆம் அதிபதி)
+  const seventhSignIdx = (udhayamSignIndex + 6) % 12;
+  const seventhLord = RASIS[seventhSignIdx].lord;
+  const seventhLordKoTa = formatGocharaPlanetName(seventhLord, true);
+  const seventhLordKoEn = formatGocharaPlanetName(seventhLord, false);
+
+  let seventhLordPlanetData = null;
+  for (let s = 0; s < 12; s++) {
+    const match = (rasiGrid[s] || []).find(p => (p.name || '').toLowerCase() === seventhLord.toLowerCase());
+    if (match) {
+      seventhLordPlanetData = { ...match, signIndex: s };
+      break;
+    }
+  }
+
+  if (seventhLordPlanetData) {
+    const sIdx = seventhLordPlanetData.signIndex;
+    const isDeb = PLANET_DEBILITATION[seventhLord] === sIdx;
+    const isKv = sIdx === kavippuSignIndex;
+    if (isKv) {
+      indicators.push({
+        id: 'seventh-lord-kavippu',
+        type: 'negative',
+        symbol: '❌',
+        category: 'lord',
+        categoryLabel: '7-ஆம் அதிபதி',
+        title: `7-ஆம் அதிபதி (${seventhLordKoTa}) கவிப்பில் சிக்கியுள்ளார்`,
+        textEn: `7th Lord (${seventhLordKoEn}) Trapped in Kavippu`,
+        textTa: `7-ஆம் அதிபதி (${seventhLordKoTa}) கவிப்பில் சிக்கியுள்ளார்`,
+        desc: 'எதிர் தரப்பினர் ஒத்துழைக்க மாட்டார்கள் அல்லது ஏமாற்றம் தரலாம். சமரசப் பேச்சுவார்த்தைகளைத் தவிர்க்கவும்.',
+        rationale: `7-ஆம் அதிபதி ${seventhLordKoTa} கவிப்பில்.`,
+        weight: -2
+      });
+    } else if (isDeb) {
+      indicators.push({
+        id: 'seventh-lord-deb',
+        type: 'warning',
+        symbol: '⚠️',
+        category: 'lord',
+        categoryLabel: '7-ஆம் அதிபதி',
+        title: `7-ஆம் அதிபதி (${seventhLordKoTa}) நீசமடைந்துள்ளார்`,
+        textEn: `7th Lord (${seventhLordKoEn}) Debilitated`,
+        textTa: `7-ஆம் அதிபதி (${seventhLordKoTa}) நீசமடைந்துள்ளார்`,
+        desc: 'கூட்டாளிகள் அல்லது வாடிக்கையாளர்கள் பலவீனமாக இருப்பார்கள்; உடன்படிக்கைகளில் கூடுதல் கவனம் தேவை.',
+        rationale: `7-ஆம் அதிபதி ${seventhLordKoTa} நீச ராசியில் (${RASIS[sIdx].ta}).`,
+        weight: -1
+      });
+    } else {
+      indicators.push({
+        id: 'seventh-lord-good',
+        type: 'positive',
+        symbol: '✅',
+        category: 'lord',
+        categoryLabel: '7-ஆம் அதிபதி',
+        title: `7-ஆம் அதிபதி (${seventhLordKoTa}) நல்ல நிலையில் உள்ளார்`,
+        textEn: `7th Lord (${seventhLordKoEn}) in Favorable Dignity`,
+        textTa: `7-ஆம் அதிபதி (${seventhLordKoTa}) நல்ல நிலையில் உள்ளார்`,
+        desc: 'எதிர்தரப்பு மற்றும் கூட்டாளிகள் ஆதரவாக இருப்பார்கள்; ஒப்பந்தங்கள் சுபமாக முடியும்.',
+        rationale: `7-ஆம் அதிபதி ${seventhLordKoTa} ${RASIS[sIdx].ta} ராசியில்.`,
+        weight: 1
+      });
+    }
+  }
+
+  // 6. Sub-Planets (Yamakandam, Maandi, Rahu Kalam)
+  const ykSign = subPlanets?.yamakandam?.rasiIndex;
+  const mdSign = subPlanets?.maandi?.rasiIndex;
+  const ykInUdOrAr = ykSign === udhayamSignIndex || ykSign === aarudamSignIndex;
+  const mdInUdOrAr = mdSign === udhayamSignIndex || mdSign === aarudamSignIndex;
+
+  if (ykInUdOrAr) {
+    indicators.push({
+      id: 'sub-yamakandam',
+      type: 'negative',
+      symbol: '❌',
+      category: 'upagraha',
+      categoryLabel: 'உபகிரகம்',
+      title: `எமகண்டம் ${ykSign === udhayamSignIndex ? 'உதயத்தில்' : 'ஆருடத்தில்'} நிற்கிறது (ஆபத்து/விரயம்)`,
+      textEn: `Yamakandam in ${ykSign === udhayamSignIndex ? 'Udhayam' : 'Aarudam'} (Caution)`,
+      textTa: `எமகண்டம் ${ykSign === udhayamSignIndex ? 'உதயத்தில்' : 'ஆருடத்தில்'} நிற்கிறது (ஆபத்து/விரயம்)`,
+      desc: 'எமகண்டக் காலத்தில் முக்கிய பணிகளைத் தொடங்க வேண்டாம்; நிதி மற்றும் பயண விவகாரங்களில் கவனம் தேவை.',
+      rationale: `எமகண்டம் ${ykSign === udhayamSignIndex ? udName : arName} ராசியில்.`,
+      weight: -2
+    });
+  }
+
+  if (mdInUdOrAr) {
+    indicators.push({
+      id: 'sub-maandi',
+      type: 'negative',
+      symbol: '❌',
+      category: 'upagraha',
+      categoryLabel: 'உபகிரகம்',
+      title: `மாந்தி ${mdSign === udhayamSignIndex ? 'உதயத்தில்' : 'ஆருடத்தில்'} நிற்கிறது (தாமதம் & மந்தம்)`,
+      textEn: `Maandi in ${mdSign === udhayamSignIndex ? 'Udhayam' : 'Aarudam'} (Affliction)`,
+      textTa: `மாந்தி ${mdSign === udhayamSignIndex ? 'உதயத்தில்' : 'ஆருடத்தில்'} நிற்கிறது (தாமதம் & மந்தம்)`,
+      desc: 'மாந்தியின் சேர்க்கையால் காரியத்தில் மந்தம், வீண் அலைச்சல் மற்றும் மன உளைச்சல் உண்டாகலாம்.',
+      rationale: `மாந்தி ${mdSign === udhayamSignIndex ? udName : arName} ராசியில்.`,
+      weight: -2
+    });
+  }
+
+  if (!ykInUdOrAr && !mdInUdOrAr) {
+    indicators.push({
+      id: 'sub-clean',
+      type: 'positive',
+      symbol: '✅',
+      category: 'upagraha',
+      categoryLabel: 'உபகிரகம்',
+      title: 'உதயம் மற்றும் ஆருடம் எமகண்டம், மாந்தி தாக்கமின்றி சுத்தமாக உள்ளன',
+      textEn: 'Udhayam & Aarudam Free of Malefic Sub-Planets',
+      textTa: 'உதயம் மற்றும் ஆருடம் எமகண்டம், மாந்தி தாக்கமின்றி சுத்தமாக உள்ளன',
+      desc: 'எமகண்டம் மற்றும் மாந்தி உபகிரகங்களின் நேரடி தாக்கம் இல்லாததால் காரியப் பாதை தெளிவாக உள்ளது.',
+      rationale: 'உபகிரக தோஷங்கள் இல்லை.',
+      weight: 2
+    });
+  }
+
+  // 7. Gowri Auspicious Period
+  if (centerInfo?.gowri) {
+    const isGowriAuspicious = centerInfo.gowri.isAuspicious;
+    const gowriName = centerInfo.gowri.value || '';
+    indicators.push({
+      id: 'timing-gowri',
+      type: isGowriAuspicious ? 'positive' : 'warning',
+      symbol: isGowriAuspicious ? '✅' : '⚠️',
+      category: 'timing',
+      categoryLabel: 'சுப வேளை',
+      title: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriName})`,
+      textEn: `Gowri ${isGowriAuspicious ? 'Auspicious' : 'Inauspicious'} Period (${gowriName})`,
+      textTa: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriName})`,
+      desc: isGowriAuspicious
+        ? `தற்போதைய கௌரி வேளை (${gowriName}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
+        : `தற்போதைய கௌரி வேளை (${gowriName}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`,
+      rationale: `கௌரி பஞ்சாங்கம்: ${gowriName}.`,
+      weight: isGowriAuspicious ? 1 : -1
+    });
+  }
 
   return {
     success: true,
@@ -1317,12 +1937,40 @@ export async function calculateJamakkolPrasannam({
       }
     },
     indicators,
+    keyNotes: calculateJamakkolKeyNotes({
+      pillars: {
+        udhayam: { signIndex: udhayamSignIndex, degreeInRasi: udhayamDegreeInRasi },
+        aarudam: { signIndex: aarudamSignIndex, degreeInRasi: aarudamDegreeInRasi },
+        kavippu: { signIndex: kavippuSignIndex, degreeInRasi: kavippuDegreeInRasi }
+      },
+      rasiGrid,
+      jamaPlanets: jamaPlanetsAssigned
+    }, 'ta'),
+    keyNotesTa: calculateJamakkolKeyNotes({
+      pillars: {
+        udhayam: { signIndex: udhayamSignIndex, degreeInRasi: udhayamDegreeInRasi },
+        aarudam: { signIndex: aarudamSignIndex, degreeInRasi: aarudamDegreeInRasi },
+        kavippu: { signIndex: kavippuSignIndex, degreeInRasi: kavippuDegreeInRasi }
+      },
+      rasiGrid,
+      jamaPlanets: jamaPlanetsAssigned
+    }, 'ta'),
+    keyNotesEn: calculateJamakkolKeyNotes({
+      pillars: {
+        udhayam: { signIndex: udhayamSignIndex, degreeInRasi: udhayamDegreeInRasi },
+        aarudam: { signIndex: aarudamSignIndex, degreeInRasi: aarudamDegreeInRasi },
+        kavippu: { signIndex: kavippuSignIndex, degreeInRasi: kavippuDegreeInRasi }
+      },
+      rasiGrid,
+      jamaPlanets: jamaPlanetsAssigned
+    }, 'en'),
     masterData: JAMAKKOL_PRASANNAM_MASTER_DATA
   };
 }
 
 export default {
   calculateJamakkolPrasannam,
+  calculateJamakkolKeyNotes,
   calculateJamakkolCenterInfo,
   calculateSunriseSunset,
   formatSunTime12Hour,
