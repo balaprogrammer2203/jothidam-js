@@ -8,6 +8,11 @@ import { calculateKadikaraPrasannam, BHAVA_PREDICTIONS } from '../../../utils/ka
 import { generateKundali, calculateKadikaraPrasannamApi } from '../../../services/api';
 import horoscopeService from '../../horoscope/services/horoscope.service';
 import masterDataService from '../../../services/masterData.service';
+import UserLoginModal from '../../auth/components/UserLoginModal';
+import SavePrasannamModal from '../components/SavePrasannamModal';
+import { useAuth } from '../../../app/providers/AuthContext';
+import accountService from '../../account/services/account.service';
+import Toast from '../../../components/common/Toast';
 import '../../../styles/kadikaraPrasannam.css';
 
 // Fallback planetary positions for 04/07/2025 15:03 Chennai with rich astrological attributes
@@ -225,6 +230,13 @@ export default function KadikaraPrasannamPage() {
 
   // Live ticking clock
   const [liveTimeStr, setLiveTimeStr] = useState('');
+
+  // Authentication & Save Prasannam States
+  const { isAuthenticated } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSavePrasannamModal, setShowSavePrasannamModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [isSavingPrasannam, setIsSavingPrasannam] = useState(false);
 
   // Form Inputs - Defaulting to user's screenshot context (04/07/2025 15:03 Chennai)
   const [inputDate, setInputDate] = useState(() => {
@@ -570,6 +582,59 @@ export default function KadikaraPrasannamPage() {
     }
   };
 
+  const handleSavePrasannamClick = () => {
+    if (!isAuthenticated) {
+      setShowLoginModal(true);
+      return;
+    }
+    setShowSavePrasannamModal(true);
+  };
+
+  const handleExecuteSavePrasannam = async (formData) => {
+    setIsSavingPrasannam(true);
+    try {
+      const payload = {
+        prasannamType: 'kadikara',
+        title: formData.title,
+        clientName: formData.clientName,
+        queryCategory: formData.queryCategory,
+        dateTime: formattedDateTimeStr,
+        location: {
+          placeName: inputPlace || 'Chennai',
+          latitude: Number(inputLat) || 13.0827,
+          longitude: Number(inputLng) || 80.2707,
+          timezone: 'Asia/Kolkata'
+        },
+        ayanamsa: inputAyanamsa || 'lahiri',
+        summary: {
+          bhava: chartResult?.bhavaNumber || 1,
+          verdict: chartResult?.predictionTextTa || chartResult?.predictionTextEn || ''
+        },
+        chartData: {
+          chartResult,
+          rasiGrid
+        },
+        notes: formData.notes
+      };
+
+      await accountService.savePrasannam(payload);
+      setToastMessage({
+        type: 'success',
+        text: currentLang === 'ta'
+          ? 'கடிகார பிரசன்னம் உங்கள் கணக்கில் வெற்றிகரமாக சேமிக்கப்பட்டது! "My Account" பக்கத்தில் பார்க்கலாம்.'
+          : 'Kadikara Prasannam chart saved to your account! You can review it anytime in My Account.'
+      });
+    } catch (err) {
+      setToastMessage({
+        type: 'error',
+        text: err.message || 'Failed to save prasannam'
+      });
+      throw err;
+    } finally {
+      setIsSavingPrasannam(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsPlaceDropdownOpen(false);
@@ -873,6 +938,28 @@ export default function KadikaraPrasannamPage() {
                   <button type="submit" className="btn-kadikara-calculate">
                     <span>✨</span> {t('astrology:kadikara.calculate', 'பலன் காண்க')}
                   </button>
+                  <button
+                    type="button"
+                    className="btn-kadikara-save"
+                    onClick={handleSavePrasannamClick}
+                    disabled={isSavingPrasannam}
+                    style={{
+                      background: 'linear-gradient(135deg, #059669, #047857)',
+                      color: '#ffffff',
+                      border: 'none',
+                      padding: '0.65rem 1.25rem',
+                      borderRadius: '0.65rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      boxShadow: '0 4px 12px rgba(5, 150, 105, 0.3)'
+                    }}
+                  >
+                    <span>{isSavingPrasannam ? '⏳' : '💾'}</span>
+                    <span>{isSavingPrasannam ? (currentLang === 'ta' ? 'சேமிக்கப்படுகிறது...' : 'Saving...') : (currentLang === 'ta' ? 'பிரசன்னம் சேமி' : 'Save Prasannam')}</span>
+                  </button>
                 </div>
               </form>
             </section>
@@ -1099,6 +1186,34 @@ export default function KadikaraPrasannamPage() {
               </div>
             </section>
           </div>
+
+      {/* Toast Notification */}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
+
+      {/* User Login Popup Modal for Kadikara Prasannam */}
+      <UserLoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSuccess={() => {
+          setShowLoginModal(false);
+          setShowSavePrasannamModal(true);
+        }}
+        title={currentLang === 'ta' ? 'கடிகார பிரசன்னத்தை சேமிக்க உள்நுழையவும்' : 'Sign In to Save Kadikara Prasannam'}
+        subtitle={currentLang === 'ta'
+          ? 'உங்கள் கணக்கில் இந்த கடிகார பிரசன்ன வரைபடத்தை பாதுகாப்பாக சேமித்து எப்போது வேண்டுமானாலும் "My Account" பக்கத்தில் பார்க்கலாம்.'
+          : 'Login or create a free account to store this Kadikara Prasannam chart in your library for future reference.'}
+      />
+
+      {/* Save Prasannam Details Modal */}
+      <SavePrasannamModal
+        isOpen={showSavePrasannamModal}
+        onClose={() => setShowSavePrasannamModal(false)}
+        onSave={handleExecuteSavePrasannam}
+        prasannamType="kadikara"
+        defaultTitle={chartResult?.bhavaNumber ? `${chartResult.bhavaNumber}-ம் பாவம் - கடிகார பிரசன்னம்` : 'கடிகார பிரசன்ன கேள்வி'}
+        dateTime={formattedDateTimeStr}
+        location={{ placeName: inputPlace || 'Chennai' }}
+      />
     </>
   );
 }

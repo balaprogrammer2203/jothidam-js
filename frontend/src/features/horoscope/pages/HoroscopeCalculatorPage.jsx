@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '../../../components/common/SEOHead';
@@ -6,13 +6,17 @@ import Breadcrumbs from '../../../components/common/Breadcrumbs';
 import HeroBanner from '../components/HeroBanner';
 import HoroscopeForm from '../components/HoroscopeForm/HoroscopeForm';
 import ChartViewContainer from '../components/ChartView/ChartViewContainer';
+import UserLoginModal from '../../auth/components/UserLoginModal';
 import { useHoroscopeForm } from '../hooks/useHoroscopeForm';
 import { useHoroscope } from '../hooks/useHoroscope';
+import { useAuth } from '../../../app/providers/AuthContext';
 
 export default function HoroscopeCalculatorPage() {
   const { t, i18n } = useTranslation(['horoscope', 'common']);
   const currentLang = i18n.language || 'en';
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const formState = useHoroscopeForm();
   const {
     chartResult,
@@ -72,16 +76,7 @@ export default function HoroscopeCalculatorPage() {
     }, 150);
   };
 
-  const handleSave = async () => {
-    const isValid = formState.validateForm(currentLang);
-    if (!isValid) {
-      const firstErrorRow = document.querySelector('.epanchang-row.has-error');
-      if (firstErrorRow) {
-        firstErrorRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      return;
-    }
-
+  const executeSaveHoroscope = async () => {
     // Ensure chart is generated if not yet present so that exact Maandi data is available
     let activeChart = chartResult;
     if (!activeChart) {
@@ -99,11 +94,29 @@ export default function HoroscopeCalculatorPage() {
 
     const payload = {
       ...formState.getPayload(formState.chartType),
-      chartData: activeChart || null,
       maandi: maandiPlanet,
       maandiDetails
     };
     await saveHoroscope(payload);
+  };
+
+  const handleSave = async () => {
+    const isValid = formState.validateForm(currentLang);
+    if (!isValid) {
+      const firstErrorRow = document.querySelector('.epanchang-row.has-error');
+      if (firstErrorRow) {
+        firstErrorRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    // If user is not authenticated, prompt the User Login popup modal
+    if (!isAuthenticated) {
+      setShowLoginModal(true);
+      return;
+    }
+
+    await executeSaveHoroscope();
   };
 
   const handleQuickSidebarSubmit = async (quickData) => {
@@ -191,6 +204,20 @@ export default function HoroscopeCalculatorPage() {
           />
         </div>
       )}
+
+      {/* User Login Popup Modal for saving horoscopes */}
+      <UserLoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSuccess={() => {
+          setShowLoginModal(false);
+          executeSaveHoroscope();
+        }}
+        title={currentLang === 'ta' ? 'ஜாதகத்தை சேமிக்க உள்நுழையவும்' : 'Sign In to Save Horoscope'}
+        subtitle={currentLang === 'ta'
+          ? 'உங்கள் கணக்கில் இந்த ஜாதகத்தை பாதுகாப்பாக சேமித்து எப்போது வேண்டுமானாலும் "My Account" பக்கத்தில் ஆய்வு செய்யலாம்.'
+          : 'Login or create a free account to store this birth chart in your library for future analysis.'}
+      />
     </>
   );
 }

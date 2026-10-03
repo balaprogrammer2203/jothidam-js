@@ -1,4 +1,5 @@
 import HoroscopeProfile from '../models/HoroscopeProfile.js';
+import PrasannamProfile from '../models/PrasannamProfile.js';
 import RasiMaster from '../models/RasiMaster.js';
 import NakshatraMaster from '../models/NakshatraMaster.js';
 import PlanetMaster from '../models/PlanetMaster.js';
@@ -367,17 +368,26 @@ export const saveUserHoroscope = async (req, res) => {
       });
     }
 
-    // Condition Check: Name, Date of Birth, Time of Birth, and Birth Place must not already exist
+    const activeUserId = req.user?._id || req.body.userId || null;
+
+    // Condition Check: If user is authenticated, check for duplicates in their own account; otherwise check globally
     const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const existingProfile = await HoroscopeProfile.findOne({
+    const duplicateQuery = {
       "personDetails.fullName": { $regex: new RegExp(`^${escapeRegex(cleanName)}$`, 'i') },
       "personDetails.dob": cleanDob,
       "personDetails.tob": cleanTob,
-      $or: [
+      status: 'active'
+    };
+    if (activeUserId) {
+      duplicateQuery.userId = activeUserId;
+    } else {
+      duplicateQuery.$or = [
         { "location.placeName": { $regex: new RegExp(`^${escapeRegex(cleanPlaceName)}$`, 'i') } },
         { "location.formattedAddress": { $regex: new RegExp(`^${escapeRegex(rawPlace)}$`, 'i') } }
-      ]
-    });
+      ];
+    }
+
+    const existingProfile = await HoroscopeProfile.findOne(duplicateQuery);
 
     if (existingProfile) {
       return res.status(409).json({
@@ -617,6 +627,7 @@ export const saveUserHoroscope = async (req, res) => {
     const englishChartType = chartType === 'north' ? 'north' : 'south';
 
     const newProfile = new HoroscopeProfile({
+      userId: activeUserId,
       personDetails: {
         fullName: cleanName,
         gender: englishGender,
@@ -813,6 +824,180 @@ export const getUserHoroscopeById = async (req, res) => {
       return res.status(404).json({ success: false, error: 'Horoscope profile not found.' });
     }
     return res.status(200).json({ success: true, data: profile });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Get saved horoscopes for the authenticated user (or all if admin)
+ */
+export const getMyHoroscopes = async (req, res) => {
+  try {
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).json({ success: false, error: 'Unauthorized.' });
+    }
+
+    const query = { status: 'active' };
+    if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
+      query.userId = userId;
+    } else if (req.query.userOnly) {
+      query.userId = userId;
+    }
+
+    const profiles = await HoroscopeProfile.find(query)
+      .sort({ createdAt: -1 })
+      .limit(100);
+
+    return res.status(200).json({ success: true, count: profiles.length, data: profiles });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Delete / Archive saved user horoscope
+ */
+export const deleteUserHoroscope = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const profile = await HoroscopeProfile.findById(id);
+    if (!profile) {
+      return res.status(404).json({ success: false, error: 'Horoscope not found.' });
+    }
+
+    const isOwner = profile.userId && profile.userId.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin' || req.user.role === 'superadmin';
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ success: false, error: 'Access denied. You can only delete your own horoscopes.' });
+    }
+
+    profile.status = 'archived';
+    await profile.save();
+
+    return res.status(200).json({ success: true, message: 'Horoscope deleted successfully.' });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Save User Prasannam (Jamakkol, Kadikara, or KP Horary)
+ */
+export const saveUserPrasannam = async (req, res) => {
+  try {
+    const {
+      prasannamType,
+      title,
+      clientName,
+      queryCategory,
+      dateTime,
+      location,
+      ayanamsa,
+      summary,
+      chartData,
+      notes
+    } = req.body;
+
+    if (!prasannamType || !title || !dateTime) {
+      return res.status(400).json({
+        success: false,
+        error: 'பிரசன்ன வகை, தலைப்பு மற்றும் தேதி/நேரம் கட்டாயமாகும் (Prasannam type, Title, and Date/Time are required).'
+      });
+    }
+
+    const newPrasannam = new PrasannamProfile({
+      userId: req.user._id,
+      prasannamType,
+      title: String(title).trim(),
+      clientName: String(clientName || '').trim(),
+      queryCategory: queryCategory || 'General',
+      dateTime,
+      location: location || { placeName: 'Chennai', latitude: 13.0827, longitude: 80.2707, timezone: 'Asia/Kolkata' },
+      ayanamsa: ayanamsa || 'lahiri',
+      summary: summary || {},
+      chartData: chartData || {},
+      notes: notes || '',
+      status: 'active'
+    });
+
+    const saved = await newPrasannam.save();
+    return res.status(201).json({
+      success: true,
+      message: 'பிரசன்னம் வெற்றிகரமாக சேமிக்கப்பட்டது (Prasannam chart saved successfully).',
+      data: saved
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Get all saved Prasannams for the authenticated user
+ */
+export const getUserPrasannams = async (req, res) => {
+  try {
+    const query = { status: 'active' };
+    if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
+      query.userId = req.user._id;
+    } else if (req.query.userOnly) {
+      query.userId = req.user._id;
+    }
+
+    if (req.query.type) {
+      query.prasannamType = req.query.type;
+    }
+
+    const list = await PrasannamProfile.find(query).sort({ createdAt: -1 });
+    return res.status(200).json({ success: true, count: list.length, data: list });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Get single Prasannam chart by ID
+ */
+export const getUserPrasannamById = async (req, res) => {
+  try {
+    const profile = await PrasannamProfile.findById(req.params.id);
+    if (!profile) {
+      return res.status(404).json({ success: false, error: 'Prasannam chart not found.' });
+    }
+
+    const isOwner = profile.userId.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin' || req.user.role === 'superadmin';
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ success: false, error: 'Access denied.' });
+    }
+
+    return res.status(200).json({ success: true, data: profile });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Delete / Archive saved Prasannam chart
+ */
+export const deleteUserPrasannam = async (req, res) => {
+  try {
+    const profile = await PrasannamProfile.findById(req.params.id);
+    if (!profile) {
+      return res.status(404).json({ success: false, error: 'Prasannam chart not found.' });
+    }
+
+    const isOwner = profile.userId.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin' || req.user.role === 'superadmin';
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ success: false, error: 'Access denied.' });
+    }
+
+    profile.status = 'archived';
+    await profile.save();
+
+    return res.status(200).json({ success: true, message: 'Prasannam chart deleted successfully.' });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
   }

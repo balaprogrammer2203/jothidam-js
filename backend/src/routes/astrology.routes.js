@@ -5,6 +5,12 @@ import {
   saveUserHoroscope,
   getUserHoroscopes,
   getUserHoroscopeById,
+  getMyHoroscopes,
+  deleteUserHoroscope,
+  saveUserPrasannam,
+  getUserPrasannams,
+  getUserPrasannamById,
+  deleteUserPrasannam,
   getMasterRasis,
   getMasterNakshatras,
   getMasterNakshatraPadas,
@@ -28,6 +34,7 @@ import {
   getMasterPlanetDignities,
   getNavigationMenu
 } from '../controllers/astrology.controller.js';
+import { verifyToken, optionalVerifyToken } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
@@ -42,9 +49,17 @@ router.post('/kadikara-prasannam/calculate', calculateKadikaraPrasannamBE);
 router.post('/jamakkol-prasannam/calculate', calculateJamakkolPrasannamBE);
 
 // User Horoscope Profile Management (CRUD)
-router.post('/save-horoscope', saveUserHoroscope);
+router.post('/save-horoscope', optionalVerifyToken, saveUserHoroscope);
 router.get('/horoscopes', getUserHoroscopes);
+router.get('/my-horoscopes', verifyToken, getMyHoroscopes);
 router.get('/horoscopes/:id', getUserHoroscopeById);
+router.delete('/horoscopes/:id', verifyToken, deleteUserHoroscope);
+
+// User Saved Prasannam Charts (CRUD)
+router.post('/prasannam/save', verifyToken, saveUserPrasannam);
+router.get('/my-prasannams', verifyToken, getUserPrasannams);
+router.get('/prasannam/:id', verifyToken, getUserPrasannamById);
+router.delete('/prasannam/:id', verifyToken, deleteUserPrasannam);
 
 // Dynamic Jothidam Portal Mega Menu Navigation Taxonomy
 router.get('/navigation', getNavigationMenu);

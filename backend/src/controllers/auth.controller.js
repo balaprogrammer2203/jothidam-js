@@ -66,6 +66,7 @@ export const login = async (req, res) => {
         username: user.username,
         fullName: user.fullName,
         email: user.email,
+        mobileNumber: user.mobileNumber || '',
         role: user.role,
         lastLogin: user.lastLogin
       }
@@ -162,7 +163,7 @@ export const seedDefaultUsers = async (req, res) => {
  */
 export const register = async (req, res) => {
   try {
-    const { username, fullName, email, password, confirmPassword, preferredLanguage } = req.body;
+    const { username, fullName, email, mobileNumber, password, confirmPassword, preferredLanguage } = req.body;
 
     if (!username || !fullName || !password) {
       return res.status(400).json({
@@ -183,6 +184,20 @@ export const register = async (req, res) => {
         success: false,
         error: 'கடவுச்சொல் குறைந்தது 6 எழுத்துகள் கொண்டிருக்க வேண்டும் (Password must be at least 6 characters long).'
       });
+    }
+
+    // Clean and validate mobile number
+    let cleanMobile = '';
+    if (mobileNumber) {
+      const rawMobile = String(mobileNumber).trim().replace(/[\s\-()]/g, '');
+      const normalizedMobile = rawMobile.replace(/^(\+91|91|0)/, '');
+      if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
+        return res.status(400).json({
+          success: false,
+          error: 'சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும் (Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9).'
+        });
+      }
+      cleanMobile = normalizedMobile;
     }
 
     const cleanUsername = String(username).trim().toLowerCase();
@@ -208,10 +223,22 @@ export const register = async (req, res) => {
       }
     }
 
+    // Check if mobile number already registered (if mobile provided)
+    if (cleanMobile) {
+      const existingMobile = await User.findOne({ mobileNumber: cleanMobile });
+      if (existingMobile) {
+        return res.status(409).json({
+          success: false,
+          error: 'இந்த மொபைல் எண் ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது (Mobile number is already registered).'
+        });
+      }
+    }
+
     const newUser = new User({
       username: cleanUsername,
       fullName: String(fullName).trim(),
       email: cleanEmail,
+      mobileNumber: cleanMobile,
       password,
       role: 'user', // Standard user for public self-registration
       preferredLanguage: ['ta', 'en', 'hi', 'te', 'kn', 'ml'].includes(preferredLanguage) ? preferredLanguage : 'ta',
@@ -242,6 +269,7 @@ export const register = async (req, res) => {
         username: newUser.username,
         fullName: newUser.fullName,
         email: newUser.email,
+        mobileNumber: newUser.mobileNumber,
         role: newUser.role,
         preferredLanguage: newUser.preferredLanguage,
         lastLogin: newUser.lastLogin
@@ -290,12 +318,14 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    // Verification check if verifyDetail is provided (matches email or fullName)
+    // Verification check if verifyDetail is provided (matches email, mobile, or fullName)
     if (verifyDetail) {
       const cleanVerify = String(verifyDetail).trim().toLowerCase();
+      const rawVerifyDigits = cleanVerify.replace(/\D/g, '');
       const matchesEmail = user.email && user.email.toLowerCase() === cleanVerify;
       const matchesFullName = user.fullName && user.fullName.toLowerCase().includes(cleanVerify);
-      if (!matchesEmail && !matchesFullName) {
+      const matchesMobile = user.mobileNumber && rawVerifyDigits && (user.mobileNumber === rawVerifyDigits || user.mobileNumber.endsWith(rawVerifyDigits));
+      if (!matchesEmail && !matchesFullName && !matchesMobile) {
         return res.status(400).json({
           success: false,
           error: 'சரிபார்ப்பு விவரம் பொருந்தவில்லை (Verification details do not match the account record).'
@@ -315,3 +345,108 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+/**
+ * Update authenticated user profile
+ */
+export const updateProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found.' });
+    }
+
+    const { fullName, email, mobileNumber, preferredLanguage, currentPassword, newPassword } = req.body;
+
+    if (fullName) {
+      user.fullName = String(fullName).trim();
+    }
+
+    if (email !== undefined) {
+      const cleanEmail = String(email).trim().toLowerCase();
+      if (cleanEmail && cleanEmail !== user.email) {
+        const existingEmail = await User.findOne({ email: cleanEmail, _id: { $ne: user._id } });
+        if (existingEmail) {
+          return res.status(409).json({
+            success: false,
+            error: 'இந்த மின்னஞ்சல் முகவரி ஏற்கனவே வேறொரு பயனரால் பயன்படுத்தப்படுகிறது (Email is already in use by another account).'
+          });
+        }
+      }
+      user.email = cleanEmail;
+    }
+
+    if (mobileNumber !== undefined) {
+      const rawMobile = String(mobileNumber).trim().replace(/[\s\-()]/g, '');
+      if (rawMobile) {
+        const normalizedMobile = rawMobile.replace(/^(\+91|91|0)/, '');
+        if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
+          return res.status(400).json({
+            success: false,
+            error: 'சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும் (Please enter a valid 10-digit mobile number starting with 6-9).'
+          });
+        }
+        if (normalizedMobile !== user.mobileNumber) {
+          const existingMobile = await User.findOne({ mobileNumber: normalizedMobile, _id: { $ne: user._id } });
+          if (existingMobile) {
+            return res.status(409).json({
+              success: false,
+              error: 'இந்த மொபைல் எண் ஏற்கனவே வேறொரு பயனரால் பயன்படுத்தப்படுகிறது (Mobile number is already in use by another account).'
+            });
+          }
+        }
+        user.mobileNumber = normalizedMobile;
+      } else {
+        user.mobileNumber = '';
+      }
+    }
+
+    if (preferredLanguage && ['ta', 'en', 'hi', 'te', 'kn', 'ml'].includes(preferredLanguage)) {
+      user.preferredLanguage = preferredLanguage;
+    }
+
+    // Optional password change
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({
+          success: false,
+          error: 'தற்போதைய கடவுச்சொல் கட்டாயமாகும் (Current password is required to set a new password).'
+        });
+      }
+      const isMatch = await user.comparePassword(currentPassword);
+      if (!isMatch) {
+        return res.status(400).json({
+          success: false,
+          error: 'தற்போதைய கடவுச்சொல் தவறானது (Current password is incorrect).'
+        });
+      }
+      if (newPassword.length < 6) {
+        return res.status(400).json({
+          success: false,
+          error: 'புதிய கடவுச்சொல் குறைந்தது 6 எழுத்துகள் கொண்டிருக்க வேண்டும் (New password must be at least 6 characters).'
+        });
+      }
+      user.password = newPassword;
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'சுயவிவரம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது (Profile updated successfully).',
+      user: {
+        id: user._id,
+        username: user.username,
+        fullName: user.fullName,
+        email: user.email,
+        mobileNumber: user.mobileNumber || '',
+        role: user.role,
+        preferredLanguage: user.preferredLanguage,
+        lastLogin: user.lastLogin
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+

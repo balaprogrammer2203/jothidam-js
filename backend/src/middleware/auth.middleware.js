@@ -45,6 +45,26 @@ export const verifyToken = async (req, res, next) => {
 };
 
 /**
+ * Optional Bearer JWT Token verification (attaches req.user if valid token present, otherwise proceeds)
+ */
+export const optionalVerifyToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const user = await User.findById(decoded.userId).select('-password');
+      if (user && user.isActive) {
+        req.user = user;
+      }
+    }
+  } catch (err) {
+    // Ignore invalid/expired token for optional check
+  }
+  next();
+};
+
+/**
  * Require specific user role(s)
  */
 export const requireRoles = (...allowedRoles) => {

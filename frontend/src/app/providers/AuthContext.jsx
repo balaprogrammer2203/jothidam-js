@@ -93,6 +93,17 @@ export function AuthProvider({ children }) {
     return await authService.resetPassword(resetData);
   };
 
+  const updateProfile = async (profileData) => {
+    const data = await authService.updateProfile(profileData);
+    if (data.user) {
+      setUser(data.user);
+      if (data.user.preferredLanguage) {
+        i18n.changeLanguage(data.user.preferredLanguage);
+      }
+    }
+    return data;
+  };
+
   const hasRole = (...allowedRoles) => {
     if (!user || !user.role) return false;
     return allowedRoles.includes(user.role);
@@ -107,6 +118,7 @@ export function AuthProvider({ children }) {
     login,
     register,
     resetPassword,
+    updateProfile,
     logout,
     hasRole
   };

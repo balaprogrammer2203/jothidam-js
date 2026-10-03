@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ROUTES } from '../../config/routes.config';
 import { SUPPORTED_LANGUAGES } from '../../i18n/languages';
 
 export default function Footer() {
@@ -45,7 +46,7 @@ export default function Footer() {
               <li><Link to="/kp-horary">🔮 {currentLang === 'ta' ? 'KP ஹோரரி எண்கள் (1-249)' : 'KP Horary Numbers (1-249)'}</Link></li>
               <li><Link to="/kalachakram">🎡 {currentLang === 'ta' ? 'காலச்சக்கரம் 360°' : '360° Kalachakram Wheel'}</Link></li>
               <li><Link to="/kadikara-prasannam">🕰️ {currentLang === 'ta' ? 'கடிகார பிரசன்னம்' : 'Kadikara Prasannam'}</Link></li>
-              <li><Link to="/saved">⭐ {currentLang === 'ta' ? 'சேமிக்கப்பட்ட ஜாதகங்கள்' : 'Saved Horoscope Profiles'}</Link></li>
+              <li><Link to={ROUTES.ACCOUNT}>⭐ {currentLang === 'ta' ? 'எனது கணக்கு & சேமித்த ஜாதகங்கள்' : 'My Account & Saved Charts'}</Link></li>
             </ul>
           </div>
 

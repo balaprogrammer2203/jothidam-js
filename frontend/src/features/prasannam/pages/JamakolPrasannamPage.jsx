@@ -13,6 +13,11 @@ import JamakolQuestionsSection from '../components/JamakolQuestionsSection';
 import JamakolFaqSection from '../components/JamakolFaqSection';
 import jamakkolService from '../services/jamakkol.service';
 import horoscopeService from '../../horoscope/services/horoscope.service';
+import UserLoginModal from '../../auth/components/UserLoginModal';
+import SavePrasannamModal from '../components/SavePrasannamModal';
+import { useAuth } from '../../../app/providers/AuthContext';
+import accountService from '../../account/services/account.service';
+import Toast from '../../../components/common/Toast';
 import {
   computeLocalJamakkol,
   PRESET_CITIES,
@@ -107,6 +112,13 @@ export default function JamakolPrasannamPage() {
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const placeAutocompleteRef = useRef(null);
   const [ayanamsa, setAyanamsa] = useState('lahiri');
+
+  // Authentication & Save Prasannam Modal States
+  const { isAuthenticated } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSavePrasannamModal, setShowSavePrasannamModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [isSavingPrasannam, setIsSavingPrasannam] = useState(false);
 
   // Place search debounce with Geo Location API
   useEffect(() => {
@@ -340,6 +352,65 @@ export default function JamakolPrasannamPage() {
     if (cityInputRef.current) {
       cityInputRef.current.focus();
       cityInputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  // Save Prasannam trigger with Login Popup Check
+  const handleSavePrasannamClick = () => {
+    if (!isAuthenticated) {
+      setShowLoginModal(true);
+      return;
+    }
+    setShowSavePrasannamModal(true);
+  };
+
+  const handleExecuteSavePrasannam = async (formData) => {
+    setIsSavingPrasannam(true);
+    try {
+      const pillars = chartData?.pillars || {};
+      const jamam = chartData?.jamam || {};
+      const payload = {
+        prasannamType: 'jamakkol',
+        title: formData.title,
+        clientName: formData.clientName,
+        queryCategory: formData.queryCategory,
+        dateTime: `${inputDate} ${inputTime}`,
+        location: {
+          placeName: inputPlace || selectedCity.name || 'Chennai',
+          latitude: Number(inputLat) || 13.0827,
+          longitude: Number(inputLng) || 80.2707,
+          timezone: 'Asia/Kolkata'
+        },
+        ayanamsa,
+        summary: {
+          udhayam: currentLang === 'ta' ? pillars.udhayam?.nameTa : pillars.udhayam?.name,
+          udhayamRasiId: pillars.udhayam?.rasiId,
+          aarudam: currentLang === 'ta' ? pillars.aarudam?.nameTa : pillars.aarudam?.name,
+          aarudamRasiId: pillars.aarudam?.rasiId,
+          kavippu: currentLang === 'ta' ? pillars.kavippu?.nameTa : pillars.kavippu?.name,
+          kavippuRasiId: pillars.kavippu?.rasiId,
+          jamamLord: jamam.activeJamamLord,
+          activeJamamNumber: jamam.number
+        },
+        chartData: chartData || {},
+        notes: formData.notes
+      };
+
+      await accountService.savePrasannam(payload);
+      setToastMessage({
+        type: 'success',
+        text: currentLang === 'ta'
+          ? 'ஜாமக்கோள் பிரசன்னம் உங்கள் கணக்கில் வெற்றிகரமாக சேமிக்கப்பட்டது! "My Account" பக்கத்தில் பார்க்கலாம்.'
+          : 'Jamakkol Prasannam chart saved to your account! You can review it anytime in My Account.'
+      });
+    } catch (err) {
+      setToastMessage({
+        type: 'error',
+        text: err.message || 'Failed to save prasannam chart'
+      });
+      throw err;
+    } finally {
+      setIsSavingPrasannam(false);
     }
   };
 
@@ -602,6 +673,17 @@ export default function JamakolPrasannamPage() {
               <span>{isLoading ? '⏳...' : '🧭'}</span>
               <span>{currentLang === 'ta' ? 'பிரசன்னம் கணக்கிடு' : 'Calculate Chart'}</span>
             </button>
+
+            <button
+              type="button"
+              className="jk-btn-save"
+              onClick={handleSavePrasannamClick}
+              disabled={isLoading || isSavingPrasannam}
+              title={currentLang === 'ta' ? 'பிரசன்ன வரைபடத்தை உங்கள் கணக்கில் சேமிக்க' : 'Save Prasannam to your account'}
+            >
+              <span>{isSavingPrasannam ? '⏳' : '💾'}</span>
+              <span>{isSavingPrasannam ? (currentLang === 'ta' ? 'சேமிக்கப்படுகிறது...' : 'Saving...') : (currentLang === 'ta' ? 'பிரசன்னம் சேமி' : 'Save Prasannam')}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -772,6 +854,34 @@ export default function JamakolPrasannamPage() {
       {/* Classical Principles & FAQs Accordion */}
       <JamakolFaqSection
         lang={currentLang}
+      />
+
+      {/* Toast Notification */}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
+
+      {/* User Login Popup Modal for Prasannam */}
+      <UserLoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSuccess={() => {
+          setShowLoginModal(false);
+          setShowSavePrasannamModal(true);
+        }}
+        title={currentLang === 'ta' ? 'பிரசன்னத்தை சேமிக்க உள்நுழையவும்' : 'Sign In to Save Prasannam'}
+        subtitle={currentLang === 'ta'
+          ? 'உங்கள் கணக்கில் இந்த ஜாமக்கோள் பிரசன்ன வரைபடத்தை பாதுகாப்பாக சேமித்து எப்போது வேண்டுமானாலும் "My Account" பக்கத்தில் பார்க்கலாம்.'
+          : 'Login or create a free account to store this Jamakkol Prasannam chart in your library for future reference.'}
+      />
+
+      {/* Save Prasannam Details Modal */}
+      <SavePrasannamModal
+        isOpen={showSavePrasannamModal}
+        onClose={() => setShowSavePrasannamModal(false)}
+        onSave={handleExecuteSavePrasannam}
+        prasannamType="jamakkol"
+        defaultTitle={chartData?.jamam ? `${chartData.jamam.titleTa || chartData.jamam.titleEn} - ஜாமக்கோள் பிரசன்னம்` : 'ஜாமக்கோள் பிரசன்ன கேள்வி'}
+        dateTime={`${inputDate} ${inputTime}`}
+        location={{ placeName: inputPlace || selectedCity.name || 'Chennai' }}
       />
     </div>
   );

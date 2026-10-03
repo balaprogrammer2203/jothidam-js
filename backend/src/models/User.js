@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  mobileNumber: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   role: {
     type: String,
     enum: ['superadmin', 'admin', 'user'],

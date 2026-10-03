@@ -1,0 +1,575 @@
+/* =========================================================================
+   USER LOGIN & REGISTRATION PAGE STYLES
+   Distinct, Spiritual Vedic Aesthetic for Public Astrologers & Normal Users
+   ========================================================================= */
+
+.user-login-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  color: var(--text-primary, #0f172a);
+}
+
+.user-login-main-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .user-login-main-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Left: Benefits Side */
+.user-login-benefits-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.spiritual-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #d97706;
+  width: fit-content;
+}
+
+[data-theme='dark'] .spiritual-banner-badge,
+.dark .spiritual-banner-badge {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.benefits-title {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary, #0f172a);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+[data-theme='dark'] .benefits-title,
+.dark .benefits-title {
+  color: #f9fafb;
+}
+
+.benefits-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.6;
+  margin: 0;
+}
+
+[data-theme='dark'] .benefits-subtitle,
+.dark .benefits-subtitle {
+  color: #9ca3af;
+}
+
+.benefits-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 0.85rem;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme='dark'] .benefit-item,
+.dark .benefit-item {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.benefit-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.benefit-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+}
+
+.benefit-text h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+
+[data-theme='dark'] .benefit-text h4,
+.dark .benefit-text h4 {
+  color: #f1f5f9;
+}
+
+.benefit-text p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.45;
+}
+
+[data-theme='dark'] .benefit-text p,
+.dark .benefit-text p {
+  color: #94a3b8;
+}
+
+.guru-blessing-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b45309;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  width: fit-content;
+}
+
+[data-theme='dark'] .guru-blessing-pill,
+.dark .guru-blessing-pill {
+  color: #fde68a;
+  background: rgba(245, 158, 11, 0.15);
+}
+
+/* Right: Login Card */
+.user-login-form-side {
+  display: flex;
+  justify-content: center;
+}
+
+.user-auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(245, 158, 11, 0.15);
+  padding: 2rem 1.75rem 1.5rem;
+}
+
+[data-theme='dark'] .user-auth-card,
+.dark .user-auth-card {
+  background: #111827;
+  border-color: #374151;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
+.user-auth-tabs-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: var(--bg-secondary, #f1f5f9);
+  padding: 0.3rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+[data-theme='dark'] .user-auth-tabs-header,
+.dark .user-auth-tabs-header {
+  background: #1f2937;
+}
+
+.user-auth-tab {
+  padding: 0.65rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #64748b);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+[data-theme='dark'] .user-auth-tab,
+.dark .user-auth-tab {
+  color: #9ca3af;
+}
+
+.user-auth-tab.active {
+  background: var(--bg-card, #ffffff);
+  color: #d97706;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .user-auth-tab.active,
+.dark .user-auth-tab.active {
+  background: #111827;
+  color: #fbbf24;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.auth-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.auth-alert.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+[data-theme='dark'] .auth-alert.error,
+.dark .auth-alert.error {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.auth-alert.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+[data-theme='dark'] .auth-alert.success,
+.dark .auth-alert.success {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+/* User Login Form */
+.user-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field-group.half {
+  flex: 1;
+}
+
+.form-row-dual {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary, #475569);
+}
+
+[data-theme='dark'] .field-label,
+.dark .field-label {
+  color: #cbd5e1;
+}
+
+.field-forgot-link {
+  background: none;
+  border: none;
+  color: #d97706;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+[data-theme='dark'] .field-forgot-link,
+.dark .field-forgot-link {
+  color: #fbbf24;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--border-color, #cbd5e1);
+  background: var(--bg-input, #ffffff);
+  color: var(--text-primary, #0f172a);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+[data-theme='dark'] .field-input,
+.dark .field-input {
+  background: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .field-input {
+  padding-right: 2.75rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.password-toggle-btn:hover {
+  opacity: 1;
+}
+
+.btn-auth-submit {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+  transition: all 0.2s ease;
+  margin-top: 0.35rem;
+}
+
+.btn-auth-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.45);
+}
+
+.btn-auth-submit.register {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+}
+
+.btn-auth-submit.register:hover:not(:disabled) {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.btn-back-link {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #64748b);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.btn-back-link:hover {
+  color: #d97706;
+}
+
+/* Quick Demo Box */
+.quick-demo-login-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 0.85rem;
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--border-color, #e2e8f0);
+}
+
+[data-theme='dark'] .quick-demo-login-box,
+.dark .quick-demo-login-box {
+  border-top-color: #374151;
+}
+
+.demo-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.btn-demo-pill {
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #b45309;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .btn-demo-pill,
+.dark .btn-demo-pill {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fde68a;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.btn-demo-pill:hover {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+/* Footer / Distinction */
+.user-login-distinction-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+[data-theme='dark'] .user-login-distinction-footer,
+.dark .user-login-distinction-footer {
+  border-top-color: #374151;
+}
+
+.distinction-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.775rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.admin-portal-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.825rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.admin-redirect-link {
+  color: #d97706;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.admin-redirect-link:hover {
+  text-decoration: underline;
+}
+
+/* Authenticated State */
+.user-login-card.authenticated-state {
+  max-width: 500px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .user-login-card.authenticated-state,
+.dark .user-login-card.authenticated-state {
+  background: #111827;
+  border-color: #374151;
+}
+
+.auth-user-badge-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.3));
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.auth-user-desc {
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 1.75rem;
+}
+
+.auth-user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn-user-primary {
+  display: block;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-user-secondary {
+  display: block;
+  padding: 0.8rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--bg-secondary, #f1f5f9);
+  color: var(--text-primary, #0f172a);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+[data-theme='dark'] .btn-user-secondary,
+.dark .btn-user-secondary {
+  background: #1e293b;
+  color: #f1f5f9;
+}

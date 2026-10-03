@@ -24,10 +24,10 @@ export default function Layout({ children }) {
   }
 
   // Layout selection:
-  // - Top-Bottom: specifically for /nakshatra-padas (full-width interactive wheel & table at top, bottom common sidebar)
+  // - Top-Bottom: for full-width applications (e.g. /my-account dashboard, /login, and /nakshatra-padas)
   // - Plain: for 404 or standalone unstyled routes
-  // - Left-Right: standard 2-column layout for all other menu link pages
-  const isTopBottomPage = pathname === '/nakshatra-padas';
+  // - Left-Right: standard 2-column layout for astrology calculator and article pages
+  const isTopBottomPage = pathname === '/nakshatra-padas' || pathname === '/my-account' || pathname === '/login';
   const isPlainPage = pathname === '/404' || pathname === '/not-found';
 
   return (

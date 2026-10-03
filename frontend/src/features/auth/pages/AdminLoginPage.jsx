@@ -248,6 +248,26 @@ export default function AdminLoginPage() {
           </span>
         </div>
 
+        {/* User Portal Link Banner */}
+        <div style={{
+          background: 'rgba(245, 158, 11, 0.12)',
+          border: '1px solid rgba(245, 158, 11, 0.3)',
+          borderRadius: '0.75rem',
+          padding: '0.65rem 1rem',
+          marginBottom: '1.25rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontSize: '0.825rem',
+          flexWrap: 'wrap',
+          gap: '0.5rem'
+        }}>
+          <span>👤 Standard user looking to save horoscopes or prasannams?</span>
+          <Link to="/login" style={{ color: '#d97706', fontWeight: 700, textDecoration: 'none' }}>
+            Go to User Login →
+          </Link>
+        </div>
+
         {/* Mode Switcher Tabs */}
         <div className="auth-mode-tabs" role="tablist">
           <button

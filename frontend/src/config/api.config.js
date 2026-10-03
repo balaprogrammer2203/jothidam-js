@@ -38,6 +38,15 @@ export const API_ENDPOINTS = {
   AUTH_LOGIN: '/auth/login',
   AUTH_REGISTER: '/auth/register',
   AUTH_RESET_PASSWORD: '/auth/reset-password',
+  AUTH_UPDATE_PROFILE: '/auth/profile',
   AUTH_ME: '/auth/me',
-  AUTH_SEED: '/auth/seed'
+  AUTH_SEED: '/auth/seed',
+
+  // User Account & Saved Items Endpoints
+  MY_HOROSCOPES: '/astrology/my-horoscopes',
+  DELETE_HOROSCOPE: (id) => `/astrology/horoscopes/${id}`,
+  SAVE_PRASANNAM: '/astrology/prasannam/save',
+  MY_PRASANNAMS: '/astrology/my-prasannams',
+  GET_PRASANNAM_BY_ID: (id) => `/astrology/prasannam/${id}`,
+  DELETE_PRASANNAM: (id) => `/astrology/prasannam/${id}`
 };

@@ -20,4 +20,6 @@ export { default as SavedHoroscopesPage } from './SavedHoroscopesPage';
 export { default as SavedHoroscopeDetailPage } from './SavedHoroscopeDetailPage';
 export { default as AdminPage } from './AdminPage';
 export { default as AdminLoginPage } from './AdminLoginPage';
+export { default as UserLoginPage } from './UserLoginPage';
+export { default as MyAccountPage } from './MyAccountPage';
 export { default as NotFoundPage } from './NotFoundPage';

@@ -33,10 +33,10 @@ export const PORTAL_NAVIGATION_TREE = [
           },
           {
             id: 'saved-profiles',
-            title: { en: 'Saved Horoscope Profiles', ta: 'சேமிக்கப்பட்ட ஜாதகங்கள்' },
-            desc: { en: 'View and manage saved kundli charts', ta: 'சேமித்த ஜாதக விவரங்கள்' },
-            path: ROUTES.HOROSCOPE.SAVED,
-            badge: 'Archive',
+            title: { en: 'My Saved Charts', ta: 'சேமித்த ஜாதகங்கள்' },
+            desc: { en: 'View and analyze saved kundli & prasannam charts', ta: 'கணக்கில் சேமித்த ஜாதகம் மற்றும் பிரசன்னங்கள்' },
+            path: ROUTES.ACCOUNT,
+            badge: 'Account',
             icon: '⭐'
           },
           {

@@ -141,13 +141,21 @@ export default function Header() {
             {/* Language Selector */}
             <LanguageSelector variant="compact" />
 
-            {/* User Profile / Admin Login */}
+            {/* User Profile / Login (Separate User vs Admin) */}
             {isAuthenticated && user ? (
               <div className="header-user-menu">
-                <Link to={ROUTES.ADMIN.DASHBOARD} className="header-user-btn" title={user.fullName}>
-                  <span className="user-avatar-tiny">{user.username?.charAt(0).toUpperCase()}</span>
-                  <span className="user-name-label">{user.fullName?.split(' ')[0] || user.username}</span>
-                </Link>
+                {user.role === 'admin' || user.role === 'superadmin' ? (
+                  <Link to={ROUTES.ADMIN.DASHBOARD} className="header-user-btn admin-role" title={`${user.fullName} (${user.role.toUpperCase()})`}>
+                    <span className="user-avatar-tiny admin">👑</span>
+                    <span className="user-name-label">{user.fullName?.split(' ')[0] || user.username}</span>
+                    <span className="user-role-tag">Admin</span>
+                  </Link>
+                ) : (
+                  <Link to={ROUTES.ACCOUNT} className="header-user-btn user-role" title={`${user.fullName} (${currentLang === 'ta' ? 'எனது கணக்கு' : 'My Account'})`}>
+                    <span className="user-avatar-tiny">{user.username?.charAt(0).toUpperCase()}</span>
+                    <span className="user-name-label">{user.fullName?.split(' ')[0] || user.username}</span>
+                  </Link>
+                )}
                 <button type="button" onClick={logout} className="header-logout-tiny-btn" title={t('common:nav.logout', 'Logout')}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -157,7 +165,7 @@ export default function Header() {
                 </button>
               </div>
             ) : (
-              <Link to={ROUTES.ADMIN.LOGIN} className="header-login-btn">
+              <Link to={ROUTES.AUTH.LOGIN} className="header-login-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
@@ -304,6 +312,54 @@ export default function Header() {
               >
                 ✕
               </button>
+            </div>
+
+            <div className="portal-mobile-user-section" style={{ padding: '12px 16px', borderBottom: '1px solid var(--border-color, #e2e8f0)', background: 'var(--bg-secondary, #f8fafc)' }}>
+              {isAuthenticated && user ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                  {user.role === 'admin' || user.role === 'superadmin' ? (
+                    <Link
+                      to={ROUTES.ADMIN.DASHBOARD}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit', fontWeight: 600, fontSize: '0.9rem' }}
+                    >
+                      <span>👑</span>
+                      <span>{user.fullName || user.username}</span>
+                      <span style={{ fontSize: '0.7rem', padding: '2px 6px', background: '#e0e7ff', color: '#4338ca', borderRadius: '4px' }}>Admin</span>
+                    </Link>
+                  ) : (
+                    <Link
+                      to={ROUTES.ACCOUNT}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit', fontWeight: 600, fontSize: '0.9rem' }}
+                    >
+                      <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#6366f1', color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem' }}>
+                        {user.username?.charAt(0).toUpperCase()}
+                      </span>
+                      <span>{user.fullName || user.username}</span>
+                    </Link>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontSize: '0.8rem', padding: '4px 8px', borderRadius: '4px' }}
+                  >
+                    {t('common:nav.logout', 'Logout')}
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to={ROUTES.AUTH.LOGIN}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '8px 14px', background: 'linear-gradient(135deg, #4f46e5, #7c3aed)', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span>{t('common:nav.login', 'Login / Register')}</span>
+                </Link>
+              )}
             </div>
 
             <div className="portal-mobile-categories">

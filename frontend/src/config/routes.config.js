@@ -8,9 +8,9 @@ export const ROUTES = {
   HOME: '/',
   HOROSCOPE: {
     CALCULATOR: '/',
-    SAVED: '/saved-horoscopes',
-    SAVED_DETAIL: '/saved-horoscopes/:id',
-    savedDetailPath: (id) => `/saved-horoscopes/${id}`
+    SAVED: '/my-account',
+    SAVED_DETAIL: '/my-account',
+    savedDetailPath: () => '/my-account'
   },
 
   // 2. Horary Prasannam Astrology
@@ -42,7 +42,15 @@ export const ROUTES = {
     TAMIL_CALENDAR: '/panchangam/tamil-calendar'
   },
 
-  // 6. Administration & Authentication
+  // 6. User Authentication & Member Portal
+  AUTH: {
+    LOGIN: '/login',
+    REGISTER: '/register',
+    FORGOT_PASSWORD: '/forgot-password'
+  },
+  ACCOUNT: '/my-account',
+
+  // 7. Administration & System Management
   ADMIN: {
     LOGIN: '/admin/login',
     DASHBOARD: '/admin',
@@ -56,7 +64,10 @@ export const ROUTES = {
  * Maps previous flat URLs to the new SEO-rich hierarchical routes.
  */
 export const LEGACY_ROUTE_REDIRECTS = [
-  { from: '/saved', to: ROUTES.HOROSCOPE.SAVED },
+  { from: '/saved', to: ROUTES.ACCOUNT },
+  { from: '/saved-horoscopes', to: ROUTES.ACCOUNT },
+  { from: '/saved-horoscopes/:id', to: ROUTES.ACCOUNT },
+  { from: '/saved-profiles', to: ROUTES.ACCOUNT },
   { from: '/kadikara-prasannam', to: ROUTES.PRASANNAM.KADIKARA },
   { from: '/jamakol', to: ROUTES.PRASANNAM.JAMAKKOL },
   { from: '/jamakkol', to: ROUTES.PRASANNAM.JAMAKKOL },
@@ -73,7 +84,10 @@ export const LEGACY_ROUTE_REDIRECTS = [
   { from: '/tithis', to: ROUTES.PANCHANGAM.TITHIS },
   { from: '/yogas', to: ROUTES.PANCHANGAM.YOGAS },
   { from: '/karanas', to: ROUTES.PANCHANGAM.KARANAS },
-  { from: '/tamil-calendar', to: ROUTES.PANCHANGAM.TAMIL_CALENDAR }
+  { from: '/tamil-calendar', to: ROUTES.PANCHANGAM.TAMIL_CALENDAR },
+  { from: '/account', to: ROUTES.ACCOUNT },
+  { from: '/signin', to: ROUTES.AUTH.LOGIN },
+  { from: '/signup', to: ROUTES.AUTH.LOGIN }
 ];
 
 export default ROUTES;

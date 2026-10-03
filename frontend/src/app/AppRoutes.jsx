@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ROUTES, LEGACY_ROUTE_REDIRECTS } from '../config/routes.config';
 import ProtectedRoute from './ProtectedRoute';
 import ErrorBoundary from './ErrorBoundary';
@@ -20,29 +20,11 @@ const TithisPage = lazy(() => import('../features/panchangam/pages/TithisPage'))
 const YogasPage = lazy(() => import('../features/panchangam/pages/YogasPage'));
 const KaranasPage = lazy(() => import('../features/panchangam/pages/KaranasPage'));
 const TamilCalendarPage = lazy(() => import('../features/panchangam/pages/TamilCalendarPage'));
-const SavedHoroscopesPage = lazy(() => import('../features/saved-horoscopes/pages/SavedHoroscopesPage'));
-const SavedHoroscopeDetailPage = lazy(() => import('../features/saved-horoscopes/pages/SavedHoroscopeDetailPage'));
 const AdminPage = lazy(() => import('../features/admin/pages/AdminPage'));
 const AdminLoginPage = lazy(() => import('../features/auth/pages/AdminLoginPage'));
+const UserLoginPage = lazy(() => import('../features/auth/pages/UserLoginPage'));
+const MyAccountPage = lazy(() => import('../features/account/pages/MyAccountPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
-
-// Backward compatibility dynamic redirect for /saved/:id
-function LegacySavedDetailRedirect() {
-  const { id } = useParams();
-  if (!id || id === ':id') {
-    return <Navigate to={ROUTES.HOROSCOPE.SAVED} replace />;
-  }
-  return <Navigate to={ROUTES.HOROSCOPE.savedDetailPath(id)} replace />;
-}
-
-// Route guard to prevent literal ':id' or missing ID from reaching detail page
-function SavedHoroscopeDetailGuard() {
-  const { id } = useParams();
-  if (!id || id === ':id') {
-    return <Navigate to={ROUTES.HOROSCOPE.SAVED} replace />;
-  }
-  return <SavedHoroscopeDetailPage />;
-}
 
 export default function AppRoutes() {
   return (
@@ -53,8 +35,12 @@ export default function AppRoutes() {
               1. MAIN HOROSCOPE & KUNDLI CALCULATOR
               ========================================================================= */}
           <Route path={ROUTES.HOME} element={<HoroscopeCalculatorPage />} />
-          <Route path={ROUTES.HOROSCOPE.SAVED} element={<SavedHoroscopesPage />} />
-          <Route path={ROUTES.HOROSCOPE.SAVED_DETAIL} element={<SavedHoroscopeDetailGuard />} />
+
+          {/* Legacy Saved Horoscopes URLs -> redirect directly to My Account */}
+          <Route path="/saved-horoscopes" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
+          <Route path="/saved-horoscopes/:id" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
+          <Route path="/saved" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
+          <Route path="/saved/:id" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
 
           {/* =========================================================================
               2. HORARY PRASANNAM
@@ -86,7 +72,21 @@ export default function AppRoutes() {
           <Route path={ROUTES.PANCHANGAM.TAMIL_CALENDAR} element={<TamilCalendarPage />} />
 
           {/* =========================================================================
-              6. ADMIN MANAGEMENT PANEL & AUTHENTICATION
+              6. USER AUTHENTICATION & MY ACCOUNT
+              ========================================================================= */}
+          <Route path={ROUTES.AUTH.LOGIN} element={<UserLoginPage />} />
+          <Route path="/register" element={<Navigate to="/login?mode=register" replace />} />
+          <Route
+            path={ROUTES.ACCOUNT}
+            element={
+              <ProtectedRoute>
+                <MyAccountPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* =========================================================================
+              7. ADMIN MANAGEMENT PANEL & AUTHENTICATION
               ========================================================================= */}
           <Route path={ROUTES.ADMIN.LOGIN} element={<AdminLoginPage />} />
           <Route
@@ -107,9 +107,8 @@ export default function AppRoutes() {
           />
 
           {/* =========================================================================
-              7. BACKWARD-COMPATIBLE ROUTE REDIRECTS (Zero breaking changes)
+              8. BACKWARD-COMPATIBLE ROUTE REDIRECTS (Zero breaking changes)
               ========================================================================= */}
-          <Route path="/saved/:id" element={<LegacySavedDetailRedirect />} />
           {LEGACY_ROUTE_REDIRECTS.map((rule) => (
             <Route
               key={rule.from}

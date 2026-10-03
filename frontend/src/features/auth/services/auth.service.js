@@ -40,6 +40,14 @@ export const authService = {
   async seedUsers() {
     const res = await apiClient.post(API_ENDPOINTS.AUTH_SEED);
     return res.data;
+  },
+
+  /**
+   * Update authenticated user profile details
+   */
+  async updateProfile(profileData) {
+    const res = await apiClient.put(API_ENDPOINTS.AUTH_UPDATE_PROFILE, profileData);
+    return res.data;
   }
 };
 
