@@ -745,11 +745,11 @@ export default function JamakolChartCard({
               );
             }
 
-            // Regular planet
+            // Regular planet (சூரி, செவ, புத, குரு, சுக், சனி, ராகு, கேது)
             const code = getLocalizedPlanetCode(it.name || it.symbol, activeLang);
             return (
-              <div key={idx} className="jk-planet-entry">
-                <span>
+              <div key={idx} className="jk-planet-entry jk-planet-regular">
+                <span className="jk-sym-code">
                   {code}
                   {isRetro && (
                     <span
@@ -847,8 +847,8 @@ export default function JamakolChartCard({
 
                     const isSub = p.type === 'yamakandam' || p.type === 'rahukalam' || p.type === 'maandi' || p.type === 'mrityu';
                     const code = getLocalizedPlanetCode(p.symbol || p.name, activeLang);
-                    const fill = (p.type === 'mrityu') ? '#800080' : (isSub ? '#8b0000' : '#334155');
-                    const weight = isSub ? 'bold' : 'normal';
+                    const fill = (p.type === 'mrityu') ? '#800080' : (isSub ? '#8b0000' : '#0f172a');
+                    const weight = 'bold';
 
                     return (
                       <tspan

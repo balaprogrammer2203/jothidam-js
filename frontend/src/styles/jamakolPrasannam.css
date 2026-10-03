@@ -862,6 +862,7 @@
   white-space: nowrap;
   position: relative;
   cursor: pointer;
+  color: #0f172a;
 }
 
 .jk-planet-entry:hover {
@@ -874,11 +875,45 @@
   font-weight: 800;
 }
 
-/* Kochara Moon: Standard dark planet color without underline */
-.jk-planet-moon {
-  color: #1c1917 !important;
-  text-decoration: none !important;
+.jk-planet-lagna .jk-sym-code {
+  color: var(--jk-lagna-red) !important;
+  font-weight: 800;
+}
+
+.jk-planet-lagna .jk-planet-deg {
+  color: #b91c1c !important;
   font-weight: 600;
+  opacity: 1;
+}
+
+/* Regular Planets (சூரி, செவ, புத, குரு, சுக், சனி, ராகு, கேது) & Moon: Bold & Dark solid color */
+.jk-planet-regular,
+.jk-planet-moon {
+  color: #0f172a !important; /* Deep dark slate / near-black */
+  font-weight: 750 !important;
+  text-decoration: none !important;
+}
+
+.jk-planet-regular .jk-sym-code,
+.jk-planet-moon .jk-sym-code {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+.jk-planet-regular .jk-planet-deg,
+.jk-planet-moon .jk-planet-deg {
+  color: #334155 !important; /* High-contrast legible dark degree */
+  font-weight: 600 !important;
+  font-size: 0.7rem;
+  opacity: 1 !important;
+}
+
+.jk-planet-regular .jk-planet-retro,
+.jk-planet-moon .jk-planet-retro {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1008,21 +1043,21 @@
 }
 
 .jk-planet-deg {
-  font-size: 0.66rem;
-  font-weight: 400;
-  color: #78716c !important; /* Small, light color with bracket */
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #334155 !important; /* High contrast, dark legible degree */
   font-family: inherit;
   letter-spacing: 0.01em;
   line-height: 1;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 /* Retrograde symbol indicator */
 .jk-retro-star,
 .jk-planet-retro {
-  color: #b91c1c;
-  font-weight: 700;
-  font-size: 0.8em;
+  color: #dc2626;
+  font-weight: 800;
+  font-size: 0.82em;
   margin-left: 2px;
   display: inline-block;
   line-height: 1;
@@ -1322,21 +1357,49 @@ html[data-theme="dark"] .jk-planet-entry,
 [data-theme="dark"] .jk-planet-entry,
 body.dark-theme .jk-planet-entry,
 .dark .jk-planet-entry {
-  color: #f5f5f4 !important;
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="dark"] .jk-planet-regular,
+html[data-theme="dark"] .jk-planet-regular .jk-sym-code,
+[data-theme="dark"] .jk-planet-regular,
+[data-theme="dark"] .jk-planet-regular .jk-sym-code,
+body.dark-theme .jk-planet-regular,
+body.dark-theme .jk-planet-regular .jk-sym-code,
+.dark .jk-planet-regular,
+.dark .jk-planet-regular .jk-sym-code {
+  color: #f8fafc !important;
+  font-weight: 800 !important;
 }
 
 html[data-theme="dark"] .jk-planet-moon,
+html[data-theme="dark"] .jk-planet-moon .jk-sym-code,
 [data-theme="dark"] .jk-planet-moon,
+[data-theme="dark"] .jk-planet-moon .jk-sym-code,
 body.dark-theme .jk-planet-moon,
-.dark .jk-planet-moon {
+body.dark-theme .jk-planet-moon .jk-sym-code,
+.dark .jk-planet-moon,
+.dark .jk-planet-moon .jk-sym-code {
   color: #93c5fd !important;
+  font-weight: 800 !important;
 }
 
 html[data-theme="dark"] .jk-planet-deg,
+html[data-theme="dark"] .jk-planet-regular .jk-planet-deg,
+html[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
 [data-theme="dark"] .jk-planet-deg,
+[data-theme="dark"] .jk-planet-regular .jk-planet-deg,
+[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
 body.dark-theme .jk-planet-deg,
-.dark .jk-planet-deg {
-  color: #a8a29e !important;
+body.dark-theme .jk-planet-regular .jk-planet-deg,
+body.dark-theme .jk-planet-moon .jk-planet-deg,
+.dark .jk-planet-deg,
+.dark .jk-planet-regular .jk-planet-deg,
+.dark .jk-planet-moon .jk-planet-deg {
+  color: #cbd5e1 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
 }
 
 html[data-theme="dark"] .jk-retro-star,
@@ -1348,6 +1411,7 @@ body.dark-theme .jk-planet-retro,
 .dark .jk-retro-star,
 .dark .jk-planet-retro {
   color: #f87171 !important;
+  font-weight: 800 !important;
 }
 
 html[data-theme="dark"] .jk-udhaya-bhava-num,
