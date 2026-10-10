@@ -268,11 +268,11 @@ export default function KadikaraPrasannamPage() {
     return now.getHours() >= 12 ? 'PM' : 'AM';
   });
 
-  const [inputPlace, setInputPlace] = useState('Chennai');
-  const [inputLat, setInputLat] = useState(13.0827);
-  const [inputLng, setInputLng] = useState(80.2707);
+  const [inputPlace, setInputPlace] = useState('Dindigul');
+  const [inputLat, setInputLat] = useState(10.3673);
+  const [inputLng, setInputLng] = useState(77.9803);
   const [inputAyanamsa, setInputAyanamsa] = useState('lahiri');
-  const [selectedPlaceName, setSelectedPlaceName] = useState('Chennai');
+  const [selectedPlaceName, setSelectedPlaceName] = useState('Dindigul');
   const [placeSuggestions, setPlaceSuggestions] = useState([]);
   const [isPlaceDropdownOpen, setIsPlaceDropdownOpen] = useState(false);
   const [isSearchingPlace, setIsSearchingPlace] = useState(false);
@@ -539,9 +539,9 @@ export default function KadikaraPrasannamPage() {
         second: parsedSec,
         ampm: ampmVal,
         calculationMode: mode,
-        placeName: placeVal || 'Chennai',
-        latitude: Number(latVal) || 13.0827,
-        longitude: Number(lngVal) || 80.2707,
+        placeName: placeVal || 'Dindigul',
+        latitude: Number(latVal) || 10.3673,
+        longitude: Number(lngVal) || 77.9803,
         ayanamsa: ayanamsaVal || 'lahiri',
         lang: langCode
       });
@@ -560,9 +560,9 @@ export default function KadikaraPrasannamPage() {
           gender: 'Male',
           dob: dateVal,
           tob: tobFormatted,
-          placeName: placeVal || 'Chennai',
-          latitude: Number(latVal) || 13.0827,
-          longitude: Number(lngVal) || 80.2707,
+          placeName: placeVal || 'Dindigul',
+          latitude: Number(latVal) || 10.3673,
+          longitude: Number(lngVal) || 77.9803,
           ayanamsa: ayanamsaVal || 'lahiri'
         });
 
@@ -600,9 +600,9 @@ export default function KadikaraPrasannamPage() {
         queryCategory: formData.queryCategory,
         dateTime: formattedDateTimeStr,
         location: {
-          placeName: inputPlace || 'Chennai',
-          latitude: Number(inputLat) || 13.0827,
-          longitude: Number(inputLng) || 80.2707,
+          placeName: inputPlace || 'Dindigul',
+          latitude: Number(inputLat) || 10.3673,
+          longitude: Number(inputLng) || 77.9803,
           timezone: 'Asia/Kolkata'
         },
         ayanamsa: inputAyanamsa || 'lahiri',
@@ -973,7 +973,7 @@ export default function KadikaraPrasannamPage() {
                   chartData={chartResult}
                   rasiGrid={rasiGrid}
                   dateTimeStr={formattedDateTimeStr}
-                  placeName={inputPlace || 'Chennai'}
+                  placeName={inputPlace || 'Dindigul'}
                   ayanamsaLabel={inputAyanamsa === 'kp_newcomb' ? 'KP-Newcomb' : (inputAyanamsa === 'lahiri' ? 'Lahiri' : inputAyanamsa)}
                   title={t('astrology:kadikara.chartTitle', 'கடிகார பிரசன்னம்')}
                   lang={currentLang}
@@ -1212,7 +1212,7 @@ export default function KadikaraPrasannamPage() {
         prasannamType="kadikara"
         defaultTitle={chartResult?.bhavaNumber ? `${chartResult.bhavaNumber}-ம் பாவம் - கடிகார பிரசன்னம்` : 'கடிகார பிரசன்ன கேள்வி'}
         dateTime={formattedDateTimeStr}
-        location={{ placeName: inputPlace || 'Chennai' }}
+        location={{ placeName: inputPlace || 'Dindigul' }}
       />
     </>
   );

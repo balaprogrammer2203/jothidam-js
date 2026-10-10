@@ -37,7 +37,7 @@ export default function KadikaraChartCard({
   chartData = {},
   rasiGrid = Array.from({ length: 12 }, () => []),
   dateTimeStr = '',
-  placeName = 'Chennai',
+  placeName = 'Dindigul',
   ayanamsaLabel = 'Lahiri',
   title = '',
   lang = 'ta'
@@ -98,7 +98,7 @@ export default function KadikaraChartCard({
 
   // Format date & time display for center cell
   const displayDateTime = dateTimeStr || '04/07/2025 15:03:00';
-  const displayPlace = placeName || 'Chennai';
+  const displayPlace = placeName || 'Dindigul';
   const displayTitle = title || t('kadikara.chartTitle', 'கடிகார பிரசன்னம்');
 
   // Localized Udhayam (உத / Udh) and Aarudam (ஆரு / Aar) labels
