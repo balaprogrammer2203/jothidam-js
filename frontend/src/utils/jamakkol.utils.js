@@ -220,32 +220,32 @@ export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
  */
 export const JAMAKKOL_SUB_PLANETS_RULES = {
   0: { // Sunday
-    day:   { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 10, degOffset: 6 }, mrityu: { rasi: 7, degOffset: 0 } },
-    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 1, degOffset: 0 },  mrityu: { rasi: 3, degOffset: 12 } }
+    day:   { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 4, degOffset: 6 },  mrityu: { rasi: 1, degOffset: 0 } },
+    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 7, degOffset: 0 },  mrityu: { rasi: 9, degOffset: 12 } }
   },
   1: { // Monday
-    day:   { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 9, degOffset: 12 }, mrityu: { rasi: 6, degOffset: 6 } },
-    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 0, degOffset: 6 },  mrityu: { rasi: 2, degOffset: 18 } }
+    day:   { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 3, degOffset: 12 }, mrityu: { rasi: 0, degOffset: 6 } },
+    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 6, degOffset: 6 },  mrityu: { rasi: 8, degOffset: 18 } }
   },
   2: { // Tuesday
-    day:   { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 8, degOffset: 18 }, mrityu: { rasi: 5, degOffset: 12 } },
-    night: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 11, degOffset: 12 }, mrityu: { rasi: 1, degOffset: 24 } }
+    day:   { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 2, degOffset: 18 }, mrityu: { rasi: 11, degOffset: 12 } },
+    night: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 5, degOffset: 12 }, mrityu: { rasi: 7, degOffset: 24 } }
   },
   3: { // Wednesday
-    day:   { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 7, degOffset: 24 }, mrityu: { rasi: 9, degOffset: 36 } },
-    night: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 4, degOffset: 6 },  mrityu: { rasi: 1, degOffset: 0 } }
+    day:   { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 1, degOffset: 24 }, mrityu: { rasi: 3, degOffset: 36 } },
+    night: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 10, degOffset: 6 }, mrityu: { rasi: 7, degOffset: 0 } }
   },
   4: { // Thursday
-    day:   { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 7, degOffset: 0 },  mrityu: { rasi: 9, degOffset: 12 } },
-    night: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 3, degOffset: 12 }, mrityu: { rasi: 0, degOffset: 6 } }
+    day:   { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 1, degOffset: 0 },  mrityu: { rasi: 3, degOffset: 12 } },
+    night: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 9, degOffset: 12 }, mrityu: { rasi: 6, degOffset: 6 } }
   },
   5: { // Friday
-    day:   { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 6, degOffset: 6 },  mrityu: { rasi: 8, degOffset: 18 } },
-    night: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 2, degOffset: 18 }, mrityu: { rasi: 11, degOffset: 12 } }
+    day:   { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 0, degOffset: 6 },  mrityu: { rasi: 2, degOffset: 18 } },
+    night: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 8, degOffset: 18 }, mrityu: { rasi: 5, degOffset: 12 } }
   },
   6: { // Saturday
-    day:   { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 5, degOffset: 12 }, mrityu: { rasi: 7, degOffset: 24 } },
-    night: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 1, degOffset: 24 }, mrityu: { rasi: 4, degOffset: 6 } }
+    day:   { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 11, degOffset: 12 }, mrityu: { rasi: 1, degOffset: 24 } },
+    night: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 7, degOffset: 24 }, mrityu: { rasi: 10, degOffset: 6 } }
   }
 };
 
@@ -676,7 +676,7 @@ export function formatDegreeShort(deg) {
  * 27 Nakshatras with 6-language names
  */
 export const NAKSHATRAS_6LANG = [
-  { id: 0, ta: 'அசுவினி', en: 'Ashwini', hi: 'अश्विनी', te: 'అశ్విని', kn: 'ಅಶ್ವಿನಿ', ml: 'അശ്വതി' },
+  { id: 0, ta: 'அஸ்வினி', en: 'Ashwini', hi: 'अश्विनी', te: 'అశ్విని', kn: 'ಅಶ್ವಿನಿ', ml: 'അശ്വതി' },
   { id: 1, ta: 'பரணி', en: 'Bharani', hi: 'भरणी', te: 'భరణి', kn: 'ಭರಣಿ', ml: 'ഭരണി' },
   { id: 2, ta: 'கார்த்திகை', en: 'Krittika', hi: 'कृत्तिका', te: 'కృతిక', kn: 'ಕೃತಿಕಾ', ml: 'കാർത്തിക' },
   { id: 3, ta: 'ரோகிணி', en: 'Rohini', hi: 'रोहिणी', te: 'రోహిణి', kn: 'ರೋಹಿಣಿ', ml: 'രോഹിണി' },
@@ -786,9 +786,181 @@ export const YOGAS_6LANG = [
   { id: 22, ta: 'சுபம்', en: 'Shubha', hi: 'शुभ', te: 'శుభం', kn: 'ಶುಭ', ml: 'ശുഭം' },
   { id: 23, ta: 'சுப்பிரம்', en: 'Shukla', hi: 'शुक्ल', te: 'శుక్లం', kn: 'ಶುಕ್ಲ', ml: 'ശുക്ലം' },
   { id: 24, ta: 'பிராமியம்', en: 'Brahma', hi: 'ब्रह्म', te: 'బ్రహ్మ', kn: 'ಬ್ರಹ್ಮ', ml: 'ബ്രഹ്മം' },
-  { id: 25, ta: 'ஐந்திரம்', en: 'Indra', hi: 'इन्द्र', te: 'ఐంద్రం', kn: 'ಐಂದ್ರ', ml: 'ఐంద్రം' },
+  { id: 25, ta: 'ஐந்திரம்', en: 'Indra', hi: 'इन्द्र', te: 'ఐంద్రం', kn: 'ಐಂದ್ರ', ml: 'ഐന്ദ്രം' },
   { id: 26, ta: 'வைதிருதி', en: 'Vaidhriti', hi: 'वैधृति', te: 'వైధృతి', kn: 'ವೈಧೃತಿ', ml: 'വൈധൃതി' }
 ];
+
+/**
+ * 27 Nakshatras Planetary Lords (Vimshottari Dasha order)
+ */
+export const NAKSHATRA_LORDS = [
+  'ketu',    // 0: Ashwini
+  'venus',   // 1: Bharani
+  'sun',     // 2: Krittika
+  'moon',    // 3: Rohini
+  'mars',    // 4: Mrigashira
+  'rahu',    // 5: Ardra
+  'jupiter', // 6: Punarvasu
+  'saturn',  // 7: Pushya
+  'mercury', // 8: Ashlesha
+  'ketu',    // 9: Magha
+  'venus',   // 10: Purva Phalguni
+  'sun',     // 11: Uttara Phalguni
+  'moon',    // 12: Hasta
+  'mars',    // 13: Chitra
+  'rahu',    // 14: Swati
+  'jupiter', // 15: Vishakha
+  'saturn',  // 16: Anuradha
+  'mercury', // 17: Jyeshtha
+  'ketu',    // 18: Mula
+  'venus',   // 19: Purva Ashadha
+  'sun',     // 20: Uttara Ashadha
+  'moon',    // 21: Shravana
+  'mars',    // 22: Dhanishta
+  'rahu',    // 23: Shatabhisha
+  'jupiter', // 24: Purva Bhadrapada
+  'saturn',  // 25: Uttara Bhadrapada
+  'mercury'  // 26: Revati
+];
+
+/**
+ * 11 Karanas Planetary Lords
+ */
+export const KARANA_LORDS = [
+  'sun',     // 0: Bava (பவ)
+  'moon',    // 1: Balava (பாலவ)
+  'mars',    // 2: Kaulava (கௌலவ)
+  'mercury', // 3: Taitila (சைதுலை)
+  'jupiter', // 4: Garija (கரசை)
+  'venus',   // 5: Vanija (வணிசை)
+  'saturn',  // 6: Vishti (பத்திரை)
+  'rahu',    // 7: Shakuni (சகுனி)
+  'ketu',    // 8: Chatushpada (சதுஷ்பாதம்)
+  'rahu',    // 9: Naga (நாகவம்)
+  'ketu'     // 10: Kimstughna (கிமிஸ்துக்னம்)
+];
+
+/**
+ * 27 Nithya / Nama Yogas Planetary Lords
+ */
+export const YOGA_LORDS = [
+  'saturn',  // 0: Vishkumbha (விஷ்கம்பம்)
+  'mercury', // 1: Priti (பிரீதி)
+  'ketu',    // 2: Ayushman (ஆயுஷ்மான்)
+  'venus',   // 3: Saubhagya (சௌபாக்யம்)
+  'sun',     // 4: Shobhana (சோபனம்)
+  'moon',    // 5: Atiganda (அதிகண்டம்)
+  'mars',    // 6: Sukarma (சுகர்மம்)
+  'rahu',    // 7: Dhriti (திருதி)
+  'jupiter', // 8: Shula (சூலம்)
+  'saturn',  // 9: Ganda (கண்டம்)
+  'mercury', // 10: Vriddhi (விருத்தி)
+  'ketu',    // 11: Dhruva (துருவம்)
+  'venus',   // 12: Vyaghata (வியாகதம்)
+  'sun',     // 13: Harshana (ஹர்ஷணம்)
+  'moon',    // 14: Vajra (வஜ்ரம்)
+  'mars',    // 15: Siddhi (சித்தி)
+  'rahu',    // 16: Vyatipata (வியதிபாதம்)
+  'jupiter', // 17: Variyan (வரியான்)
+  'saturn',  // 18: Parigha (பரிகம்)
+  'mercury', // 19: Shiva (சிவம்)
+  'ketu',    // 20: Siddha (சித்தம்)
+  'venus',   // 21: Sadhya (சாத்தியம்)
+  'sun',     // 22: Shubha (சுபம்)
+  'moon',    // 23: Shukla (சுப்பிரம்)
+  'mars',    // 24: Brahma (பிராமியம்)
+  'rahu',    // 25: Indra (ஐந்திரம்)
+  'jupiter'  // 26: Vaidhriti (வைதிருதி)
+];
+
+/**
+ * 6-Language titles for Jamakkol pillars: Udhayam, Aarudam, Kavippu
+ */
+export const PILLAR_TITLES_6LANG = {
+  udhayam: {
+    ta: 'உதயம்',
+    en: 'Udhayam',
+    hi: 'उदय',
+    te: 'ఉదయం',
+    kn: 'ಉದಯ',
+    ml: 'ഉദയം'
+  },
+  aarudam: {
+    ta: 'ஆருடம்',
+    en: 'Aarudam',
+    hi: 'आरूढ़',
+    te: 'ఆరూఢం',
+    kn: 'ಆರೂಢ',
+    ml: 'ആരൂഢം'
+  },
+  kavippu: {
+    ta: 'கவிப்பு',
+    en: 'Kavippu',
+    hi: 'कविप्पु',
+    te: 'కవిప్పు',
+    kn: 'ಕವಿಪ್ಪು',
+    ml: 'കവിപ്പ്'
+  }
+};
+
+/**
+ * Calculates or formats Nakshatra, Pada and short Athipathi lord name for a pillar
+ */
+export function getPillarStarInfo(pillar, lang = 'ta') {
+  if (!pillar) {
+    return { starIdx: 0, pada: 1, starName: '', lordPlanet: 'ketu', lordShort: '', text: '' };
+  }
+
+  const safeLang = (lang || 'ta').split('-')[0].toLowerCase();
+
+  let starIdx = pillar.star?.index;
+  let pada = pillar.star?.pada;
+
+  if (starIdx === undefined || pada === undefined) {
+    const signIndex = pillar.signIndex !== undefined ? pillar.signIndex : (pillar.rasiIndex ?? 0);
+    let degInRasi = 0;
+    if (typeof pillar.degreeInRasi === 'number' && !isNaN(pillar.degreeInRasi)) {
+      degInRasi = pillar.degreeInRasi;
+    } else if (pillar.formattedDegree) {
+      const str = String(pillar.formattedDegree).trim();
+      const matchDms = str.match(/(\d+)(?:°|\s|:)\s*(\d+)?/);
+      if (matchDms) {
+        degInRasi = parseInt(matchDms[1], 10) + (matchDms[2] ? parseInt(matchDms[2], 10) / 60 : 0);
+      } else {
+        const parsedFloat = parseFloat(str);
+        if (!isNaN(parsedFloat)) degInRasi = parsedFloat;
+      }
+    } else if (typeof pillar.degreeInRasi === 'string') {
+      const parsedFloat = parseFloat(pillar.degreeInRasi);
+      if (!isNaN(parsedFloat)) degInRasi = parsedFloat;
+    }
+
+    const totalLong = ((signIndex * 30 + degInRasi) % 360 + 360) % 360;
+    starIdx = Math.floor(totalLong / (360 / 27));
+    const rem = totalLong % (360 / 27);
+    pada = Math.min(4, Math.max(1, Math.floor(rem / (360 / 108)) + 1));
+  }
+
+  starIdx = Math.min(26, Math.max(0, Number(starIdx) || 0));
+  pada = Math.min(4, Math.max(1, Number(pada) || 1));
+
+  const starObj = NAKSHATRAS_6LANG[starIdx] || NAKSHATRAS_6LANG[0];
+  const starName = (safeLang === 'ta' && starIdx === 0)
+    ? 'அஸ்வினி'
+    : (starObj[safeLang] || starObj.ta || starObj.en);
+
+  const lordPlanet = NAKSHATRA_LORDS[starIdx] || 'ketu';
+  const lordShort = getLocalizedPlanetCode(lordPlanet, safeLang);
+
+  return {
+    starIdx,
+    pada,
+    starName,
+    lordPlanet,
+    lordShort,
+    text: `★ ${starName} - ${pada} (${lordShort})`
+  };
+}
 
 export const WEEKDAYS_6LANG = [
   { id: 0, ta: 'ஞாயிறு', en: 'Sunday', hi: 'रविवार', te: 'ఆదివారం', kn: 'ಭಾನುವಾರ', ml: 'ഞായർ' },
@@ -1172,7 +1344,9 @@ export function calculateJamakkolCenterInfo({
   const nakshatraDeg = moonLong % (360 / 27);
   const pada = Math.min(4, Math.max(1, Math.floor(nakshatraDeg / (360 / 108)) + 1));
   const nakshatraObj = NAKSHATRAS_6LANG[nakshatraIndex] || NAKSHATRAS_6LANG[0];
-  const nakshatraVal = `${nakshatraObj[lang] || nakshatraObj.ta} - ${pada}`;
+  const nakLord = NAKSHATRA_LORDS[nakshatraIndex] || 'ketu';
+  const nakLordShort = getLocalizedPlanetCode(nakLord, lang);
+  const nakshatraVal = `${nakshatraObj[lang] || nakshatraObj.ta} - ${pada} (${nakLordShort})`;
 
   // 3. Thithi
   const sunLong = ((Number(sunData?.longitude ?? 0) % 360) + 360) % 360;
@@ -1183,27 +1357,36 @@ export function calculateJamakkolCenterInfo({
   const pakshaName = PAKSHA_NAMES_6LANG[pakshaKey][lang] || PAKSHA_NAMES_6LANG[pakshaKey].ta;
   const tithiObj = TITHIS_6LANG[tithiRawIndex] || TITHIS_6LANG[0];
   const tithiName = tithiObj[lang] || tithiObj.ta;
-  const thithiVal = `${pakshaName} ${tithiName}`;
+  const thithiVal = (lang === 'ta')
+    ? `${tithiName} (${isShukla ? 'வளர்' : 'தேய்'})`
+    : `${pakshaName} ${tithiName}`;
 
   // 4. Karanam
   const karanaSpanIndex = Math.min(59, Math.max(0, Math.floor(moonSunDiff / 6)));
   let karanaObj = KARANAS_6LANG[0];
+  let karanaIndex = 0;
   if (karanaSpanIndex === 0) {
     karanaObj = KARANAS_6LANG[10]; // Kimstughna
+    karanaIndex = 10;
   } else if (karanaSpanIndex >= 57) {
-    if (karanaSpanIndex === 57) karanaObj = KARANAS_6LANG[7]; // Shakuni
-    else if (karanaSpanIndex === 58) karanaObj = KARANAS_6LANG[8]; // Chatushpada
-    else karanaObj = KARANAS_6LANG[9]; // Naga
+    if (karanaSpanIndex === 57) { karanaObj = KARANAS_6LANG[7]; karanaIndex = 7; } // Shakuni
+    else if (karanaSpanIndex === 58) { karanaObj = KARANAS_6LANG[8]; karanaIndex = 8; } // Chatushpada
+    else { karanaObj = KARANAS_6LANG[9]; karanaIndex = 9; } // Naga
   } else {
-    karanaObj = KARANAS_6LANG[(karanaSpanIndex - 1) % 7];
+    karanaIndex = (karanaSpanIndex - 1) % 7;
+    karanaObj = KARANAS_6LANG[karanaIndex];
   }
-  const karanamVal = karanaObj[lang] || karanaObj.ta;
+  const karanaLord = KARANA_LORDS[karanaIndex] || 'sun';
+  const karanaLordShort = getLocalizedPlanetCode(karanaLord, lang);
+  const karanamVal = `${karanaObj[lang] || karanaObj.ta} (${karanaLordShort})`;
 
   // 5. Yogam
   const yogaSum = (moonLong + sunLong) % 360;
   const yogaIndex = Math.min(26, Math.max(0, Math.floor(yogaSum / (360 / 27))));
   const yogaObj = YOGAS_6LANG[yogaIndex] || YOGAS_6LANG[0];
-  const yogamVal = yogaObj[lang] || yogaObj.ta;
+  const yogaLord = YOGA_LORDS[yogaIndex] || 'saturn';
+  const yogaLordShort = getLocalizedPlanetCode(yogaLord, lang);
+  const yogamVal = `${yogaObj[lang] || yogaObj.ta} (${yogaLordShort})`;
 
   // 6. Horai
   const sunriseSec = sunTimes?.sunrise?.totalSeconds ?? 21760;
@@ -1234,11 +1417,7 @@ export function calculateJamakkolCenterInfo({
     locationDMS
   ].join('\n');
 
-  const karanaIndex = (karanaSpanIndex === 0)
-    ? 10
-    : (karanaSpanIndex >= 57
-      ? (karanaSpanIndex === 57 ? 7 : (karanaSpanIndex === 58 ? 8 : 9))
-      : (karanaSpanIndex - 1) % 7);
+  // karanaIndex already assigned above
 
   const raw = {
     dateFormatted,
@@ -1266,10 +1445,10 @@ export function calculateJamakkolCenterInfo({
     queryDateTimeStr,
     labels,
     vaaram: { label: labels.vaaram, value: vaaramVal, dayOfWeek },
-    nakshatram: { label: labels.nakshatram, value: nakshatraVal, pada, nakshatraIndex },
+    nakshatram: { label: labels.nakshatram, value: nakshatraVal, pada, nakshatraIndex, lord: nakLord, lordShort: nakLordShort },
     thithi: { label: labels.thithi, value: thithiVal, isShukla, paksha: pakshaName, tithiName, tithiRawIndex },
-    karanam: { label: labels.karanam, value: karanamVal, karanaIndex },
-    yogam: { label: labels.yogam, value: yogamVal, yogaIndex },
+    karanam: { label: labels.karanam, value: karanamVal, karanaIndex, lord: karanaLord, lordShort: karanaLordShort },
+    yogam: { label: labels.yogam, value: yogamVal, yogaIndex, lord: yogaLord, lordShort: yogaLordShort },
     horai: { label: labels.horai, value: hora.display, color: hora.color, mainLord: hora.mainLord, subLord: hora.subLord },
     gowri: { label: labels.gowri, value: gowri.name, color: gowri.color, isAuspicious: gowri.isAuspicious, key: gowri.key },
     sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(sunTimes?.sunrise?.formatted || sunriseStr, '06:00 AM') },
@@ -1296,6 +1475,8 @@ NAKSHATRAS_6LANG.forEach((n, idx) => {
     if (n[l]) NAKSHATRA_LOOKUP[n[l].toLowerCase().trim()] = idx;
   });
 });
+NAKSHATRA_LOOKUP['அசுவினி'] = 0;
+NAKSHATRA_LOOKUP['அஸ்வினி'] = 0;
 
 const TITHI_LOOKUP = {};
 TITHIS_6LANG.forEach((t, idx) => {
@@ -1393,13 +1574,15 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     : (centerInfo.nakshatram?.pada !== undefined ? centerInfo.nakshatram.pada : 1);
 
   if (nakshatraIndex === -1 && centerInfo.nakshatram?.value) {
-    const starPart = centerInfo.nakshatram.value.split(/[-–]/)[0].trim().toLowerCase();
+    const starPart = centerInfo.nakshatram.value.split(/[-–(]/)[0].trim().toLowerCase();
     nakshatraIndex = NAKSHATRA_LOOKUP[starPart] ?? 0;
     const digitMatch = centerInfo.nakshatram.value.match(/\d+/);
     if (digitMatch) pada = parseInt(digitMatch[0], 10);
   }
   const nakshatraObj = NAKSHATRAS_6LANG[Math.max(0, nakshatraIndex)] || NAKSHATRAS_6LANG[0];
-  const nakshatraVal = `${nakshatraObj[safeLang] || nakshatraObj.ta} - ${pada}`;
+  const nakLord = NAKSHATRA_LORDS[Math.max(0, nakshatraIndex)] || 'ketu';
+  const nakLordShort = getLocalizedPlanetCode(nakLord, safeLang);
+  const nakshatraVal = `${nakshatraObj[safeLang] || nakshatraObj.ta} - ${pada} (${nakLordShort})`;
 
   // 3. Thithi
   let tithiRawIndex = raw.tithiRawIndex !== undefined
@@ -1410,9 +1593,25 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     : (centerInfo.thithi?.isShukla !== undefined ? centerInfo.thithi.isShukla : true);
 
   if (tithiRawIndex === -1 && centerInfo.thithi?.value) {
-    const parts = centerInfo.thithi.value.split(' ');
-    const tName = (parts.length > 1 ? parts.slice(1).join(' ') : parts[0]).trim().toLowerCase();
-    tithiRawIndex = TITHI_LOOKUP[tName] ?? (isShukla ? 0 : 15);
+    const valClean = centerInfo.thithi.value.replace(/[()]/g, ' ').trim();
+    if (valClean.includes('வளர்') || valClean.toLowerCase().includes('shukla')) {
+      isShukla = true;
+    } else if (valClean.includes('தேய்') || valClean.toLowerCase().includes('krishna')) {
+      isShukla = false;
+    }
+    const parts = valClean.split(/\s+/);
+    for (const part of parts) {
+      const lowerPart = part.toLowerCase().trim();
+      if (TITHI_LOOKUP[lowerPart] !== undefined) {
+        const foundIdx = TITHI_LOOKUP[lowerPart];
+        const baseIdx = foundIdx % 15;
+        tithiRawIndex = isShukla ? baseIdx : (baseIdx + 15);
+        break;
+      }
+    }
+    if (tithiRawIndex === -1) {
+      tithiRawIndex = isShukla ? 0 : 15;
+    }
   }
   if (tithiRawIndex >= 0 && tithiRawIndex < 15) isShukla = true;
   else if (tithiRawIndex >= 15) isShukla = false;
@@ -1421,27 +1620,35 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
   const pakshaName = (PAKSHA_NAMES_6LANG[pakshaKey] || PAKSHA_NAMES_6LANG.shukla)[safeLang] || PAKSHA_NAMES_6LANG[pakshaKey].ta;
   const tithiObj = TITHIS_6LANG[Math.max(0, tithiRawIndex)] || TITHIS_6LANG[0];
   const tithiName = tithiObj[safeLang] || tithiObj.ta;
-  const thithiVal = `${pakshaName} ${tithiName}`;
+  const thithiVal = (safeLang === 'ta')
+    ? `${tithiName} (${isShukla ? 'வளர்' : 'தேய்'})`
+    : `${pakshaName} ${tithiName}`;
 
   // 4. Karanam
   let karanaIndex = raw.karanaIndex !== undefined
     ? raw.karanaIndex
     : (centerInfo.karanam?.karanaIndex !== undefined ? centerInfo.karanam.karanaIndex : -1);
   if (karanaIndex === -1 && centerInfo.karanam?.value) {
-    karanaIndex = KARANA_LOOKUP[centerInfo.karanam.value.toLowerCase().trim()] ?? 0;
+    const cleanKaranam = centerInfo.karanam.value.split(/[(]/)[0].trim().toLowerCase();
+    karanaIndex = KARANA_LOOKUP[cleanKaranam] ?? 0;
   }
   const karanaObj = KARANAS_6LANG[Math.max(0, karanaIndex)] || KARANAS_6LANG[0];
-  const karanamVal = karanaObj[safeLang] || karanaObj.ta;
+  const karanaLord = KARANA_LORDS[Math.max(0, karanaIndex)] || 'sun';
+  const karanaLordShort = getLocalizedPlanetCode(karanaLord, safeLang);
+  const karanamVal = `${karanaObj[safeLang] || karanaObj.ta} (${karanaLordShort})`;
 
   // 5. Yogam
   let yogaIndex = raw.yogaIndex !== undefined
     ? raw.yogaIndex
     : (centerInfo.yogam?.yogaIndex !== undefined ? centerInfo.yogam.yogaIndex : -1);
   if (yogaIndex === -1 && centerInfo.yogam?.value) {
-    yogaIndex = YOGA_LOOKUP[centerInfo.yogam.value.toLowerCase().trim()] ?? 0;
+    const cleanYogam = centerInfo.yogam.value.split(/[(]/)[0].trim().toLowerCase();
+    yogaIndex = YOGA_LOOKUP[cleanYogam] ?? 0;
   }
   const yogaObj = YOGAS_6LANG[Math.max(0, yogaIndex)] || YOGAS_6LANG[0];
-  const yogamVal = yogaObj[safeLang] || yogaObj.ta;
+  const yogaLord = YOGA_LORDS[Math.max(0, yogaIndex)] || 'saturn';
+  const yogaLordShort = getLocalizedPlanetCode(yogaLord, safeLang);
+  const yogamVal = `${yogaObj[safeLang] || yogaObj.ta} (${yogaLordShort})`;
 
   // 6. Horai
   let mainLordKey = raw.mainLordKey || centerInfo.horai?.mainLord;
@@ -1508,10 +1715,10 @@ export function getLocalizedCenterInfo(centerInfo, activeLang = 'ta', fallbackDa
     queryDateTimeStr,
     labels,
     vaaram: { label: labels.vaaram, value: vaaramVal, dayOfWeek },
-    nakshatram: { label: labels.nakshatram, value: nakshatraVal, pada, nakshatraIndex },
+    nakshatram: { label: labels.nakshatram, value: nakshatraVal, pada, nakshatraIndex, lord: nakLord, lordShort: nakLordShort },
     thithi: { label: labels.thithi, value: thithiVal, isShukla, paksha: pakshaName, tithiName, tithiRawIndex },
-    karanam: { label: labels.karanam, value: karanamVal, karanaIndex },
-    yogam: { label: labels.yogam, value: yogamVal, yogaIndex },
+    karanam: { label: labels.karanam, value: karanamVal, karanaIndex, lord: karanaLord, lordShort: karanaLordShort },
+    yogam: { label: labels.yogam, value: yogamVal, yogaIndex, lord: yogaLord, lordShort: yogaLordShort },
     horai: { label: labels.horai, value: horaDisplay, color: '#ef4444', mainLord: mainLordKey, subLord: subLordKey },
     gowri: { label: labels.gowri, value: gowriVal, color: isAuspicious ? '#22c55e' : (gowriKey === 'Uthi' ? '#f1f5f9' : '#ef4444'), isAuspicious, key: gowriKey },
     sunrise: { icon: '🌅', value: sunriseStr, time12: formatSunTime12Hour(centerInfo.sunrise?.time12 || sunriseStr, '06:00 AM') },
@@ -2548,8 +2755,8 @@ export function computeLocalJamakkol({
   const periodKey = isDay ? 'day' : 'night';
   const subPlanetsRule = JAMAKKOL_SUB_PLANETS_RULES[effectiveDayOfWeek]?.[periodKey] || JAMAKKOL_SUB_PLANETS_RULES[6].day;
 
-  // Baseline Sun degree in Virgo (approx 2.01°)
-  const sunDegInRasi = 2.01;
+  // Baseline Sun degree in current rasi
+  const sunDegInRasi = sunDeg;
 
   const calculateSubPlanet = (rule, baseDeg) => {
     const total = baseDeg + (rule.degOffset || 0);
@@ -2753,7 +2960,11 @@ export default {
   PLANET_EXALTATION,
   PLANET_DEBILITATION,
   PLANET_OWN_HOUSES,
-  PLANET_NAMES_6LANG,
+  NAKSHATRA_LORDS,
+  PILLAR_TITLES_6LANG,
+  getPillarStarInfo,
+  KARANA_LORDS,
+  YOGA_LORDS,
   getLocalizedPlanetCode,
   getLocalizedCityName,
   formatDegreeDMS,

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '../../../components/common/SEOHead';
 import Breadcrumbs from '../../../components/common/Breadcrumbs';
 import JamakolChartCard from '../components/JamakolChartCard';
+import JamakolGeneralRaysCard from '../components/JamakolGeneralRaysCard';
 import JamakolKeyNotesCard from '../components/JamakolKeyNotesCard';
 import JamakolPlanetaryStatusTables from '../components/JamakolPlanetaryStatusTables';
 import JamakolRaysTable from '../components/JamakolRaysTable';
@@ -694,6 +695,12 @@ export default function JamakolPrasannamPage() {
         dateTimeStr={chartData?.metadata?.displayDateTimeStr}
         cityName={inputPlace || selectedCity.name || 'Chennai'}
         onChangeCity={handleChangeCityClick}
+        lang={currentLang}
+      />
+
+      {/* General Rasi & Giraha Kathir Table (பொது ராசி மற்றும் கிரக கதிர்கள் அட்டவணை) */}
+      <JamakolGeneralRaysCard
+        chartData={chartData}
         lang={currentLang}
       />
 

@@ -644,19 +644,18 @@ export default function KadikaraPrasannamPage() {
     }
   };
 
-  // Format date time string matching screenshot "04/07/2025 15:03:00"
+  // Format date time string with AM/PM e.g. "10/10/2026 08:57:57 AM"
   const formattedDateTimeStr = (() => {
-    if (!inputDate) return '04/07/2025 15:03:00';
+    if (!inputDate) return '04/07/2025 03:03:00 PM';
     const parts = inputDate.split('-');
     if (parts.length !== 3) return inputDate;
     const [yyyy, mm, dd] = parts;
 
-    let h24 = parseInt(inputHour, 10);
-    if (inputAmPm === 'PM' && h24 < 12) h24 += 12;
-    if (inputAmPm === 'AM' && h24 === 12) h24 = 0;
     const pad = (n) => String(n).padStart(2, '0');
+    const h12 = parseInt(inputHour, 10) || 12;
+    const ampm = inputAmPm ? inputAmPm.toUpperCase() : 'AM';
 
-    return `${pad(dd)}/${pad(mm)}/${yyyy} ${pad(h24)}:${pad(inputMinute)}:${pad(inputSecond || 0)}`;
+    return `${pad(dd)}/${pad(mm)}/${yyyy} ${pad(h12)}:${pad(inputMinute)}:${pad(inputSecond || 0)} ${ampm}`;
   })();
 
   const toggleFaq = (idx) => {
@@ -974,7 +973,9 @@ export default function KadikaraPrasannamPage() {
                   rasiGrid={rasiGrid}
                   dateTimeStr={formattedDateTimeStr}
                   placeName={inputPlace || 'Dindigul'}
-                  ayanamsaLabel={inputAyanamsa === 'kp_newcomb' ? 'KP-Newcomb' : (inputAyanamsa === 'lahiri' ? 'Lahiri' : inputAyanamsa)}
+                  latitude={inputLat}
+                  longitude={inputLng}
+                  ayanamsaLabel={inputAyanamsa === 'kp_newcomb' ? 'KP-Newcomb' : (inputAyanamsa === 'lahiri' ? 'Lahiri' : (KADIKARA_AYANAMSA_OPTIONS.find(o => o.value === inputAyanamsa)?.labelEn?.split(' ')[0] || inputAyanamsa))}
                   title={t('astrology:kadikara.chartTitle', 'கடிகார பிரசன்னம்')}
                   lang={currentLang}
                 />

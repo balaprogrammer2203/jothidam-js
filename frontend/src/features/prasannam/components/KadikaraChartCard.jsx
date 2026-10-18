@@ -38,6 +38,8 @@ export default function KadikaraChartCard({
   rasiGrid = Array.from({ length: 12 }, () => []),
   dateTimeStr = '',
   placeName = 'Dindigul',
+  latitude,
+  longitude,
   ayanamsaLabel = 'Lahiri',
   title = '',
   lang = 'ta'
@@ -96,10 +98,37 @@ export default function KadikaraChartCard({
     return `${ad}°${String(am).padStart(2, '0')}'`;
   })();
 
-  // Format date & time display for center cell
-  const displayDateTime = dateTimeStr || '04/07/2025 15:03:00';
-  const displayPlace = placeName || 'Dindigul';
+  // Format date & time display with AM/PM for center cell
+  const formatDateTimeWithAmPm = (rawStr) => {
+    if (!rawStr) return '04/07/2025 03:03:00 PM';
+    const clean = String(rawStr).trim();
+    if (/AM|PM/i.test(clean)) return clean;
+    const match24 = clean.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})[,·\s]+(\d{1,2}):(\d{2}):?(\d{2})?$/);
+    if (match24) {
+      const day = match24[1].padStart(2, '0');
+      const mon = match24[2].padStart(2, '0');
+      const yr = match24[3];
+      const h24 = parseInt(match24[4], 10);
+      const m = match24[5];
+      const s = match24[6] || '00';
+      const period = h24 >= 12 ? 'PM' : 'AM';
+      const h12 = h24 % 12 || 12;
+      return `${day}/${mon}/${yr} ${String(h12).padStart(2, '0')}:${m}:${String(s).padStart(2, '0')} ${period}`;
+    }
+    return clean;
+  };
+
+  const displayDateTime = formatDateTimeWithAmPm(dateTimeStr);
+  const displayPlace = placeName || chartData?.placeName || chartData?.metadata?.placeName || 'Dindigul';
+  const displayAyanamsa = ayanamsaLabel || chartData?.ayanamsa || chartData?.metadata?.ayanamsa || 'Lahiri';
   const displayTitle = title || t('kadikara.chartTitle', 'கடிகார பிரசன்னம்');
+
+  const effectiveLat = latitude ?? chartData?.latitude ?? chartData?.metadata?.latitude ?? 10.3673;
+  const effectiveLng = longitude ?? chartData?.longitude ?? chartData?.metadata?.longitude ?? 77.9803;
+
+  const displayCoords = (effectiveLat !== undefined && effectiveLng !== undefined && !isNaN(Number(effectiveLat)) && !isNaN(Number(effectiveLng)))
+    ? `${Number(effectiveLat).toFixed(4)}° ${Number(effectiveLat) >= 0 ? 'N' : 'S'}, ${Number(effectiveLng).toFixed(4)}° ${Number(effectiveLng) >= 0 ? 'E' : 'W'}`
+    : '';
 
   // Localized Udhayam (உத / Udh) and Aarudam (ஆரு / Aar) labels
   const getBadgeShort = (type) => {
@@ -504,13 +533,20 @@ export default function KadikaraChartCard({
             <div className="center-chart-subheading">{t('kadikara.chartTransit', 'கோச்சாரம்')}</div>
             <div className="center-chart-heading">{t('kadikara.chartTitle', 'கடிகார பிரசன்னம்')}</div>
 
-            {/* Date and Time */}
+            {/* Date and Time with AM / PM */}
             <div className="center-datetime-text">{displayDateTime}</div>
 
-            {/* Place / City & Ayanamsa */}
+            {/* Place / Location & Ayanamsa */}
             <div className="center-place-text">
-              {displayPlace} {ayanamsaLabel ? `(${ayanamsaLabel})` : ''}
+              {displayPlace} {displayAyanamsa ? `(${displayAyanamsa})` : ''}
             </div>
+
+            {/* Geo Coordinates (Latitude / Longitude) */}
+            {displayCoords && (
+              <div className="center-coords-text" title={`Coordinates: ${displayCoords}`}>
+                {displayCoords}
+              </div>
+            )}
 
             {/* Status Rating Badge */}
             <div

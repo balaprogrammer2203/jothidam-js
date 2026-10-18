@@ -21,10 +21,23 @@
 
 .jamakol-container {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 1.5rem 1rem 3rem 1rem;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--jk-text-main);
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.jamakol-container * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .jamakol-container {
+    padding: 0.85rem 0.5rem 2rem 0.5rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -91,6 +104,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .jamam-banner {
+    padding: 0.75rem 0.75rem;
+    gap: 0.5rem;
+    justify-content: center;
+  }
 }
 
 .jamam-info-pill-group {
@@ -98,6 +121,14 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
+}
+
+@media (max-width: 640px) {
+  .jamam-info-pill-group {
+    width: 100%;
+    justify-content: center;
+    gap: 0.35rem;
+  }
 }
 
 .jamam-pill {
@@ -111,6 +142,13 @@
   font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .jamam-pill {
+    padding: 0.28rem 0.55rem;
+    font-size: 0.8rem;
+  }
 }
 
 .jamam-pill.accent {
@@ -136,6 +174,14 @@
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--jk-card-shadow);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .jamakol-controls-card {
+    padding: 1rem 0.75rem;
+  }
 }
 
 .jamakol-form-container {
@@ -153,23 +199,24 @@
 
 .jamakol-form-row.jk-row-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-top: 0.25rem;
 }
 
 .jamakol-form-row.jk-row-actions .jk-btn-now,
-.jamakol-form-row.jk-row-actions .jk-btn-submit {
+.jamakol-form-row.jk-row-actions .jk-btn-submit,
+.jamakol-form-row.jk-row-actions .jk-btn-save {
   width: 100%;
   justify-content: center;
   height: 44px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .jamakol-form-row,
   .jamakol-form-row.jk-row-actions {
     grid-template-columns: 1fr;
-    gap: 0.85rem;
+    gap: 0.75rem;
   }
 }
 
@@ -414,22 +461,42 @@
 }
 
 /* --------------------------------------------------------------------------
-   Top Sunrise & Sunset Timings Banner Card (Exact Screenshot Design)
+   Top Bar: Sunrise & Sunset Info Box on left, South/North Toggle on right
    -------------------------------------------------------------------------- */
-.jk-sun-timings-card {
+.jk-chart-top-bar {
   width: 100%;
-  max-width: 450px;
-  margin: 0 auto 1.15rem auto;
+  margin: 0 0 1.15rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
+}
+
+.jk-sun-timings-card {
+  width: auto;
+  flex: 0 0 auto;
+  margin: 0;
   background: linear-gradient(180deg, #fffbf5 0%, #fff7eb 100%);
   border: 1.5px solid #fed7aa;
   border-radius: 14px;
-  padding: 0.75rem 1.5rem;
-  display: flex;
+  padding: 0.55rem 1.25rem;
+  display: inline-flex;
   align-items: center;
   justify-content: space-evenly;
   box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.jk-chart-top-bar .jk-chart-style-toggle {
+  margin: 0;
+  margin-left: auto;
+  flex-shrink: 0;
+  align-self: center;
+  white-space: nowrap;
 }
 
 .jk-sun-timings-card:hover {
@@ -479,24 +546,43 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 640px) {
-  .jk-sun-timings-card {
-    max-width: 95%;
-    padding: 0.65rem 1rem;
+@media (max-width: 768px) {
+  .jk-chart-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0.75rem;
     margin-bottom: 0.9rem;
+    padding: 0;
+  }
+  .jk-sun-timings-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.55rem 0.85rem;
+  }
+  .jk-chart-top-bar .jk-chart-style-toggle {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    justify-content: center;
+  }
+  .jk-chart-top-bar .jk-toggle-btn {
+    flex: 1;
+    text-align: center;
   }
   .jk-sun-timing-icon {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   }
   .jk-sun-timing-label {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
   .jk-sun-timing-time {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
   }
   .jk-sun-timing-divider {
-    height: 36px;
-    margin: 0 0.65rem;
+    height: 32px;
+    margin: 0 0.5rem;
   }
 }
 
@@ -511,6 +597,19 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .jamakol-chart-frame-card {
+    padding: 0.5rem 0.25rem;
+    border-radius: 8px;
+    align-items: flex-start;
+  }
 }
 
 /* Outer layout that wraps the chart and 8 outer boxes */
@@ -532,7 +631,9 @@
   position: relative;
   width: 100%;
   max-width: 540px;
+  min-width: 280px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* The 8 Outer Brown Square Boxes matching exact user screenshot with ample spacing */
@@ -688,86 +789,159 @@
 /* Responsive adjustments for tablets and mobile screens */
 @media (max-width: 640px) {
   .jamakol-outer-chart-wrapper {
-    padding: 3.75rem 3.85rem;
+    padding: 2.35rem 2.45rem;
+    width: auto;
+    margin: 0 auto;
   }
   .jk-outer-box,
   .jk-outer-badge {
-    width: 52px;
-    height: 46px;
-    padding: 2px 3px;
-  }
-  .jk-box-sym,
-  .jk-outer-badge .planet-sym {
-    font-size: 0.78rem;
-    margin-bottom: 1px;
-  }
-  .jk-box-sym.is-long,
-  .jk-outer-badge .planet-sym.is-long {
-    font-size: 0.68rem;
-  }
-  .jk-box-deg,
-  .jk-outer-badge .deg-text {
-    font-size: 0.64rem;
-  }
-  .jk-box-pisces,
-  .jk-badge-pisces {
-    --tx: calc(-100% - 4px);
-    --ty: calc(-100% - 4px);
-  }
-  .jk-box-aries,
-  .jk-badge-aries-taurus {
-    --ty: calc(-100% - 4px);
-  }
-  .jk-box-gemini,
-  .jk-badge-gemini {
-    --tx: 4px;
-    --ty: calc(-100% - 4px);
-  }
-  .jk-box-cancer,
-  .jk-badge-cancer-leo {
-    --tx: 4px;
-  }
-  .jk-box-virgo,
-  .jk-badge-virgo {
-    --tx: 4px;
-    --ty: 4px;
-  }
-  .jk-box-libra,
-  .jk-badge-libra-scorpio {
-    --ty: 4px;
-  }
-  .jk-box-sagittarius,
-  .jk-badge-sagittarius {
-    --tx: calc(-100% - 4px);
-    --ty: 4px;
-  }
-  .jk-box-capricorn,
-  .jk-badge-capricorn-aquarius {
-    --tx: calc(-100% - 4px);
-  }
-}
-
-@media (max-width: 440px) {
-  .jamakol-outer-chart-wrapper {
-    padding: 3rem 3rem;
-  }
-  .jk-outer-box,
-  .jk-outer-badge {
-    width: 46px;
-    height: 42px;
+    width: 48px;
+    min-height: 40px;
+    height: auto;
     padding: 2px 2px;
   }
   .jk-box-sym,
   .jk-outer-badge .planet-sym {
-    font-size: 0.70rem;
+    font-size: 0.74rem;
+    margin-bottom: 1px;
   }
   .jk-box-sym.is-long,
   .jk-outer-badge .planet-sym.is-long {
-    font-size: 0.60rem;
+    font-size: 0.64rem;
   }
   .jk-box-deg,
   .jk-outer-badge .deg-text {
+    font-size: 0.60rem;
+    gap: 2px;
+  }
+  .jk-box-deg-45 {
     font-size: 0.56rem;
+  }
+  .jk-box-pisces,
+  .jk-badge-pisces {
+    --tx: calc(-100% - 3px);
+    --ty: calc(-100% - 3px);
+  }
+  .jk-box-aries,
+  .jk-badge-aries-taurus {
+    --ty: calc(-100% - 3px);
+  }
+  .jk-box-gemini,
+  .jk-badge-gemini {
+    --tx: 3px;
+    --ty: calc(-100% - 3px);
+  }
+  .jk-box-cancer,
+  .jk-badge-cancer-leo {
+    --tx: 3px;
+  }
+  .jk-box-virgo,
+  .jk-badge-virgo {
+    --tx: 3px;
+    --ty: 3px;
+  }
+  .jk-box-libra,
+  .jk-badge-libra-scorpio {
+    --ty: 3px;
+  }
+  .jk-box-sagittarius,
+  .jk-badge-sagittarius {
+    --tx: calc(-100% - 3px);
+    --ty: 3px;
+  }
+  .jk-box-capricorn,
+  .jk-badge-capricorn-aquarius {
+    --tx: calc(-100% - 3px);
+  }
+
+  /* Grid scaling on mobile */
+  .jamakol-grid-south {
+    grid-template-rows: repeat(4, minmax(64px, auto));
+  }
+  .jk-rasi-cell {
+    padding: 2px 3px;
+    min-height: 64px;
+  }
+  .jk-rasi-title {
+    font-size: 0.64rem;
+  }
+  .jk-rasi-degree-range {
+    font-size: 0.50rem;
+  }
+  .jk-cell-planets {
+    gap: 0.12rem;
+    font-size: 0.72rem;
+  }
+  .jk-planet-entry {
+    gap: 0.18rem;
+  }
+  .jk-sym-code {
+    font-size: 0.72rem !important;
+  }
+  .jk-planet-deg {
+    font-size: 0.58rem !important;
+  }
+  .jk-udhaya-bhava-num {
+    font-size: 0.60rem;
+    right: 2px;
+    bottom: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .jamakol-outer-chart-wrapper {
+    padding: 2.05rem 2.15rem;
+  }
+  .jk-outer-box,
+  .jk-outer-badge {
+    width: 40px;
+    min-height: 34px;
+    padding: 1px 1px;
+  }
+  .jk-box-sym,
+  .jk-outer-badge .planet-sym {
+    font-size: 0.65rem;
+  }
+  .jk-box-sym.is-long,
+  .jk-outer-badge .planet-sym.is-long {
+    font-size: 0.55rem;
+  }
+  .jk-box-deg,
+  .jk-outer-badge .deg-text {
+    font-size: 0.52rem;
+    gap: 1px;
+  }
+  .jk-box-deg-45 {
+    font-size: 0.48rem;
+  }
+
+  /* Compact grid for screens under 480px */
+  .jamakol-grid-south {
+    grid-template-rows: repeat(4, minmax(54px, auto));
+  }
+  .jk-rasi-cell {
+    padding: 1px 2px;
+    min-height: 54px;
+  }
+  .jk-rasi-title {
+    font-size: 0.58rem;
+  }
+  .jk-rasi-degree-range {
+    display: none;
+  }
+  .kadikara-rasi-info-pill {
+    width: 12px;
+    height: 12px;
+    font-size: 0.50rem;
+  }
+  .jk-sym-code {
+    font-size: 0.65rem !important;
+  }
+  .jk-planet-deg {
+    font-size: 0.52rem !important;
+  }
+  .jk-planet-entry {
+    gap: 0.12rem;
   }
 }
 
@@ -1187,38 +1361,48 @@
 
 @media (max-width: 640px) {
   .jk-chart-center-cell {
-    padding: 0.35rem 0.25rem;
+    padding: 0.25rem 0.2rem;
   }
   .jk-center-time-text {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
   }
   .jk-center-label,
   .jk-center-icon,
   .jk-center-val {
-    font-size: 0.64rem;
+    font-size: 0.58rem;
   }
   .jk-center-row {
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.08rem;
     gap: 0.15rem;
   }
   .jk-center-panchangam-header {
     gap: 0.25rem;
-    margin-bottom: 0.15rem;
-    padding-bottom: 0.12rem;
+    margin-bottom: 0.12rem;
+    padding-bottom: 0.1rem;
+  }
+  .jk-center-coords-row .jk-val-coords {
+    font-size: 0.55rem;
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 480px) {
+  .jk-chart-center-cell {
+    padding: 0.18rem 0.12rem;
+  }
   .jk-center-time-text {
-    font-size: 0.58rem;
+    font-size: 0.56rem;
   }
   .jk-center-label,
   .jk-center-icon,
   .jk-center-val {
-    font-size: 0.54rem;
+    font-size: 0.52rem;
   }
   .jk-center-row {
-    margin-bottom: 0.06rem;
+    margin-bottom: 0.04rem;
+    gap: 0.1rem;
+  }
+  .jk-center-coords-row .jk-val-coords {
+    font-size: 0.48rem;
   }
 }
 
@@ -1535,21 +1719,192 @@ body.dark-theme .jk-field-group label,
 }
 
 /* --------------------------------------------------------------------------
-   Chart Outer Footer (Below & outside chart: South / North Indian Toggle)
+   Chart Outer Footer (Below & outside chart: Pillars Banner)
    -------------------------------------------------------------------------- */
 .jamakol-chart-outer-footer {
   width: 100%;
+  max-width: 760px;
+  margin: 0.85rem auto 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 0 0.5rem;
   box-sizing: border-box;
 }
 
+/* Horizontal Pillars Banner Card (Similar to Sunrise / Sunset Card) */
+.jk-pillars-banner {
+  background: linear-gradient(180deg, #fffbf5 0%, #fff7eb 100%);
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  width: 100%;
+  max-width: 720px;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.jk-pillars-banner:hover {
+  border-color: #fdba74;
+  box-shadow: 0 4px 12px -2px rgba(234, 88, 12, 0.14), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.jk-pillar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  text-align: center;
+  user-select: none;
+}
+
+.jk-pillar-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #b91c1c;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.jk-pillar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #ffffff;
+  border: 1px solid #fecdd3;
+  border-radius: 7px;
+  padding: 0.18rem 0.6rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+}
+
+.jk-pillar-star-icon {
+  font-size: 0.75rem;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.jk-pillar-badge-text {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.jk-pillar-lord {
+  font-weight: 700;
+  color: #991b1b;
+  margin-left: 0.2rem;
+}
+
+.jk-pillar-divider {
+  width: 1px;
+  height: 38px;
+  background-color: #fed7aa;
+  margin: 0 0.85rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .jamakol-chart-outer-footer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.85rem;
+  }
+}
+
 @media (max-width: 640px) {
   .jamakol-chart-outer-footer {
-    justify-content: center;
+    padding: 0;
+    margin-top: 0.65rem;
   }
+  .jk-pillars-banner {
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.65rem 0.75rem;
+    align-items: stretch;
+  }
+  .jk-pillar-col {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .jk-pillar-title {
+    font-size: 0.85rem;
+  }
+  .jk-pillar-divider {
+    width: 100%;
+    height: 1px;
+    margin: 0.1rem 0;
+  }
+  .jk-pillar-badge {
+    padding: 0.18rem 0.5rem;
+    gap: 0.25rem;
+  }
+  .jk-pillar-badge-text {
+    font-size: 0.80rem;
+  }
+}
+
+/* Dark Mode Support for Pillars Banner */
+@media (prefers-color-scheme: dark) {
+  .jk-pillars-banner {
+    background: linear-gradient(180deg, #1c1917 0%, #292524 100%);
+    border-color: #78350f;
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
+  }
+  .jk-pillar-title {
+    color: #f87171;
+  }
+  .jk-pillar-badge {
+    background: #0c0a09;
+    border-color: #7f1d1d;
+  }
+  .jk-pillar-star-icon {
+    color: #fca5a5;
+  }
+  .jk-pillar-badge-text {
+    color: #f5f5f4;
+  }
+  .jk-pillar-lord {
+    color: #fca5a5;
+  }
+  .jk-pillar-divider {
+    background-color: #78350f;
+  }
+}
+
+[data-theme="dark"] .jk-pillars-banner {
+  background: linear-gradient(180deg, #1c1917 0%, #292524 100%);
+  border-color: #78350f;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .jk-pillar-title {
+  color: #f87171;
+}
+[data-theme="dark"] .jk-pillar-badge {
+  background: #0c0a09;
+  border-color: #7f1d1d;
+}
+[data-theme="dark"] .jk-pillar-star-icon {
+  color: #fca5a5;
+}
+[data-theme="dark"] .jk-pillar-badge-text {
+  color: #f5f5f4;
+}
+[data-theme="dark"] .jk-pillar-lord {
+  color: #fca5a5;
+}
+[data-theme="dark"] .jk-pillar-divider {
+  background-color: #78350f;
 }
 
 .jamakol-chart-footer-bar {
@@ -1599,23 +1954,28 @@ body.dark-theme .jk-field-group label,
 /* Toggle Pill: South Indian / North Indian */
 .jk-chart-style-toggle {
   display: inline-flex;
+  align-items: center;
   background: #f5f5f4;
   border: 1px solid #d6d3d1;
   border-radius: 9999px;
   padding: 3px;
   gap: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .jk-toggle-btn {
   background: transparent;
   border: none;
   border-radius: 9999px;
-  padding: 0.35rem 0.85rem;
+  padding: 0.35rem 0.8rem;
   font-size: 0.82rem;
   font-weight: 600;
   color: #57534e;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .jk-toggle-btn.active {
@@ -1907,7 +2267,7 @@ body.dark-theme .jk-field-group label,
 /* Cards Grid */
 .jk-ind-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 0.85rem;
 }
 
@@ -2164,7 +2524,7 @@ body.dark-theme .jk-field-group label,
    -------------------------------------------------------------------------- */
 .jamakol-summary-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 1.25rem;
   margin-bottom: 2rem;
 }
@@ -2373,7 +2733,7 @@ body.dark-theme .jk-field-group label,
 
 .jk-questions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 1rem;
   max-height: 580px;
   overflow-y: auto;
@@ -3435,4 +3795,568 @@ body.dark-theme .jk-field-group label,
   opacity: 0.65;
   cursor: not-allowed;
 }
+
+/* --------------------------------------------------------------------------
+   General Rasi & Planet Rays Card (பொது ராசி மற்றும் கிரக கதிர்கள் அட்டவணை)
+   Matches classical Vedic style: Gold/terracotta borders, clean pill tags,
+   two responsive side-by-side tables.
+   -------------------------------------------------------------------------- */
+.jk-general-rays-card {
+  background: #ffffff;
+  border: 1.5px solid var(--jk-gold-border, #caa254);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--jk-card-shadow, 0 4px 20px -2px rgba(90, 50, 10, 0.08));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.jk-general-rays-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1.5px solid #fed7aa;
+}
+
+.jk-general-rays-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.jk-general-rays-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.jk-general-rays-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #431407;
+  letter-spacing: -0.01em;
+}
+
+.jk-general-rays-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  letter-spacing: 0.03em;
+}
+
+.jk-general-rays-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.jk-general-rays-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.jk-general-rays-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.jk-general-rays-table-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #78350f;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.jk-general-rays-count-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #b45309;
+  background: #fffbeb;
+  border: 1px solid #fed7aa;
+  border-radius: 6px;
+  padding: 0.15rem 0.55rem;
+}
+
+.jk-general-rays-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1.5px solid #fed7aa;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.jk-general-rays-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.jk-general-rays-table thead tr {
+  background: linear-gradient(180deg, #78350f 0%, #6c2205 100%);
+  color: #ffffff;
+}
+
+.jk-general-rays-table th {
+  padding: 0.65rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #ffffff;
+  border-bottom: 2px solid #5a1c06;
+  white-space: nowrap;
+}
+
+.jk-general-rays-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #f6efe8;
+  color: #292524;
+  font-weight: 600;
+}
+
+.jk-general-rays-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.jk-general-rays-table tbody tr:hover {
+  background-color: #fffbf2;
+}
+
+.jk-general-rays-table tbody tr.row-udhayam {
+  background-color: #fbf7ff;
+}
+
+.jk-general-rays-table tbody tr.row-aarudam {
+  background-color: #f0f9ff;
+}
+
+.jk-general-rays-table tbody tr.row-kavippu {
+  background-color: #fef2f2;
+}
+
+.jk-general-rays-table tbody tr.row-timing {
+  background-color: #f0fdf4;
+}
+
+.jk-col-num {
+  color: #78716c;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.jk-col-name {
+  color: #1c1917;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.jk-name-main {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.jk-col-lord {
+  color: #78350f;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.jk-col-code {
+  color: #431407;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.jk-col-ray {
+  text-align: center;
+}
+
+.jk-ray-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 25px;
+  padding: 0 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.jk-ray-pill.ray-time {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #bfdbfe;
+  font-weight: 850;
+}
+
+.jk-ray-pill-total {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 27px;
+  padding: 0 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.86rem;
+  font-weight: 900;
+  background: #9a3412;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(154, 52, 18, 0.3);
+}
+
+.jk-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.jk-tag-pill.tag-ud {
+  background: #ede9fe;
+  color: #5b21b6;
+  border: 1px solid #ddd6fe;
+}
+
+.jk-tag-pill.tag-ar {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.jk-tag-pill.tag-kv {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.jk-tag-pill.tag-time {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.jk-general-rays-table tfoot tr {
+  background: #fdfaf3;
+  border-top: 2px solid #fed7aa;
+}
+
+.jk-total-label {
+  text-align: right;
+  padding: 0.65rem 0.75rem;
+  color: #78350f;
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+.jk-total-val {
+  text-align: center;
+  padding: 0.65rem 0.75rem;
+}
+
+.jk-general-rays-note {
+  margin-top: 1.15rem;
+  background: #fffbf2;
+  border: 1px solid #fed7aa;
+  border-left: 4.5px solid #ea580c;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.jk-note-title {
+  font-size: 0.86rem;
+  color: #9a3412;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.jk-note-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.82rem;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+.jk-note-list li {
+  margin-bottom: 0.25rem;
+}
+
+.jk-note-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile responsive rules for General Rays Card */
+@media (max-width: 640px) {
+  .jk-general-rays-card {
+    padding: 0.9rem 0.75rem;
+  }
+
+  .jk-general-rays-title {
+    font-size: 1.05rem;
+  }
+
+  .jk-general-rays-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .jk-general-rays-table th,
+  .jk-general-rays-table td {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.82rem;
+  }
+
+  .jk-ray-pill {
+    min-width: 28px;
+    height: 23px;
+    font-size: 0.78rem;
+    padding: 0 0.4rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .jk-general-rays-card {
+    background: #1c1917;
+    border-color: #7c2d12;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .jk-general-rays-header {
+    border-bottom-color: #44403c;
+  }
+
+  .jk-general-rays-title {
+    color: #fb923c;
+  }
+
+  .jk-general-rays-badge {
+    background: #292524;
+    color: #fde68a;
+    border-color: #44403c;
+  }
+
+  .jk-general-rays-table-title {
+    color: #fdba74;
+  }
+
+  .jk-general-rays-count-badge {
+    background: #292524;
+    color: #fde68a;
+    border-color: #44403c;
+  }
+
+  .jk-general-rays-table-wrap {
+    border-color: #44403c;
+    background: #1c1917;
+  }
+
+  .jk-general-rays-table thead tr {
+    background: #451a03;
+  }
+
+  .jk-general-rays-table th {
+    border-bottom-color: #292524;
+    color: #fed7aa;
+  }
+
+  .jk-general-rays-table td {
+    border-bottom-color: #292524;
+    color: #e7e5e4;
+  }
+
+  .jk-name-main {
+    color: #f5f5f4;
+  }
+
+  .jk-col-lord {
+    color: #fdba74;
+  }
+
+  .jk-col-code {
+    color: #fde68a;
+  }
+
+  .jk-general-rays-table tbody tr:hover {
+    background-color: #292524;
+  }
+
+  .jk-general-rays-table tbody tr.row-udhayam {
+    background-color: rgba(124, 58, 237, 0.15);
+  }
+
+  .jk-general-rays-table tbody tr.row-aarudam {
+    background-color: rgba(2, 132, 199, 0.15);
+  }
+
+  .jk-general-rays-table tbody tr.row-kavippu {
+    background-color: rgba(220, 38, 38, 0.15);
+  }
+
+  .jk-general-rays-table tbody tr.row-timing {
+    background-color: rgba(22, 163, 74, 0.15);
+  }
+
+  .jk-general-rays-table tfoot tr {
+    background: #292524;
+    border-top-color: #44403c;
+  }
+
+  .jk-total-label {
+    color: #fdba74;
+  }
+
+  .jk-general-rays-note {
+    background: #241b12;
+    border-color: #78350f;
+    border-left-color: #ea580c;
+  }
+
+  .jk-note-title {
+    color: #fb923c;
+  }
+
+  .jk-note-list {
+    color: #fed7aa;
+  }
+}
+
+[data-theme="dark"] .jk-general-rays-card {
+  background: #1c1917;
+  border-color: #7c2d12;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .jk-general-rays-header {
+  border-bottom-color: #44403c;
+}
+
+[data-theme="dark"] .jk-general-rays-title {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .jk-general-rays-badge {
+  background: #292524;
+  color: #fde68a;
+  border-color: #44403c;
+}
+
+[data-theme="dark"] .jk-general-rays-table-title {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-general-rays-count-badge {
+  background: #292524;
+  color: #fde68a;
+  border-color: #44403c;
+}
+
+[data-theme="dark"] .jk-general-rays-table-wrap {
+  border-color: #44403c;
+  background: #1c1917;
+}
+
+[data-theme="dark"] .jk-general-rays-table thead tr {
+  background: #451a03;
+}
+
+[data-theme="dark"] .jk-general-rays-table th {
+  border-bottom-color: #292524;
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-general-rays-table td {
+  border-bottom-color: #292524;
+  color: #e7e5e4;
+}
+
+[data-theme="dark"] .jk-name-main {
+  color: #f5f5f4;
+}
+
+[data-theme="dark"] .jk-col-lord {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-col-code {
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-general-rays-table tbody tr:hover {
+  background-color: #292524;
+}
+
+[data-theme="dark"] .jk-general-rays-table tbody tr.row-udhayam {
+  background-color: rgba(124, 58, 237, 0.15);
+}
+
+[data-theme="dark"] .jk-general-rays-table tbody tr.row-aarudam {
+  background-color: rgba(2, 132, 199, 0.15);
+}
+
+[data-theme="dark"] .jk-general-rays-table tbody tr.row-kavippu {
+  background-color: rgba(220, 38, 38, 0.15);
+}
+
+[data-theme="dark"] .jk-general-rays-table tbody tr.row-timing {
+  background-color: rgba(22, 163, 74, 0.15);
+}
+
+[data-theme="dark"] .jk-general-rays-table tfoot tr {
+  background: #292524;
+  border-top-color: #44403c;
+}
+
+[data-theme="dark"] .jk-total-label {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-general-rays-note {
+  background: #241b12;
+  border-color: #78350f;
+  border-left-color: #ea580c;
+}
+
+[data-theme="dark"] .jk-note-title {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .jk-note-list {
+  color: #fed7aa;
+}
+
 

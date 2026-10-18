@@ -12,7 +12,9 @@ import {
   formatSunTime12Hour,
   formatCenterDateTime12Hour,
   getRasiDegreeFromStr,
-  getRasiDegree45FromStr
+  getRasiDegree45FromStr,
+  PILLAR_TITLES_6LANG,
+  getPillarStarInfo
 } from '../../../utils/jamakkol.utils';
 import {
   PRASANNAM_RASIS,
@@ -192,6 +194,16 @@ export default function JamakolChartCard({
   const udhayam = pillars?.udhayam || chartData?.udhayam || { signIndex: 8, formattedDegree: "18°25'" };
   const aarudam = pillars?.aarudam || chartData?.aarudam || { signIndex: 3, formattedDegree: "24°19'" };
   const kavippu = pillars?.kavippu || chartData?.kavippu || { signIndex: 6, formattedDegree: "06°08'" };
+
+  const udhayamStarInfo = getPillarStarInfo(udhayam, activeLang);
+  const aarudamStarInfo = getPillarStarInfo(aarudam, activeLang);
+  const kavippuStarInfo = getPillarStarInfo(kavippu, activeLang);
+
+  const pillarTitles = {
+    udhayam: PILLAR_TITLES_6LANG?.udhayam?.[activeLang] || PILLAR_TITLES_6LANG?.udhayam?.ta || 'உதயம்',
+    aarudam: PILLAR_TITLES_6LANG?.aarudam?.[activeLang] || PILLAR_TITLES_6LANG?.aarudam?.ta || 'ஆருடம்',
+    kavippu: PILLAR_TITLES_6LANG?.kavippu?.[activeLang] || PILLAR_TITLES_6LANG?.kavippu?.ta || 'கவிப்பு'
+  };
 
   const rasiGrid = chartData.rasiGrid || innerChart?.rasiGrid || Array.from({ length: 12 }, () => []);
 
@@ -899,18 +911,38 @@ export default function JamakolChartCard({
 
   return (
     <div className="jamakol-chart-block">
-      {/* Top Sunrise & Sunset Banner Card (Exact Screenshot Reproduction) */}
-      <div className="jk-sun-timings-card">
-        <div className="jk-sun-timing-col" title={`Sunrise: ${centerInfo.sunrise?.value || displaySunrise}`}>
-          <span className="jk-sun-timing-icon">🌅</span>
-          <span className="jk-sun-timing-label">{sunLabels.sunrise}</span>
-          <span className="jk-sun-timing-time">{displaySunrise}</span>
+      {/* Top Header Bar: Sunrise/Sunset card on left + South/North Indian toggle on right */}
+      <div className="jk-chart-top-bar">
+        <div className="jk-sun-timings-card">
+          <div className="jk-sun-timing-col" title={`Sunrise: ${centerInfo.sunrise?.value || displaySunrise}`}>
+            <span className="jk-sun-timing-icon">🌅</span>
+            <span className="jk-sun-timing-label">{sunLabels.sunrise}</span>
+            <span className="jk-sun-timing-time">{displaySunrise}</span>
+          </div>
+          <div className="jk-sun-timing-divider" />
+          <div className="jk-sun-timing-col" title={`Sunset: ${centerInfo.sunset?.value || displaySunset}`}>
+            <span className="jk-sun-timing-icon">🌆</span>
+            <span className="jk-sun-timing-label">{sunLabels.sunset}</span>
+            <span className="jk-sun-timing-time">{displaySunset}</span>
+          </div>
         </div>
-        <div className="jk-sun-timing-divider" />
-        <div className="jk-sun-timing-col" title={`Sunset: ${centerInfo.sunset?.value || displaySunset}`}>
-          <span className="jk-sun-timing-icon">🌆</span>
-          <span className="jk-sun-timing-label">{sunLabels.sunset}</span>
-          <span className="jk-sun-timing-time">{displaySunset}</span>
+
+        {/* South / North Indian Style Toggle */}
+        <div className="jk-chart-style-toggle" role="group" aria-label="Chart Style">
+          <button
+            type="button"
+            className={`jk-toggle-btn ${chartStyle === 'south' ? 'active' : ''}`}
+            onClick={() => setChartStyle('south')}
+          >
+            {southIndianText}
+          </button>
+          <button
+            type="button"
+            className={`jk-toggle-btn ${chartStyle === 'north' ? 'active' : ''}`}
+            onClick={() => setChartStyle('north')}
+          >
+            {northIndianText}
+          </button>
         </div>
       </div>
 
@@ -1065,23 +1097,43 @@ export default function JamakolChartCard({
         </div>
       </div>
 
-      {/* Outside & Below Chart: [South / North Indian] Toggle */}
+      {/* Outside & Below Chart: [Udhayam, Aarudam, Kavippu Banner] on left & [South / North Indian] Toggle on right */}
       <div className="jamakol-chart-outer-footer">
-        <div className="jk-chart-style-toggle" role="group" aria-label="Chart Style">
-          <button
-            type="button"
-            className={`jk-toggle-btn ${chartStyle === 'south' ? 'active' : ''}`}
-            onClick={() => setChartStyle('south')}
-          >
-            {southIndianText}
-          </button>
-          <button
-            type="button"
-            className={`jk-toggle-btn ${chartStyle === 'north' ? 'active' : ''}`}
-            onClick={() => setChartStyle('north')}
-          >
-            {northIndianText}
-          </button>
+        {/* Horizontal Pillars Box Container (Similar to Sunrise / Sunset Card) */}
+        <div className="jk-pillars-banner" aria-label="Jamakkol Key Pillars">
+          <div className="jk-pillar-col" title={`${pillarTitles.udhayam}: ${udhayamStarInfo.text}`}>
+            <span className="jk-pillar-title">{pillarTitles.udhayam}</span>
+            <div className="jk-pillar-badge">
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {udhayamStarInfo.starName} - {udhayamStarInfo.pada} <span className="jk-pillar-lord">({udhayamStarInfo.lordShort})</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="jk-pillar-divider" />
+
+          <div className="jk-pillar-col" title={`${pillarTitles.aarudam}: ${aarudamStarInfo.text}`}>
+            <span className="jk-pillar-title">{pillarTitles.aarudam}</span>
+            <div className="jk-pillar-badge">
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {aarudamStarInfo.starName} - {aarudamStarInfo.pada} <span className="jk-pillar-lord">({aarudamStarInfo.lordShort})</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="jk-pillar-divider" />
+
+          <div className="jk-pillar-col" title={`${pillarTitles.kavippu}: ${kavippuStarInfo.text}`}>
+            <span className="jk-pillar-title">{pillarTitles.kavippu}</span>
+            <div className="jk-pillar-badge">
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {kavippuStarInfo.starName} - {kavippuStarInfo.pada} <span className="jk-pillar-lord">({kavippuStarInfo.lordShort})</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

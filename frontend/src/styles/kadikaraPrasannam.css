@@ -1045,11 +1045,20 @@
 }
 
 .center-place-text {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #475569;
   line-height: 1.2;
   white-space: nowrap;
+}
+
+.center-coords-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1.2;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
 }
 
 /* Status Rating Badge (Matching screenshot Hard Luck / அதமம்) */
@@ -1512,6 +1521,13 @@
     white-space: nowrap;
   }
 
+  .center-coords-text {
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
   .center-status-badge {
     padding: 3px 8px;
     min-width: 76px;
@@ -1621,6 +1637,11 @@
   .center-datetime-text,
   .center-place-text {
     font-size: 10.5px;
+    white-space: nowrap;
+  }
+
+  .center-coords-text {
+    font-size: 9.5px;
     white-space: nowrap;
   }
 
@@ -2004,7 +2025,10 @@ html[data-theme="dark"] .center-datetime-text,
 body.dark-theme .center-datetime-text,
 html[data-theme="dark"] .center-place-text,
 [data-theme="dark"] .center-place-text,
-body.dark-theme .center-place-text {
+body.dark-theme .center-place-text,
+html[data-theme="dark"] .center-coords-text,
+[data-theme="dark"] .center-coords-text,
+body.dark-theme .center-coords-text {
   color: #e2e8f0 !important;
 }
 
