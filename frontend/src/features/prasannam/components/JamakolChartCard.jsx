@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   JAMAKKOL_RASIS,
@@ -23,6 +23,7 @@ import {
   getLocalizedPrasannamRasiLord,
   enrichPlanetAstrology
 } from '../../../utils/kadikaraPrasannam';
+import { calculate12RasiRays } from './Jamakol12RasiRaysChart';
 
 /**
  * Tooltip positioning helper based on South Indian 4x4 chart cell layout
@@ -236,6 +237,19 @@ export default function JamakolChartCard({
         : (udhayam.rasiIndex !== undefined
             ? udhayam.rasiIndex
             : (pillars?.udhayam?.signIndex ?? pillars?.udhayam?.rasiIndex ?? 0)));
+
+  // 12 Rasi calculated rays (including Jama giraha rays)
+  const rasiRaysList = useMemo(() => {
+    return calculate12RasiRays(chartData, true, activeLang);
+  }, [chartData, activeLang]);
+
+  const rasiRayMap = useMemo(() => {
+    const map = {};
+    (rasiRaysList || []).forEach((r) => {
+      map[r.rasiId] = r;
+    });
+    return map;
+  }, [rasiRaysList]);
 
   // Prepare normalized 8 outer cards with proper fallback symbols
   const outerCards = [
@@ -666,7 +680,11 @@ export default function JamakolChartCard({
             <span className="jk-rasi-degree-range">{degreeRange}</span>
           </div>
           <span className="kadikara-rasi-info-pill" title={activeLang === 'ta' ? 'ராசி & நட்சத்திர விபரம்' : 'Rasi & Star Details'}>
-            ⓘ
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
           </span>
           {renderRasiTooltip(rasiId, displayName, degreeRange)}
         </div>
@@ -778,6 +796,18 @@ export default function JamakolChartCard({
             );
           })}
         </div>
+
+        {/* Bottom Left: Total Rays Count */}
+        {rasiRayMap[rasiId] && (
+          <span
+            className="jk-cell-ray-badge"
+            title={`${activeLang === 'ta' ? 'கணக்கிடப்பட்ட கதிர்' : 'Calculated Rays'}: ${rasiRayMap[rasiId].totalRays} (${rasiRayMap[rasiId].breakdownText})`}
+          >
+            {rasiRayMap[rasiId].totalRays}
+          </span>
+        )}
+
+        {/* Bottom Right: Udhaya Bhava number */}
         <span
           className="jk-udhaya-bhava-num"
           title={activeLang === 'ta' ? `உதய பாவம்: ${houseNumFromUdhayam}` : `Udhaya Bhava: ${houseNumFromUdhayam}`}
@@ -845,6 +875,20 @@ export default function JamakolChartCard({
                 >
                   {rasiId + 1}
                 </text>
+
+                {/* Calculated Ray Badge */}
+                {rasiRayMap[rasiId] && (
+                  <text
+                    x="0"
+                    y="-5"
+                    fontSize="8.5"
+                    fontWeight="bold"
+                    fill="#b45309"
+                    textAnchor="middle"
+                  >
+                    ☀️{rasiRayMap[rasiId].totalRays}
+                  </text>
+                )}
 
                 {/* Planets listing */}
                 <text x="0" y="2" fontSize="9" textAnchor="middle" fill="#1e293b">

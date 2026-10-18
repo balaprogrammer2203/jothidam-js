@@ -871,6 +871,7 @@
   .jk-cell-planets {
     gap: 0.12rem;
     font-size: 0.72rem;
+    padding-bottom: 12px;
   }
   .jk-planet-entry {
     gap: 0.18rem;
@@ -880,6 +881,12 @@
   }
   .jk-planet-deg {
     font-size: 0.58rem !important;
+  }
+  .jk-cell-ray-badge {
+    font-size: 0.58rem;
+    padding: 0 3px;
+    left: 2px;
+    bottom: 1px;
   }
   .jk-udhaya-bhava-num {
     font-size: 0.60rem;
@@ -1027,6 +1034,7 @@
   gap: 0.2rem;
   font-size: 0.8rem;
   line-height: 1.3;
+  padding-bottom: 16px;
 }
 
 .jk-planet-entry {
@@ -3037,30 +3045,33 @@ body.dark-theme .jk-field-group label,
   border-color: #0f172a transparent transparent transparent;
 }
 
-/* Tooltip Interior Styles */
+/* Tooltip Interior Styles - Light Color Info Pill */
 .kadikara-rasi-info-pill {
-  font-size: 10px;
-  font-weight: 700;
-  color: #92400e;
-  background: #fef3c7;
-  border: 1px solid #fde68a;
-  border-radius: 50%;
   width: 14px;
   height: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: #a8a29e;
+  background: #fffdf5;
+  border-radius: 50%;
   margin-left: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.kadikara-rasi-info-pill svg {
+  display: block;
 }
 
 .kadikara-rasi-header:hover .kadikara-rasi-info-pill,
-.jk-cell-header:hover .kadikara-rasi-info-pill {
-  background: #b45309;
-  border-color: #b45309;
-  color: #ffffff;
+.jk-cell-header:hover .kadikara-rasi-info-pill,
+.kadikara-rasi-info-pill:hover {
+  color: #78716c;
+  background: #f5eedc;
 }
 
 .kadikara-tooltip-card .tooltip-header {
@@ -4358,5 +4369,977 @@ body.dark-theme .jk-field-group label,
 [data-theme="dark"] .jk-note-list {
   color: #fed7aa;
 }
+
+/* ==========================================================================
+   12-Box Calculated Rasi Rays Chart (ராசி வாரியான கணக்கிடப்பட்ட கதிர் சக்கரம்)
+   Compact Standalone Design
+   ========================================================================== */
+.jk-12rays-standalone-card {
+  background: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.06);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.jk-12rays-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ffedd5;
+}
+
+.jk-12rays-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jk-12rays-header-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.jk-12rays-title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jk-12rays-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jk-12rays-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #451a03;
+  line-height: 1.2;
+}
+
+.jk-12rays-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #fde68a;
+}
+
+.jk-12rays-subtitle {
+  display: block;
+  font-size: 0.76rem;
+  color: #9a3412;
+  font-weight: 500;
+}
+
+.jk-12rays-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jk-rays-toggle-group {
+  display: inline-flex;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.jk-rays-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #92400e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jk-rays-toggle-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
+}
+
+.jk-rays-toggle-btn.active {
+  background: #d97706;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(180, 83, 9, 0.2);
+}
+
+.jk-12rays-total-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+.jk-12rays-total-label {
+  font-size: 0.75rem;
+  color: #78350f;
+  font-weight: 600;
+}
+
+.jk-12rays-total-val {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #b45309;
+}
+
+/* Compact rules strip */
+.jk-12rays-rules-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #fffdf7;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+}
+
+.jk-rule-item {
+  color: #78350f;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.jk-rule-sep {
+  color: #d97706;
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+/* 4x4 Grid - Compact with minmax(0, 1fr) to guarantee no horizontal overflow */
+.jk-12rays-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(88px, auto);
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.jk-ray-cell {
+  background: #fffdfa;
+  border: 1.5px solid #fed7aa;
+  border-radius: 8px;
+  padding: 4px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+  min-height: 92px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.jk-ray-cell:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.12);
+  transform: translateY(-1px);
+}
+
+.jk-ray-cell.cell-udhayam {
+  border-color: #8b5cf6;
+  background: #fbf9ff;
+  box-shadow: 0 0 0 1px #8b5cf6 inset;
+}
+
+.jk-ray-cell.cell-aarudam {
+  border-color: #0284c7;
+  background: #f8fcff;
+  box-shadow: 0 0 0 1px #0284c7 inset;
+}
+
+.jk-ray-cell.cell-kavippu {
+  border-color: #dc2626;
+  background: #fffafa;
+  box-shadow: 0 0 0 1px #dc2626 inset;
+}
+
+/* Cell Header */
+.jk-ray-cell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #fde68a;
+  flex-shrink: 0;
+}
+
+.jk-ray-cell-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  line-height: 1.1;
+}
+
+.jk-ray-cell-title {
+  font-weight: 700;
+  font-size: 0.74rem;
+  color: #451a03;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.jk-ray-cell-lord {
+  font-size: 0.62rem;
+  color: #9a3412;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.jk-ray-tag {
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0 3px;
+  border-radius: 2px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.jk-ray-tag.tag-ud {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.jk-ray-tag.tag-ar {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.jk-ray-tag.tag-kv {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Compact Total Rays in Cell Header */
+.jk-ray-cell-header-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: #b45309;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(217, 119, 6, 0.08);
+}
+
+.jk-ray-total-icon {
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.jk-ray-total-num {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #b45309;
+  line-height: 1;
+  letter-spacing: -0.2px;
+}
+
+/* Vertical Items List inside each Rasi Box */
+.jk-ray-cell-vert-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+  width: 100%;
+  max-height: 135px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  padding-right: 1px;
+}
+
+.jk-ray-cell-vert-items::-webkit-scrollbar {
+  width: 3px;
+}
+
+.jk-ray-cell-vert-items::-webkit-scrollbar-thumb {
+  background: #fed7aa;
+  border-radius: 2px;
+}
+
+/* Individual Vertical Item Row */
+.jk-vert-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 0.65rem;
+  line-height: 1.25;
+  padding: 0.5px 2px;
+  border-radius: 2px;
+  border-bottom: 1px dotted rgba(254, 215, 170, 0.35);
+}
+
+.jk-vert-item:last-child {
+  border-bottom: none;
+}
+
+.jk-v-label {
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.jk-v-val {
+  font-weight: 700;
+  color: #0f172a;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  text-align: right;
+}
+
+.jk-vert-item.item-rasi {
+  background: rgba(254, 243, 199, 0.35);
+}
+
+.jk-vert-item.item-rasi .jk-v-label {
+  color: #78350f;
+  font-weight: 600;
+}
+
+.jk-vert-item.item-rasi .jk-v-val {
+  color: #92400e;
+}
+
+.jk-vert-item.item-standing {
+  color: #1e293b;
+}
+
+.jk-vert-item.item-standing.dignity-ucham .jk-v-label {
+  color: #047857;
+  font-weight: 700;
+}
+
+.jk-vert-item.item-standing.dignity-ucham .jk-v-val {
+  color: #065f46;
+  font-weight: 800;
+}
+
+.jk-vert-item.item-standing.dignity-atchi .jk-v-label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.jk-vert-item.item-standing.dignity-atchi .jk-v-val {
+  color: #1e40af;
+  font-weight: 800;
+}
+
+.jk-vert-item.item-standing.dignity-neecham .jk-v-label {
+  color: #dc2626;
+  text-decoration: line-through;
+  opacity: 0.85;
+}
+
+.jk-vert-item.item-standing.dignity-neecham .jk-v-val {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.jk-vert-item.item-aspect {
+  color: #475569;
+}
+
+.jk-vert-item.item-aspect .jk-v-label {
+  color: #475569;
+}
+
+.jk-vert-item.item-aspect .jk-v-val {
+  color: #475569;
+  font-weight: 600;
+}
+
+/* Jamakkol Planet Differentiation */
+.jk-vert-item.is-jama {
+  background: rgba(254, 243, 199, 0.25);
+}
+
+.jk-vert-item.is-jama .jk-v-label {
+  color: #c2410c;
+  font-weight: 700;
+}
+
+.jk-vert-item.is-jama .jk-v-val {
+  color: #ea580c;
+}
+
+.jk-vert-item.item-empty {
+  justify-content: center;
+  border-bottom: none;
+}
+
+.jk-v-muted {
+  color: #94a3b8;
+  font-size: 0.7rem;
+}
+
+/* Mini planet pills for Audit Table */
+.jk-mini-planet {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0 3px;
+  border-radius: 2px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  line-height: 1.2;
+}
+
+.jk-mini-planet.is-jama {
+  border-color: #fdba74;
+  color: #c2410c;
+  background: #fff7ed;
+  font-weight: 700;
+}
+
+.jk-mini-planet.mini-standing.dignity-ucham {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.jk-mini-planet.mini-standing.dignity-atchi {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+
+.jk-mini-planet.mini-standing.dignity-neecham {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.jk-mini-planet.mini-aspect {
+  background: #faf5ff;
+  color: #6b21a8;
+  border-color: #e9d5ff;
+}
+
+/* Center 2x2 Box - Compact */
+.jk-12rays-center-box {
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 2;
+  background: linear-gradient(135deg, #fffbeb 0%, #fff7ed 100%);
+  border: 1.5px solid #f59e0b;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  box-shadow: inset 0 0 8px rgba(245, 158, 11, 0.05);
+}
+
+.jk-center-title-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #78350f;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid #fcd34d;
+}
+
+.jk-center-formula-chip {
+  font-size: 0.7rem;
+  color: #451a03;
+  background: #ffffff;
+  border: 1px solid #fed7aa;
+  border-radius: 5px;
+  padding: 2px 8px;
+  width: 90%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.jk-center-pillars-rays {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.jk-center-pillar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.jk-center-pillar-item.udhayam {
+  background: #ede9fe;
+  color: #5b21b6;
+  border: 1px solid #c4b5fd;
+}
+
+.jk-center-pillar-item.aarudam {
+  background: #e0f2fe;
+  color: #075985;
+  border: 1px solid #bae6fd;
+}
+
+.jk-center-pillar-item.kavippu {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.jk-center-pillar-num {
+  font-weight: 800;
+}
+
+.jk-btn-view-table {
+  background: #f59e0b;
+  color: #ffffff;
+  border: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.jk-btn-view-table:hover {
+  background: #d97706;
+}
+
+/* Table Expansion */
+.jk-12rays-table-expand {
+  margin-top: 10px;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.jk-table-planets-flow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.jk-empty-dash {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Ray badge inside main chart cell bottom-left (Light color & Clean style) */
+.jk-cell-ray-badge {
+  position: absolute;
+  left: 4px;
+  bottom: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffdf5;
+  border: 1px solid #fde68a;
+  color: #a16207;
+  font-weight: 600;
+  font-size: 0.65rem;
+  padding: 0 4px;
+  border-radius: 3px;
+  cursor: help;
+  box-shadow: none;
+  z-index: 10;
+  line-height: 1.25;
+  transition: all 0.15s ease;
+}
+
+.jk-cell-ray-badge:hover {
+  background: #fef9c3;
+  border-color: #fcd34d;
+  color: #854d0e;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+  .jk-12rays-chart-grid {
+    gap: 5px;
+  }
+  .jk-ray-cell {
+    min-height: 82px;
+    padding: 4px 5px;
+  }
+  .jk-ray-cell-title {
+    font-size: 0.75rem;
+  }
+  .jk-ray-total-num {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .jk-12rays-standalone-card {
+    padding: 10px;
+  }
+  .jk-12rays-header {
+    gap: 8px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+  }
+  .jk-12rays-title {
+    font-size: 0.92rem;
+  }
+  .jk-12rays-subtitle {
+    font-size: 0.7rem;
+  }
+  .jk-12rays-rules-strip {
+    font-size: 0.66rem;
+    padding: 3px 6px;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+  .jk-12rays-chart-grid {
+    gap: 3px;
+    grid-auto-rows: minmax(78px, auto);
+  }
+  .jk-ray-cell {
+    padding: 2px 3px;
+    min-height: 78px;
+    gap: 1.5px;
+  }
+  .jk-ray-cell-title {
+    font-size: 0.66rem;
+  }
+  .jk-ray-cell-lord {
+    font-size: 0.55rem;
+  }
+  .jk-ray-cell-header-total {
+    padding: 0.5px 3px;
+    font-size: 0.68rem;
+  }
+  .jk-ray-total-num {
+    font-size: 0.72rem;
+  }
+  .jk-ray-cell-vert-items {
+    max-height: 110px;
+  }
+  .jk-vert-item {
+    font-size: 0.58rem;
+    padding: 0 1px;
+    gap: 2px;
+  }
+  .jk-v-val {
+    font-size: 0.58rem;
+  }
+  .jk-mini-planet {
+    font-size: 0.55rem;
+    padding: 0 2px;
+  }
+  .jk-center-formula-chip {
+    display: none;
+  }
+  .jk-center-title-badge {
+    font-size: 0.7rem;
+    padding: 1px 6px;
+  }
+  .jk-center-pillar-item {
+    font-size: 0.64rem;
+    padding: 1px 4px;
+  }
+  .jk-btn-view-table {
+    font-size: 0.64rem;
+    padding: 2px 6px;
+  }
+}
+
+/* Dark Theme */
+[data-theme="dark"] .jk-12rays-standalone-card {
+  background: #1c1917;
+  border-color: #44403c;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .jk-12rays-header {
+  border-bottom-color: #292524;
+}
+
+[data-theme="dark"] .jk-12rays-title {
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-12rays-subtitle {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-12rays-badge {
+  background: #292524;
+  border-color: #44403c;
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-rays-toggle-group {
+  background: #292524;
+  border-color: #44403c;
+}
+
+[data-theme="dark"] .jk-rays-toggle-btn {
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-rays-toggle-btn.active {
+  background: #b45309;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .jk-12rays-total-badge {
+  background: #292524;
+  border-color: #78350f;
+}
+
+[data-theme="dark"] .jk-12rays-total-label {
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-12rays-total-val {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .jk-12rays-rules-strip {
+  background: #201c18;
+  border-color: #44403c;
+}
+
+[data-theme="dark"] .jk-rule-item {
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-rule-sep {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .jk-ray-cell {
+  background: #201c18;
+  border-color: #44403c;
+}
+
+[data-theme="dark"] .jk-ray-cell:hover {
+  border-color: #f59e0b;
+}
+
+[data-theme="dark"] .jk-ray-cell.cell-udhayam {
+  background: #231d30;
+  border-color: #8b5cf6;
+}
+
+[data-theme="dark"] .jk-ray-cell.cell-aarudam {
+  background: #192535;
+  border-color: #0284c7;
+}
+
+[data-theme="dark"] .jk-ray-cell.cell-kavippu {
+  background: #2f1919;
+  border-color: #dc2626;
+}
+
+[data-theme="dark"] .jk-ray-cell-title {
+  color: #f5f5f4;
+}
+
+[data-theme="dark"] .jk-ray-cell-lord {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-ray-cell-header {
+  border-bottom-color: #44403c;
+}
+
+[data-theme="dark"] .jk-ray-cell-header-total {
+  background: #292524;
+  border-color: #78350f;
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .jk-ray-total-num {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .jk-ray-total-unit {
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-ray-cell-vert-items::-webkit-scrollbar-thumb {
+  background: #78350f;
+}
+
+[data-theme="dark"] .jk-vert-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .jk-vert-item.item-rasi {
+  background: rgba(180, 83, 9, 0.18);
+}
+
+[data-theme="dark"] .jk-vert-item.item-rasi .jk-v-label {
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-vert-item.item-rasi .jk-v-val {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing .jk-v-label {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing .jk-v-val {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-ucham .jk-v-label {
+  color: #34d399;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-ucham .jk-v-val {
+  color: #6ee7b7;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-atchi .jk-v-label {
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-atchi .jk-v-val {
+  color: #93c5fd;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-neecham .jk-v-label {
+  color: #f87171;
+}
+
+[data-theme="dark"] .jk-vert-item.item-standing.dignity-neecham .jk-v-val {
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .jk-vert-item.item-aspect .jk-v-label {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .jk-vert-item.item-aspect .jk-v-val {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .jk-vert-item.is-jama {
+  background: rgba(180, 83, 9, 0.15);
+}
+
+[data-theme="dark"] .jk-vert-item.is-jama .jk-v-label {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .jk-vert-item.is-jama .jk-v-val {
+  color: #fdba74;
+}
+
+[data-theme="dark"] .jk-mini-planet {
+  background: #292524;
+  border-color: #44403c;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .jk-mini-planet.is-jama {
+  border-color: #7c2d12;
+  background: #2e1710;
+  color: #fb923c;
+}
+
+[data-theme="dark"] .jk-12rays-center-box {
+  background: #261f18;
+  border-color: #b45309;
+}
+
+[data-theme="dark"] .jk-center-title-badge {
+  background: #451a03;
+  border-color: #78350f;
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-center-formula-chip {
+  background: #1c1917;
+  border-color: #44403c;
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .jk-cell-ray-badge {
+  background: #201c18;
+  border-color: #44403c;
+  color: #fde68a;
+}
+
+[data-theme="dark"] .jk-cell-ray-badge:hover {
+  background: #292524;
+  border-color: #78350f;
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .kadikara-rasi-info-pill {
+  color: #78716c;
+  background: #201c18;
+}
+
+[data-theme="dark"] .kadikara-rasi-header:hover .kadikara-rasi-info-pill,
+[data-theme="dark"] .jk-cell-header:hover .kadikara-rasi-info-pill,
+[data-theme="dark"] .kadikara-rasi-info-pill:hover {
+  background: #292524;
+  color: #fed7aa;
+}
+
+
 
 

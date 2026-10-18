@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '../../../components/common/SEOHead';
 import Breadcrumbs from '../../../components/common/Breadcrumbs';
 import JamakolChartCard from '../components/JamakolChartCard';
+import Jamakol12RasiRaysChart from '../components/Jamakol12RasiRaysChart';
 import JamakolGeneralRaysCard from '../components/JamakolGeneralRaysCard';
 import JamakolKeyNotesCard from '../components/JamakolKeyNotesCard';
 import JamakolPlanetaryStatusTables from '../components/JamakolPlanetaryStatusTables';
@@ -490,10 +491,10 @@ export default function JamakolPrasannamPage() {
                 <span>📅</span>
                 <span>
                   {currentLang === 'ta' ? 'தேதி (Date)' :
-                   currentLang === 'hi' ? 'दिनांक (Date)' :
-                   currentLang === 'te' ? 'తేదీ (Date)' :
-                   currentLang === 'kn' ? 'ದಿನಾಂಕ (Date)' :
-                   currentLang === 'ml' ? 'തീയതി (Date)' : 'Date'}
+                    currentLang === 'hi' ? 'दिनांक (Date)' :
+                      currentLang === 'te' ? 'తేదీ (Date)' :
+                        currentLang === 'kn' ? 'ದಿನಾಂಕ (Date)' :
+                          currentLang === 'ml' ? 'തീയതി (Date)' : 'Date'}
                 </span>
               </label>
               <input
@@ -509,10 +510,10 @@ export default function JamakolPrasannamPage() {
                 <span>⏰</span>
                 <span>
                   {currentLang === 'ta' ? 'நேரம் (மணி : நிமிடம் : வினாடி)' :
-                   currentLang === 'hi' ? 'समय (घंटा : मिनट : सेकंड)' :
-                   currentLang === 'te' ? 'సమయం (గం : ని : సె)' :
-                   currentLang === 'kn' ? 'ಸಮಯ (ಗಂ : ನಿ : ಸೆ)' :
-                   currentLang === 'ml' ? 'സമയം (മണി : മിനിറ്റ് : സെക്കൻഡ്)' : 'Time (HH:MM:SS)'}
+                    currentLang === 'hi' ? 'समय (घंटा : मिनट : सेकंड)' :
+                      currentLang === 'te' ? 'సమయం (గం : ని : సె)' :
+                        currentLang === 'kn' ? 'ಸಮಯ (ಗಂ : ನಿ : ಸೆ)' :
+                          currentLang === 'ml' ? 'സമയം (മണി : മിനിറ്റ് : സെക്കൻഡ്)' : 'Time (HH:MM:SS)'}
                 </span>
               </label>
               <input
@@ -533,10 +534,10 @@ export default function JamakolPrasannamPage() {
                 <span>📍</span>
                 <span>
                   {currentLang === 'ta' ? 'நகரம் (City)' :
-                   currentLang === 'hi' ? 'शहर (City)' :
-                   currentLang === 'te' ? 'నగరం (City)' :
-                   currentLang === 'kn' ? 'ನಗರ (City)' :
-                   currentLang === 'ml' ? 'നഗരം (City)' : 'City / Location'}
+                    currentLang === 'hi' ? 'शहर (City)' :
+                      currentLang === 'te' ? 'నగరం (City)' :
+                        currentLang === 'kn' ? 'ನಗರ (City)' :
+                          currentLang === 'ml' ? 'നഗരം (City)' : 'City / Location'}
                 </span>
               </label>
               <div className="jk-place-input-group">
@@ -546,11 +547,11 @@ export default function JamakolPrasannamPage() {
                   className="jk-form-input jk-place-input"
                   placeholder={
                     currentLang === 'ta' ? 'நகரம் (எ.கா. New Delhi, Chennai, Madurai...)' :
-                    currentLang === 'hi' ? 'शहर (उदा. New Delhi, Chennai...)' :
-                    currentLang === 'te' ? 'నగరం (ఉదా. New Delhi, Chennai...)' :
-                    currentLang === 'kn' ? 'ನಗರ (ಉದಾ. New Delhi, Chennai...)' :
-                    currentLang === 'ml' ? 'നഗരം (ഉദാ. New Delhi, Chennai...)' :
-                    'City / Location (e.g. New Delhi, Chennai...)'
+                      currentLang === 'hi' ? 'शहर (उदा. New Delhi, Chennai...)' :
+                        currentLang === 'te' ? 'నగరం (ఉదా. New Delhi, Chennai...)' :
+                          currentLang === 'kn' ? 'ನಗರ (ಉದಾ. New Delhi, Chennai...)' :
+                            currentLang === 'ml' ? 'നഗരം (ഉദാ. New Delhi, Chennai...)' :
+                              'City / Location (e.g. New Delhi, Chennai...)'
                   }
                   value={inputPlace}
                   onChange={(e) => {
@@ -575,11 +576,11 @@ export default function JamakolPrasannamPage() {
                   onClick={handleDetectCurrentLocation}
                   title={
                     currentLang === 'ta' ? 'தற்போதைய இருப்பிடம் (Detect My Location)' :
-                    currentLang === 'hi' ? 'वर्तमान स्थान (Detect My Location)' :
-                    currentLang === 'te' ? 'ప్రస్తుత స్థానం (Detect My Location)' :
-                    currentLang === 'kn' ? 'ಪ್ರಸ್ತುತ ಸ್ಥಳ (Detect My Location)' :
-                    currentLang === 'ml' ? 'നിലവിലെ സ്ഥലം (Detect My Location)' :
-                    'Detect My Location'
+                      currentLang === 'hi' ? 'वर्तमान स्थान (Detect My Location)' :
+                        currentLang === 'te' ? 'ప్రస్తుత స్థానం (Detect My Location)' :
+                          currentLang === 'kn' ? 'ಪ್ರಸ್ತುತ ಸ್ಥಳ (Detect My Location)' :
+                            currentLang === 'ml' ? 'നിലവിലെ സ്ഥലം (Detect My Location)' :
+                              'Detect My Location'
                   }
                   disabled={isDetectingLocation}
                 >
@@ -633,10 +634,10 @@ export default function JamakolPrasannamPage() {
                 <span>📐</span>
                 <span>
                   {currentLang === 'ta' ? 'அயனாம்சம்' :
-                   currentLang === 'hi' ? 'अयनांश' :
-                   currentLang === 'te' ? 'అయనాంశ' :
-                   currentLang === 'kn' ? 'ಅಯನಾಂಶ' :
-                   currentLang === 'ml' ? 'அയനാംശം' : 'Ayanamsa'}
+                    currentLang === 'hi' ? 'अयनांश' :
+                      currentLang === 'te' ? 'అయనాంశ' :
+                        currentLang === 'kn' ? 'ಅಯನಾಂಶ' :
+                          currentLang === 'ml' ? 'அയനാംശം' : 'Ayanamsa'}
                 </span>
               </label>
               <select
@@ -657,6 +658,17 @@ export default function JamakolPrasannamPage() {
           <div className="jamakol-form-row jk-row-actions">
             <button
               type="button"
+              className="jk-btn-save"
+              onClick={handleSavePrasannamClick}
+              disabled={isLoading || isSavingPrasannam}
+              title={currentLang === 'ta' ? 'பிரசன்ன வரைபடத்தை உங்கள் கணக்கில் சேமிக்க' : 'Save Prasannam to your account'}
+            >
+              <span>{isSavingPrasannam ? '⏳' : '💾'}</span>
+              <span>{isSavingPrasannam ? (currentLang === 'ta' ? 'சேமிக்கப்படுகிறது...' : 'Saving...') : (currentLang === 'ta' ? 'பிரசன்னம் சேமி' : 'Save Prasannam')}</span>
+            </button>
+
+            <button
+              type="button"
               className="jk-btn-now"
               onClick={handleSetNow}
               title={currentLang === 'ta' ? 'தற்போதைய நேரம்' : 'Current Time'}
@@ -675,16 +687,6 @@ export default function JamakolPrasannamPage() {
               <span>{currentLang === 'ta' ? 'பிரசன்னம் கணக்கிடு' : 'Calculate Chart'}</span>
             </button>
 
-            <button
-              type="button"
-              className="jk-btn-save"
-              onClick={handleSavePrasannamClick}
-              disabled={isLoading || isSavingPrasannam}
-              title={currentLang === 'ta' ? 'பிரசன்ன வரைபடத்தை உங்கள் கணக்கில் சேமிக்க' : 'Save Prasannam to your account'}
-            >
-              <span>{isSavingPrasannam ? '⏳' : '💾'}</span>
-              <span>{isSavingPrasannam ? (currentLang === 'ta' ? 'சேமிக்கப்படுகிறது...' : 'Saving...') : (currentLang === 'ta' ? 'பிரசன்னம் சேமி' : 'Save Prasannam')}</span>
-            </button>
           </div>
         </div>
       </div>
@@ -695,6 +697,12 @@ export default function JamakolPrasannamPage() {
         dateTimeStr={chartData?.metadata?.displayDateTimeStr}
         cityName={inputPlace || selectedCity.name || 'Chennai'}
         onChangeCity={handleChangeCityClick}
+        lang={currentLang}
+      />
+
+      {/* 12-Box Calculated Rasi Rays Chart (ராசி வாரியான கணக்கிடப்பட்ட கதிர் சக்கரம்) */}
+      <Jamakol12RasiRaysChart
+        chartData={chartData}
         lang={currentLang}
       />
 

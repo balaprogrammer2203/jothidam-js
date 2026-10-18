@@ -21,12 +21,12 @@ export const JAMAKKOL_RASIS = [
 export const PRASANNAM_RASIS = JAMAKKOL_RASIS;
 
 export const JAMA_GRAHAS_LIST = [
-  { key: 'Sun', symbol: 'Su', nameEn: 'Sun', nameTa: 'சூரியன்', rays: 30 },
+  { key: 'Sun', symbol: 'Su', nameEn: 'Sun', nameTa: 'சூரியன்', rays: 5 },
   { key: 'Mars', symbol: 'Ma', nameEn: 'Mars', nameTa: 'செவ்வாய்', rays: 8 },
   { key: 'Jupiter', symbol: 'Ju', nameEn: 'Jupiter', nameTa: 'குரு', rays: 10 },
-  { key: 'Mercury', symbol: 'Me', nameEn: 'Mercury', nameTa: 'புதன்', rays: 9 },
-  { key: 'Venus', symbol: 'Ve', nameEn: 'Venus', nameTa: 'சுக்கிரன்', rays: 12 },
-  { key: 'Saturn', symbol: 'Sa', nameEn: 'Saturn', nameTa: 'சனி', rays: 5 },
+  { key: 'Mercury', symbol: 'Me', nameEn: 'Mercury', nameTa: 'புதன்', rays: 16 },
+  { key: 'Venus', symbol: 'Ve', nameEn: 'Venus', nameTa: 'சுக்கிரன்', rays: 20 },
+  { key: 'Saturn', symbol: 'Sa', nameEn: 'Saturn', nameTa: 'சனி', rays: 4 },
   { key: 'Moon', symbol: 'Mo', nameEn: 'Moon', nameTa: 'சந்திரன்', rays: 21 },
   { key: 'Snake', symbol: 'Sn', nameEn: 'Snake (Rahu)', nameTa: 'பாம்பு (சர்ப்பம்)', rays: 4 }
 ];
@@ -2946,6 +2946,8 @@ export function computeLocalJamakkol({
     }
   };
 }
+
+export { calculate12RasiRays } from '../features/prasannam/components/Jamakol12RasiRaysChart';
 
 export default {
   JAMAKKOL_RASIS,

@@ -5,13 +5,13 @@
  */
 
 export const JAMAKKOL_PLANETARY_RAYS = {
-  Sun: { planet: 'Sun', nameTa: 'சூரியன்', rays: 30 },
+  Sun: { planet: 'Sun', nameTa: 'சூரியன்', rays: 5 },
   Moon: { planet: 'Moon', nameTa: 'சந்திரன்', rays: 21 },
   Mars: { planet: 'Mars', nameTa: 'செவ்வாய்', rays: 8 },
-  Mercury: { planet: 'Mercury', nameTa: 'புதன்', rays: 9 },
+  Mercury: { planet: 'Mercury', nameTa: 'புதன்', rays: 16 },
   Jupiter: { planet: 'Jupiter', nameTa: 'குரு', rays: 10 },
-  Venus: { planet: 'Venus', nameTa: 'சுக்கிரன்', rays: 12 },
-  Saturn: { planet: 'Saturn', nameTa: 'சனி', rays: 5 },
+  Venus: { planet: 'Venus', nameTa: 'சுக்கிரன்', rays: 20 },
+  Saturn: { planet: 'Saturn', nameTa: 'சனி', rays: 4 },
   Rahu: { planet: 'Rahu', nameTa: 'பாம்பு (சர்ப்பம்)', rays: 4 },
   Ketu: { planet: 'Ketu', nameTa: 'கேது', rays: 4 }
 };
@@ -511,10 +511,10 @@ export const JAMAKKOL_PRASANNAM_MASTER_DATA = [
       ml: 'ഗ്രഹ കിരണങ്ങൾ എന്നാൽ എന്താണ്?'
     },
     answer: {
-      en: 'Planetary Rays quantify the numerical power of each celestial body in Jamakkol: Sun=30, Moon=21, Venus=12, Jupiter=10, Mercury=9, Mars=8, Saturn=5, Snake=4. The Moon\'s rays determine event timing (*Sambhava Kala Nirnayam*).',
-      ta: 'ஒவ்வொரு கிரகத்திற்கும் உள்ள ஆற்றலை எண்களால் அளவிடுவதே கதிர்கள் (Kathirgal) ஆகும். சூரியன்=30, சந்திரன்=21, சுக்கிரன்=12, குரு=10, புதன்=9, செவ்வாய்=8, சனி=5, பாம்பு=4. சந்திரனின் கதிர்களை வைத்து சம்பவம் எப்போது நடக்கும் என்பதை நொடியில் கணிக்கலாம்.',
-      hi: 'प्रत्येक ग्रह की शक्ति को किरणों द्वारा मापा जाता है: सूर्य=30, चंद्र=21, शुक्र=12, गुरु=10, बुध=9, मंगल=8, शनि=5, राहु/सर्प=4।',
-      te: 'ప్రతి గ్రహ శక్తిని కిరణాల సంఖ్యతో లెక్కిస్తారు: సూర్యుడు=30, చంద్రుడు=21, శుక్రుడు=12, గురువు=10, బుధుడు=9, కుజుడు=8, శని=5, రాహు=4.',
+      en: 'Planetary Rays quantify the numerical power of each celestial body in Jamakkol: Sun=5, Moon=21, Venus=20, Jupiter=10, Mercury=16, Mars=8, Saturn=4, Snake=4. The Moon\'s rays determine event timing (*Sambhava Kala Nirnayam*).',
+      ta: 'ஒவ்வொரு கிரகத்திற்கும் உள்ள ஆற்றலை எண்களால் அளவிடுவதே கதிர்கள் (Kathirgal) ஆகும். சூரியன்=5, சந்திரன்=21, சுக்கிரன்=20, குரு=10, புதன்=16, செவ்வாய்=8, சனி=4, பாம்பு=4. சந்திரனின் கதிர்களை வைத்து சம்பவம் எப்போது நடக்கும் என்பதை நொடியில் கணிக்கலாம்.',
+      hi: 'प्रत्येक ग्रह की शक्ति को किरणों द्वारा मापा जाता है: सूर्य=5, चंद्र=21, शुक्र=20, गुरु=10, बुध=16, मंगल=8, शनि=4, राहु/सर्प=4।',
+      te: 'ప్రతి గ్రహ శక్తిని కిరణాల సంఖ్యతో లెక్కిస్తారు: సూర్యుడు=5, చంద్రుడు=21, శుక్రుడు=20, గురువు=10, బుధుడు=16, కుజుడు=8, శని=4, రాహు=4.',
       kn: 'ಪ್ರತಿಯೊಂದು ಗ್ರಹದ ಶಕ್ತಿಯನ್ನು ಕಿರಣಗಳಿಂದ ಅಳೆಯಲಾಗುತ್ತದೆ.',
       ml: 'ഓരോ ഗ്രഹത്തിന്റെയും ഊർജ്ജത്തെ കിരണങ്ങളാൽ കണക്കാക്കുന്നു.'
     }

@@ -20,11 +20,11 @@ const GENERAL_RASI_RAYS = [
 ];
 
 // Classical General Planetary Rays (Jamakkol & Navagrahas)
-// சூரியன்: 30, சந்திரன்: 21, செவ்வாய்: 8, புதன்: 9, குரு: 10, சுக்கிரன்: 12, சனி: 5, ராகு/பாம்பு: 4, கேது: 4
+// சூரியன்: 5, சந்திரன்: 21, செவ்வாய்: 8, புதன்: 16, குரு: 10, சுக்கிரன்: 20, சனி: 4, ராகு/பாம்பு: 4, கேது: 4
 const GENERAL_PLANET_RAYS = [
   {
     key: 'Sun',
-    rays: 30,
+    rays: 5,
     names: { ta: 'சூரியன்', en: 'Sun', hi: 'सूर्य', te: 'సూర్యుడు', kn: 'ಸೂರ್ಯ', ml: 'സൂര്യൻ' },
     shortCodes: { ta: 'சூரி', en: 'Su', hi: 'सूर्य', te: 'సూర్య', kn: 'ಸೂರ್ಯ', ml: 'സൂര്യ' }
   },
@@ -43,7 +43,7 @@ const GENERAL_PLANET_RAYS = [
   },
   {
     key: 'Mercury',
-    rays: 9,
+    rays: 16,
     names: { ta: 'புதன்', en: 'Mercury', hi: 'बुध', te: 'బుధుడు', kn: 'ಬುಧ', ml: 'ബുധൻ' },
     shortCodes: { ta: 'புத', en: 'Me', hi: 'बुध', te: 'బుధ', kn: 'ಬುಧ', ml: 'ബുധ' }
   },
@@ -55,13 +55,13 @@ const GENERAL_PLANET_RAYS = [
   },
   {
     key: 'Venus',
-    rays: 12,
+    rays: 20,
     names: { ta: 'சுக்கிரன்', en: 'Venus', hi: 'शुक्र', te: 'శుక్రుడు', kn: 'ಶುಕ್ರ', ml: 'ശുക്രൻ' },
     shortCodes: { ta: 'சுக்', en: 'Ve', hi: 'शुक्र', te: 'శుక్ర', kn: 'ಶುಕ್ರ', ml: 'ശു' }
   },
   {
     key: 'Saturn',
-    rays: 5,
+    rays: 4,
     names: { ta: 'சனி', en: 'Saturn', hi: 'शनि', te: 'శని', kn: 'ಶನಿ', ml: 'ശനി' },
     shortCodes: { ta: 'சனி', en: 'Sa', hi: 'शनि', te: 'శని', kn: 'ಶನಿ', ml: 'ശനി' }
   },
