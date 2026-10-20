@@ -997,11 +997,12 @@
 }
 
 .jk-rasi-title {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #78716c; /* Lighter subtle tone matching screenshot */
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #78716c; /* Subtle tone matching horoscope rasi title */
   text-transform: capitalize;
   letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
 .jk-cell-header-titles {
@@ -1013,13 +1014,13 @@
 }
 
 .jk-rasi-degree-range {
-  font-size: 0.56rem;
-  font-weight: 400;
+  font-size: 8px;
+  font-weight: 500;
   color: #a8a29e;
   letter-spacing: 0.01em;
   white-space: nowrap;
   line-height: 1;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .jk-rasi-tamil-title {
@@ -1064,8 +1065,9 @@
 
 .jk-planet-lagna .jk-planet-deg {
   color: #b91c1c !important;
-  font-weight: 600;
-  opacity: 1;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  opacity: 0.95 !important;
 }
 
 /* Regular Planets (சூரி, செவ, புத, குரு, சுக், சனி, ராகு, கேது) & Moon: Bold & Dark solid color */
@@ -1086,10 +1088,10 @@
 
 .jk-planet-regular .jk-planet-deg,
 .jk-planet-moon .jk-planet-deg {
-  color: #334155 !important; /* High-contrast legible dark degree */
+  color: #475569 !important; /* Subtle dark degree matching horoscope page */
   font-weight: 600 !important;
-  font-size: 0.7rem;
-  opacity: 1 !important;
+  font-size: 9px !important;
+  opacity: 0.9 !important;
 }
 
 .jk-planet-regular .jk-planet-retro,
@@ -1129,8 +1131,10 @@
 }
 
 .jk-point-udhayam .jk-planet-deg {
-  color: #4c1d95 !important;
-  font-weight: 650;
+  color: #6b21a8 !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  opacity: 0.95 !important;
 }
 
 .jk-point-aarudam {
@@ -1161,8 +1165,10 @@
 }
 
 .jk-point-aarudam .jk-planet-deg {
-  color: #0c4a6e !important;
-  font-weight: 650;
+  color: #0369a1 !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  opacity: 0.95 !important;
 }
 
 .jk-point-kavippu {
@@ -1194,7 +1200,9 @@
 
 .jk-point-kavippu .jk-planet-deg {
   color: #991b1b !important;
-  font-weight: 650;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  opacity: 0.95 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1224,14 +1232,23 @@
   font-weight: 700;
 }
 
+.jk-sub-yamakandam .jk-planet-deg,
+.jk-sub-rahukalam .jk-planet-deg,
+.jk-sub-maandi .jk-planet-deg,
+.jk-sub-mrityu .jk-planet-deg {
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  opacity: 0.95 !important;
+}
+
 .jk-planet-deg {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #334155 !important; /* High contrast, dark legible degree */
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  color: #475569 !important; /* High contrast, subtle legible degree matching horoscope chart */
   font-family: inherit;
   letter-spacing: 0.01em;
   line-height: 1;
-  opacity: 1;
+  opacity: 0.9;
 }
 
 /* Retrograde symbol indicator */
@@ -1251,8 +1268,8 @@
   right: 4px;
   bottom: 3px;
   color: #a8a29e;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   line-height: 1;
   z-index: 10;
   pointer-events: none;
@@ -1270,7 +1287,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0.55rem 0.5rem;
+  padding: 0.35rem 0.35rem;
   box-sizing: border-box;
   color: #1c1917;
   box-shadow: inset 0 0 10px rgba(202, 162, 84, 0.08);
@@ -1283,31 +1300,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.3rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid rgba(202, 162, 84, 0.35);
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px dashed rgba(202, 162, 84, 0.4);
   width: 100%;
   text-align: center;
 }
 
 .jk-center-time-text {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #451a03;
-  letter-spacing: 0.02em;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #78350f;
+  letter-spacing: 0.1px;
   text-align: center;
   white-space: nowrap;
+  line-height: 1.2;
+}
+
+.jk-center-panchangam-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1px;
 }
 
 .jk-center-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  margin-bottom: 0.18rem;
+  gap: 0.2rem;
+  margin-bottom: 1px;
   width: 100%;
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
 .jk-center-row:last-child {
@@ -1316,14 +1343,14 @@
 
 .jk-center-label,
 .jk-center-icon {
-  font-size: 0.77rem;
+  font-size: 9px;
   font-weight: 600;
   color: #78350f;
   white-space: nowrap;
 }
 
 .jk-center-val {
-  font-size: 0.77rem;
+  font-size: 9px;
   font-weight: 700;
   color: #1c1917;
   white-space: nowrap;
@@ -1340,7 +1367,7 @@
 }
 
 .jk-center-coords-row .jk-val-coords {
-  font-size: 0.75rem;
+  font-size: 8.5px;
   font-weight: 700;
   color: #1c1917;
   letter-spacing: 0.01em;
@@ -1365,6 +1392,53 @@
 
 .jk-val-gowri.neutral {
   color: #475569 !important; /* Slate */
+}
+
+/* Center Box Location & Coordinates compact dashed meta box matching horoscope.css */
+.jk-center-meta-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5px;
+  margin-top: 3px;
+  width: 96%;
+  max-width: 220px;
+  padding: 2px 5px;
+  background: rgba(254, 240, 138, 0.25);
+  border: 1px dashed var(--fe-border-yellow-dark, #caa254);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.jk-center-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 9px;
+  line-height: 1.2;
+  color: #1c1917;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.jk-center-meta-place {
+  font-weight: 700;
+  color: #451a03;
+  font-size: 9.5px;
+}
+
+.jk-center-meta-coords {
+  font-family: var(--font-mono, monospace);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #78350f;
+  letter-spacing: -0.1px;
+}
+
+.jk-center-meta-icon {
+  font-size: 9px;
 }
 
 @media (max-width: 640px) {
@@ -1487,6 +1561,36 @@ html[data-theme="dark"] .jk-val-gowri.neutral,
 body.dark-theme .jk-val-gowri.neutral,
 .dark .jk-val-gowri.neutral {
   color: #cbd5e1 !important;
+}
+
+/* Dark mode meta details */
+html[data-theme="dark"] .jk-center-meta-details,
+[data-theme="dark"] .jk-center-meta-details,
+body.dark-theme .jk-center-meta-details,
+.dark .jk-center-meta-details {
+  background: rgba(254, 240, 138, 0.06) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+html[data-theme="dark"] .jk-center-meta-row,
+[data-theme="dark"] .jk-center-meta-row,
+body.dark-theme .jk-center-meta-row,
+.dark .jk-center-meta-row {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .jk-center-meta-place,
+[data-theme="dark"] .jk-center-meta-place,
+body.dark-theme .jk-center-meta-place,
+.dark .jk-center-meta-place {
+  color: #fef08a !important;
+}
+
+html[data-theme="dark"] .jk-center-meta-coords,
+[data-theme="dark"] .jk-center-meta-coords,
+body.dark-theme .jk-center-meta-coords,
+.dark .jk-center-meta-coords {
+  color: #fde68a !important;
 }
 
 /* Jamakkol Chart Frame & Grid in Dark Mode */
@@ -4992,8 +5096,8 @@ body.dark-theme .jk-field-group label,
   border: 1px solid #fde68a;
   color: #a16207;
   font-weight: 600;
-  font-size: 0.65rem;
-  padding: 0 4px;
+  font-size: 9px;
+  padding: 0 3px;
   border-radius: 3px;
   cursor: help;
   box-shadow: none;

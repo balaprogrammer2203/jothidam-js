@@ -1037,64 +1037,68 @@ export default function JamakolChartCard({
                     <span className="jk-center-time-text">{formatCenterDateTime12Hour(centerInfo?.queryDateTimeStr || dateTimeStr)}</span>
                   </div>
 
-                  {/* Row 2: Naal (Day) */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{naalLabel}: </span>
-                    <span className="jk-center-val">{centerInfo.vaaram?.value}</span>
-                  </div>
-
-                  {/* Row 3: Nakshatram */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.nakshatram?.label}: </span>
-                    <span className="jk-center-val">{centerInfo.nakshatram?.value}</span>
-                  </div>
-
-                  {/* Row 4: Thithi */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.thithi?.label}: </span>
-                    <span className="jk-center-val">{centerInfo.thithi?.value}</span>
-                  </div>
-
-                  {/* Row 5: Karanam */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.karanam?.label}: </span>
-                    <span className="jk-center-val">{centerInfo.karanam?.value}</span>
-                  </div>
-
-                  {/* Row 6: Yogam */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.yogam?.label}: </span>
-                    <span className="jk-center-val">{centerInfo.yogam?.value}</span>
-                  </div>
-
-                  {/* Row 7: Horai */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.horai?.label}: </span>
-                    <span className="jk-center-val jk-val-horai">
-                      {centerInfo.horai?.value}
-                    </span>
-                  </div>
-
-                  {/* Row 8: Gowri */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.gowri?.label}: </span>
-                    <span className={`jk-center-val jk-val-gowri ${centerInfo.gowri?.isAuspicious ? 'auspicious' : (centerInfo.gowri?.key === 'Uthi' ? 'neutral' : 'inauspicious')}`}>
-                      {centerInfo.gowri?.value}
-                    </span>
-                  </div>
-
-                  {/* Row 9: Location (City Name) */}
-                  <div className="jk-center-row">
-                    <span className="jk-center-label">{centerInfo.location?.label || locationLabel}: </span>
-                    <span className="jk-center-val jk-val-city">{displayCity}</span>
-                  </div>
-
-                  {/* Row 10: Geo Coordinates on the next line */}
-                  {displayCoords && (
-                    <div className="jk-center-row jk-center-coords-row">
-                      <span className="jk-center-val jk-val-coords">{displayCoords}</span>
+                  {/* Panchangam info rows in compact small font */}
+                  <div className="jk-center-panchangam-list">
+                    {/* Row 2: Naal (Day) */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{naalLabel}: </span>
+                      <span className="jk-center-val">{centerInfo.vaaram?.value}</span>
                     </div>
-                  )}
+
+                    {/* Row 3: Nakshatram */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.nakshatram?.label}: </span>
+                      <span className="jk-center-val">{centerInfo.nakshatram?.value}</span>
+                    </div>
+
+                    {/* Row 4: Thithi */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.thithi?.label}: </span>
+                      <span className="jk-center-val">{centerInfo.thithi?.value}</span>
+                    </div>
+
+                    {/* Row 5: Karanam */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.karanam?.label}: </span>
+                      <span className="jk-center-val">{centerInfo.karanam?.value}</span>
+                    </div>
+
+                    {/* Row 6: Yogam */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.yogam?.label}: </span>
+                      <span className="jk-center-val">{centerInfo.yogam?.value}</span>
+                    </div>
+
+                    {/* Row 7: Horai */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.horai?.label}: </span>
+                      <span className="jk-center-val jk-val-horai">
+                        {centerInfo.horai?.value}
+                      </span>
+                    </div>
+
+                    {/* Row 8: Gowri */}
+                    <div className="jk-center-row">
+                      <span className="jk-center-label">{centerInfo.gowri?.label}: </span>
+                      <span className={`jk-center-val jk-val-gowri ${centerInfo.gowri?.isAuspicious ? 'auspicious' : (centerInfo.gowri?.key === 'Uthi' ? 'neutral' : 'inauspicious')}`}>
+                        {centerInfo.gowri?.value}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Location & Coordinates in compact dashed meta box matching horoscope calculate page */}
+                  <div className="jk-center-meta-details">
+                    <div className="jk-center-meta-row jk-center-meta-place">
+                      <span className="jk-center-meta-icon">📍</span>
+                      <span className="jk-center-meta-val">{displayCity}</span>
+                    </div>
+                    {displayCoords && (
+                      <div className="jk-center-meta-row jk-center-meta-coords">
+                        <span className="jk-center-meta-icon">🌐</span>
+                        <span className="jk-center-meta-val">{displayCoords}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {renderSouthCell(3)}
