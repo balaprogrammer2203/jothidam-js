@@ -60,6 +60,28 @@ function getOuterTooltipPos(key) {
   }
 }
 
+/**
+ * Calculate absolute 360-degree string from Rasi degree and rasiIndex
+ * Example: in Rishabam (rasiId = 1, 30°-60°), "04°42'" -> "(34° 42')"
+ */
+function format360Degree(cleanDeg, rasiId) {
+  if (!cleanDeg || rasiId === undefined || rasiId === null || rasiId < 0) return '';
+  const match = String(cleanDeg).match(/(\d+)\s*[°':]\s*(\d+)?(?:\s*['":]\s*(\d+)?)?/);
+  if (!match) return '';
+  const d = parseInt(match[1], 10);
+  if (isNaN(d)) return '';
+  const m = match[2] !== undefined ? String(match[2]).padStart(2, '0') : '00';
+  const s = match[3] !== undefined ? String(match[3]).padStart(2, '0') : null;
+
+  const absDeg = (Number(rasiId) * 30) + d;
+  const absDegStr = String(absDeg).padStart(2, '0');
+
+  if (s) {
+    return `(${absDegStr}° ${m}' ${s}")`;
+  }
+  return `(${absDegStr}° ${m}')`;
+}
+
 const TOOLTIP_LABELS = {
   ta: {
     rasi: 'ராசி:',
@@ -694,14 +716,20 @@ export default function JamakolChartCard({
             const isRetro = !!it.isRetrograde;
             const retroSymbol = getRetroSymbol(activeLang);
             const cleanDeg = it.formattedDegree ? String(it.formattedDegree).replace(/[()]/g, '').trim() : '';
-            const degDisplay = cleanDeg ? `(${cleanDeg})` : '';
+            const degDisplay = cleanDeg;
+            const deg360 = format360Degree(cleanDeg, rasiId);
 
             if (it.type === 'lagna') {
               const code = getLocalizedPlanetCode('La', activeLang);
               return (
                 <div key={idx} className="jk-planet-entry jk-planet-lagna">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -712,7 +740,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className="jk-planet-entry jk-planet-moon">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -723,7 +756,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className="jk-planet-entry jk-point-udhayam">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -734,7 +772,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className="jk-planet-entry jk-point-aarudam">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -745,7 +788,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className="jk-planet-entry jk-point-kavippu">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -757,7 +805,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className={`jk-planet-entry jk-sub-${it.type}`}>
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -769,7 +822,12 @@ export default function JamakolChartCard({
               return (
                 <div key={idx} className="jk-planet-entry jk-sub-mrityu">
                   <span className="jk-sym-code">{code}</span>
-                  {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                  {degDisplay && (
+                    <div className="jk-planet-deg-row">
+                      <span className="jk-planet-deg">{degDisplay}</span>
+                      {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                    </div>
+                  )}
                   {renderPlanetTooltip(it, rasiId)}
                 </div>
               );
@@ -790,7 +848,12 @@ export default function JamakolChartCard({
                     </span>
                   )}
                 </span>
-                {degDisplay && <span className="jk-planet-deg">{degDisplay}</span>}
+                {degDisplay && (
+                  <div className="jk-planet-deg-row">
+                    <span className="jk-planet-deg">{degDisplay}</span>
+                    {deg360 && <span className="jk-planet-deg-360">{deg360}</span>}
+                  </div>
+                )}
                 {renderPlanetTooltip(it, rasiId)}
               </div>
             );
