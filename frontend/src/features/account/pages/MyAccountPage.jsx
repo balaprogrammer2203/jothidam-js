@@ -411,7 +411,7 @@ export default function MyAccountPage() {
 
                     <div className="horoscope-card-footer">
                       <Link
-                        to={ROUTES.HOROSCOPE.savedDetailPath(profile._id || profile.id)}
+                        to={ROUTES.HOROSCOPE.viewAnalyzePath(profile._id || profile.id)}
                         className="btn-card-analyze"
                         title="View Complete Chart & Dasha Analysis"
                       >

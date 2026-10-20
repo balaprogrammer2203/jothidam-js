@@ -282,7 +282,11 @@
   }
 
   .chart-grid-container {
-    grid-template-rows: repeat(4, 90px);
+    grid-template-rows: repeat(4, minmax(118px, auto));
+  }
+
+  .rasi-cell {
+    min-height: 118px;
   }
 
   .planet-name {

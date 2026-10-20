@@ -18,6 +18,7 @@ export { default as KaranasPage } from './KaranasPage';
 export { default as TamilCalendarPage } from './TamilCalendarPage';
 export { default as SavedHoroscopesPage } from './SavedHoroscopesPage';
 export { default as SavedHoroscopeDetailPage } from './SavedHoroscopeDetailPage';
+export { default as HoroscopeViewAnalyzePage } from './HoroscopeViewAnalyzePage';
 export { default as AdminPage } from './AdminPage';
 export { default as AdminLoginPage } from './AdminLoginPage';
 export { default as UserLoginPage } from './UserLoginPage';

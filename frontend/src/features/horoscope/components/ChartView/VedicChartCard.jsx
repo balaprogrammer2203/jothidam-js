@@ -130,6 +130,7 @@ export default function VedicChartCard({
 
   const isLagnaPlanet = (p) => p.name === 'Lagna' || p.nameTa === 'லக்னம்';
   const isMaandiPlanet = (p) => p.name === 'Maandi' || p.name === 'Mandi' || p.nameTa === 'மாந்தி';
+  const isMoonPlanet = (p) => p.name === 'Moon' || p.nameTa === 'சந்திரன்';
 
   const renderHouseCell = (rasiIndex) => {
     const rawPlanets = gridData[rasiIndex] || [];
@@ -153,6 +154,8 @@ export default function VedicChartCard({
           {planetsInHouse.map((p, pIdx) => {
             const isLagna = isLagnaPlanet(p);
             const isMaandi = isMaandiPlanet(p);
+            const isMoon = isMoonPlanet(p);
+            const isHighlighted = isLagna || isMaandi || isMoon;
             const shortName = getPlanetShort(p);
             const locPlanet = getLocalizedPlanet(p.name, currentLang);
             const planetFullName = currentLang === 'en'
@@ -178,7 +181,7 @@ export default function VedicChartCard({
             return (
               <div
                 key={pIdx}
-                className={`planet-badge ${isLagna ? 'lagna-badge' : ''} ${isMaandi ? 'maandi-badge' : ''}`}
+                className={`planet-badge ${isLagna ? 'lagna-badge' : ''} ${isMaandi ? 'maandi-badge' : ''} ${isMoon ? 'moon-badge' : ''} ${!isHighlighted ? 'plain-planet' : ''}`}
               >
                 <span className="planet-name">{shortName}</span>
                 {p.isRetrograde && !isLagna && !isMaandi && (

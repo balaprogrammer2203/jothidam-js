@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { ROUTES, LEGACY_ROUTE_REDIRECTS } from '../config/routes.config';
 import ProtectedRoute from './ProtectedRoute';
 import ErrorBoundary from './ErrorBoundary';
@@ -7,6 +7,7 @@ import PageLoader from '../components/feedback/PageLoader';
 
 // Dynamic route-level code splitting using React.lazy
 const HoroscopeCalculatorPage = lazy(() => import('../features/horoscope/pages/HoroscopeCalculatorPage'));
+const HoroscopeViewAnalyzePage = lazy(() => import('../features/horoscope/pages/HoroscopeViewAnalyzePage'));
 const KadikaraPrasannamPage = lazy(() => import('../features/prasannam/pages/KadikaraPrasannamPage'));
 const JamakolPrasannamPage = lazy(() => import('../features/prasannam/pages/JamakolPrasannamPage'));
 const KPHoraryPage = lazy(() => import('../features/kp-astrology/pages/KPHoraryPage'));
@@ -26,21 +27,32 @@ const UserLoginPage = lazy(() => import('../features/auth/pages/UserLoginPage'))
 const MyAccountPage = lazy(() => import('../features/account/pages/MyAccountPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
+// Backward compatibility dynamic redirect for /saved/:id and /saved-horoscopes/:id
+function LegacySavedDetailRedirect() {
+  const { id } = useParams();
+  if (!id || id === ':id') {
+    return <Navigate to={ROUTES.ACCOUNT} replace />;
+  }
+  return <Navigate to={ROUTES.HOROSCOPE.viewAnalyzePath(id)} replace />;
+}
+
 export default function AppRoutes() {
   return (
     <ErrorBoundary name="RouteLevelBoundary">
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* =========================================================================
-              1. MAIN HOROSCOPE & KUNDLI CALCULATOR
+              1. MAIN HOROSCOPE & KUNDLI CALCULATOR & VIEW ANALYZE
               ========================================================================= */}
           <Route path={ROUTES.HOME} element={<HoroscopeCalculatorPage />} />
+          <Route path={ROUTES.HOROSCOPE.VIEW_ANALYZE} element={<HoroscopeViewAnalyzePage />} />
+          <Route path="/horoscope-view-analyze" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
 
-          {/* Legacy Saved Horoscopes URLs -> redirect directly to My Account */}
-          <Route path="/saved-horoscopes" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
-          <Route path="/saved-horoscopes/:id" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
-          <Route path="/saved" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
-          <Route path="/saved/:id" element={<Navigate to={ROUTES.ACCOUNT} replace />} />
+          {/* Legacy Saved Horoscopes URLs -> redirect directly */}
+          <Route path="/saved-horoscopes" element={<Navigate to={`${ROUTES.ACCOUNT}?tab=horoscopes`} replace />} />
+          <Route path="/saved-horoscopes/:id" element={<LegacySavedDetailRedirect />} />
+          <Route path="/saved" element={<Navigate to={`${ROUTES.ACCOUNT}?tab=horoscopes`} replace />} />
+          <Route path="/saved/:id" element={<LegacySavedDetailRedirect />} />
 
           {/* =========================================================================
               2. HORARY PRASANNAM

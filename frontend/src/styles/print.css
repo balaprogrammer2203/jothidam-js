@@ -240,9 +240,9 @@
   }
 
   .planet-badge {
-    background: #ffedd5 !important;
-    border: 1px solid #fdba74 !important;
-    padding: 1px 3px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 1px 2px !important;
     border-radius: 2px !important;
     display: inline-flex !important;
     align-items: baseline !important;
@@ -252,25 +252,40 @@
   .planet-badge.lagna-badge {
     background: #fee2e2 !important;
     border: 1px solid #fca5a5 !important;
+    padding: 1px 3px !important;
   }
 
   .planet-badge.maandi-badge {
     background: #f3e8ff !important;
     border: 1px solid #d8b4fe !important;
+    padding: 1px 3px !important;
+  }
+
+  .planet-badge.moon-badge {
+    background: #e0f2fe !important;
+    border: 1px solid #7dd3fc !important;
+    padding: 1px 3px !important;
   }
 
   .planet-name {
     font-size: 8pt !important;
-    font-weight: 800 !important;
-    color: #7c2d12 !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
   }
 
   .lagna-badge .planet-name {
     color: #991b1b !important;
+    font-weight: 800 !important;
   }
 
   .maandi-badge .planet-name {
     color: #6b21a8 !important;
+    font-weight: 800 !important;
+  }
+
+  .moon-badge .planet-name {
+    color: #0369a1 !important;
+    font-weight: 800 !important;
   }
 
   .planet-degree {

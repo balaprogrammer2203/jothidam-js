@@ -141,6 +141,7 @@ export default function NorthIndianChartCard({
 
   const isLagnaPlanet = (p) => p.name === 'Lagna' || p.nameTa === 'லக்னம்';
   const isMaandiPlanet = (p) => p.name === 'Maandi' || p.name === 'Mandi' || p.nameTa === 'மாந்தி';
+  const isMoonPlanet = (p) => p.name === 'Moon' || p.nameTa === 'சந்திரன்';
 
   return (
     <div className="astrology-card north-indian-card">
@@ -242,11 +243,13 @@ export default function NorthIndianChartCard({
                             '-';
 
                       const isMaandi = isMaandiPlanet(p);
+                      const isMoon = isMoonPlanet(p);
+                      const isHighlighted = isLagna || isMaandi || isMoon;
 
                       return (
                         <div
                           key={pIdx}
-                          className={`planet-badge north-planet-badge ${isLagna ? 'lagna-badge' : ''} ${isMaandi ? 'maandi-badge' : ''}`}
+                          className={`planet-badge north-planet-badge ${isLagna ? 'lagna-badge' : ''} ${isMaandi ? 'maandi-badge' : ''} ${isMoon ? 'moon-badge' : ''} ${!isHighlighted ? 'plain-planet' : ''}`}
                         >
                           <span className="planet-name">{shortName}</span>
                           {p.isRetrograde && !isLagna && !isMaandi && (

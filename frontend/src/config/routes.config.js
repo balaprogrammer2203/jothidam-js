@@ -9,8 +9,10 @@ export const ROUTES = {
   HOROSCOPE: {
     CALCULATOR: '/',
     SAVED: '/my-account',
-    SAVED_DETAIL: '/my-account',
-    savedDetailPath: () => '/my-account'
+    VIEW_ANALYZE: '/horoscope-view-analyze/:id',
+    viewAnalyzePath: (id) => (id ? `/horoscope-view-analyze/${id}` : '/my-account'),
+    SAVED_DETAIL: '/horoscope-view-analyze/:id',
+    savedDetailPath: (id) => (id ? `/horoscope-view-analyze/${id}` : '/my-account')
   },
 
   // 2. Horary Prasannam Astrology
@@ -66,7 +68,6 @@ export const ROUTES = {
 export const LEGACY_ROUTE_REDIRECTS = [
   { from: '/saved', to: ROUTES.ACCOUNT },
   { from: '/saved-horoscopes', to: ROUTES.ACCOUNT },
-  { from: '/saved-horoscopes/:id', to: ROUTES.ACCOUNT },
   { from: '/saved-profiles', to: ROUTES.ACCOUNT },
   { from: '/kadikara-prasannam', to: ROUTES.PRASANNAM.KADIKARA },
   { from: '/jamakol', to: ROUTES.PRASANNAM.JAMAKKOL },
