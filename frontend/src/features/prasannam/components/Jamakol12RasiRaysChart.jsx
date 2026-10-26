@@ -94,6 +94,15 @@ export const JAMA_PREFIXES = {
   ml: 'ജാ.'
 };
 
+export const DIGNITY_SHORT_LABELS = {
+  ta: { ucham: '(உச்ச)', atchi: '(ஆட்சி)', neecham: '(நீச)' },
+  en: { ucham: '(Ex)', atchi: '(Own)', neecham: '(Deb)' },
+  hi: { ucham: '(उच्च)', atchi: '(स्व)', neecham: '(नीच)' },
+  te: { ucham: '(ఉచ్ఛ)', atchi: '(స్వ)', neecham: '(నీచ)' },
+  kn: { ucham: '(ಉಚ್ಚ)', atchi: '(ಸ್ವ)', neecham: '(ನೀಚ)' },
+  ml: { ucham: '(ഉച്ച)', atchi: '(സ്വ)', neecham: '(നീച)' }
+};
+
 export function normalizeStandardPlanetKey(nameOrKey) {
   if (!nameOrKey) return '';
   const clean = String(nameOrKey).replace(/[^a-zA-Z]/g, '').toLowerCase();
@@ -202,7 +211,7 @@ export function calculatePlanetStandingRay(planetKey, signIndex, lang = 'ta') {
  * - Aspect planet: ray / 2
  * Jamakol planets are flagged with `isJama: true`
  */
-export function calculate12RasiRays(chartData, includeJama = false, lang = 'ta') {
+export function calculate12RasiRays(chartData, includeJama = true, lang = 'ta') {
   if (!chartData) return [];
 
   const rasiGrid = chartData.rasiGrid || [];
@@ -327,6 +336,13 @@ const UI_TEXT = {
     viewTableBtn: 'விரிவான அட்டவணை',
     hideTableBtn: 'அட்டவணையை மறை',
     centerTitle: 'கதிர் சக்கர விவரம்',
+    centerFormulaRasi: 'ராசி கதிர்',
+    centerFormulaStanding: 'நின்றவை',
+    centerFormulaAspect: 'பார்வை',
+    baseRasiRayTitle: 'ராசி அடிப்படை கதிர்',
+    aspectLabel: 'பார்வை',
+    jamaPlanetLabel: '(ஜாம கிரகம்)',
+    transitPlanetLabel: '(கோச்சாரம்)',
     udhayamBadge: 'உதயம்',
     aarudamBadge: 'ஆரூடம்',
     kavippuBadge: 'கவிப்பு',
@@ -354,6 +370,13 @@ const UI_TEXT = {
     viewTableBtn: 'Detailed Table',
     hideTableBtn: 'Hide Table',
     centerTitle: 'Rays Chakra Summary',
+    centerFormulaRasi: 'Rasi Ray',
+    centerFormulaStanding: 'Standing',
+    centerFormulaAspect: 'Aspect',
+    baseRasiRayTitle: 'Base Rasi Ray',
+    aspectLabel: 'Aspect',
+    jamaPlanetLabel: '(Jama Planet)',
+    transitPlanetLabel: '(Transit)',
     udhayamBadge: 'Udhayam',
     aarudamBadge: 'Aarudam',
     kavippuBadge: 'Kavippu',
@@ -381,6 +404,13 @@ const UI_TEXT = {
     viewTableBtn: 'विस्तृत तालिका',
     hideTableBtn: 'छिपाएं',
     centerTitle: 'किरण चक्र सारांश',
+    centerFormulaRasi: 'राशि किरण',
+    centerFormulaStanding: 'स्थित',
+    centerFormulaAspect: 'दृष्टि',
+    baseRasiRayTitle: 'राशि मूल किरण',
+    aspectLabel: 'दृष्टि',
+    jamaPlanetLabel: '(जाम ग्रह)',
+    transitPlanetLabel: '(गोचर)',
     udhayamBadge: 'उदय',
     aarudamBadge: 'आरूढ़',
     kavippuBadge: 'कविप्पु',
@@ -408,6 +438,13 @@ const UI_TEXT = {
     viewTableBtn: 'వివరణ పట్టిక',
     hideTableBtn: 'దాచు',
     centerTitle: 'కిరణ చక్ర సారాంశం',
+    centerFormulaRasi: 'రాశి కిరణం',
+    centerFormulaStanding: 'స్థితి',
+    centerFormulaAspect: 'దృష్టి',
+    baseRasiRayTitle: 'రాశి మూల కిరణం',
+    aspectLabel: 'దృష్టి',
+    jamaPlanetLabel: '(జామ గ్రహం)',
+    transitPlanetLabel: '(గోచారం)',
     udhayamBadge: 'ఉదయం',
     aarudamBadge: 'ఆరూఢం',
     kavippuBadge: 'కవిప్పు',
@@ -435,6 +472,13 @@ const UI_TEXT = {
     viewTableBtn: 'ವಿವರಣಾ ಪಟ್ಟಿ',
     hideTableBtn: 'ಮರೆಮಾಡಿ',
     centerTitle: 'ಕಿರಣ ಚಕ್ರ ಸಾರಾಂಶ',
+    centerFormulaRasi: 'ರಾಶಿ ಕಿರಣ',
+    centerFormulaStanding: 'ಸ್ಥಿತ',
+    centerFormulaAspect: 'ದೃಷ್ಟಿ',
+    baseRasiRayTitle: 'ರಾಶಿ ಮೂಲ ಕಿರಣ',
+    aspectLabel: 'ದೃಷ್ಟಿ',
+    jamaPlanetLabel: '(ಜಾಮ ಗ್ರಹ)',
+    transitPlanetLabel: '(ಗೋಚಾರ)',
     udhayamBadge: 'ಉದಯ',
     aarudamBadge: 'ಆರೂಢ',
     kavippuBadge: 'ಕವಿಪ್ಪು',
@@ -462,6 +506,13 @@ const UI_TEXT = {
     viewTableBtn: 'വിശദ പട്ടിക',
     hideTableBtn: 'മറയ്ക്കുക',
     centerTitle: 'കിരണ ചക്ര സംഗ്രഹം',
+    centerFormulaRasi: 'രാശി കിരണം',
+    centerFormulaStanding: 'നിന്നത്',
+    centerFormulaAspect: 'ദൃഷ്ടി',
+    baseRasiRayTitle: 'രാശി അടിസ്ഥാന കിരണം',
+    aspectLabel: 'ദൃഷ്ടി',
+    jamaPlanetLabel: '(ജാമ ഗ്രഹം)',
+    transitPlanetLabel: '(ഗോചാരം)',
     udhayamBadge: 'ഉദയം',
     aarudamBadge: 'ആരൂഢം',
     kavippuBadge: 'കവിപ്പ്',
@@ -482,7 +533,7 @@ const UI_TEXT = {
  * Jamakkol planets are clearly differentiated with prefix "ஜா." (e.g. "ஜா.குரு").
  */
 export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
-  const [includeJama, setIncludeJama] = useState(false);
+  const [includeJama, setIncludeJama] = useState(true);
   const [showTable, setShowTable] = useState(false);
 
   const safeLang = (lang || 'ta').split('-')[0].toLowerCase();
@@ -519,7 +570,7 @@ export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
     const data = rayMap[rasiId] || {
       rasiId,
       rasiName: JAMAKKOL_RASIS[rasiId]?.[safeLang] || JAMAKKOL_RASIS[rasiId]?.ta || `Rasi ${rasiId + 1}`,
-      lordName: JAMAKKOL_RASIS[rasiId]?.lordTa || '',
+      lordName: safeLang === 'ta' ? (JAMAKKOL_RASIS[rasiId]?.lordTa || JAMAKKOL_RASIS[rasiId]?.lord) : (JAMAKKOL_RASIS[rasiId]?.lord || JAMAKKOL_RASIS[rasiId]?.lordTa),
       rasiRay: RASI_CLASSICAL_RAYS[rasiId] || 0,
       insidePlanets: [],
       insideRaysSum: 0,
@@ -558,21 +609,23 @@ export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
         {/* Vertical Items List (Compact & Space-Saving) */}
         <div className="jk-ray-cell-vert-items">
           {/* Base Rasi Ray */}
-          <div className="jk-vert-item item-rasi" title={`ராசி அடிப்படை கதிர்: ${data.rasiRay}`}>
+          <div className="jk-vert-item item-rasi" title={`${text.baseRasiRayTitle || text.lblRasi}: ${data.rasiRay}`}>
             <span className="jk-v-label">{text.lblRasi}:</span>
             <span className="jk-v-val">{data.rasiRay}</span>
           </div>
 
-          {/* Standing Planets (Vertical list with "ஜா." prefix for Jamakkol planets) */}
+          {/* Standing Planets (Vertical list with "ஜா." / "Ja." prefix for Jamakkol planets) */}
           {data.insidePlanets.map((p, idx) => {
             const prefix = p.isJama ? jamaPrefix : '';
             const displayName = `${prefix}${p.shortCode}`;
-            const digShort = p.dignity === 'ucham' ? '(உச்ச)' : p.dignity === 'atchi' ? '(ஆட்சி)' : p.dignity === 'neecham' ? '(நீச)' : '';
+            const digLabels = DIGNITY_SHORT_LABELS[safeLang] || DIGNITY_SHORT_LABELS.en;
+            const digShort = digLabels[p.dignity] || '';
+            const jamaTag = p.isJama ? (text.jamaPlanetLabel || '(Jama)') : (text.transitPlanetLabel || '(Transit)');
             return (
               <div
                 key={`in-${idx}`}
                 className={`jk-vert-item item-standing dignity-${p.dignity} ${p.isJama ? 'is-jama' : ''}`}
-                title={`${p.name} (${p.dignityLabel}): +${p.calculatedRay} கதிர் ${p.isJama ? '(ஜாம கிரகம்)' : '(கோச்சாரம்)'}`}
+                title={`${p.name} (${p.dignityLabel}): +${p.calculatedRay} ${text.raysUnit} ${jamaTag}`}
               >
                 <span className="jk-v-label">
                   {displayName}{digShort}:
@@ -582,15 +635,16 @@ export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
             );
           })}
 
-          {/* Aspecting Planets (Vertical list with "ஜா." prefix for Jamakkol planets) */}
+          {/* Aspecting Planets (Vertical list with "ஜா." / "Ja." prefix for Jamakkol planets) */}
           {data.aspectingPlanets.map((p, idx) => {
             const prefix = p.isJama ? jamaPrefix : '';
             const displayName = `👁️${prefix}${p.shortCode}`;
+            const jamaTag = p.isJama ? (text.jamaPlanetLabel || '(Jama)') : (text.transitPlanetLabel || '(Transit)');
             return (
               <div
                 key={`asp-${idx}`}
                 className={`jk-vert-item item-aspect ${p.isJama ? 'is-jama' : ''}`}
-                title={`${p.name} (${p.sourceRasiName} பார்வை): +${p.aspectRay} கதிர் ${p.isJama ? '(ஜாம கிரகம்)' : '(கோச்சாரம்)'}`}
+                title={`${p.name} (${p.sourceRasiName} ${text.aspectLabel || text.lblAspect}): +${p.aspectRay} ${text.raysUnit} ${jamaTag}`}
               >
                 <span className="jk-v-label">{displayName}:</span>
                 <span className="jk-v-val">+{p.aspectRay}</span>
@@ -625,21 +679,21 @@ export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
         </div>
 
         <div className="jk-12rays-controls">
-          {/* Compact Toggle: Transit vs All */}
+          {/* Compact Toggle: All (Jamam included) vs Transit */}
           <div className="jk-rays-toggle-group">
-            <button
-              type="button"
-              className={`jk-rays-toggle-btn ${!includeJama ? 'active' : ''}`}
-              onClick={() => setIncludeJama(false)}
-            >
-              {text.toggleTransit}
-            </button>
             <button
               type="button"
               className={`jk-rays-toggle-btn ${includeJama ? 'active' : ''}`}
               onClick={() => setIncludeJama(true)}
             >
               {text.toggleAll}
+            </button>
+            <button
+              type="button"
+              className={`jk-rays-toggle-btn ${!includeJama ? 'active' : ''}`}
+              onClick={() => setIncludeJama(false)}
+            >
+              {text.toggleTransit}
             </button>
           </div>
 
@@ -680,24 +734,24 @@ export default function Jamakol12RasiRaysChart({ chartData, lang = 'ta' }) {
           </div>
 
           <div className="jk-center-formula-chip">
-            <strong>ராசி கதிர்</strong> + <strong>நின்றவை</strong> + <strong>பார்வை</strong>
+            <strong>{text.centerFormulaRasi || text.lblRasi}</strong> + <strong>{text.centerFormulaStanding || text.lblStanding}</strong> + <strong>{text.centerFormulaAspect || text.lblAspect}</strong>
           </div>
 
           <div className="jk-center-pillars-rays">
             {udhayamSign >= 0 && rayMap[udhayamSign] && (
-              <div className="jk-center-pillar-item udhayam" title={`உதயம் (${rayMap[udhayamSign].rasiName}) கதிர்`}>
+              <div className="jk-center-pillar-item udhayam" title={`${text.udhayamBadge} (${rayMap[udhayamSign].rasiName}) ${text.raysUnit}`}>
                 <span className="jk-center-pillar-name">{text.udhayamBadge}:</span>
                 <span className="jk-center-pillar-num">{rayMap[udhayamSign].totalRays}</span>
               </div>
             )}
             {aarudamSign >= 0 && rayMap[aarudamSign] && (
-              <div className="jk-center-pillar-item aarudam" title={`ஆரூடம் (${rayMap[aarudamSign].rasiName}) கதிர்`}>
+              <div className="jk-center-pillar-item aarudam" title={`${text.aarudamBadge} (${rayMap[aarudamSign].rasiName}) ${text.raysUnit}`}>
                 <span className="jk-center-pillar-name">{text.aarudamBadge}:</span>
                 <span className="jk-center-pillar-num">{rayMap[aarudamSign].totalRays}</span>
               </div>
             )}
             {kavippuSign >= 0 && rayMap[kavippuSign] && (
-              <div className="jk-center-pillar-item kavippu" title={`கவிப்பு (${rayMap[kavippuSign].rasiName}) கதிர்`}>
+              <div className="jk-center-pillar-item kavippu" title={`${text.kavippuBadge} (${rayMap[kavippuSign].rasiName}) ${text.raysUnit}`}>
                 <span className="jk-center-pillar-name">{text.kavippuBadge}:</span>
                 <span className="jk-center-pillar-num">{rayMap[kavippuSign].totalRays}</span>
               </div>

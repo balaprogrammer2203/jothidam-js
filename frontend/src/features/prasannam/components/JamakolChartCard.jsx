@@ -82,6 +82,24 @@ function format360Degree(cleanDeg, rasiId) {
   return `(${absDegStr}° ${m}')`;
 }
 
+/**
+ * Extract numeric degree in Rasi (0.0 to 30.0) for sorting entities low to high
+ */
+function getRasiDegreeNumeric(item) {
+  if (!item) return 0;
+  if (typeof item.degreeInRasi === 'number' && !isNaN(item.degreeInRasi)) {
+    return item.degreeInRasi;
+  }
+  const str = item.formattedDegree || item.degree || '';
+  if (!str) return 0;
+  const match = String(str).match(/(\d+)\s*[°':]\s*(\d+)?(?:\s*['":]\s*(\d+)?)?/);
+  if (!match) return 0;
+  const d = parseInt(match[1], 10) || 0;
+  const m = parseInt(match[2] || '0', 10) || 0;
+  const s = parseInt(match[3] || '0', 10) || 0;
+  return d + (m / 60.0) + (s / 3600.0);
+}
+
 const TOOLTIP_LABELS = {
   ta: {
     rasi: 'ராசி:',
@@ -259,6 +277,50 @@ export default function JamakolChartCard({
         : (udhayam.rasiIndex !== undefined
             ? udhayam.rasiIndex
             : (pillars?.udhayam?.signIndex ?? pillars?.udhayam?.rasiIndex ?? 0)));
+
+  // Determine true Aarudam Rasi Index (0 to 11)
+  let foundAarudamRasi = -1;
+  for (let r = 0; r < 12; r++) {
+    const list = rasiGrid[r] || [];
+    if (list.some((p) => p && (p.isAarudam || (p.name || '').toLowerCase() === 'aarudam' || (p.symbol || '').toLowerCase() === 'ar' || (p.symbol || '').toLowerCase() === 'aa'))) {
+      foundAarudamRasi = r;
+      break;
+    }
+  }
+  const effectiveAarudamRasi = foundAarudamRasi !== -1
+    ? foundAarudamRasi
+    : (aarudam.signIndex !== undefined
+        ? aarudam.signIndex
+        : (aarudam.rasiIndex !== undefined
+            ? aarudam.rasiIndex
+            : (pillars?.aarudam?.signIndex ?? pillars?.aarudam?.rasiIndex ?? 0)));
+
+  // Determine true Kavippu Rasi Index (0 to 11)
+  let foundKavippuRasi = -1;
+  for (let r = 0; r < 12; r++) {
+    const list = rasiGrid[r] || [];
+    if (list.some((p) => p && (p.isKavippu || (p.name || '').toLowerCase() === 'kavippu' || (p.symbol || '').toLowerCase() === 'kv' || (p.symbol || '').toLowerCase() === 'ka'))) {
+      foundKavippuRasi = r;
+      break;
+    }
+  }
+  const effectiveKavippuRasi = foundKavippuRasi !== -1
+    ? foundKavippuRasi
+    : (kavippu.signIndex !== undefined
+        ? kavippu.signIndex
+        : (kavippu.rasiIndex !== undefined
+            ? kavippu.rasiIndex
+            : (pillars?.kavippu?.signIndex ?? pillars?.kavippu?.rasiIndex ?? 0)));
+
+  // Rasi Name and Athipathi (with short form & brackets, e.g. "சிம்மம் (சூரி)")
+  const udhayamRasiName = getLocalizedPrasannamRasiName(effectiveUdhayamRasi, activeLang);
+  const udhayamRasiLordShort = getLocalizedPlanetCode(JAMAKKOL_RASIS[effectiveUdhayamRasi]?.lord || 'Sun', activeLang);
+
+  const aarudamRasiName = getLocalizedPrasannamRasiName(effectiveAarudamRasi, activeLang);
+  const aarudamRasiLordShort = getLocalizedPlanetCode(JAMAKKOL_RASIS[effectiveAarudamRasi]?.lord || 'Mars', activeLang);
+
+  const kavippuRasiName = getLocalizedPrasannamRasiName(effectiveKavippuRasi, activeLang);
+  const kavippuRasiLordShort = getLocalizedPlanetCode(JAMAKKOL_RASIS[effectiveKavippuRasi]?.lord || 'Saturn', activeLang);
 
   // 12 Rasi calculated rays (including Jama giraha rays)
   const rasiRaysList = useMemo(() => {
@@ -622,7 +684,7 @@ export default function JamakolChartCard({
           });
         }
       } else {
-        const isMoon = pName === 'moon' || sym === 'mo';
+        const isMoon = p.type === 'moon' || p.isMoon || pName === 'moon' || sym === 'mo' || pName === 'chandra' || sym === 'சந்' || pName === 'சந்திரன்' || (p.key && p.key.toLowerCase() === 'moon');
         items.push({
           type: isMoon ? 'moon' : 'planet',
           name: p.name || p.symbol || '',
@@ -689,6 +751,9 @@ export default function JamakolChartCard({
       });
     }
 
+    // Sort entities inside this rasi box low to high based on degree value in rasi
+    items.sort((a, b) => getRasiDegreeNumeric(a) - getRasiDegreeNumeric(b));
+
     const startDeg = rasiId * 30;
     const endDeg = (rasiId + 1) * 30;
     const degreeRange = `(${startDeg}-${endDeg})`;
@@ -701,7 +766,7 @@ export default function JamakolChartCard({
             <span className="jk-rasi-title">{displayName}</span>
             <span className="jk-rasi-degree-range">{degreeRange}</span>
           </div>
-          <span className="kadikara-rasi-info-pill" title={activeLang === 'ta' ? 'ராசி & நட்சத்திர விபரம்' : 'Rasi & Star Details'}>
+          <span className="jk-rasi-info-pill kadikara-rasi-info-pill" title={activeLang === 'ta' ? 'ராசி & நட்சத்திர விபரம்' : 'Rasi & Star Details'}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="16" x2="12" y2="12" />
@@ -1212,9 +1277,15 @@ export default function JamakolChartCard({
       <div className="jamakol-chart-outer-footer">
         {/* Horizontal Pillars Box Container (Similar to Sunrise / Sunset Card) */}
         <div className="jk-pillars-banner" aria-label="Jamakkol Key Pillars">
-          <div className="jk-pillar-col" title={`${pillarTitles.udhayam}: ${udhayamStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.udhayam}: ${udhayamRasiName} (${udhayamRasiLordShort}) · ${udhayamStarInfo.text}`}>
             <span className="jk-pillar-title">{pillarTitles.udhayam}</span>
-            <div className="jk-pillar-badge">
+            <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${udhayamRasiName}, அதிபதி: ${udhayamRasiLordShort}` : `Rasi: ${udhayamRasiName}, Sign Lord: ${udhayamRasiLordShort}`}>
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {udhayamRasiName} <span className="jk-pillar-lord">({udhayamRasiLordShort})</span>
+              </span>
+            </div>
+            <div className="jk-pillar-badge jk-pillar-star-badge">
               <span className="jk-pillar-star-icon">★</span>
               <span className="jk-pillar-badge-text">
                 {udhayamStarInfo.starName} - {udhayamStarInfo.pada} <span className="jk-pillar-lord">({udhayamStarInfo.lordShort})</span>
@@ -1224,9 +1295,15 @@ export default function JamakolChartCard({
 
           <div className="jk-pillar-divider" />
 
-          <div className="jk-pillar-col" title={`${pillarTitles.aarudam}: ${aarudamStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.aarudam}: ${aarudamRasiName} (${aarudamRasiLordShort}) · ${aarudamStarInfo.text}`}>
             <span className="jk-pillar-title">{pillarTitles.aarudam}</span>
-            <div className="jk-pillar-badge">
+            <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${aarudamRasiName}, அதிபதி: ${aarudamRasiLordShort}` : `Rasi: ${aarudamRasiName}, Sign Lord: ${aarudamRasiLordShort}`}>
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {aarudamRasiName} <span className="jk-pillar-lord">({aarudamRasiLordShort})</span>
+              </span>
+            </div>
+            <div className="jk-pillar-badge jk-pillar-star-badge">
               <span className="jk-pillar-star-icon">★</span>
               <span className="jk-pillar-badge-text">
                 {aarudamStarInfo.starName} - {aarudamStarInfo.pada} <span className="jk-pillar-lord">({aarudamStarInfo.lordShort})</span>
@@ -1236,9 +1313,15 @@ export default function JamakolChartCard({
 
           <div className="jk-pillar-divider" />
 
-          <div className="jk-pillar-col" title={`${pillarTitles.kavippu}: ${kavippuStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.kavippu}: ${kavippuRasiName} (${kavippuRasiLordShort}) · ${kavippuStarInfo.text}`}>
             <span className="jk-pillar-title">{pillarTitles.kavippu}</span>
-            <div className="jk-pillar-badge">
+            <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${kavippuRasiName}, அதிபதி: ${kavippuRasiLordShort}` : `Rasi: ${kavippuRasiName}, Sign Lord: ${kavippuRasiLordShort}`}>
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {kavippuRasiName} <span className="jk-pillar-lord">({kavippuRasiLordShort})</span>
+              </span>
+            </div>
+            <div className="jk-pillar-badge jk-pillar-star-badge">
               <span className="jk-pillar-star-icon">★</span>
               <span className="jk-pillar-badge-text">
                 {kavippuStarInfo.starName} - {kavippuStarInfo.pada} <span className="jk-pillar-lord">({kavippuStarInfo.lordShort})</span>

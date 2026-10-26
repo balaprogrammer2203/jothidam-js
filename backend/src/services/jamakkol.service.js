@@ -215,32 +215,32 @@ export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
  */
 export const JAMAKKOL_SUB_PLANETS_RULES = {
   0: { // Sunday
-    day:   { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 4, degOffset: 6 },  mrityu: { rasi: 1, degOffset: 0 } },
-    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { rasi: 7, degOffset: 0 },  mrityu: { rasi: 9, degOffset: 12 } }
+    day:   { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true } },
+    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 8, rasi: 8, degOffset: 0, isOffsetFromSun: true },  mrityu: { offsetSigns: 10, rasi: 10, degOffset: 12, isOffsetFromSun: true } }
   },
   1: { // Monday
-    day:   { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 3, degOffset: 12 }, mrityu: { rasi: 0, degOffset: 6 } },
-    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { rasi: 6, degOffset: 6 },  mrityu: { rasi: 8, degOffset: 18 } }
+    day:   { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true } },
+    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 7, rasi: 7, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 9, rasi: 9, degOffset: 18, isOffsetFromSun: true } }
   },
   2: { // Tuesday
-    day:   { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 2, degOffset: 18 }, mrityu: { rasi: 11, degOffset: 12 } },
-    night: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { rasi: 5, degOffset: 12 }, mrityu: { rasi: 7, degOffset: 24 } }
+    day:   { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true }, mrityu: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true } },
+    night: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { offsetSigns: 6, rasi: 6, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 8, rasi: 8, degOffset: 24, isOffsetFromSun: true } }
   },
   3: { // Wednesday
-    day:   { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 1, degOffset: 24 }, mrityu: { rasi: 3, degOffset: 36 } },
-    night: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { rasi: 10, degOffset: 6 }, mrityu: { rasi: 7, degOffset: 0 } }
+    day:   { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true }, mrityu: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true } },
+    night: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { offsetSigns: 11, rasi: 11, degOffset: 6, isOffsetFromSun: true }, mrityu: { offsetSigns: 8, rasi: 8, degOffset: 0, isOffsetFromSun: true } }
   },
   4: { // Thursday
-    day:   { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 1, degOffset: 0 },  mrityu: { rasi: 3, degOffset: 12 } },
-    night: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { rasi: 9, degOffset: 12 }, mrityu: { rasi: 6, degOffset: 6 } }
+    day:   { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true },  mrityu: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true } },
+    night: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { offsetSigns: 10, rasi: 10, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 7, rasi: 7, degOffset: 6, isOffsetFromSun: true } }
   },
   5: { // Friday
-    day:   { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 0, degOffset: 6 },  mrityu: { rasi: 2, degOffset: 18 } },
-    night: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { rasi: 8, degOffset: 18 }, mrityu: { rasi: 5, degOffset: 12 } }
+    day:   { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true } },
+    night: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { offsetSigns: 9, rasi: 9, degOffset: 18, isOffsetFromSun: true }, mrityu: { offsetSigns: 6, rasi: 6, degOffset: 12, isOffsetFromSun: true } }
   },
   6: { // Saturday
-    day:   { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 11, degOffset: 12 }, mrityu: { rasi: 1, degOffset: 24 } },
-    night: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { rasi: 7, degOffset: 24 }, mrityu: { rasi: 10, degOffset: 6 } }
+    day:   { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true } },
+    night: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { offsetSigns: 8, rasi: 8, degOffset: 24, isOffsetFromSun: true }, mrityu: { offsetSigns: 11, rasi: 11, degOffset: 6, isOffsetFromSun: true } }
   }
 };
 
@@ -1037,7 +1037,8 @@ export function calculateJamakkolKeyNotes(input, lang = 'ta') {
           degreeInRasi: degInRasi,
           totalLongitude: (s * 30 + degInRasi) % 360,
           displayName: formatGocharaPlanetNameLocal(clean),
-          isJama: false
+          isJama: false,
+          isRetrograde: Boolean(p.isRetrograde || p.isRetro || p.symbol?.includes('*'))
         });
       }
     });
@@ -1144,6 +1145,31 @@ export function calculateJamakkolKeyNotes(input, lang = 'ta') {
     }
   });
 
+  // Helper to determine the Jamakkol planet moving towards a target point
+  // Condition: Only Jamakkol planets (ஜாமக்கோள் கிரகம் மட்டுமே) must be considered
+  function getApproachingPlanet(targetLong) {
+    let best = null, minDist = 999;
+    allPlanets.filter(p => p.isJama).forEach(p => {
+      // In Jamakkol, all Jama Grahas move counter-clockwise / backward (360 -> 0)
+      const dist = ((p.totalLongitude - targetLong) % 360 + 360) % 360;
+
+      if (dist > 0.05 && dist < minDist) {
+        minDist = dist;
+        best = { ...p, dist, isMovingBackward: true };
+      }
+    });
+    return best;
+  }
+
+  const approachUd = getApproachingPlanet(udLong);
+  const approachAr = getApproachingPlanet(arLong);
+  const approachKv = getApproachingPlanet(kvLong);
+
+  function formatApproachPlanet(p) {
+    if (!p) return noneText;
+    return `${p.displayName} (${Math.round(p.totalLongitude)}°)`;
+  }
+
   return {
     udhayamStandingAspects: udStandingPairs.length > 0 ? udStandingPairs.join(', ') : noneText,
     udhayamAspectingPlanets: udAspecting.length > 0 ? udAspecting.map(p => p.displayName).join(', ') : noneText,
@@ -1152,13 +1178,16 @@ export function calculateJamakkolKeyNotes(input, lang = 'ta') {
     aarudamStandingAspects: arStandingPairs.length > 0 ? arStandingPairs.join(', ') : noneText,
     aarudamAspectingPlanets: arAspecting.length > 0 ? arAspecting.map(p => p.displayName).join(', ') : noneText,
     udhayamNextTouch: nextUd ? `${nextUd.displayName} (${Math.round(nextUd.totalLongitude)}°)` : noneText,
+    udhayamApproachingPlanet: formatApproachPlanet(approachUd),
     aarudamNextTouch: nextAr ? `${nextAr.displayName} (${Math.round(nextAr.totalLongitude)}°)` : noneText,
+    aarudamApproachingPlanet: formatApproachPlanet(approachAr),
     kavippuAspectingPlanets: kvAspecting.length > 0 ? kvAspecting.map(p => p.displayName).join(', ') : noneText,
     kavippuStandingAspects: kvStandingPairs.length > 0 ? kvStandingPairs.join(', ') : noneText,
     kavippuNextTouchPlanet: nextKv ? nextKv.displayName : noneText,
     kavippuNextTouchDegree: nextKv ? `(${Math.round(nextKv.totalLongitude)}°)` : '',
     kavippuNextTouchRetro: nextKv ? (isTa ? '(பின்னோக்கி)' : '(Retrograde)') : '',
-    kavippuNextTouch: nextKv ? `${nextKv.displayName} (${Math.round(nextKv.totalLongitude)}°) ${isTa ? '(பின்னோக்கி)' : '(Retrograde)'}` : noneText
+    kavippuNextTouch: nextKv ? `${nextKv.displayName} (${Math.round(nextKv.totalLongitude)}°) ${isTa ? '(பின்னோக்கி)' : '(Retrograde)'}` : noneText,
+    kavippuApproachingPlanet: formatApproachPlanet(approachKv)
   };
 }
 
@@ -1410,11 +1439,13 @@ export async function calculateJamakkolPrasannam({
   const subPlanetsRule = JAMAKKOL_SUB_PLANETS_RULES[effectiveDayOfWeek]?.[periodKey] || JAMAKKOL_SUB_PLANETS_RULES[6].day;
 
   const sunDegInRasi = sunData.degreeInRasi !== undefined ? sunData.degreeInRasi : (((sunData.longitude || 0) % 30 + 30) % 30);
+  const sunSignIndex = sunData.rasiIndex !== undefined ? sunData.rasiIndex : Math.floor((((sunData.longitude || 0) % 360 + 360) % 360) / 30);
 
-  const calculateSubPlanet = (rule, baseDeg) => {
+  const calculateSubPlanet = (rule, baseDeg, sunSign = 0) => {
     const total = baseDeg + (rule.degOffset || 0);
     const shift = Math.floor(total / 30);
-    const rasiIndex = (rule.rasi + shift) % 12;
+    const baseRasi = rule.isOffsetFromSun ? (sunSign + (rule.offsetSigns ?? rule.rasi ?? 0)) : (rule.rasi ?? 0);
+    const rasiIndex = ((baseRasi + shift) % 12 + 12) % 12;
     const degreeInRasi = total % 30;
     return {
       rasiIndex,
@@ -1423,10 +1454,10 @@ export async function calculateJamakkolPrasannam({
     };
   };
 
-  const yamaCalc = calculateSubPlanet(subPlanetsRule.yama, sunDegInRasi);
-  const rahuCalc = calculateSubPlanet(subPlanetsRule.rahu, sunDegInRasi);
-  const maandiCalc = calculateSubPlanet(subPlanetsRule.maandi, sunDegInRasi);
-  const mrityuCalc = calculateSubPlanet(subPlanetsRule.mrityu, sunDegInRasi);
+  const yamaCalc = calculateSubPlanet(subPlanetsRule.yama, sunDegInRasi, sunSignIndex);
+  const rahuCalc = calculateSubPlanet(subPlanetsRule.rahu, sunDegInRasi, sunSignIndex);
+  const maandiCalc = calculateSubPlanet(subPlanetsRule.maandi, sunDegInRasi, sunSignIndex);
+  const mrityuCalc = calculateSubPlanet(subPlanetsRule.mrityu, sunDegInRasi, sunSignIndex);
 
   const subPlanets = {
     yamakandam: {
@@ -1956,20 +1987,47 @@ export async function calculateJamakkolPrasannam({
   // 7. Gowri Auspicious Period
   if (centerInfo?.gowri) {
     const isGowriAuspicious = centerInfo.gowri.isAuspicious;
-    const gowriName = centerInfo.gowri.value || '';
+    let gowriKey = centerInfo.gowri.key;
+    if (!gowriKey && centerInfo.gowri.value) {
+      const vClean = String(centerInfo.gowri.value).toLowerCase().trim();
+      const found = Object.keys(GOWRI_METADATA).find(k =>
+        k.toLowerCase() === vClean || (GOWRI_METADATA[k].ta && GOWRI_METADATA[k].ta.toLowerCase() === vClean)
+      );
+      if (found) gowriKey = found;
+    }
+    const meta = (gowriKey && GOWRI_METADATA[gowriKey]) ? GOWRI_METADATA[gowriKey] : GOWRI_METADATA.Dhanam;
+    const gowriNameTa = meta?.ta || centerInfo.gowri.value || 'தனம்';
+    const gowriNameEn = meta?.en || gowriKey || centerInfo.gowri.value || 'Dhanam';
+    const isTa = lang === 'ta';
+    const gowriName = isTa ? gowriNameTa : gowriNameEn;
+
     indicators.push({
       id: 'timing-gowri',
       type: isGowriAuspicious ? 'positive' : 'warning',
       symbol: isGowriAuspicious ? '✅' : '⚠️',
       category: 'timing',
-      categoryLabel: 'சுப வேளை',
-      title: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriName})`,
-      textEn: `Gowri ${isGowriAuspicious ? 'Auspicious' : 'Inauspicious'} Period (${gowriName})`,
-      textTa: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriName})`,
-      desc: isGowriAuspicious
-        ? `தற்போதைய கௌரி வேளை (${gowriName}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
-        : `தற்போதைய கௌரி வேளை (${gowriName}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`,
-      rationale: `கௌரி பஞ்சாங்கம்: ${gowriName}.`,
+      categoryLabel: isTa ? 'சுப வேளை' : 'Auspicious Time',
+      title: isTa
+        ? `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriNameTa})`
+        : `Gowri ${isGowriAuspicious ? 'Auspicious' : 'Inauspicious'} Period (${gowriNameEn})`,
+      textEn: `Gowri ${isGowriAuspicious ? 'Auspicious' : 'Inauspicious'} Period (${gowriNameEn})`,
+      textTa: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriNameTa})`,
+      desc: isTa
+        ? (isGowriAuspicious
+            ? `தற்போதைய கௌரி வேளை (${gowriNameTa}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
+            : `தற்போதைய கௌரி வேளை (${gowriNameTa}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`)
+        : (isGowriAuspicious
+            ? `Current Gowri period (${gowriNameEn}) is highly auspicious for beginning negotiations and ventures.`
+            : `Current Gowri period (${gowriNameEn}) is inauspicious. Defer crucial agreements until a favorable period.`),
+      descEn: isGowriAuspicious
+        ? `Current Gowri period (${gowriNameEn}) is highly auspicious for beginning negotiations and ventures.`
+        : `Current Gowri period (${gowriNameEn}) is inauspicious. Defer crucial agreements until a favorable period.`,
+      descTa: isGowriAuspicious
+        ? `தற்போதைய கௌரி வேளை (${gowriNameTa}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
+        : `தற்போதைய கௌரி வேளை (${gowriNameTa}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`,
+      rationale: isTa ? `கௌரி பஞ்சாங்கம்: ${gowriNameTa}.` : `Gowri period: ${gowriNameEn}.`,
+      rationaleEn: `Gowri period: ${gowriNameEn}.`,
+      rationaleTa: `கௌரி பஞ்சாங்கம்: ${gowriNameTa}.`,
       weight: isGowriAuspicious ? 1 : -1
     });
   }

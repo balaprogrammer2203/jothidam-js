@@ -1077,31 +1077,53 @@
   opacity: 0.95 !important;
 }
 
-/* Regular Planets (சூரி, செவ, புத, குரு, சுக், சனி, ராகு, கேது) & Moon: Bold & Dark solid color */
-.jk-planet-regular,
-.jk-planet-moon {
+/* Regular Planets (சூரி, செவ, புத, குரு, சுக், சனி, ராகு, கேது): Bold & Dark solid color */
+.jk-planet-regular {
   color: #0f172a !important; /* Deep dark slate / near-black */
   font-weight: 750 !important;
   text-decoration: none !important;
 }
 
-.jk-planet-regular .jk-sym-code,
-.jk-planet-moon .jk-sym-code {
+.jk-planet-regular .jk-sym-code {
   color: #0f172a !important;
   font-weight: 800 !important;
   font-size: 0.85rem;
   letter-spacing: 0.01em;
 }
 
-.jk-planet-regular .jk-planet-deg,
-.jk-planet-moon .jk-planet-deg {
+.jk-planet-regular .jk-planet-deg {
   color: #475569 !important; /* Subtle dark degree matching horoscope page */
   font-weight: 600 !important;
   font-size: 9px !important;
   opacity: 0.9 !important;
 }
 
-.jk-planet-regular .jk-planet-retro,
+.jk-planet-regular .jk-planet-retro {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+}
+
+/* Moon (சந் / சந்திரன்): Distinct Dark Color (Deep Sapphire / Royal Ocean Blue) */
+.jk-planet-moon {
+  color: #0369a1 !important; /* Deep dark ocean/sapphire blue */
+  font-weight: 800 !important;
+  text-decoration: none !important;
+}
+
+.jk-planet-moon .jk-sym-code {
+  color: #0369a1 !important;
+  font-weight: 850 !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+.jk-planet-moon .jk-planet-deg {
+  color: #0284c7 !important;
+  font-weight: 600 !important;
+  font-size: 9px !important;
+  opacity: 0.95 !important;
+}
+
 .jk-planet-moon .jk-planet-retro {
   color: #dc2626 !important;
   font-weight: 800 !important;
@@ -1727,17 +1749,22 @@ body.dark-theme .jk-planet-moon .jk-sym-code,
 
 html[data-theme="dark"] .jk-planet-deg,
 html[data-theme="dark"] .jk-planet-regular .jk-planet-deg,
-html[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
 [data-theme="dark"] .jk-planet-deg,
 [data-theme="dark"] .jk-planet-regular .jk-planet-deg,
-[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
 body.dark-theme .jk-planet-deg,
 body.dark-theme .jk-planet-regular .jk-planet-deg,
-body.dark-theme .jk-planet-moon .jk-planet-deg,
 .dark .jk-planet-deg,
-.dark .jk-planet-regular .jk-planet-deg,
-.dark .jk-planet-moon .jk-planet-deg {
+.dark .jk-planet-regular .jk-planet-deg {
   color: #cbd5e1 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
+[data-theme="dark"] .jk-planet-moon .jk-planet-deg,
+body.dark-theme .jk-planet-moon .jk-planet-deg,
+.dark .jk-planet-moon .jk-planet-deg {
+  color: #7dd3fc !important;
   font-weight: 600 !important;
   opacity: 1 !important;
 }
@@ -1893,7 +1920,7 @@ body.dark-theme .jk-field-group label,
   background: linear-gradient(180deg, #fffbf5 0%, #fff7eb 100%);
   border: 1.5px solid #fed7aa;
   border-radius: 12px;
-  padding: 0.5rem 1.25rem;
+  padding: 0.55rem 1.25rem;
   display: flex;
   width: 100%;
   max-width: 720px;
@@ -1914,14 +1941,14 @@ body.dark-theme .jk-field-group label,
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0.3rem;
   text-align: center;
   user-select: none;
 }
 
 .jk-pillar-title {
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 750;
   color: #b91c1c;
   line-height: 1.2;
   letter-spacing: 0.01em;
@@ -1934,7 +1961,7 @@ body.dark-theme .jk-field-group label,
   background: #ffffff;
   border: 1px solid #fecdd3;
   border-radius: 7px;
-  padding: 0.18rem 0.6rem;
+  padding: 0.16rem 0.55rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   white-space: nowrap;
 }
@@ -1946,7 +1973,7 @@ body.dark-theme .jk-field-group label,
 }
 
 .jk-pillar-badge-text {
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #1e293b;
   line-height: 1.2;
@@ -1960,7 +1987,7 @@ body.dark-theme .jk-field-group label,
 
 .jk-pillar-divider {
   width: 1px;
-  height: 38px;
+  height: 62px;
   background-color: #fed7aa;
   margin: 0 0.85rem;
   flex-shrink: 0;
@@ -1987,19 +2014,22 @@ body.dark-theme .jk-field-group label,
     align-items: stretch;
   }
   .jk-pillar-col {
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    gap: 0.5rem;
+    gap: 0.2rem;
     align-items: center;
   }
   .jk-pillar-title {
     font-size: 0.85rem;
   }
+  .jk-pillar-rasi-row {
+    font-size: 0.82rem;
+  }
   .jk-pillar-divider {
     width: 100%;
     height: 1px;
-    margin: 0.1rem 0;
+    margin: 0.2rem 0;
   }
   .jk-pillar-badge {
     padding: 0.18rem 0.5rem;
@@ -2019,6 +2049,12 @@ body.dark-theme .jk-field-group label,
   }
   .jk-pillar-title {
     color: #f87171;
+  }
+  .jk-pillar-rasi-name {
+    color: #f1f5f9;
+  }
+  .jk-pillar-rasi-lord {
+    color: #fca5a5;
   }
   .jk-pillar-badge {
     background: #0c0a09;
@@ -2045,6 +2081,12 @@ body.dark-theme .jk-field-group label,
 }
 [data-theme="dark"] .jk-pillar-title {
   color: #f87171;
+}
+[data-theme="dark"] .jk-pillar-rasi-name {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .jk-pillar-rasi-lord {
+  color: #fca5a5;
 }
 [data-theme="dark"] .jk-pillar-badge {
   background: #0c0a09;
@@ -3193,33 +3235,60 @@ body.dark-theme .jk-field-group label,
   border-color: #0f172a transparent transparent transparent;
 }
 
-/* Tooltip Interior Styles - Light Color Info Pill */
-.kadikara-rasi-info-pill {
-  width: 14px;
-  height: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #a8a29e;
-  background: #fffdf5;
-  border-radius: 50%;
-  margin-left: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-  padding: 0;
-  box-shadow: none;
+/* Tooltip Interior Styles - Light Color Info Pill for Jamakol Chart */
+.jk-rasi-cell .jk-rasi-info-pill,
+.jk-rasi-cell .kadikara-rasi-info-pill,
+.jamakol-container .jk-rasi-info-pill,
+.jamakol-container .kadikara-rasi-info-pill,
+.jk-cell-header .jk-rasi-info-pill,
+.jk-cell-header .kadikara-rasi-info-pill {
+  width: 14px !important;
+  height: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #94a3b8 !important; /* Soft, light neutral slate icon */
+  background: #f8fafc !important; /* Clean light background */
+  border: 1px solid #e2e8f0 !important; /* Subtle soft border */
+  border-radius: 50% !important;
+  margin-left: 4px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 
-.kadikara-rasi-info-pill svg {
-  display: block;
+.jk-rasi-cell .jk-rasi-info-pill svg,
+.jk-rasi-cell .kadikara-rasi-info-pill svg,
+.jamakol-container .jk-rasi-info-pill svg,
+.jamakol-container .kadikara-rasi-info-pill svg {
+  display: block !important;
+  color: #94a3b8 !important;
+  stroke: #94a3b8 !important;
 }
 
+.kadikara-rasi-header:hover .jk-rasi-info-pill,
 .kadikara-rasi-header:hover .kadikara-rasi-info-pill,
+.jk-cell-header:hover .jk-rasi-info-pill,
 .jk-cell-header:hover .kadikara-rasi-info-pill,
-.kadikara-rasi-info-pill:hover {
-  color: #78716c;
-  background: #f5eedc;
+.jk-rasi-cell .jk-rasi-info-pill:hover,
+.jk-rasi-cell .kadikara-rasi-info-pill:hover,
+.jamakol-container .kadikara-rasi-info-pill:hover {
+  color: #64748b !important;
+  background: #edf2f7 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.kadikara-rasi-header:hover .jk-rasi-info-pill svg,
+.kadikara-rasi-header:hover .kadikara-rasi-info-pill svg,
+.jk-cell-header:hover .jk-rasi-info-pill svg,
+.jk-cell-header:hover .kadikara-rasi-info-pill svg,
+.jk-rasi-cell .jk-rasi-info-pill:hover svg,
+.jk-rasi-cell .kadikara-rasi-info-pill:hover svg,
+.jamakol-container .kadikara-rasi-info-pill:hover svg {
+  color: #64748b !important;
+  stroke: #64748b !important;
 }
 
 .kadikara-tooltip-card .tooltip-header {
@@ -5476,16 +5545,43 @@ body.dark-theme .jk-field-group label,
   color: #fbbf24;
 }
 
-[data-theme="dark"] .kadikara-rasi-info-pill {
-  color: #78716c;
-  background: #201c18;
+[data-theme="dark"] .jk-rasi-cell .jk-rasi-info-pill,
+[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill,
+[data-theme="dark"] .jamakol-container .kadikara-rasi-info-pill,
+html[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill,
+body.dark-theme .jk-rasi-cell .kadikara-rasi-info-pill {
+  color: #94a3b8 !important;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .jk-rasi-cell .jk-rasi-info-pill svg,
+[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill svg,
+[data-theme="dark"] .jamakol-container .kadikara-rasi-info-pill svg,
+html[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill svg {
+  color: #94a3b8 !important;
+  stroke: #94a3b8 !important;
 }
 
 [data-theme="dark"] .kadikara-rasi-header:hover .kadikara-rasi-info-pill,
+[data-theme="dark"] .jk-cell-header:hover .jk-rasi-info-pill,
 [data-theme="dark"] .jk-cell-header:hover .kadikara-rasi-info-pill,
+[data-theme="dark"] .jk-rasi-cell .jk-rasi-info-pill:hover,
+[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill:hover,
 [data-theme="dark"] .kadikara-rasi-info-pill:hover {
-  background: #292524;
-  color: #fed7aa;
+  background: #334155 !important;
+  color: #f1f5f9 !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] .kadikara-rasi-header:hover .kadikara-rasi-info-pill svg,
+[data-theme="dark"] .jk-cell-header:hover .jk-rasi-info-pill svg,
+[data-theme="dark"] .jk-cell-header:hover .kadikara-rasi-info-pill svg,
+[data-theme="dark"] .jk-rasi-cell .jk-rasi-info-pill:hover svg,
+[data-theme="dark"] .jk-rasi-cell .kadikara-rasi-info-pill:hover svg,
+[data-theme="dark"] .kadikara-rasi-info-pill:hover svg {
+  color: #f1f5f9 !important;
+  stroke: #f1f5f9 !important;
 }
 
 

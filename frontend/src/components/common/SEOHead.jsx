@@ -10,8 +10,11 @@ import { SITE_METADATA, PAGE_SEO_REGISTRY } from '../../config/seo.config';
  */
 export default function SEOHead({
   pageKey,
+  title: propTitle,
   customTitle,
+  description: propDescription,
   customDescription,
+  keywords: propKeywords,
   customKeywords,
   customImage,
   breadcrumbs = [],
@@ -27,6 +30,7 @@ export default function SEOHead({
   // Resolve localized title & description
   const title =
     customTitle ||
+    propTitle ||
     pageConfig.title?.[currentLang] ||
     pageConfig.title?.ta ||
     pageConfig.title?.en ||
@@ -34,6 +38,7 @@ export default function SEOHead({
 
   const description =
     customDescription ||
+    propDescription ||
     pageConfig.description?.[currentLang] ||
     pageConfig.description?.ta ||
     pageConfig.description?.en ||
@@ -41,6 +46,7 @@ export default function SEOHead({
 
   const keywordsList =
     customKeywords ||
+    propKeywords ||
     pageConfig.keywords ||
     SITE_METADATA.keywords ||
     [];
@@ -172,6 +178,7 @@ export default function SEOHead({
         featureList: [
           'Vedic Kundli D1 & D9 Navamsa Charts',
           'Swiss Ephemeris Planetary Calculations',
+          'Classical Jamakkol Prasannam 8 Jamams & 3 Pillars',
           'KP Horary 1-249 Sub Lord Lookup',
           'Panchangam Tithis, Yogas, Karanas, and Nakshatras',
           '6 Indian Languages Support'

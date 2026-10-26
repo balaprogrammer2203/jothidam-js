@@ -429,8 +429,12 @@ export default function JamakolPrasannamPage() {
   return (
     <div className="jamakol-container">
       <SEOHead
-        title={currentLang === 'ta' ? 'ஜாமக்கோள் பிரசன்னம் | Jamakkol Prasannam Horary Calculator' : 'Jamakkol Prasannam Astrology Calculator - Classical 8 Jamams'}
-        description="Authentic classical Jamakkol Prasannam calculator based on Sri Upendra Achariyar system with Udhayam, Aarudam, Kavippu, 8 Jama Grahas, and 70+ Questions Advisor."
+        pageKey="jamakolPrasannam"
+        breadcrumbs={[
+          { name: currentLang === 'ta' ? 'முகப்பு' : 'Home', path: '/' },
+          { name: currentLang === 'ta' ? 'பிரசன்னம்' : 'Prasannam', path: '/prasannam/kadikara' },
+          { name: currentLang === 'ta' ? 'ஜாமக்கோள் பிரசன்னம்' : 'Jamakkol Prasannam', path: '/prasannam/jamakol' }
+        ]}
       />
 
       <Breadcrumbs items={breadcrumbs} />
@@ -700,6 +704,37 @@ export default function JamakolPrasannamPage() {
         lang={currentLang}
       />
 
+      {/* Key Prasanna Notes (முக்கிய பிரசன்ன குறிப்புகள்) */}
+      <JamakolKeyNotesCard
+        chartData={chartData}
+        lang={currentLang}
+      />
+
+      {/* Dynamic & Workable Prasannam Indicators & Verdict Section */}
+      <JamakolIndicatorsSection
+        chartData={chartData}
+        lang={currentLang}
+        cityName={inputPlace || selectedCity.name || 'Chennai'}
+        onRefreshLiveTime={handleSetNow}
+      />
+
+      {/* Sambhava Kala Nirnayam (Event Timing / கால நிர்ணயம்) */}
+      <JamakolTimingSection
+        timing={chartData?.eventTiming}
+        lang={currentLang}
+      />
+
+      {/* 70+ Questions Advisor Section */}
+      <JamakolQuestionsSection
+        lang={currentLang}
+      />
+
+      {/* Planetary Status in Pillars & Pillar Lords (புள்ளி & அதிபதி நிலைகள்) */}
+      <JamakolPlanetaryStatusTables
+        chartData={chartData}
+        lang={currentLang}
+      />
+
       {/* 12-Box Calculated Rasi Rays Chart (ராசி வாரியான கணக்கிடப்பட்ட கதிர் சக்கரம்) */}
       <Jamakol12RasiRaysChart
         chartData={chartData}
@@ -708,18 +743,6 @@ export default function JamakolPrasannamPage() {
 
       {/* General Rasi & Giraha Kathir Table (பொது ராசி மற்றும் கிரக கதிர்கள் அட்டவணை) */}
       <JamakolGeneralRaysCard
-        chartData={chartData}
-        lang={currentLang}
-      />
-
-      {/* Key Prasanna Notes (முக்கிய பிரசன்ன குறிப்புகள்) */}
-      <JamakolKeyNotesCard
-        chartData={chartData}
-        lang={currentLang}
-      />
-
-      {/* Planetary Status in Pillars & Pillar Lords (புள்ளி & அதிபதி நிலைகள்) */}
-      <JamakolPlanetaryStatusTables
         chartData={chartData}
         lang={currentLang}
       />
@@ -734,14 +757,6 @@ export default function JamakolPrasannamPage() {
       <JamakolPositionsAndSphutasTables
         chartData={chartData}
         lang={currentLang}
-      />
-
-      {/* Dynamic & Workable Prasannam Indicators & Verdict Section */}
-      <JamakolIndicatorsSection
-        chartData={chartData}
-        lang={currentLang}
-        cityName={inputPlace || selectedCity.name || 'Chennai'}
-        onRefreshLiveTime={handleSetNow}
       />
 
       {/* 3 Pillars Summary (Udhayam, Aarudam, Kavippu) */}
@@ -854,17 +869,6 @@ export default function JamakolPrasannamPage() {
           )}
         </div>
       </div>
-
-      {/* Sambhava Kala Nirnayam (Event Timing / கால நிர்ணயம்) */}
-      <JamakolTimingSection
-        timing={chartData?.eventTiming}
-        lang={currentLang}
-      />
-
-      {/* 70+ Questions Advisor Section */}
-      <JamakolQuestionsSection
-        lang={currentLang}
-      />
 
       {/* Classical Principles & FAQs Accordion */}
       <JamakolFaqSection

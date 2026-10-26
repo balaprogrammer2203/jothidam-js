@@ -21,9 +21,9 @@ export default function JamakolKeyNotesCard({ chartData, lang = 'ta' }) {
 
   const notes = useMemo(() => {
     if (!chartData) return null;
-    if (isTa && chartData.keyNotesTa) return chartData.keyNotesTa;
-    if (!isTa && chartData.keyNotesEn) return chartData.keyNotesEn;
-    if (chartData.keyNotes) return chartData.keyNotes;
+    if (isTa && chartData.keyNotesTa?.udhayamApproachingPlanet) return chartData.keyNotesTa;
+    if (!isTa && chartData.keyNotesEn?.udhayamApproachingPlanet) return chartData.keyNotesEn;
+    if (chartData.keyNotes?.udhayamApproachingPlanet) return chartData.keyNotes;
     return calculateJamakkolKeyNotes(chartData, lang);
   }, [chartData, lang, isTa]);
 
@@ -39,22 +39,8 @@ export default function JamakolKeyNotesCard({ chartData, lang = 'ta' }) {
       </div>
 
       <div className="jk-key-notes-content">
-        {/* Group 1: Udhayam & Distance */}
+        {/* Group 1: Distance */}
         <div className="jk-kn-group">
-          <div className="jk-kn-row">
-            <span className="jk-kn-label">
-              {isTa ? 'உதயத்தில் நின்ற கிரகம் பார்க்கும் கிரகங்கள்' : 'Planets in Udhayam aspecting'}:
-            </span>
-            <span className="jk-kn-val jk-val-pairs">{notes.udhayamStandingAspects}</span>
-          </div>
-
-          <div className="jk-kn-row">
-            <span className="jk-kn-label">
-              {isTa ? 'உதயத்தை பார்க்கும் கிரகங்கள்' : 'Planets aspecting Udhayam'}:
-            </span>
-            <span className="jk-kn-val jk-val-aspects">{notes.udhayamAspectingPlanets}</span>
-          </div>
-
           <div className="jk-kn-row">
             <span className="jk-kn-label">
               {isTa ? 'உதயத்திலிருந்து ஆருடம் உள்ள இடம்' : 'House of Aarudam from Udhayam'}:
@@ -69,9 +55,57 @@ export default function JamakolKeyNotesCard({ chartData, lang = 'ta' }) {
             <span className="jk-kn-val jk-val-number">{notes.udhayamFromArudam}</span>
           </div>
         </div>
+        {/* Group 1: Udhayam */}
+        <div className="jk-kn-group">
+          {/* Udhayam Next touches & Approaching planets */}
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'உதயம் அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Udhayam will touch'}:
+            </span>
+            <span className="jk-kn-val jk-val-touch">{notes.udhayamNextTouch}</span>
+          </div>
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'உதயத்தை நோக்கி வரும் ஜாம கிரகம்' : 'Jama Planet approaching Udhayam'}:
+            </span>
+            <span className="jk-kn-val jk-val-touch">{notes.udhayamApproachingPlanet}</span>
+          </div>
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'உதயத்தில் நின்ற கிரகம் பார்க்கும் கிரகங்கள்' : 'Planets in Udhayam aspecting'}:
+            </span>
+            <span className="jk-kn-val jk-val-pairs">{notes.udhayamStandingAspects}</span>
+          </div>
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'உதயத்தை பார்க்கும் கிரகங்கள்' : 'Planets aspecting Udhayam'}:
+            </span>
+            <span className="jk-kn-val jk-val-aspects">{notes.udhayamAspectingPlanets}</span>
+          </div>
+        </div>
 
         {/* Group 2: Aarudam */}
         <div className="jk-kn-group">
+          {/* Aarudam Next touches & Approaching planets */}
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'ஆருடம் அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Aarudam will touch'}:
+            </span>
+            <span className="jk-kn-val jk-val-touch">{notes.aarudamNextTouch}</span>
+          </div>
+
+          <div className="jk-kn-row">
+            <span className="jk-kn-label">
+              {isTa ? 'ஆரூடத்தை நோக்கி வரும் ஜாம கிரகம்' : 'Jama Planet approaching Aarudam'}:
+            </span>
+            <span className="jk-kn-val jk-val-touch">{notes.aarudamApproachingPlanet}</span>
+          </div>
+
           <div className="jk-kn-row">
             <span className="jk-kn-label">
               {isTa ? 'ஆருடத்தில் நின்ற கிரகம் பார்க்கும் கிரகங்கள்' : 'Planets in Aarudam aspecting'}:
@@ -87,25 +121,26 @@ export default function JamakolKeyNotesCard({ chartData, lang = 'ta' }) {
           </div>
         </div>
 
-        {/* Group 3: Next touches (Forward) */}
+        {/* Group 3: Kavippu */}
         <div className="jk-kn-group">
+          {/* Kavippu Next touches & Approaching planets */}
+
           <div className="jk-kn-row">
             <span className="jk-kn-label">
-              {isTa ? 'உதயம் அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Udhayam will touch'}:
+              {isTa ? 'கவிப்பு அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Kavippu will touch'}:
             </span>
-            <span className="jk-kn-val jk-val-touch">{notes.udhayamNextTouch}</span>
+            <span className="jk-kn-val jk-val-touch">
+              {notes.kavippuNextTouchPlanet} {notes.kavippuNextTouchDegree} <span className="jk-kn-retro">{notes.kavippuNextTouchRetro}</span>
+            </span>
           </div>
 
           <div className="jk-kn-row">
             <span className="jk-kn-label">
-              {isTa ? 'ஆருடம் அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Aarudam will touch'}:
+              {isTa ? 'கவிப்பை நோக்கி வரும் ஜாம கிரகம்' : 'Jama Planet approaching Kavippu'}:
             </span>
-            <span className="jk-kn-val jk-val-touch">{notes.aarudamNextTouch}</span>
+            <span className="jk-kn-val jk-val-touch">{notes.kavippuApproachingPlanet}</span>
           </div>
-        </div>
 
-        {/* Group 4: Kavippu */}
-        <div className="jk-kn-group">
           <div className="jk-kn-row">
             <span className="jk-kn-label">
               {isTa ? 'கவிப்பை பார்க்கும் கிரகங்கள்' : 'Planets aspecting Kavippu'}:
@@ -118,15 +153,6 @@ export default function JamakolKeyNotesCard({ chartData, lang = 'ta' }) {
               {isTa ? 'கவிப்பில் நின்ற கிரகம் பார்க்கும் கிரகங்கள்' : 'Planets in Kavippu aspecting'}:
             </span>
             <span className="jk-kn-val jk-val-pairs">{notes.kavippuStandingAspects}</span>
-          </div>
-
-          <div className="jk-kn-row">
-            <span className="jk-kn-label">
-              {isTa ? 'கவிப்பு அடுத்ததாக தொட இருக்கும் கிரகம்' : 'Next planet Kavippu will touch'}:
-            </span>
-            <span className="jk-kn-val jk-val-touch">
-              {notes.kavippuNextTouchPlanet} {notes.kavippuNextTouchDegree} <span className="jk-kn-retro">{notes.kavippuNextTouchRetro}</span>
-            </span>
           </div>
         </div>
       </div>

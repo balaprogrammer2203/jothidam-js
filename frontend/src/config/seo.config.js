@@ -314,5 +314,42 @@ export const PAGE_SEO_REGISTRY = {
     },
     keywords: ['kadigara prasannam calculator', 'clock prasannam', 'tamil horary astrology', 'south indian rasi chart clock', 'udhayam aarudam calculator'],
     schemaType: 'WebApplication'
+  },
+
+  // 13. Jamakkol Prasannam (Classical Horary Astrology)
+  jamakolPrasannam: {
+    title: {
+      ta: 'ஜாமக்கோள் பிரசன்னம் கால்குலேட்டர்: உதயம், ஆரூடம், கவிப்பு உடனடி பலன்கள் | Jothidam Portal',
+      en: 'Jamakkol Prasannam Calculator: Classical Tamil Horary Astrology | Jothidam Portal',
+      hi: 'जामक्कोल प्रश्न कुंडली कैलकुलेटर: उदय, आरूढ़, कविप्पु फल | Jothidam Portal',
+      te: 'జామక్కోల్ ప్రశ్న జ్యోతిష్యం కాలిక్యులేటర్: ఉదయం, ఆరూఢం, కవిప్పు | Jothidam Portal',
+      kn: 'ಜಾಮಕ್ಕೋಲ್ ಪ್ರಶ್ನ ಜ್ಯೋತಿಷ್ಯ ಕ್ಯಾಲ್ಕುಲೇಟರ್: ಉದಯ, ಆರೂಢ, ಕವಿಪ್ಪು | Jothidam Portal',
+      ml: 'ജാമക്കോൾ പ്രശ്നം കാൽക്കുലേറ്റർ: ഉദയം, ആരൂഢം, കവിപ്പ് | Jothidam Portal'
+    },
+    description: {
+      ta: 'உபேந்திர ஆச்சாரியாரின் பாரம்பரிய ஜாமக்கோள் பிரசன்னம் முறைப்படி உதயம், ஆரூடம், கவிப்பு மற்றும் 8 ஜாமக் கிரகங்களின் சுழற்சி கொண்டு நினைத்த காரியத்தின் உடனடி பலன்களைக் கணிக்கவும்.',
+      en: 'Authentic classical Jamakkol Prasannam calculator based on Sri Upendra Achariyar Jinendramala system. Instant horary verdicts via Udhayam, Aarudam, Kavippu, 8 Jama Grahas, and 12 Rasi Rays.',
+      hi: 'श्री उपेन्द्र आचार्यार की जिनेंद्रमाला पद्धति पर आधारित प्रामाणिक जामक्कोल प्रश्न कुंडली। उदय, आरूढ़, कविप्पु और 8 जाम ग्रहों के साथ त्वरित प्रश्न फल प्राप्त करें।',
+      te: 'శ్రీ ఉపేంద్ర ఆచార్య జినేంద్రమాల పద్ధతిలో ఉదయం, ఆరూఢం, కవిప్పు మరియు 8 జామ గ్రహాల ఆధారంగా ఖచ్చితమైన ప్రశ్న జ్యోతిష్య ఫలితాలు.',
+      kn: 'ಶ್ರೀ ಉಪೇಂದ್ರ ಆಚಾರ್ಯರ ಜಿನೇಂದ್ರಮಾಲಾ ಪದ್ಧತಿಯ ಅಧಿಕೃತ ಜಾಮಕ್ಕೋಲ್ ಪ್ರಶ್ನ ಕ್ಯಾಲ್ಕುಲೇಟರ್. ಉದಯ, ಆರೂಢ, ಕವಿಪ್ಪು ಮೂಲಕ ತಕ್ಷಣದ ಫಲಿತಾಂಶ.',
+      ml: 'ശ്രീ ഉപേന്ദ്ര ആചാര്യരുടെ ജിനേന്ദ്രമാല സമ്പ്രദായത്തിലുള്ള ജാമക്കോൾ പ്രശ്നം. ഉദയം, ആരൂഢം, കവിപ്പ്, 8 ജാമ ഗ്രഹങ്ങൾ എന്നിവയിലൂടെ തത്സമയ പ്രശ്നഫലം.'
+    },
+    keywords: [
+      'jamakkol prasannam',
+      'jamakol prasannam calculator',
+      'jamakkol astrology online',
+      'tamil horary astrology',
+      'upendra achariyar jamakkol',
+      'jinendramala prasannam',
+      'udhayam aarudam kavippu',
+      'jama grahas',
+      'jamakkol 8 jamams',
+      'sambhava kala nirnayam',
+      'rasi rays jamakkol',
+      'prasanna jothidam'
+    ],
+    schemaType: 'WebApplication'
   }
 };
+
+PAGE_SEO_REGISTRY.jamakkolPrasannam = PAGE_SEO_REGISTRY.jamakolPrasannam;
