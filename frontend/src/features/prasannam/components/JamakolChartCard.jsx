@@ -1277,7 +1277,7 @@ export default function JamakolChartCard({
       <div className="jamakol-chart-outer-footer">
         {/* Horizontal Pillars Box Container (Similar to Sunrise / Sunset Card) */}
         <div className="jk-pillars-banner" aria-label="Jamakkol Key Pillars">
-          <div className="jk-pillar-col" title={`${pillarTitles.udhayam}: ${udhayamRasiName} (${udhayamRasiLordShort}) · ${udhayamStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.udhayam}: ${udhayamRasiName} (${udhayamRasiLordShort}) · ${udhayamStarInfo.text} · ${udhayamStarInfo.padaLordLabel}: ${udhayamStarInfo.padaLordShort}`}>
             <span className="jk-pillar-title">{pillarTitles.udhayam}</span>
             <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${udhayamRasiName}, அதிபதி: ${udhayamRasiLordShort}` : `Rasi: ${udhayamRasiName}, Sign Lord: ${udhayamRasiLordShort}`}>
               <span className="jk-pillar-star-icon">★</span>
@@ -1285,17 +1285,22 @@ export default function JamakolChartCard({
                 {udhayamRasiName} <span className="jk-pillar-lord">({udhayamRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge">
-              <span className="jk-pillar-star-icon">★</span>
-              <span className="jk-pillar-badge-text">
-                {udhayamStarInfo.starName} - {udhayamStarInfo.pada} <span className="jk-pillar-lord">({udhayamStarInfo.lordShort})</span>
-              </span>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${udhayamStarInfo.starName}, பாதம்: ${udhayamStarInfo.pada}, நட்சத்திர அதிபதி: ${udhayamStarInfo.lordShort}, பதம் அதிபதி: ${udhayamStarInfo.padaLordShort}` : `Star: ${udhayamStarInfo.starName}, Pada: ${udhayamStarInfo.pada}, Star Lord: ${udhayamStarInfo.lordShort}, Pada Lord: ${udhayamStarInfo.padaLordShort}`}>
+              <div className="jk-pillar-star-main">
+                <span className="jk-pillar-star-icon">★</span>
+                <span className="jk-pillar-badge-text">
+                  {udhayamStarInfo.starName} - {udhayamStarInfo.pada} <span className="jk-pillar-lord">({udhayamStarInfo.lordShort})</span>
+                </span>
+              </div>
+              <div className="jk-pillar-pada-lord">
+                ({udhayamStarInfo.padaLordLabel}: <span className="jk-pillar-pada-lord-val">{udhayamStarInfo.padaLordShort}</span>)
+              </div>
             </div>
           </div>
 
           <div className="jk-pillar-divider" />
 
-          <div className="jk-pillar-col" title={`${pillarTitles.aarudam}: ${aarudamRasiName} (${aarudamRasiLordShort}) · ${aarudamStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.aarudam}: ${aarudamRasiName} (${aarudamRasiLordShort}) · ${aarudamStarInfo.text} · ${aarudamStarInfo.padaLordLabel}: ${aarudamStarInfo.padaLordShort}`}>
             <span className="jk-pillar-title">{pillarTitles.aarudam}</span>
             <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${aarudamRasiName}, அதிபதி: ${aarudamRasiLordShort}` : `Rasi: ${aarudamRasiName}, Sign Lord: ${aarudamRasiLordShort}`}>
               <span className="jk-pillar-star-icon">★</span>
@@ -1303,17 +1308,22 @@ export default function JamakolChartCard({
                 {aarudamRasiName} <span className="jk-pillar-lord">({aarudamRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge">
-              <span className="jk-pillar-star-icon">★</span>
-              <span className="jk-pillar-badge-text">
-                {aarudamStarInfo.starName} - {aarudamStarInfo.pada} <span className="jk-pillar-lord">({aarudamStarInfo.lordShort})</span>
-              </span>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${aarudamStarInfo.starName}, பாதம்: ${aarudamStarInfo.pada}, நட்சத்திர அதிபதி: ${aarudamStarInfo.lordShort}, பதம் அதிபதி: ${aarudamStarInfo.padaLordShort}` : `Star: ${aarudamStarInfo.starName}, Pada: ${aarudamStarInfo.pada}, Star Lord: ${aarudamStarInfo.lordShort}, Pada Lord: ${aarudamStarInfo.padaLordShort}`}>
+              <div className="jk-pillar-star-main">
+                <span className="jk-pillar-star-icon">★</span>
+                <span className="jk-pillar-badge-text">
+                  {aarudamStarInfo.starName} - {aarudamStarInfo.pada} <span className="jk-pillar-lord">({aarudamStarInfo.lordShort})</span>
+                </span>
+              </div>
+              <div className="jk-pillar-pada-lord">
+                ({aarudamStarInfo.padaLordLabel}: <span className="jk-pillar-pada-lord-val">{aarudamStarInfo.padaLordShort}</span>)
+              </div>
             </div>
           </div>
 
           <div className="jk-pillar-divider" />
 
-          <div className="jk-pillar-col" title={`${pillarTitles.kavippu}: ${kavippuRasiName} (${kavippuRasiLordShort}) · ${kavippuStarInfo.text}`}>
+          <div className="jk-pillar-col" title={`${pillarTitles.kavippu}: ${kavippuRasiName} (${kavippuRasiLordShort}) · ${kavippuStarInfo.text} · ${kavippuStarInfo.padaLordLabel}: ${kavippuStarInfo.padaLordShort}`}>
             <span className="jk-pillar-title">{pillarTitles.kavippu}</span>
             <div className="jk-pillar-badge jk-pillar-rasi-badge" title={activeLang === 'ta' ? `ராசி: ${kavippuRasiName}, அதிபதி: ${kavippuRasiLordShort}` : `Rasi: ${kavippuRasiName}, Sign Lord: ${kavippuRasiLordShort}`}>
               <span className="jk-pillar-star-icon">★</span>
@@ -1321,11 +1331,16 @@ export default function JamakolChartCard({
                 {kavippuRasiName} <span className="jk-pillar-lord">({kavippuRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge">
-              <span className="jk-pillar-star-icon">★</span>
-              <span className="jk-pillar-badge-text">
-                {kavippuStarInfo.starName} - {kavippuStarInfo.pada} <span className="jk-pillar-lord">({kavippuStarInfo.lordShort})</span>
-              </span>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${kavippuStarInfo.starName}, பாதம்: ${kavippuStarInfo.pada}, நட்சத்திர அதிபதி: ${kavippuStarInfo.lordShort}, பதம் அதிபதி: ${kavippuStarInfo.padaLordShort}` : `Star: ${kavippuStarInfo.starName}, Pada: ${kavippuStarInfo.pada}, Star Lord: ${kavippuStarInfo.lordShort}, Pada Lord: ${kavippuStarInfo.padaLordShort}`}>
+              <div className="jk-pillar-star-main">
+                <span className="jk-pillar-star-icon">★</span>
+                <span className="jk-pillar-badge-text">
+                  {kavippuStarInfo.starName} - {kavippuStarInfo.pada} <span className="jk-pillar-lord">({kavippuStarInfo.lordShort})</span>
+                </span>
+              </div>
+              <div className="jk-pillar-pada-lord">
+                ({kavippuStarInfo.padaLordLabel}: <span className="jk-pillar-pada-lord-val">{kavippuStarInfo.padaLordShort}</span>)
+              </div>
             </div>
           </div>
         </div>

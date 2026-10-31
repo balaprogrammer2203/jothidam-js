@@ -908,7 +908,21 @@ export const PILLAR_TITLES_6LANG = {
  */
 export function getPillarStarInfo(pillar, lang = 'ta') {
   if (!pillar) {
-    return { starIdx: 0, pada: 1, starName: '', lordPlanet: 'ketu', lordShort: '', text: '' };
+    return {
+      starIdx: 0,
+      pada: 1,
+      starName: '',
+      lordPlanet: 'ketu',
+      lordShort: '',
+      totalPadaIdx: 0,
+      navamsaRasiIdx: 0,
+      padaLordPlanet: 'mars',
+      padaLordShort: '',
+      padaLordName: '',
+      padaLordLabel: 'பதம் அதிபதி',
+      padaLordText: '',
+      text: ''
+    };
   }
 
   const safeLang = (lang || 'ta').split('-')[0].toLowerCase();
@@ -952,12 +966,42 @@ export function getPillarStarInfo(pillar, lang = 'ta') {
   const lordPlanet = NAKSHATRA_LORDS[starIdx] || 'ketu';
   const lordShort = getLocalizedPlanetCode(lordPlanet, safeLang);
 
+  // 108 Pada calculation (0 to 107) -> 12 Navamsa Signs (Aries to Pisces cycle)
+  const totalPadaIdx = ((starIdx * 4) + (pada - 1)) % 108;
+  const navamsaRasiIdx = pillar.navamsaRasiIndex !== undefined
+    ? Number(pillar.navamsaRasiIndex) % 12
+    : (pillar.navamsaRasiId !== undefined ? Number(pillar.navamsaRasiId) % 12 : totalPadaIdx % 12);
+
+  const navamsaRasiObj = JAMAKKOL_RASIS[navamsaRasiIdx] || JAMAKKOL_RASIS[0];
+  const padaLordPlanet = (navamsaRasiObj.lord || 'Mars').toLowerCase();
+  const padaLordShort = getLocalizedPlanetCode(padaLordPlanet, safeLang);
+  const padaLordName = (safeLang === 'ta' ? navamsaRasiObj.lordTa : navamsaRasiObj.lord) || padaLordShort;
+
+  const PADA_LORD_LABELS = {
+    ta: 'பதம் அதிபதி',
+    en: 'Pada Lord',
+    hi: 'पद स्वामी',
+    te: 'పాద అధిపతి',
+    kn: 'ಪಾದ ಅಧಿಪತಿ',
+    ml: 'പാദ അധിപൻ'
+  };
+  const padaLordLabel = PADA_LORD_LABELS[safeLang] || PADA_LORD_LABELS.en;
+  const padaLordText = `(${padaLordLabel}: ${padaLordShort})`;
+
   return {
     starIdx,
     pada,
     starName,
     lordPlanet,
     lordShort,
+    totalPadaIdx,
+    navamsaRasiIdx,
+    navamsaRasiObj,
+    padaLordPlanet,
+    padaLordShort,
+    padaLordName,
+    padaLordLabel,
+    padaLordText,
     text: `★ ${starName} - ${pada} (${lordShort})`
   };
 }
