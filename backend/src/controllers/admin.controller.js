@@ -12,6 +12,7 @@ import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
 import JamakkolMaster from '../models/JamakkolMaster.js';
 import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
+import PushkaraNavamsaMaster from '../models/PushkaraNavamsaMaster.js';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 
@@ -195,6 +196,20 @@ export const MODEL_REGISTRY = {
     name: 'Planet Dignities (ஆட்சி, உச்சம், நீசம், நட்பு, பகை, சமம்)',
     nameTa: 'கிரக நிலைகள்',
     searchFields: ['rasiName', 'rasiNameTa', 'rasiNameHi', 'rasiNameTe', 'rasiNameKn', 'rasiNameMl', 'athipathiName', 'athipathiNameTa'],
+    defaultSort: { order: 1 }
+  },
+  'pushkara-navamsam': {
+    model: PushkaraNavamsaMaster,
+    name: 'Pushkara Navamsa (24 புஷ்கர நவாம்ச பாதங்கள்)',
+    nameTa: 'புஷ்கர நவாம்ச பாதங்கள்',
+    searchFields: ['nakshatraName.name', 'nakshatraName.nameTa', 'rasiName.name', 'rasiName.nameTa', 'navamsaRasiName.name', 'navamsaRasiName.nameTa'],
+    defaultSort: { order: 1 }
+  },
+  pushkara_navamsam: {
+    model: PushkaraNavamsaMaster,
+    name: 'Pushkara Navamsa (24 புஷ்கர நவாம்ச பாதங்கள்)',
+    nameTa: 'புஷ்கர நவாம்ச பாதங்கள்',
+    searchFields: ['nakshatraName.name', 'nakshatraName.nameTa', 'rasiName.name', 'rasiName.nameTa', 'navamsaRasiName.name', 'navamsaRasiName.nameTa'],
     defaultSort: { order: 1 }
   }
 };

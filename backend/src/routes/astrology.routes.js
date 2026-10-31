@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { 
   generateSouthIndianChart, 
   handlePlaceAutocomplete,
+  getDailyPanchangam,
   saveUserHoroscope,
   getUserHoroscopes,
   getUserHoroscopeById,
@@ -32,6 +33,7 @@ import {
   calculateJamakkolPrasannamBE,
   getMasterJamakkolPrasannam,
   getMasterPlanetDignities,
+  getMasterPushkaraNavamsa,
   getNavigationMenu
 } from '../controllers/astrology.controller.js';
 import { verifyToken, optionalVerifyToken } from '../middleware/auth.middleware.js';
@@ -41,6 +43,12 @@ const router = Router();
 // Place autocomplete & chart calculation
 router.get('/places', handlePlaceAutocomplete);
 router.post('/generate-chart', generateSouthIndianChart);
+
+// Daily Panchangam (இன்றைய பஞ்சாங்கம்) High-Precision Calculations
+router.get('/panchangam/daily', getDailyPanchangam);
+router.post('/panchangam/daily', getDailyPanchangam);
+router.get('/daily-panchangam', getDailyPanchangam);
+router.post('/daily-panchangam', getDailyPanchangam);
 
 // Kadikara Prasannam Full Calculation & Planetary Chart Engine
 router.post('/kadikara-prasannam/calculate', calculateKadikaraPrasannamBE);
@@ -72,6 +80,9 @@ router.get('/master/nakshatra-padas', getMasterNakshatraPadas);
 router.get('/master/nakshatra-padas/:number', getNakshatraPadaByNumber);
 router.get('/master/planets', getMasterPlanets);
 router.get('/master/planet-dignities', getMasterPlanetDignities);
+router.get('/master/pushkara-navamsam', getMasterPushkaraNavamsa);
+router.get('/master/pushkara-navamsam-padam-list', getMasterPushkaraNavamsa);
+router.get('/master/pushkara-navamsa', getMasterPushkaraNavamsa);
 
 // KP Horary Numbers 1-249 Master Table
 router.get('/master/kp-horary', getMasterKPHorary);

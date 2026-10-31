@@ -1,0 +1,433 @@
+/* ==========================================================================
+   ABOUT PAGE (எங்களைப் பற்றி) STYLESHEET
+   Follows Jothidam Portal Color Tokens, Typography & Aesthetics
+   Full Support for Light Mode & Astrotalk-style Dark Mode
+   ========================================================================== */
+
+/* 1. Main Page Container */
+.about-page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 20px 64px;
+  font-family: inherit;
+  color: var(--fe-text-main, #1e293b);
+  line-height: 1.75;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 2. Hero Header Banner (Consistent with dp-hero-banner & directory-hero-banner) */
+.about-page-header {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.75) 0%, rgba(254, 240, 138, 0.45) 100%);
+  border: 1px solid var(--fe-border-yellow, #fde047);
+  border-left: 6px solid #eab308;
+  border-radius: 16px;
+  padding: 22px 26px;
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.08);
+}
+
+.about-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.about-hero-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(202, 138, 4, 0.3);
+  border: 1.5px solid var(--fe-border-yellow-dark, #facc15);
+  flex-shrink: 0;
+}
+
+.about-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-page-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--fe-text-heading, #0f172a);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.about-page-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fe-ochre-mid, #92400e);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* 3. Platform Introduction Box */
+.about-intro-section {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-left: 4px solid var(--fe-border-yellow-dark, #facc15);
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow-xs, 0 1px 3px rgba(0, 0, 0, 0.04));
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--fe-text-body, #334155);
+}
+
+.about-intro-section p {
+  margin: 0;
+}
+
+.about-brand-highlight {
+  font-weight: 800;
+  color: var(--fe-ochre-dark, #78350f);
+  background: var(--fe-bg-cream-accent, #fef9c3);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* 4. Section Headings */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-section-heading {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--fe-ochre-dark, #78350f);
+  margin: 4px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.3;
+}
+
+.about-section-heading::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--fe-primary, #facc15);
+  border-radius: 2px;
+}
+
+/* 5. Service & Explanation Cards List */
+.about-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-card {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-yellow, #fef08a);
+  border-top: 4px solid var(--fe-border-yellow-dark, #facc15);
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--fe-border-yellow-dark, #facc15);
+  box-shadow: 0 8px 22px rgba(234, 179, 8, 0.14);
+}
+
+.about-card-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--fe-text-heading, #0f172a);
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--fe-bg-cream, #fefce8);
+  border: 1px solid var(--fe-border-yellow, #fef08a);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.about-card-desc {
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--fe-text-body, #334155);
+  margin: 0;
+}
+
+.about-card-actions {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-card-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--fe-ochre-dark, #78350f);
+  background: var(--fe-primary-gradient, linear-gradient(135deg, #fef08a, #facc15));
+  border: 1px solid var(--fe-border-yellow-dark, #facc15);
+  padding: 7px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px var(--fe-primary-shadow, rgba(250, 204, 21, 0.4));
+  transition: all 0.18s ease;
+}
+
+.about-card-link-btn:hover {
+  background: #eab308;
+  color: #451a03;
+  border-color: #ca8a04;
+  box-shadow: 0 4px 14px var(--fe-primary-shadow-hover, rgba(250, 204, 21, 0.55));
+  transform: translateY(-1px);
+}
+
+.about-highlight-text {
+  color: var(--fe-ochre-dark, #78350f);
+  font-weight: 700;
+  background: var(--fe-bg-cream-accent, #fef9c3);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.about-inline-link {
+  color: var(--fe-ochre-mid, #92400e);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--fe-border-yellow-dark, #facc15);
+  text-underline-offset: 3px;
+  transition: all 0.15s ease;
+}
+
+.about-inline-link:hover {
+  color: var(--fe-ochre-dark, #78350f);
+  text-decoration-color: var(--fe-ochre-dark, #78350f);
+}
+
+/* 6. Callout Card (Boundaries / Testing) */
+.about-callout-card {
+  background: var(--fe-bg-cream, #fefce8);
+  border: 1px solid var(--fe-border-yellow, #fef08a);
+  border-left: 5px solid var(--fe-amber-gold, #ca8a04);
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.05);
+}
+
+.about-testing-note {
+  margin-top: 14px;
+  font-size: 13.5px;
+  color: var(--fe-text-muted, #64748b);
+  border-top: 1px dashed var(--fe-border-yellow-dark, #facc15);
+  padding-top: 12px;
+  line-height: 1.6;
+}
+
+/* 7. Mission Section */
+.about-mission-section {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.04));
+}
+
+.about-mission-section p {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--fe-text-body, #334155);
+}
+
+.about-mission-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* 8. Anchor Smooth Scrolling */
+#kanippu {
+  scroll-margin-top: 90px;
+}
+
+/* ==========================================================================
+   DARK THEME OVERRIDES (Consistent with [data-theme="dark"])
+   ========================================================================== */
+[data-theme="dark"] .about-page-container {
+  color: var(--fe-text-main, #f5f5f4);
+}
+
+[data-theme="dark"] .about-page-header {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border-color: rgba(234, 179, 8, 0.25);
+  border-left-color: #eab308;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .about-page-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .about-page-subtitle {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .about-intro-section {
+  background: #1c150e;
+  border-color: #2c2015;
+  border-left-color: #f59e0b;
+  color: #e7e5e4;
+}
+
+[data-theme="dark"] .about-brand-highlight {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.2);
+}
+
+[data-theme="dark"] .about-section-heading {
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .about-section-heading::before {
+  background: #f59e0b;
+}
+
+[data-theme="dark"] .about-card {
+  background: #1c150e;
+  border: 1px solid #2c2015;
+  border-top: 4px solid #f59e0b;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .about-card:hover {
+  background: #241b12;
+  border-color: #54391e;
+  border-top-color: #fbbf24;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .about-card-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .about-card-icon {
+  background: #271d14;
+  border-color: #443020;
+  color: #fef08a;
+}
+
+[data-theme="dark"] .about-card-desc {
+  color: #e7e5e4;
+}
+
+[data-theme="dark"] .about-highlight-text {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.18);
+}
+
+[data-theme="dark"] .about-card-link-btn {
+  background: linear-gradient(135deg, #78350f, #92400e);
+  color: #fefce8;
+  border-color: #d97706;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+}
+
+[data-theme="dark"] .about-card-link-btn:hover {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  color: #ffffff;
+  border-color: #f59e0b;
+}
+
+[data-theme="dark"] .about-inline-link {
+  color: #fbbf24;
+  text-decoration-color: #f59e0b;
+}
+
+[data-theme="dark"] .about-inline-link:hover {
+  color: #fde047;
+  text-decoration-color: #fde047;
+}
+
+[data-theme="dark"] .about-callout-card {
+  background: #241b12;
+  border: 1px solid #443020;
+  border-left: 5px solid #f59e0b;
+}
+
+[data-theme="dark"] .about-testing-note {
+  color: #a8a29e;
+  border-top-color: #54391e;
+}
+
+[data-theme="dark"] .about-mission-section {
+  background: #1c150e;
+  border-color: #2c2015;
+}
+
+[data-theme="dark"] .about-mission-section p {
+  color: #e7e5e4;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 640px) {
+  .about-page-container {
+    padding: 12px 14px 48px;
+    gap: 18px;
+  }
+
+  .about-page-header {
+    padding: 18px 18px;
+  }
+
+  .about-hero-content {
+    gap: 14px;
+  }
+
+  .about-hero-badge {
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+  }
+
+  .about-page-title {
+    font-size: 20px;
+  }
+
+  .about-page-subtitle {
+    font-size: 13px;
+  }
+
+  .about-card,
+  .about-callout-card,
+  .about-intro-section,
+  .about-mission-section {
+    padding: 16px 16px;
+  }
+}

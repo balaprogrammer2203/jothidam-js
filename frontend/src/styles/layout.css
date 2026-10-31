@@ -241,6 +241,7 @@
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .portal-category-icon {
@@ -249,7 +250,8 @@
 }
 
 .portal-category-btn:hover,
-.portal-category-item.active-dropdown .portal-category-btn {
+.portal-category-item.active-dropdown .portal-category-btn,
+.portal-category-btn.active-link {
   background: #fef9c3;
   color: #854d0e;
 }
@@ -834,6 +836,8 @@
   color: #1f2937;
   cursor: pointer;
   text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .portal-mobile-cat-icon {
@@ -899,6 +903,7 @@
   margin: 0 auto;
   padding: 16px 20px 48px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .prokerala-main-grid {
@@ -906,6 +911,9 @@
   grid-template-columns: minmax(0, 1fr) 340px;
   gap: 30px;
   align-items: start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .prokerala-content-col {
@@ -913,6 +921,9 @@
   flex-direction: column;
   gap: 20px;
   min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* 4. App Header Tabs */
@@ -1232,7 +1243,8 @@ body.dark-theme .guru-pranam-icon {
 }
 
 [data-theme="dark"] .portal-category-btn:hover,
-[data-theme="dark"] .portal-category-item.active-dropdown .portal-category-btn {
+[data-theme="dark"] .portal-category-item.active-dropdown .portal-category-btn,
+[data-theme="dark"] .portal-category-btn.active-link {
   background: rgba(245, 158, 11, 0.15);
   color: #fbbf24;
 }

@@ -185,8 +185,25 @@ export default function Header() {
           <nav className="portal-main-menu-nav">
             <ul className="portal-categories-list">
               {PORTAL_NAVIGATION_TREE.map((category) => {
-                const isOpen = activeDropdown === category.id;
+                const hasDropdown = category.hasDropdown && category.columns && category.columns.length > 0;
                 const titleText = getLangProp(category.title);
+                const isActive = category.path && location.pathname === category.path;
+
+                if (!hasDropdown) {
+                  return (
+                    <li key={category.id} className="portal-category-item">
+                      <Link
+                        to={category.path || ROUTES.ABOUT}
+                        className={`portal-category-btn portal-category-link ${isActive ? 'active-link' : ''}`}
+                      >
+                        <span className="portal-category-icon">{category.icon}</span>
+                        <span className="portal-category-label">{titleText}</span>
+                      </Link>
+                    </li>
+                  );
+                }
+
+                const isOpen = activeDropdown === category.id;
 
                 return (
                   <li
@@ -364,8 +381,28 @@ export default function Header() {
 
             <div className="portal-mobile-categories">
               {PORTAL_NAVIGATION_TREE.map((category) => {
-                const isExpanded = mobileExpandedCat === category.id;
+                const hasDropdown = category.hasDropdown && category.columns && category.columns.length > 0;
                 const titleText = getLangProp(category.title);
+
+                if (!hasDropdown) {
+                  return (
+                    <div key={category.id} className="portal-mobile-category-group">
+                      <Link
+                        to={category.path || ROUTES.ABOUT}
+                        className="portal-mobile-cat-header-btn portal-mobile-cat-link"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <span className="portal-mobile-cat-icon">{category.icon}</span>
+                          <span className="portal-mobile-cat-title">{titleText}</span>
+                        </div>
+                        <span className="portal-mobile-sub-arrow">→</span>
+                      </Link>
+                    </div>
+                  );
+                }
+
+                const isExpanded = mobileExpandedCat === category.id;
 
                 return (
                   <div key={category.id} className="portal-mobile-category-group">

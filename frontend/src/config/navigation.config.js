@@ -162,6 +162,28 @@ export const PORTAL_NAVIGATION_TREE = [
             path: ROUTES.ZODIAC.NAKSHATRA_PADAS,
             badge: '108 Padas',
             icon: '🧭'
+          },
+          {
+            id: 'pushkara-navamsam',
+            title: {
+              en: '24 Pushkara Navamsa Padas',
+              ta: '24 புஷ்கர நவாம்ச பாதங்கள்',
+              hi: '24 पुष्कर नवांश पद',
+              te: '24 పుష్కర నవాంశ పాదాలు',
+              kn: '24 ಪುಷ್ಕರ ನವಾಂಶ ಪಾದಗಳು',
+              ml: '24 പുഷ്കര നവാംശ പാദങ്ങൾ'
+            },
+            desc: {
+              en: '18 Nakshatras & 24 Auspicious Navamsa Padas',
+              ta: '18 நட்சத்திரங்கள் & 24 சுப நவாம்ச பாதங்களின் பட்டியல்',
+              hi: '18 नक्षत्र और 24 शुभ नवांश पद',
+              te: '18 నక్షత్రాలు మరియు 24 శుభ నవాంశ పాదాల జాబితా',
+              kn: '18 ನಕ್ಷತ್ರಗಳು ಮತ್ತು 24 ಶುಭ ನವಾಂಶ ಪಾದಗಳ ಪಟ್ಟಿ',
+              ml: '18 നക്ഷത്രങ്ങളും 24 ശുഭ നവാംശ പാദങ്ങളുടെ പട്ടിക'
+            },
+            path: '/pushkara-navamsam-padam-list',
+            badge: '24 Padas',
+            icon: '🌟'
           }
         ]
       },
@@ -280,6 +302,33 @@ export const PORTAL_NAVIGATION_TREE = [
     hasDropdown: true,
     columns: [
       {
+        heading: { en: 'Daily Almanac', ta: 'இன்றைய பஞ்சாங்கம்' },
+        items: [
+          {
+            id: 'daily-panchangam',
+            title: {
+              en: 'Daily Panchangam',
+              ta: 'இன்றைய பஞ்சாங்கம்',
+              hi: 'आज का पंचांग',
+              te: 'నేటి పంచాంగం',
+              kn: 'ಇಂದಿನ ಪಂಚಾಂಗ',
+              ml: 'ഇന്നത്തെ പഞ്ചാംഗം'
+            },
+            desc: {
+              en: 'Tithi, Nakshatram, Yogam, Karanam, Nalla Neram, Rahu Kalam & Horai',
+              ta: 'திதி, நட்சத்திரம், யோகம், கரணம், நல்ல நேரம், ராகு காலம் & ஹோரை',
+              hi: 'तिथि, नक्षत्र, योग, करण, शुभ मुहूर्त, राहुकाल एवं होरा',
+              te: 'తిథి, నక్షత్రం, యోగం, కరణం, మంచి సమయం, రాహుకాలం',
+              kn: 'ತಿಥಿ, ನಕ್ಷತ್ರ, ಯೋಗ, ಕರಣ, ಶುಭ ಸಮಯ, ರಾಹುಕಾಲ',
+              ml: 'തിഥി, നക്ഷത്രം, യോഗം, കരണം, നല്ല സമയം, രാഹുകാലം'
+            },
+            path: ROUTES.PANCHANGAM.DAILY,
+            badge: 'Today',
+            icon: '📅'
+          }
+        ]
+      },
+      {
         heading: { en: 'Lunar Elements', ta: 'திதிகள் & யோகங்கள்' },
         items: [
           {
@@ -318,6 +367,21 @@ export const PORTAL_NAVIGATION_TREE = [
         ]
       }
     ]
+  },
+  {
+    id: 'about',
+    key: 'about',
+    title: {
+      en: 'About',
+      ta: 'எங்களைப் பற்றி',
+      hi: 'परिचय',
+      te: 'మా గురించి',
+      kn: 'ನಮ್ಮ ಬಗ್ಗೆ',
+      ml: 'ഞങ്ങളെക്കുറിച്ച്'
+    },
+    icon: 'ℹ️',
+    hasDropdown: false,
+    path: ROUTES.ABOUT
   },
   {
     id: 'admin',

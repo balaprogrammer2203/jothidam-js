@@ -9,3 +9,4 @@ export const calculateKadikaraPrasannamApi = (data) => API.post('/astrology/kadi
 export const calculateJamakolPrasannamApi = (data) => API.post('/astrology/jamakkol-prasannam/calculate', data);
 export const getMasterJamakolPrasannamApi = (lang) => API.get(`/astrology/master/jamakkol-prasannam${lang ? `?lang=${lang}` : ''}`);
 export const getPlanetDignitiesMasterApi = (params) => API.get('/astrology/master/planet-dignities', { params });
+export const getDailyPanchangamApi = (data) => API.post('/astrology/daily-panchangam', data);

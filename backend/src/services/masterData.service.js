@@ -11,13 +11,15 @@ import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
 import JamakkolMaster from '../models/JamakkolMaster.js';
 import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
+import PushkaraNavamsaMaster from '../models/PushkaraNavamsaMaster.js';
 import { KP_HORARY_DATA } from './kpHoraryData.js';
 import { NAKSHATRA_PADAS_DATA } from './nakshatraPadaData.js';
 import { KADIKARA_PRASANNAM_MASTER_DATA } from './kadikaraData.js';
 import { JAMAKKOL_PRASANNAM_MASTER_DATA } from './jamakkolData.js';
 import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from './planetDignityData.js';
+import { PUSHKARA_NAVAMSA_DATA, PUSHKARA_NAKSHATRA_SUMMARY, NON_PUSHKARA_NAKSHATRAS_NOTE } from './pushkaraNavamsaData.js';
 
-export { NAKSHATRA_PADAS_DATA, KADIKARA_PRASANNAM_MASTER_DATA, JAMAKKOL_PRASANNAM_MASTER_DATA, PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA };
+export { NAKSHATRA_PADAS_DATA, KADIKARA_PRASANNAM_MASTER_DATA, JAMAKKOL_PRASANNAM_MASTER_DATA, PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA, PUSHKARA_NAVAMSA_DATA, PUSHKARA_NAKSHATRA_SUMMARY, NON_PUSHKARA_NAKSHATRAS_NOTE };
 
 export const RASIS_DATA = [
   {
@@ -574,6 +576,54 @@ export const seedMasterDataIfEmpty = async () => {
     for (const pd of PLANET_RASI_DIGNITIES_DATA) {
       await PlanetRasiDignityMaster.updateOne({ rasiId: pd.rasiId }, { $set: pd }, { upsert: true });
     }
+
+    try {
+      await PushkaraNavamsaMaster.collection.updateMany(
+        {},
+        {
+          $unset: {
+            'nakshatraName.en': '',
+            'nakshatraName.ta': '',
+            'nakshatraName.hi': '',
+            'nakshatraName.te': '',
+            'nakshatraName.kn': '',
+            'nakshatraName.ml': '',
+            'navamsaRasiName.en': '',
+            'navamsaRasiName.ta': '',
+            'navamsaRasiName.hi': '',
+            'navamsaRasiName.te': '',
+            'navamsaRasiName.kn': '',
+            'navamsaRasiName.ml': ''
+          }
+        }
+      );
+    } catch {
+      // ignore
+    }
+
+    for (const p of PUSHKARA_NAVAMSA_DATA) {
+      await PushkaraNavamsaMaster.updateOne(
+        { order: p.order },
+        {
+          $set: p,
+          $unset: {
+            'nakshatraName.en': '',
+            'nakshatraName.ta': '',
+            'nakshatraName.hi': '',
+            'nakshatraName.te': '',
+            'nakshatraName.kn': '',
+            'nakshatraName.ml': '',
+            'navamsaRasiName.en': '',
+            'navamsaRasiName.ta': '',
+            'navamsaRasiName.hi': '',
+            'navamsaRasiName.te': '',
+            'navamsaRasiName.kn': '',
+            'navamsaRasiName.ml': ''
+          }
+        },
+        { upsert: true }
+      );
+    }
   } catch (err) {
     console.error('Error seeding master astrology data:', err.message);
   }
@@ -603,4 +653,6 @@ export const getKadikaraBhavaDetails = (bhavaNum) => KADIKARA_PRASANNAM_MASTER_D
 export const getJamakkolPrasannamMasterData = () => JAMAKKOL_PRASANNAM_MASTER_DATA;
 export const getPlanetRasiDignitiesMasterData = () => PLANET_RASI_DIGNITIES_DATA;
 export const getTatkalikaRulesMasterData = () => TATKALIKA_RULES_DATA;
+export const getPushkaraNavamsaMasterData = () => PUSHKARA_NAVAMSA_DATA;
+export const getPushkaraNakshatraSummaryData = () => PUSHKARA_NAKSHATRA_SUMMARY;
 

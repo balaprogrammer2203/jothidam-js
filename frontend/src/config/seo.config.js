@@ -184,6 +184,56 @@ export const PAGE_SEO_REGISTRY = {
     schemaType: 'ItemPage'
   },
 
+  // 6.2 24 Pushkara Navamsa Padas (புஷ்கர நவாம்சம் 24 பாதங்கள்)
+  'pushkara-navamsam-padam-list': {
+    title: {
+      ta: 'புஷ்கர நவாம்சம் பெறும் 24 பாதங்களின் முழு பட்டியல் | 24 Pushkara Navamsa Padas | Jothidam Portal',
+      en: '24 Pushkara Navamsa Padas List | Complete 18 Nakshatra Table & Benefic Navamsas | Jothidam Portal',
+      hi: '24 पुष्कर नवांश पद सूची | 18 नक्षत्रों की सम्पूर्ण तालिका | Jothidam Portal',
+      te: '24 పుష్కర నవాంశ పాదాల పూర్తి జాబితా | 18 నక్షత్రాల పట్టిక | Jothidam Portal',
+      kn: '24 ಪುಷ್ಕರ ನವಾಂಶ ಪಾದಗಳ ಸಂಪೂರ್ಣ ಪಟ್ಟಿ | 18 ನಕ್ಷತ್ರಗಳ ಕೋಷ್ಟಕ | Jothidam Portal',
+      ml: '24 പുഷ്കര നവാംശ പാദങ്ങൾ | 18 നക്ഷത്ര പട്ടിക | Jothidam Portal'
+    },
+    description: {
+      ta: 'புஷ்கர நவாம்சம் பெரும் நட்சத்திர வாரியாக 24 பாதங்களின் முழு பட்டியல், நவாம்சம் அமையும் வீடு, புஷ்கர வர்கோத்தமம் மற்றும் 9 புஷ்கர நவாம்சமற்ற நட்சத்திரங்களின் குறிப்புகள்.',
+      en: 'Comprehensive guide to the 24 Pushkara Navamsa padas across 18 nakshatras, benefic navamsa rasis, Pushkara Vargottama analysis, and non-Pushkara stars.',
+      hi: '18 नक्षत्रों में 24 पुष्कर नवांश पदों की सम्पूर्ण सूची, नवांश राशि, पुष्कर वर्गोत्तम एवं शुभ फल।',
+      te: '18 నక్షత్రాలలో 24 పుష్కర నవాంశ పాదాలు, నవాంశ రాశులు మరియు శుభ ఫలితాలు.',
+      kn: '18 ನಕ್ಷತ್ರಗಳ 24 ಪುಷ್ಕರ ನವಾಂಶ ಪಾದಗಳು, ನವಾಂಶ ರಾಶಿ ಮತ್ತು ಶುಭ ಫಲಗಳು.',
+      ml: '18 നക്ഷത്രങ്ങളിലെ 24 പുഷ്കര നവാംശ പാദങ്ങളുടെ സമഗ്ര വിവരണം.'
+    },
+    keywords: [
+      'pushkara navamsa', 'pushkara navamsa padam list', '24 pushkara navamsa',
+      'pushkara navamsam 24 padangal', 'pushkara vargottama', 'pushkara nakshatras'
+    ],
+    schemaType: 'ItemPage'
+  },
+
+  // 6.5 Daily Panchangam (இன்றைய பஞ்சாங்கம்)
+  'daily-panchangam': {
+    title: {
+      ta: 'இன்றைய பஞ்சாங்கம் | Daily Panchangam, நல்ல நேரம் & ராகு காலம் | Jothidam Portal',
+      en: "Daily Panchangam Today | Today's Tamil Panchangam, Muhurtham & Rahu Kalam | Jothidam Portal",
+      hi: 'आज का पंचांग | दैनिक पंचांग, शुभ मुहूर्त एवं राहुकाल | Jothidam Portal',
+      te: 'నేటి పంచాంగం | డైలీ పంచాంగం, శుభ ముహూర్తం & రాహుకాలం | Jothidam Portal',
+      kn: 'ಇಂದಿನ ಪಂಚಾಂಗ | ದಿನನಿತ್ಯದ ಪಂಚಾಂಗ, ಶುಭ ಮುಹೂರ್ತ ಮತ್ತು ರಾಹುಕಾಲ | Jothidam Portal',
+      ml: 'ഇന്നത്തെ പഞ്ചാംഗം | മുഹൂർത്തം, രാഹുകാലം | Jothidam Portal'
+    },
+    description: {
+      ta: 'இன்றைய பஞ்சாங்கம்: திதி, நட்சத்திரம், யோகம், கரணம், நல்ல நேரம், கௌரி நல்ல நேரம், ராகு காலம், எமகண்டம், சந்திராஷ்டமம் மற்றும் 24 மணி நேர கிரக ஹோரை அட்டவணை.',
+      en: "Today's authentic Vedic Daily Panchangam: Tithi, Nakshatram, Yogam, Karanam, Nalla Neram, Gowri Panchangam, Rahu Kalam, Yamakandam, Chandrashtamam, and 24-hr planetary Horai schedule.",
+      hi: 'आज का सम्पूर्ण पंचांग: तिथि, नक्षत्र, योग, करण, शुभ मुहूर्त, गौरी पंचांग, राहुकाल, यमगंड, चंद्राष्टम एवं 24 घंटे की होरा सारणी।',
+      te: 'నేటి సంపూర్ణ పంచాంగం: తిథి, నక్షత్రం, యోగం, కరణం, మంచి సమయం, గౌరి పంచాంగం, రాహుకాలం మరియు 24 గంటల హోరా పట్టిక.',
+      kn: 'ಇಂದಿನ ಪೂರ್ಣ ಪಂಚಾಂಗ: ತಿಥಿ, ನಕ್ಷತ್ರ, ಯೋಗ, ಕರಣ, ಶುಭ ಸಮಯ, ಗೌರಿ ಪಂಚಾಂಗ, ರಾಹುಕಾಲ ಮತ್ತು 24 ಗಂಟೆಗಳ ಹೋರಾ ಕೋಷ್ಟಕ.',
+      ml: 'ഇന്നത്തെ സമ്പൂർണ്ണ പഞ്ചാംഗം: തിഥി, നക്ഷത്രം, യോഗം, കരണം, നല്ല സമയം, ഗൗരി പഞ്ചാംഗം, രാഹുകാലം, 24 മണിക്കൂർ ഹോരാ ടേബിൾ.'
+    },
+    keywords: [
+      'daily panchangam', 'today panchangam', 'tamil panchangam today', 'inraya panchangam',
+      'nalla neram today', 'rahu kalam today', 'chandrashtamam today', 'gowri panchangam', 'hora schedule'
+    ],
+    schemaType: 'ItemPage'
+  },
+
   // 7. 30 Lunar Tithis
   tithis: {
     title: {
@@ -349,6 +399,31 @@ export const PAGE_SEO_REGISTRY = {
       'prasanna jothidam'
     ],
     schemaType: 'WebApplication'
+  },
+
+  // 14. About Us Page (About AstroTamil)
+  about: {
+    title: {
+      ta: 'எங்களைப் பற்றி | About AstroTamil - தமிழ் ஜோதிட தளம் | Jothidam Portal',
+      en: 'About AstroTamil - Tamil Astrology & Panchangam Portal | Jothidam Portal',
+      hi: 'हमारे बारे में | About AstroTamil | Jothidam Portal',
+      te: 'మా గురించి | About AstroTamil | Jothidam Portal',
+      kn: 'ನಮ್ಮ ಬಗ್ಗೆ | About AstroTamil | Jothidam Portal',
+      ml: 'ഞങ്ങളെക്കുറിച്ച് | About AstroTamil | Jothidam Portal'
+    },
+    description: {
+      ta: 'AstroTamil — தினசரி பஞ்சாங்கம், இலவச ஜாதகம், எண் கணிதம், ஜோதிடர் டைரக்டரி ஆகியவற்றை முழுக்கத் தமிழில் வழங்கும் தளம். About AstroTamil, a Tamil-first astrology portal.',
+      en: 'About AstroTamil — A Tamil-first Vedic astrology portal offering daily panchangam, free horoscope, numerology, and astrologer directory.',
+      hi: 'AstroTamil के बारे में — दैनिक पंचांग, मुफ्त कुंडली और वैदिक ज्योतिष सेवाएं।',
+      te: 'AstroTamil గురించి — రోజువారీ పంచాంగం, ఉచిత జాతకం మరియు వేద జ్యోతిష్యం.',
+      kn: 'AstroTamil ಬಗ್ಗೆ — ದೈನಂದಿನ ಪಂಚಾಂಗ, ಉಚಿತ ಜಾತಕ ಮತ್ತು ವೈದಿಕ ಜ್ಯೋತಿಷ್ಯ.',
+      ml: 'AstroTamil നെ കുറിച്ച് — ദൈനംദിന പഞ്ചാംഗം, സൗജന്യ ജാതകം, വേദ ജ്യോതിഷം.'
+    },
+    keywords: [
+      'about astrotamil', 'tamil astrology portal', 'thirukanitha panchangam calculation',
+      'tamil horoscope free', 'vedic astrology about us', 'tamil numerology'
+    ],
+    schemaType: 'AboutPage'
   }
 };
 

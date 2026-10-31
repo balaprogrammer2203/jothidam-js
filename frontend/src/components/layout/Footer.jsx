@@ -42,6 +42,7 @@ export default function Footer() {
               <li><Link to="/rasis">♈ {currentLang === 'ta' ? '12 ராசிகள் அட்டவணை' : '12 Zodiac Signs (Rasis)'}</Link></li>
               <li><Link to="/nakshatras">✨ {currentLang === 'ta' ? '27 நட்சத்திரங்கள் அட்டவணை' : '27 Vedic Nakshatras'}</Link></li>
               <li><Link to="/nakshatra-padas">🧭 {currentLang === 'ta' ? '108 நட்சத்திர பாதங்கள் (மண்டலம்)' : '108 Nakshatra Padas (Mandalam)'}</Link></li>
+              <li><Link to="/pushkara-navamsam-padam-list">🌟 {currentLang === 'ta' ? '24 புஷ்கர நவாம்ச பாதங்கள்' : '24 Pushkara Navamsa Padas'}</Link></li>
               <li><Link to="/planets">🪐 {currentLang === 'ta' ? 'நவக்கிரகங்கள் அட்டவணை' : '9 Navagrahas & Lords'}</Link></li>
               <li><Link to="/kp-horary">🔮 {currentLang === 'ta' ? 'KP ஹோரரி எண்கள் (1-249)' : 'KP Horary Numbers (1-249)'}</Link></li>
               <li><Link to="/kalachakram">🎡 {currentLang === 'ta' ? 'காலச்சக்கரம் 360°' : '360° Kalachakram Wheel'}</Link></li>
@@ -54,10 +55,12 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">{currentLang === 'ta' ? 'பஞ்சாங்கம் & காலண்டர்' : 'Panchangam & Calendar'}</h4>
             <ul className="footer-links-list">
+              <li><Link to="/daily-panchangam">📅 {currentLang === 'ta' ? 'இன்றைய பஞ்சாங்கம்' : 'Daily Panchangam'}</Link></li>
               <li><Link to="/tithis">🌕 {currentLang === 'ta' ? '30 திதிகள் அட்டவணை' : '30 Lunar Tithis'}</Link></li>
               <li><Link to="/yogas">🌀 {currentLang === 'ta' ? '27 நித்திய யோகங்கள்' : '27 Nithya Yogas'}</Link></li>
               <li><Link to="/karanas">⏳ {currentLang === 'ta' ? '11 கரணங்கள் அட்டவணை' : '11 Vedic Karanas'}</Link></li>
               <li><Link to="/tamil-calendar">📆 {currentLang === 'ta' ? '60 தமிழ் வருடங்கள் & மாதங்கள்' : 'Tamil Calendar (60 Years)'}</Link></li>
+              <li><Link to="/about">ℹ️ {currentLang === 'ta' ? 'எங்களைப் பற்றி (About Us)' : 'About Jothidam'}</Link></li>
               <li><Link to="/admin">⚙️ {currentLang === 'ta' ? 'நிர்வாகப் பலகை (Admin)' : 'Master Tables Administration'}</Link></li>
             </ul>
           </div>

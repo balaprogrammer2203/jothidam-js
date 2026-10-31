@@ -17,6 +17,8 @@ const NakshatraPadasPage = lazy(() => import('../features/zodiac-planets/pages/N
 const PlanetsPage = lazy(() => import('../features/zodiac-planets/pages/PlanetsPage'));
 const PlanetDignitiesPage = lazy(() => import('../features/zodiac-planets/pages/PlanetDignitiesPage'));
 const KalachakramPage = lazy(() => import('../features/zodiac-planets/pages/KalachakramPage'));
+const PushkaraNavamsamPage = lazy(() => import('../features/zodiac-planets/pages/PushkaraNavamsamPage'));
+const DailyPanchangamPage = lazy(() => import('../features/panchangam/pages/DailyPanchangamPage'));
 const TithisPage = lazy(() => import('../features/panchangam/pages/TithisPage'));
 const YogasPage = lazy(() => import('../features/panchangam/pages/YogasPage'));
 const KaranasPage = lazy(() => import('../features/panchangam/pages/KaranasPage'));
@@ -25,6 +27,7 @@ const AdminPage = lazy(() => import('../features/admin/pages/AdminPage'));
 const AdminLoginPage = lazy(() => import('../features/auth/pages/AdminLoginPage'));
 const UserLoginPage = lazy(() => import('../features/auth/pages/UserLoginPage'));
 const MyAccountPage = lazy(() => import('../features/account/pages/MyAccountPage'));
+const AboutPage = lazy(() => import('../pages/AboutPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 // Backward compatibility dynamic redirect for /saved/:id and /saved-horoscopes/:id
@@ -69,6 +72,12 @@ export default function AppRoutes() {
           <Route path={ROUTES.ZODIAC.PLANETS} element={<PlanetsPage />} />
           <Route path={ROUTES.ZODIAC.PLANET_DIGNITIES} element={<PlanetDignitiesPage />} />
           <Route path={ROUTES.ZODIAC.KALACHAKRAM} element={<KalachakramPage />} />
+          <Route path={ROUTES.ZODIAC.PUSHKARA_NAVAMSA} element={<PushkaraNavamsamPage />} />
+          <Route path="/pushkara-navamsam-padam-list" element={<PushkaraNavamsamPage />} />
+          <Route path="/zodiac/pushkara-navamsam-padam-list" element={<PushkaraNavamsamPage />} />
+          <Route path="/pushkara-navamsam" element={<Navigate to={ROUTES.ZODIAC.PUSHKARA_NAVAMSA} replace />} />
+          <Route path="/pushkara-navamsa" element={<Navigate to={ROUTES.ZODIAC.PUSHKARA_NAVAMSA} replace />} />
+          <Route path="/pushkara-navamsa-padam-list" element={<Navigate to={ROUTES.ZODIAC.PUSHKARA_NAVAMSA} replace />} />
 
           {/* =========================================================================
               4. KRISHNAMURTI PADDHATI (KP) ASTROLOGY
@@ -78,6 +87,10 @@ export default function AppRoutes() {
           {/* =========================================================================
               5. VEDIC PANCHANGAM ALMANAC
               ========================================================================= */}
+          <Route path={ROUTES.PANCHANGAM.DAILY} element={<DailyPanchangamPage />} />
+          <Route path="/daily-panchangam" element={<DailyPanchangamPage />} />
+          <Route path="/panchangam/daily" element={<Navigate to={ROUTES.PANCHANGAM.DAILY} replace />} />
+          <Route path="/panchangam/daily-panchangam" element={<Navigate to={ROUTES.PANCHANGAM.DAILY} replace />} />
           <Route path={ROUTES.PANCHANGAM.TITHIS} element={<TithisPage />} />
           <Route path={ROUTES.PANCHANGAM.YOGAS} element={<YogasPage />} />
           <Route path={ROUTES.PANCHANGAM.KARANAS} element={<KaranasPage />} />
@@ -96,6 +109,11 @@ export default function AppRoutes() {
               </ProtectedRoute>
             }
           />
+
+          {/* =========================================================================
+              7. GENERAL & INFORMATIONAL PAGES
+              ========================================================================= */}
+          <Route path={ROUTES.ABOUT} element={<AboutPage />} />
 
           {/* =========================================================================
               7. ADMIN MANAGEMENT PANEL & AUTHENTICATION

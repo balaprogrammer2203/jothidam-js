@@ -1884,7 +1884,10 @@
 .prokerala-right-sidebar.layout-sidebar {
   position: sticky;
   top: 90px;
-  width: 100%;
+  width: 340px;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .prokerala-right-sidebar.layout-bottom {

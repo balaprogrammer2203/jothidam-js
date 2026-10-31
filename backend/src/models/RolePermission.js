@@ -53,6 +53,7 @@ const rolePermissionSchema = new mongoose.Schema({
     'tamil-months': { type: tableCrudSchema, default: () => ({ read: true, create: true, update: true, delete: true }) },
     'kp-horary': { type: tableCrudSchema, default: () => ({ read: true, create: true, update: true, delete: true }) },
     'kadikara-prasannam': { type: tableCrudSchema, default: () => ({ read: true, create: true, update: true, delete: true }) },
+    'pushkara-navamsam': { type: tableCrudSchema, default: () => ({ read: true, create: true, update: true, delete: true }) },
     users: { type: tableCrudSchema, default: () => ({ read: true, create: true, update: true, delete: true }) }
   }
 }, {
@@ -86,6 +87,7 @@ export const DEFAULT_ROLE_PERMISSIONS = {
       'tamil-months': { read: true, create: true, update: true, delete: true },
       'kp-horary': { read: true, create: true, update: true, delete: true },
       'kadikara-prasannam': { read: true, create: true, update: true, delete: true },
+      'pushkara-navamsam': { read: true, create: true, update: true, delete: true },
       users: { read: true, create: true, update: true, delete: true }
     }
   },
@@ -114,6 +116,7 @@ export const DEFAULT_ROLE_PERMISSIONS = {
       'tamil-months': { read: true, create: true, update: true, delete: false },
       'kp-horary': { read: true, create: true, update: true, delete: false },
       'kadikara-prasannam': { read: true, create: true, update: true, delete: false },
+      'pushkara-navamsam': { read: true, create: true, update: true, delete: false },
       users: { read: true, create: false, update: false, delete: false }
     }
   },
@@ -142,6 +145,7 @@ export const DEFAULT_ROLE_PERMISSIONS = {
       'tamil-months': { read: true, create: false, update: false, delete: false },
       'kp-horary': { read: true, create: false, update: false, delete: false },
       'kadikara-prasannam': { read: true, create: false, update: false, delete: false },
+      'pushkara-navamsam': { read: true, create: false, update: false, delete: false },
       users: { read: false, create: false, update: false, delete: false }
     }
   }

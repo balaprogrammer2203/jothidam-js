@@ -25,6 +25,8 @@ export const API_ENDPOINTS = {
   MASTER_KADIKARA_PRASANNAM: '/astrology/master/kadikara-prasannam',
   MASTER_KADIKARA_BHAVA_BY_NUM: (bhava) => `/astrology/master/kadikara-prasannam/bhavas/${bhava}`,
   MASTER_PLANET_DIGNITIES: '/astrology/master/planet-dignities',
+  MASTER_PUSHKARA_NAVAMSA: '/astrology/master/pushkara-navamsam',
+  MASTER_PUSHKARA_NAVAMSA_PADAM_LIST: '/astrology/master/pushkara-navamsam-padam-list',
   
   // Admin Endpoints
   ADMIN_STATS: '/admin/stats',

@@ -1,0 +1,2500 @@
+/* ==========================================================================
+   DAILY PANCHANGAM (இன்றைய பஞ்சாங்கம்) PREMIUM STYLESHEET
+   Supports Responsive Desktop, Tablet, Mobile & Dark/Light Themes
+   ========================================================================== */
+
+.daily-panchangam-container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 32px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.daily-panchangam-container * {
+  box-sizing: border-box;
+}
+
+/* 1. Hero Title Banner */
+.dp-hero-banner {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.7) 0%, rgba(254, 240, 138, 0.4) 100%);
+  border: 1px solid var(--fe-border-yellow, #fde047);
+  border-left: 6px solid #eab308;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+[data-theme="dark"] .dp-hero-banner {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border-color: rgba(234, 179, 8, 0.25);
+  border-left-color: #eab308;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.dp-hero-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dp-hero-om-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(202, 138, 4, 0.3);
+  flex-shrink: 0;
+}
+
+.dp-hero-title-group h1 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--fe-text-heading, #1e293b);
+  letter-spacing: -0.02em;
+}
+
+[data-theme="dark"] .dp-hero-title-group h1 {
+  color: #f8fafc;
+}
+
+.dp-hero-title-group p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--fe-text-label, #64748b);
+  line-height: 1.5;
+}
+
+.dp-hero-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dp-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  color: var(--fe-text-primary, #334155);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dp-action-btn:hover {
+  background: var(--fe-border-yellow, #fef08a);
+  border-color: #eab308;
+  color: #713f12;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .dp-action-btn {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .dp-action-btn:hover {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: #eab308;
+  color: #fef08a;
+}
+
+/* 2. Interactive Control Bar (Date, Time, Location) */
+.dp-controls-card {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+[data-theme="dark"] .dp-controls-card {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dp-quick-date-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dp-quick-date-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fe-text-muted, #94a3b8);
+  margin-right: 4px;
+}
+
+.dp-quick-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--fe-border-light, #cbd5e1);
+  background: transparent;
+  color: var(--fe-text-primary, #475569);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dp-quick-pill:hover {
+  border-color: #eab308;
+  background: rgba(234, 179, 8, 0.08);
+  color: #854d0e;
+}
+
+.dp-quick-pill.active {
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  border-color: #ca8a04;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(202, 138, 4, 0.25);
+}
+
+[data-theme="dark"] .dp-quick-pill {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .dp-quick-pill:hover {
+  background: rgba(234, 179, 8, 0.12);
+  color: #fef08a;
+}
+
+.dp-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.dp-form-row {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Row 1: Date, Time, City */
+.dp-form-row-top {
+  grid-template-columns: 1fr 1fr 1.35fr;
+  align-items: flex-start;
+}
+
+/* Row 2: Ayanamsa (aligned with Date), Submit Button (fills space under Time & City) */
+.dp-form-row-bottom {
+  grid-template-columns: 1fr 2.35fr;
+  align-items: flex-end;
+}
+
+@media (max-width: 900px) {
+  .dp-form-row-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dp-form-row-top .jk-place-field {
+    grid-column: span 2;
+  }
+  .dp-form-row-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dp-form-row-top,
+  .dp-form-row-bottom {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dp-form-row-top .jk-place-field {
+    grid-column: auto;
+  }
+  .dp-form-row-bottom {
+    align-items: stretch;
+  }
+}
+
+.dp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  position: relative;
+}
+
+.dp-input-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fe-text-label, #475569);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 20px;
+}
+
+[data-theme="dark"] .dp-input-group label {
+  color: #94a3b8;
+}
+
+.dp-live-tag {
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 11px;
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(34, 197, 94, 0.12);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+[data-theme="dark"] .dp-live-tag {
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.dp-input, .dp-select {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--fe-border-light, #cbd5e1);
+  background: var(--fe-bg-surface, #ffffff);
+  color: var(--fe-text-primary, #1e293b);
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dp-input:focus, .dp-select:focus {
+  border-color: #b45309;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.15);
+}
+
+[data-theme="dark"] .dp-input,
+[data-theme="dark"] .dp-select {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+}
+
+.dp-time-input-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+}
+
+.dp-time-input {
+  height: 42px;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dp-time-toggle-btn {
+  height: 42px;
+  width: 44px;
+  flex-shrink: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+}
+
+/* Submit Button & Group */
+.dp-submit-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.dp-btn-submit {
+  height: 42px;
+  background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+  border: 1px solid #78350f;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.25);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dp-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(180, 83, 9, 0.35);
+}
+
+.dp-btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.dp-btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.dp-btn-submit-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.dp-btn-submit-text {
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .dp-btn-submit {
+  background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .dp-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+}
+
+/* 3. Primary Day Summary Hero Card */
+.dp-today-summary-card {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dp-today-summary-card::before {
+  content: "🕉️";
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 140px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.dp-summary-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 18px;
+}
+
+.dp-date-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dp-gregorian-date {
+  font-size: 15px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.dp-tamil-date-badge {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fef08a;
+  letter-spacing: -0.01em;
+}
+
+.dp-sub-ayanam-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.dp-sub-ayanam-tag .bullet {
+  color: #eab308;
+}
+
+.dp-location-time-badge {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dp-loc-city {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.dp-loc-time {
+  font-size: 13px;
+  color: #38bdf8;
+  font-family: monospace;
+}
+
+/* Sun & Moon Timings Strip - Balanced 4x2 Grid (8 items total) */
+.dp-astro-timings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .dp-astro-timings-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dp-astro-timings-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.dp-astro-timing-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  box-sizing: border-box;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dp-astro-timing-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.dp-astro-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.dp-astro-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dp-astro-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+
+.dp-astro-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.dp-astro-degree {
+  font-size: 11px;
+  color: #fde047;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* 4. Pancha Angas (5 Pillars) Cards */
+.dp-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dp-section-icon {
+  font-size: 22px;
+}
+
+.dp-section-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--fe-text-heading, #0f172a);
+  margin: 0;
+}
+
+[data-theme="dark"] .dp-section-title {
+  color: #f8fafc;
+}
+
+/* ========================================================
+   4.2 DETAILED PANCHANG DETAILS (2-COLUMN CARDS)
+   ======================================================== */
+/* ========================================================
+   4.2 DETAILED PANCHANG DETAILS (2-COLUMN TILE CARDS GRID)
+   ======================================================== */
+/* ========================================================
+   4.2 DETAILED PANCHANG DETAILS (2-COLUMN TILE CARDS GRID)
+   ======================================================== */
+.dp-panchang-details-section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dp-panchang-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .dp-panchang-tiles-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.dp-panchang-tile {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-top-width: 4px;
+  border-radius: 16px;
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  min-width: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dp-panchang-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] .dp-panchang-tile {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .dp-panchang-tile:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Top Row: Category Title (Left) + Rounded Icon Badge (Right) */
+.dp-ptile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.dp-ptile-cat-label {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.dp-ptile-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dp-ptile-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* Main Content Body */
+.dp-ptile-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dp-ptile-title {
+  font-size: 18.5px;
+  font-weight: 800;
+  color: var(--fe-text-heading, #0f172a);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .dp-ptile-title {
+  color: #f8fafc;
+}
+
+.dp-ptile-subtitle {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #4338ca;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .dp-ptile-subtitle {
+  color: #a5b4fc;
+}
+
+.dp-ptile-meta {
+  font-size: 13px;
+  color: var(--fe-text-label, #475569);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .dp-ptile-meta {
+  color: #cbd5e1;
+}
+
+.dp-ptile-meta.dp-meta-green {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .dp-ptile-meta.dp-meta-green {
+  color: #4ade80;
+}
+
+.dp-ptile-timing {
+  font-size: 12px;
+  color: var(--fe-text-muted, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .dp-ptile-timing {
+  color: #94a3b8;
+}
+
+.dp-ptile-next {
+  font-size: 12px;
+  color: var(--fe-text-muted, #64748b);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .dp-ptile-next {
+  color: #94a3b8;
+}
+
+.dp-ptile-arrow {
+  color: var(--fe-text-muted, #64748b);
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.dp-ptile-clock {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* Theme Color Variants matching Sample Structure */
+/* 1. Teal / Green */
+.dp-tile-teal {
+  border-top-color: #0d9488;
+}
+.dp-tile-teal .dp-ptile-cat-label {
+  color: #0f766e;
+}
+.dp-tile-teal .dp-ptile-icon-badge {
+  background: rgba(13, 148, 136, 0.12);
+  color: #0d9488;
+}
+
+/* 2. Blue */
+.dp-tile-blue {
+  border-top-color: #0284c7;
+}
+.dp-tile-blue .dp-ptile-cat-label {
+  color: #0369a1;
+}
+.dp-tile-blue .dp-ptile-icon-badge {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+}
+
+/* 3. Amber / Gold */
+.dp-tile-amber {
+  border-top-color: #f59e0b;
+}
+.dp-tile-amber .dp-ptile-cat-label {
+  color: #b45309;
+}
+.dp-tile-amber .dp-ptile-icon-badge {
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+}
+
+/* 4. Rose / Pink / Red */
+.dp-tile-rose {
+  border-top-color: #f43f5e;
+}
+.dp-tile-rose .dp-ptile-cat-label {
+  color: #be123c;
+}
+.dp-tile-rose .dp-ptile-icon-badge {
+  background: rgba(244, 63, 94, 0.12);
+  color: #f43f5e;
+}
+
+/* 5. Purple / Violet */
+.dp-tile-purple {
+  border-top-color: #8b5cf6;
+}
+.dp-tile-purple .dp-ptile-cat-label {
+  color: #6d28d9;
+}
+.dp-tile-purple .dp-ptile-icon-badge {
+  background: rgba(139, 92, 246, 0.12);
+  color: #8b5cf6;
+}
+
+/* 6. Green */
+.dp-tile-green {
+  border-top-color: #16a34a;
+}
+.dp-tile-green .dp-ptile-cat-label {
+  color: #15803d;
+}
+.dp-tile-green .dp-ptile-icon-badge {
+  background: rgba(22, 163, 74, 0.12);
+  color: #16a34a;
+}
+
+/* 7. Indigo */
+.dp-tile-indigo {
+  border-top-color: #6366f1;
+}
+.dp-tile-indigo .dp-ptile-cat-label {
+  color: #4338ca;
+}
+.dp-tile-indigo .dp-ptile-icon-badge {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+/* 8. Emerald */
+.dp-tile-emerald {
+  border-top-color: #059669;
+}
+.dp-tile-emerald .dp-ptile-cat-label {
+  color: #047857;
+}
+.dp-tile-emerald .dp-ptile-icon-badge {
+  background: rgba(5, 150, 105, 0.12);
+  color: #059669;
+}
+
+/* 9. Cyan */
+.dp-tile-cyan {
+  border-top-color: #0891b2;
+}
+.dp-tile-cyan .dp-ptile-cat-label {
+  color: #0e7490;
+}
+.dp-tile-cyan .dp-ptile-icon-badge {
+  background: rgba(8, 145, 178, 0.12);
+  color: #0891b2;
+}
+
+/* Dark theme label color overrides */
+[data-theme="dark"] .dp-tile-teal .dp-ptile-cat-label { color: #2dd4bf; }
+[data-theme="dark"] .dp-tile-blue .dp-ptile-cat-label { color: #38bdf8; }
+[data-theme="dark"] .dp-tile-amber .dp-ptile-cat-label { color: #fde047; }
+[data-theme="dark"] .dp-tile-rose .dp-ptile-cat-label { color: #fb7185; }
+[data-theme="dark"] .dp-tile-purple .dp-ptile-cat-label { color: #c084fc; }
+[data-theme="dark"] .dp-tile-green .dp-ptile-cat-label { color: #4ade80; }
+[data-theme="dark"] .dp-tile-indigo .dp-ptile-cat-label { color: #a5b4fc; }
+[data-theme="dark"] .dp-tile-emerald .dp-ptile-cat-label { color: #34d399; }
+[data-theme="dark"] .dp-tile-cyan .dp-ptile-cat-label { color: #22d3ee; }
+
+.dp-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dp-pill-tag.auspicious {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+.dp-pill-tag.inauspicious {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+/* 5. Timings Section (Auspicious vs Inauspicious) */
+.dp-timings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 880px) {
+  .dp-timings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.dp-timing-box {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .dp-timing-box {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dp-timing-box.auspicious-box {
+  border-top: 4px solid #22c55e;
+}
+
+.dp-timing-box.inauspicious-box {
+  border-top: 4px solid #ef4444;
+}
+
+.dp-timing-box-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+}
+
+.dp-timing-box.auspicious-box .dp-timing-box-title {
+  color: #16a34a;
+}
+
+.dp-timing-box.inauspicious-box .dp-timing-box-title {
+  color: #dc2626;
+}
+
+.dp-timing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dp-timing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--fe-bg-cream, #f8fafc);
+  gap: 16px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .dp-timing-row {
+  background: #0f172a;
+}
+
+.dp-timing-row-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--fe-text-primary, #334155);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .dp-timing-row-label {
+  color: #e2e8f0;
+}
+
+.dp-timing-row-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: inherit;
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+/* Multi-period stacked intervals (e.g. Durmuhurtham) */
+.dp-timing-row-val-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.dp-timing-period {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.auspicious-box .dp-timing-row-val,
+.auspicious-box .dp-timing-row-val-group .dp-timing-period {
+  color: #15803d;
+}
+
+.inauspicious-box .dp-timing-row-val,
+.inauspicious-box .dp-timing-row-val-group .dp-timing-period {
+  color: #b91c1c;
+}
+
+[data-theme="dark"] .auspicious-box .dp-timing-row-val,
+[data-theme="dark"] .auspicious-box .dp-timing-row-val-group .dp-timing-period {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .inauspicious-box .dp-timing-row-val,
+[data-theme="dark"] .inauspicious-box .dp-timing-row-val-group .dp-timing-period {
+  color: #f87171;
+}
+
+.dp-timing-row-lbl-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.dp-muhurtham-type-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+
+[data-theme="dark"] .dp-muhurtham-type-badge {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.dp-non-muhurtham-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.auspicious-box .dp-timing-row-val-group .dp-timing-period.dp-timing-period-muted,
+.dp-timing-period-muted {
+  color: #64748b !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .auspicious-box .dp-timing-row-val-group .dp-timing-period.dp-timing-period-muted,
+[data-theme="dark"] .dp-timing-period-muted {
+  color: #94a3b8 !important;
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dp-timing-next-muhurtham {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #0284c7;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .dp-timing-next-muhurtham {
+  color: #38bdf8;
+}
+
+/* 6. Chandrashtamam Alert Banner */
+.dp-chandrashtamam-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.04) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-left: 5px solid #ef4444;
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+[data-theme="dark"] .dp-chandrashtamam-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.dp-chandra-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dp-chandra-content h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+[data-theme="dark"] .dp-chandra-content h3 {
+  color: #f87171;
+}
+
+.dp-chandra-stars {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fe-text-heading, #1e293b);
+  margin-bottom: 4px;
+}
+
+[data-theme="dark"] .dp-chandra-stars {
+  color: #f1f5f9;
+}
+
+.dp-chandra-note {
+  font-size: 13px;
+  color: var(--fe-text-label, #64748b);
+  margin: 0;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .dp-chandra-note {
+  color: #cbd5e1;
+}
+
+/* 7. Tables for Horai & Gowri */
+.dp-card-table-wrapper {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .dp-card-table-wrapper {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dp-table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dp-tab-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.dp-tab-pill {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--fe-border-light, #cbd5e1);
+  background: transparent;
+  color: var(--fe-text-primary, #475569);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dp-tab-pill.active {
+  background: #eab308;
+  border-color: #ca8a04;
+  color: #713f12;
+}
+
+[data-theme="dark"] .dp-tab-pill.active {
+  background: #eab308;
+  border-color: #eab308;
+  color: #0f172a;
+}
+
+.dp-responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dp-responsive-table th {
+  background: var(--fe-bg-cream, #f8fafc);
+  color: var(--fe-text-label, #475569);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--fe-border-light, #cbd5e1);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .dp-responsive-table th {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+
+.dp-responsive-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--fe-border-light, #f1f5f9);
+  color: var(--fe-text-primary, #1e293b);
+}
+
+[data-theme="dark"] .dp-responsive-table td {
+  border-color: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.dp-responsive-table tr:hover td {
+  background: rgba(234, 179, 8, 0.04);
+}
+
+.dp-responsive-table tr.current-period td {
+  background: rgba(234, 179, 8, 0.12) !important;
+  font-weight: 700;
+}
+
+.dp-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: #eab308;
+  color: #713f12;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-left: 6px;
+  animation: pulseLive 1.5s infinite;
+}
+
+@keyframes pulseLive {
+  0% { opacity: 0.8; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 0.8; transform: scale(0.98); }
+}
+
+/* Gowri & Horai Tile Grid View */
+.dp-gowri-card-wrapper,
+.dp-horai-card-wrapper {
+  margin-bottom: 24px;
+}
+
+.dp-horai-sub-label {
+  font-size: 13px;
+  color: var(--fe-text-label, #64748b);
+  margin-top: 3px;
+}
+
+[data-theme="dark"] .dp-horai-sub-label {
+  color: #94a3b8;
+}
+
+.dp-gowri-tab-hint {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fe-text-label, #64748b);
+  margin-left: 4px;
+}
+
+[data-theme="dark"] .dp-gowri-tab-hint {
+  color: #94a3b8;
+}
+
+.dp-gowri-tiles-grid,
+.dp-horai-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.dp-gowri-tile,
+.dp-horai-tile {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 12px;
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-top: 3.5px solid transparent;
+  min-height: 145px;
+  box-sizing: border-box;
+}
+
+.dp-gowri-tile:hover,
+.dp-horai-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+/* Accent top-border according to nature */
+.dp-gowri-tile.is-auspicious,
+.dp-horai-tile.is-auspicious {
+  border-top-color: #16a34a;
+}
+
+.dp-gowri-tile.is-inauspicious,
+.dp-horai-tile.is-inauspicious {
+  border-top-color: #ef4444;
+}
+
+.dp-gowri-tile.is-moderate,
+.dp-horai-tile.is-moderate {
+  border-top-color: #94a3b8;
+}
+
+/* Current / Live highlight */
+.dp-gowri-tile.is-current-gowri,
+.dp-horai-tile.is-current-horai,
+.dp-gowri-tile.is-current-horai {
+  border: 2px solid #eab308;
+  border-top: 3.5px solid #eab308;
+  background: linear-gradient(180deg, rgba(254, 240, 138, 0.18) 0%, rgba(255, 255, 255, 0.95) 100%);
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.25);
+}
+
+.dp-gtile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.dp-gtile-seq {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.1);
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+.dp-gtile-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dp-gtile-body {
+  text-align: center;
+  margin: 6px 0 10px;
+}
+
+.dp-gtile-name {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+
+.dp-gowri-tile.is-auspicious .dp-gtile-name,
+.dp-horai-tile.is-auspicious .dp-gtile-name {
+  color: #15803d;
+}
+
+.dp-gowri-tile.is-inauspicious .dp-gtile-name,
+.dp-horai-tile.is-inauspicious .dp-gtile-name {
+  color: #dc2626;
+}
+
+.dp-gowri-tile.is-moderate .dp-gtile-name,
+.dp-horai-tile.is-moderate .dp-gtile-name {
+  color: #475569;
+}
+
+.dp-gtile-time {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--fe-text-primary, #334155);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.dp-gtile-clock {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.dp-gtile-desc {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px dashed var(--fe-border-light, #e2e8f0);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--fe-text-label, #64748b);
+  text-align: center;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pill tag for moderate */
+.dp-pill-tag.moderate {
+  background: rgba(148, 163, 184, 0.16);
+  color: #475569;
+}
+
+/* Dark mode overrides for Gowri & Horai tiles */
+[data-theme="dark"] .dp-gowri-tile,
+[data-theme="dark"] .dp-horai-tile {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .dp-gowri-tile:hover,
+[data-theme="dark"] .dp-horai-tile:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-auspicious,
+[data-theme="dark"] .dp-horai-tile.is-auspicious {
+  border-top-color: #22c55e;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-inauspicious,
+[data-theme="dark"] .dp-horai-tile.is-inauspicious {
+  border-top-color: #ef4444;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-moderate,
+[data-theme="dark"] .dp-horai-tile.is-moderate {
+  border-top-color: #94a3b8;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-auspicious .dp-gtile-name,
+[data-theme="dark"] .dp-horai-tile.is-auspicious .dp-gtile-name {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-inauspicious .dp-gtile-name,
+[data-theme="dark"] .dp-horai-tile.is-inauspicious .dp-gtile-name {
+  color: #f87171;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-moderate .dp-gtile-name,
+[data-theme="dark"] .dp-horai-tile.is-moderate .dp-gtile-name {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .dp-gowri-tile.is-current-gowri,
+[data-theme="dark"] .dp-horai-tile.is-current-horai,
+[data-theme="dark"] .dp-gowri-tile.is-current-horai {
+  background: linear-gradient(180deg, rgba(234, 179, 8, 0.16) 0%, rgba(30, 41, 59, 0.95) 100%);
+  border-color: #eab308;
+  border-top-color: #eab308;
+}
+
+[data-theme="dark"] .dp-gtile-seq {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .dp-gtile-time {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .dp-gtile-desc {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .dp-pill-tag.moderate {
+  background: rgba(148, 163, 184, 0.22);
+  color: #cbd5e1;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+  .dp-gowri-tiles-grid,
+  .dp-horai-tiles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-gowri-tiles-grid,
+  .dp-horai-tiles-grid {
+    grid-template-columns: 1fr;
+  }
+  .dp-gowri-tile,
+  .dp-horai-tile {
+    min-height: auto;
+  }
+}
+
+/* Loading & Toast feedback */
+.dp-loading-container {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--fe-text-label, #64748b);
+}
+
+.dp-loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--fe-border-light, #e2e8f0);
+  border-top-color: #eab308;
+  border-radius: 50%;
+  animation: dpSpin 0.8s linear infinite;
+}
+
+@keyframes dpSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .dp-hero-banner {
+    padding: 16px;
+  }
+  .dp-hero-title-group h1 {
+    font-size: 20px;
+  }
+  .dp-tamil-date-badge {
+    font-size: 20px;
+  }
+  .dp-location-time-badge {
+    text-align: left;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Geo Location & Dynamic Place Autocomplete for Daily Panchangam
+   -------------------------------------------------------------------------- */
+.jk-place-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.jk-place-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+}
+
+.jk-place-input {
+  width: 100%;
+  height: 42px !important;
+  padding-right: 44px !important;
+  box-sizing: border-box;
+}
+
+.btn-jk-gps {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 3;
+  line-height: 1;
+  height: 32px;
+  width: 32px;
+}
+
+.btn-jk-gps:hover {
+  background-color: rgba(180, 83, 9, 0.12);
+  transform: translateY(-50%) scale(1.12);
+}
+
+.btn-jk-gps:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.jk-coords-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 3px 8px;
+  margin-top: 4px;
+  align-self: flex-start;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .jk-coords-badge {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.3);
+  color: #fef08a;
+}
+
+.jk-suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1.5px solid var(--fe-border-light, #d6d3d1);
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+}
+
+[data-theme="dark"] .jk-suggestions-dropdown {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.jk-suggestion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--fe-border-light, #f5f5f4);
+  text-align: left;
+}
+
+[data-theme="dark"] .jk-suggestion-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.jk-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.jk-suggestion-item:hover {
+  background-color: #fef3c7;
+}
+
+[data-theme="dark"] .jk-suggestion-item:hover {
+  background-color: rgba(234, 179, 8, 0.15);
+}
+
+.jk-suggestion-main-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.jk-suggestion-city-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--fe-text-heading, #1c1917);
+}
+
+[data-theme="dark"] .jk-suggestion-city-name {
+  color: #f8fafc;
+}
+
+.jk-suggestion-region-name {
+  font-size: 0.75rem;
+  color: var(--fe-text-label, #78716c);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .jk-suggestion-region-name {
+  color: #94a3b8;
+}
+
+.jk-suggestion-latlng-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .jk-suggestion-latlng-pill {
+  background: rgba(234, 179, 8, 0.12);
+  border-color: rgba(234, 179, 8, 0.25);
+  color: #fde047;
+}
+
+/* ==========================================================================
+   8. Dedicated Subha Muhurtham Section (சுப முகூர்த்த விவரங்கள்)
+   ========================================================================== */
+.dp-muhurtham-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dp-section-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dp-section-subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+[data-theme="dark"] .dp-section-subtitle {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+/* Today's Muhurtham Card */
+.dp-muhurtham-today-card {
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Auspicious Muhurtham Day Banner (Green/Gold Auspicious festive look) */
+.dp-muhurtham-today-card.is-muhurtham {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(234, 179, 8, 0.08) 100%);
+  border: 1.5px solid rgba(34, 197, 94, 0.35);
+  border-left: 6px solid #16a34a;
+}
+
+[data-theme="dark"] .dp-muhurtham-today-card.is-muhurtham {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(234, 179, 8, 0.1) 100%);
+  border-color: rgba(34, 197, 94, 0.4);
+  border-left-color: #22c55e;
+}
+
+.dp-muhurtham-today-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(34, 197, 94, 0.25);
+}
+
+[data-theme="dark"] .dp-muhurtham-today-header {
+  border-bottom-color: rgba(34, 197, 94, 0.2);
+}
+
+.dp-muhurtham-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dp-muhurtham-status-badge {
+  font-size: 14px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.dp-muhurtham-status-badge.success {
+  background: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.dp-muhurtham-status-badge.muted {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+[data-theme="dark"] .dp-muhurtham-status-badge.muted {
+  background: #334155;
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+.dp-muhurtham-type-pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(234, 179, 8, 0.18);
+  color: #854d0e;
+  border: 1px solid rgba(234, 179, 8, 0.35);
+}
+
+[data-theme="dark"] .dp-muhurtham-type-pill {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.dp-muhurtham-today-tamil {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+[data-theme="dark"] .dp-muhurtham-today-tamil {
+  color: #f8fafc;
+}
+
+.dp-muhurtham-timings-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dp-muhurtham-timings-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #15803d;
+}
+
+[data-theme="dark"] .dp-muhurtham-timings-title {
+  color: #4ade80;
+}
+
+.dp-muhurtham-slots-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dp-muhurtham-slot-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1.5px solid #86efac;
+  border-radius: 8px;
+  padding: 8px 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .dp-muhurtham-slot-item {
+  background: #0f172a;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.dp-slot-icon {
+  font-size: 15px;
+}
+
+.dp-slot-text {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #166534;
+  letter-spacing: 0.2px;
+}
+
+[data-theme="dark"] .dp-slot-text {
+  color: #86efac;
+}
+
+/* Non-Muhurtham Card */
+.dp-muhurtham-today-card.not-muhurtham {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-left: 5px solid #94a3b8;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .dp-muhurtham-today-card.not-muhurtham {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+  border-left-color: #64748b;
+}
+
+.dp-muhurtham-non-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.dp-muhurtham-non-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.dp-muhurtham-non-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--fe-text-label, #64748b);
+}
+
+[data-theme="dark"] .dp-muhurtham-non-desc {
+  color: #94a3b8;
+}
+
+.dp-muhurtham-next-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(3, 105, 161, 0.05) 100%);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .dp-muhurtham-next-box {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.dp-next-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fe-text-label, #64748b);
+}
+
+[data-theme="dark"] .dp-next-lbl {
+  color: #cbd5e1;
+}
+
+.dp-next-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+[data-theme="dark"] .dp-next-val {
+  color: #38bdf8;
+}
+
+.dp-next-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #0284c7;
+  background: #0284c7;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.dp-next-btn:hover {
+  background: #0369a1;
+  border-color: #0369a1;
+}
+
+/* Monthly Muhurtham Table Section */
+.dp-muhurtham-month-wrapper {
+  margin-top: 4px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dp-month-table-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dp-month-table-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--fe-text-heading, #1e293b);
+}
+
+[data-theme="dark"] .dp-month-table-title {
+  color: #f8fafc;
+}
+
+.dp-month-count-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  display: inline-block;
+}
+
+[data-theme="dark"] .dp-month-count-badge {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+/* ========================================================
+   Monthly Subha Muhurtham Tiles Grid (Replaces Table View)
+   ======================================================== */
+.dp-muhurtham-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .dp-muhurtham-tiles-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.dp-muhurtham-tile {
+  background: var(--fe-bg-surface, #ffffff);
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  min-width: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.dp-muhurtham-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  border-color: #cbd5e1;
+}
+
+[data-theme="dark"] .dp-muhurtham-tile {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .dp-muhurtham-tile:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.dp-muhurtham-tile.is-current-tile {
+  border: 2px solid #16a34a;
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.01) 100%);
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.12);
+}
+
+[data-theme="dark"] .dp-muhurtham-tile.is-current-tile {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* Tile Top Header: Date Badge Pill + Muhurtham Type */
+.dp-tile-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--fe-border-light, #f1f5f9);
+}
+
+[data-theme="dark"] .dp-tile-top-bar {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dp-tile-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--fe-border-light, #e2e8f0);
+  background: #f8fafc;
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .dp-tile-date-badge {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+.dp-tile-badge-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.dp-tile-badge-date {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--fe-text-heading, #0f172a);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-badge-date {
+  color: #f8fafc;
+}
+
+.dp-tile-badge-day {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fe-text-muted, #64748b);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-badge-day {
+  color: #94a3b8;
+}
+
+.dp-today-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #16a34a;
+  color: #ffffff;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Muhurtham Type Pills */
+.dp-type-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.dp-type-pill.type-valarpirai {
+  background: rgba(34, 197, 94, 0.14);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+[data-theme="dark"] .dp-type-pill.type-valarpirai {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.dp-type-pill.type-theipirai {
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+  border: 1px solid rgba(14, 165, 233, 0.28);
+}
+
+[data-theme="dark"] .dp-type-pill.type-theipirai {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+/* Tile Body */
+.dp-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dp-tile-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  align-items: baseline;
+}
+
+.dp-tile-meta-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.dp-tile-meta-span {
+  grid-column: span 2;
+}
+
+.dp-tile-meta-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fe-text-muted, #64748b);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-meta-lbl {
+  color: #94a3b8;
+}
+
+.dp-tile-tamil-val {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #92400e;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-tamil-val {
+  color: #fde047;
+}
+
+.dp-tile-tithi-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fe-text-heading, #1e293b);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-tithi-val {
+  color: #e2e8f0;
+}
+
+.dp-tile-nak-val {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0284c7;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .dp-tile-nak-val {
+  color: #38bdf8;
+}
+
+/* Auspicious Timings Box */
+.dp-tile-timings-box {
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px dashed rgba(245, 158, 11, 0.35);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+[data-theme="dark"] .dp-tile-timings-box {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.dp-tile-timings-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #b45309;
+}
+
+[data-theme="dark"] .dp-tile-timings-header {
+  color: #fcd34d;
+}
+
+.dp-tile-timings-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.dp-tile-timings-label {
+  letter-spacing: 0.01em;
+}
+
+.dp-tile-slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dp-tile-slot-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #166534;
+  line-height: 1.35;
+}
+
+[data-theme="dark"] .dp-tile-slot-item {
+  color: #86efac;
+}
+
+.dp-tile-slot-icon {
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.dp-tile-slot-text {
+  font-variant-numeric: tabular-nums;
+  word-break: break-word;
+}
+
+/* Tile Footer */
+.dp-tile-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--fe-border-light, #f1f5f9);
+}
+
+[data-theme="dark"] .dp-tile-footer {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+.dp-tile-action-btn {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #0284c7;
+  background: #0284c7;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.dp-tile-action-btn:hover:not(:disabled) {
+  background: #0369a1;
+  border-color: #0369a1;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.25);
+}
+
+.dp-tile-action-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.dp-tile-action-btn.is-current {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #15803d;
+  cursor: default;
+}
+
+[data-theme="dark"] .dp-tile-action-btn.is-current {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+}
+
+.dp-empty-muhurtham-box {
+  padding: 26px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dp-empty-muhurtham-box p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fe-text-heading, #334155);
+}
+
+[data-theme="dark"] .dp-empty-muhurtham-box p {
+  color: #e2e8f0;
+}
+
+.dp-empty-note {
+  font-size: 12px;
+  color: var(--fe-text-label, #64748b);
+}
+
+[data-theme="dark"] .dp-empty-note {
+  color: #94a3b8;
+}
+
+

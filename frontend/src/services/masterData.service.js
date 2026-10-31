@@ -2,6 +2,7 @@ import apiClient from './apiClient';
 import { API_ENDPOINTS } from '../config/api.config';
 import { RASIS_6LANG, NAKSHATRAS_6LANG, PLANETS_6LANG } from '../utils/astrologyLocalization';
 import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from '../features/zodiac-planets/data/planetDignityData';
+import { PUSHKARA_NAVAMSA_DATA, PUSHKARA_NAKSHATRA_SUMMARY, NON_PUSHKARA_NAKSHATRAS_NOTE } from '../features/zodiac-planets/data/pushkaraNavamsaData';
 
 // Robust local fallback datasets in case backend server is unreachable
 export const FALLBACK_RASIS = [
@@ -619,6 +620,26 @@ export const masterDataService = {
     return {
       data: PLANET_RASI_DIGNITIES_DATA,
       rules: TATKALIKA_RULES_DATA
+    };
+  },
+
+  async getPushkaraNavamsa(params = {}) {
+    try {
+      const res = await apiClient.get(API_ENDPOINTS.MASTER_PUSHKARA_NAVAMSA, { params });
+      if (res.data?.data && res.data.data.length > 0) {
+        return {
+          data: res.data.data,
+          nakshatraSummary: res.data.nakshatraSummary || PUSHKARA_NAKSHATRA_SUMMARY,
+          note: res.data.note || NON_PUSHKARA_NAKSHATRAS_NOTE
+        };
+      }
+    } catch {
+      // ignore
+    }
+    return {
+      data: PUSHKARA_NAVAMSA_DATA,
+      nakshatraSummary: PUSHKARA_NAKSHATRA_SUMMARY,
+      note: NON_PUSHKARA_NAKSHATRAS_NOTE
     };
   }
 };

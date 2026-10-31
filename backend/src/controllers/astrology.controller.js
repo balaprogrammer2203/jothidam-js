@@ -13,15 +13,17 @@ import NakshatraPadaMaster from '../models/NakshatraPadaMaster.js';
 import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
 import JamakkolMaster from '../models/JamakkolMaster.js';
 import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
+import PushkaraNavamsaMaster from '../models/PushkaraNavamsaMaster.js';
 import { KP_HORARY_DATA } from '../services/kpHoraryData.js';
 import { NAKSHATRA_PADAS_DATA } from '../services/nakshatraPadaData.js';
 import { KADIKARA_PRASANNAM_MASTER_DATA } from '../services/kadikaraData.js';
 import { JAMAKKOL_PRASANNAM_MASTER_DATA } from '../services/jamakkolData.js';
 import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from '../services/planetDignityData.js';
+import { PUSHKARA_NAVAMSA_DATA, PUSHKARA_NAKSHATRA_SUMMARY, NON_PUSHKARA_NAKSHATRAS_NOTE } from '../services/pushkaraNavamsaData.js';
 import { calculateJamakkolPrasannam } from '../services/jamakkol.service.js';
 import { calculateVedicChart, AYANAMSA_MODES } from '../services/ephemeris.service.js';
 import { getPlaceCoordinates, searchPlaces } from '../services/geo.service.js';
-import { calculateBasicHoroscopeDetails } from '../services/panchangam.service.js';
+import { calculateBasicHoroscopeDetails, calculateDailyPanchangam } from '../services/panchangam.service.js';
 import { 
   RASIS_DATA, 
   NAKSHATRAS_DATA, 
@@ -46,6 +48,77 @@ export const handlePlaceAutocomplete = async (req, res) => {
     res.json(places);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+/**
+ * Daily Panchangam (இன்றைய பஞ்சாங்கம்) Controller
+ * Returns full Tamil Panchangam details for a given date, time, and location.
+ */
+export const getDailyPanchangam = async (req, res) => {
+  try {
+    const params = req.method === 'POST' ? req.body : req.query;
+    const {
+      date,
+      time,
+      placeId,
+      manualCoords,
+      latitude: reqLat,
+      longitude: reqLng,
+      placeName: reqPlaceName,
+      formattedAddress: reqFormattedAddress,
+      ayanamsa,
+      timezone,
+      lang
+    } = params || {};
+
+    let latitude, longitude, formattedAddress, placeName;
+
+    if (reqLat !== undefined && reqLng !== undefined && reqLat !== '' && reqLng !== '' && !isNaN(Number(reqLat)) && !isNaN(Number(reqLng))) {
+      latitude = parseFloat(reqLat);
+      longitude = parseFloat(reqLng);
+      placeName = reqPlaceName || (reqFormattedAddress ? reqFormattedAddress.split(',')[0] : 'Selected Place');
+      formattedAddress = reqFormattedAddress || placeName;
+    } else if (placeId) {
+      const geo = await getPlaceCoordinates(placeId);
+      latitude = geo.lat;
+      longitude = geo.lng;
+      formattedAddress = geo.formattedAddress;
+      placeName = formattedAddress.split(',')[0];
+    } else if (manualCoords) {
+      latitude = manualCoords.lat;
+      longitude = manualCoords.lng;
+      placeName = manualCoords.name || 'Dindigul';
+      formattedAddress = placeName;
+    } else {
+      latitude = 10.3673;
+      longitude = 77.9803;
+      placeName = 'Dindigul';
+      formattedAddress = 'Dindigul, Tamil Nadu, India';
+    }
+
+    const panchangam = await calculateDailyPanchangam({
+      date,
+      time,
+      latitude,
+      longitude,
+      placeName,
+      formattedAddress,
+      ayanamsa: ayanamsa || 'lahiri',
+      timezone: timezone || '+05:30',
+      lang: lang || 'ta'
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: panchangam
+    });
+  } catch (error) {
+    console.error('Error in getDailyPanchangam:', error);
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
 };
 
@@ -2052,4 +2125,86 @@ export const getRobotsTxt = async (req, res) => {
   const robots = `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/\nDisallow: /api/\nCrawl-delay: 1\nSitemap: ${baseUrl}/sitemap.xml\n`;
   res.header('Content-Type', 'text/plain');
   res.send(robots);
+};
+
+/**
+ * Master Data Endpoint: 24 Pushkara Navamsa Padas (புஷ்கர நவாம்சம் பெறும் 24 பாதங்கள்)
+ * Returns all 24 individual padas, the 18 nakshatras summary table, and explanatory notes.
+ */
+export const getMasterPushkaraNavamsa = async (req, res) => {
+  try {
+    let records;
+    try {
+      records = await PushkaraNavamsaMaster.find({}).sort({ order: 1 });
+      
+      // Auto-heal/sync if documents in collection have missing nakshatraName.name or nameTa, or lingering old fields
+      const needsUpdate = !records || records.length === 0 || records.some(r => !r.nakshatraName?.name || !r.nakshatraName?.nameTa || r.nakshatraName?.en !== undefined || r.navamsaRasiName?.en !== undefined);
+      if (needsUpdate) {
+        try {
+          await PushkaraNavamsaMaster.collection.updateMany(
+            {},
+            {
+              $unset: {
+                'nakshatraName.en': '',
+                'nakshatraName.ta': '',
+                'nakshatraName.hi': '',
+                'nakshatraName.te': '',
+                'nakshatraName.kn': '',
+                'nakshatraName.ml': '',
+                'navamsaRasiName.en': '',
+                'navamsaRasiName.ta': '',
+                'navamsaRasiName.hi': '',
+                'navamsaRasiName.te': '',
+                'navamsaRasiName.kn': '',
+                'navamsaRasiName.ml': ''
+              }
+            }
+          );
+        } catch {
+          // ignore
+        }
+
+        for (const p of PUSHKARA_NAVAMSA_DATA) {
+          await PushkaraNavamsaMaster.updateOne(
+            { order: p.order },
+            {
+              $set: p,
+              $unset: {
+                'nakshatraName.en': '',
+                'nakshatraName.ta': '',
+                'nakshatraName.hi': '',
+                'nakshatraName.te': '',
+                'nakshatraName.kn': '',
+                'nakshatraName.ml': '',
+                'navamsaRasiName.en': '',
+                'navamsaRasiName.ta': '',
+                'navamsaRasiName.hi': '',
+                'navamsaRasiName.te': '',
+                'navamsaRasiName.kn': '',
+                'navamsaRasiName.ml': ''
+              }
+            },
+            { upsert: true }
+          );
+        }
+        records = await PushkaraNavamsaMaster.find({}).sort({ order: 1 });
+      }
+    } catch {
+      records = null;
+    }
+
+    if (!records || records.length === 0) {
+      records = PUSHKARA_NAVAMSA_DATA;
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: records.length,
+      data: records,
+      nakshatraSummary: PUSHKARA_NAKSHATRA_SUMMARY,
+      note: NON_PUSHKARA_NAKSHATRAS_NOTE
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
 };

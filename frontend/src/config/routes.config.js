@@ -28,7 +28,8 @@ export const ROUTES = {
     NAKSHATRA_PADAS: '/zodiac/nakshatra-padas',
     PLANETS: '/zodiac/navagraha-planets',
     PLANET_DIGNITIES: '/zodiac/planet-dignities',
-    KALACHAKRAM: '/zodiac/kalachakram-360'
+    KALACHAKRAM: '/zodiac/kalachakram-360',
+    PUSHKARA_NAVAMSA: '/pushkara-navamsam-padam-list'
   },
 
   // 4. Krishnamurti Paddhati (KP) Astrology
@@ -38,6 +39,7 @@ export const ROUTES = {
 
   // 5. Vedic Panchangam Almanac
   PANCHANGAM: {
+    DAILY: '/daily-panchangam',
     TITHIS: '/panchangam/tithis',
     YOGAS: '/panchangam/yogas',
     KARANAS: '/panchangam/karanas',
@@ -52,7 +54,10 @@ export const ROUTES = {
   },
   ACCOUNT: '/my-account',
 
-  // 7. Administration & System Management
+  // 7. General & Informational Pages
+  ABOUT: '/about',
+
+  // 8. Administration & System Management
   ADMIN: {
     LOGIN: '/admin/login',
     DASHBOARD: '/admin',
@@ -81,14 +86,22 @@ export const LEGACY_ROUTE_REDIRECTS = [
   { from: '/planet-dignities', to: ROUTES.ZODIAC.PLANET_DIGNITIES },
   { from: '/dignities', to: ROUTES.ZODIAC.PLANET_DIGNITIES },
   { from: '/kalachakram', to: ROUTES.ZODIAC.KALACHAKRAM },
+  { from: '/pushkara-navamsam', to: '/pushkara-navamsam-padam-list' },
+  { from: '/pushkara-navamsa', to: '/pushkara-navamsam-padam-list' },
+  { from: '/pushkara-navamsa-padam-list', to: '/pushkara-navamsam-padam-list' },
+  { from: '/zodiac/pushkara-navamsam-padam-list', to: '/pushkara-navamsam-padam-list' },
   { from: '/kp-horary', to: ROUTES.KP_ASTROLOGY.HORARY },
   { from: '/tithis', to: ROUTES.PANCHANGAM.TITHIS },
   { from: '/yogas', to: ROUTES.PANCHANGAM.YOGAS },
   { from: '/karanas', to: ROUTES.PANCHANGAM.KARANAS },
   { from: '/tamil-calendar', to: ROUTES.PANCHANGAM.TAMIL_CALENDAR },
+  { from: '/panchangam/daily', to: ROUTES.PANCHANGAM.DAILY },
+  { from: '/panchangam/daily-panchangam', to: ROUTES.PANCHANGAM.DAILY },
+  { from: '/panchangam', to: ROUTES.PANCHANGAM.DAILY },
   { from: '/account', to: ROUTES.ACCOUNT },
   { from: '/signin', to: ROUTES.AUTH.LOGIN },
-  { from: '/signup', to: ROUTES.AUTH.LOGIN }
+  { from: '/signup', to: ROUTES.AUTH.LOGIN },
+  { from: '/about-us', to: ROUTES.ABOUT }
 ];
 
 export default ROUTES;

@@ -4,8 +4,14 @@
  */
 
 import masterDataService from '../../../services/masterData.service';
+import { getDailyPanchangamApi } from '../../../services/api';
 
 export const panchangamService = {
+  async getDailyPanchangam(params) {
+    const response = await getDailyPanchangamApi(params);
+    return response.data?.data || response.data;
+  },
+
   async getTithis() {
     return await masterDataService.getTithis();
   },

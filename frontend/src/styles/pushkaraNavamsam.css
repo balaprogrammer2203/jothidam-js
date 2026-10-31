@@ -1,0 +1,763 @@
+/* ==========================================================================
+   PUSHKARA NAVAMSA PADAS LIST (pushkaraNavamsam.css)
+   Clean, modern, responsive styles supporting both Light & Dark modes
+   ========================================================================== */
+
+.pushkara-page-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   1. HERO BANNER
+   -------------------------------------------------------------------------- */
+.pushkara-hero-banner {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fef08a 100%);
+  border: 1px solid #fcd34d;
+  border-left: 6px solid #d97706;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 18px rgba(217, 119, 6, 0.08);
+}
+
+.pushkara-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pushkara-hero-icon {
+  width: 52px;
+  height: 52px;
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  flex-shrink: 0;
+}
+
+.pushkara-hero-titles h1 {
+  font-size: 23px;
+  font-weight: 800;
+  color: #78350f;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.pushkara-hero-titles p {
+  font-size: 14px;
+  color: #92400e;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.pushkara-hero-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pushkara-hero-badge {
+  background: #ffffff;
+  border: 1px solid #fcd34d;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #78350f;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   2. STATS ROW
+   -------------------------------------------------------------------------- */
+.pushkara-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.pushkara-stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pushkara-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.pushkara-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.pushkara-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pushkara-stat-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.pushkara-stat-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTROLS BAR (TABS, SEARCH, FILTERS)
+   -------------------------------------------------------------------------- */
+.pushkara-controls-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.pushkara-controls-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pushkara-tabs {
+  display: flex;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.pushkara-tab-btn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.pushkara-tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.pushkara-tab-count {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  color: #334155;
+  font-weight: 700;
+}
+
+.pushkara-tab-btn.active .pushkara-tab-count {
+  background: #fef08a;
+  color: #78350f;
+}
+
+.pushkara-search-box {
+  position: relative;
+  min-width: 260px;
+  flex: 1;
+  max-width: 360px;
+}
+
+.pushkara-search-input {
+  width: 100%;
+  padding: 9px 34px 9px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13.5px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.pushkara-search-input:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
+.pushkara-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pushkara-filters-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.pushkara-filter-chip {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.pushkara-filter-chip:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.pushkara-filter-chip.active {
+  background: #fef3c7;
+  color: #78350f;
+  border-color: #f59e0b;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   4. SUMMARY TABLE (EXACT MATCH WITH USER IMAGE)
+   -------------------------------------------------------------------------- */
+.pushkara-summary-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.pushkara-card-header {
+  padding: 16px 20px;
+  background: #fafaf9;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pushkara-card-header h2 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pushkara-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pushkara-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pushkara-summary-table th {
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 13px 20px;
+  border-bottom: 1.5px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.pushkara-summary-table td {
+  padding: 13px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #0f172a;
+  vertical-align: middle;
+}
+
+.pushkara-summary-table tbody tr:hover {
+  background: #fefce8;
+}
+
+.pushkara-nak-name {
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pushkara-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.pushkara-padas-text {
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.pushkara-navamsa-rasis {
+  font-weight: 700;
+  color: #15803d;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pushkara-vargottama-pill {
+  font-size: 10.5px;
+  background: #fef08a;
+  color: #854d0e;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-weight: 800;
+  border: 1px solid #fde047;
+  letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------------------------------
+   5. TILE / CARD VIEW (24 PADAS GRID)
+   -------------------------------------------------------------------------- */
+.pushkara-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+.pushkara-padam-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.pushkara-padam-card:hover {
+  transform: translateY(-3px);
+  border-color: #f59e0b;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.12);
+}
+
+.pushkara-padam-card.is-vargottama {
+  border-color: #facc15;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 40%);
+}
+
+.pushkara-padam-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pushkara-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pushkara-card-nakshatra {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pushkara-card-nakshatra-lord {
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.pushkara-pada-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pushkara-padam-card.is-vargottama .pushkara-pada-badge {
+  background: #fef08a;
+  color: #78350f;
+  border-color: #fde047;
+}
+
+.pushkara-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.pushkara-data-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+
+.pushkara-data-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.pushkara-data-value {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.pushkara-navamsa-highlight {
+  color: #15803d;
+  font-weight: 800;
+  font-size: 13.5px;
+}
+
+.pushkara-card-significance {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.45;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   6. NOTE CARD (MATCHING USER NOTE AT BOTTOM)
+   -------------------------------------------------------------------------- */
+.pushkara-note-card {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 5px solid #ef4444;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.05);
+}
+
+.pushkara-note-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #991b1b;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   8. EXPLANATION / CLASSICAL KNOWLEDGE CARD
+   -------------------------------------------------------------------------- */
+.pushkara-knowledge-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pushkara-knowledge-card h3 {
+  margin: 0;
+  font-size: 16.5px;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pushkara-knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.pushkara-knowledge-item {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-left: 4px solid #3b82f6;
+}
+
+.pushkara-knowledge-item h4 {
+  margin: 0 0 6px 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.pushkara-knowledge-item p {
+  margin: 0;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   DARK MODE ADAPTATIONS
+   -------------------------------------------------------------------------- */
+body.dark .pushkara-hero-banner,
+.dark-theme .pushkara-hero-banner {
+  background: linear-gradient(135deg, #2a1f0a 0%, #3f2e13 100%);
+  border-color: #854d0e;
+  border-left-color: #f59e0b;
+}
+
+body.dark .pushkara-hero-titles h1,
+.dark-theme .pushkara-hero-titles h1 {
+  color: #fef08a;
+}
+
+body.dark .pushkara-hero-titles p,
+.dark-theme .pushkara-hero-titles p {
+  color: #fde68a;
+}
+
+body.dark .pushkara-hero-icon,
+.dark-theme .pushkara-hero-icon {
+  background: #1e1b18;
+  border-color: #d97706;
+}
+
+body.dark .pushkara-hero-badge,
+.dark-theme .pushkara-hero-badge {
+  background: #272118;
+  border-color: #78350f;
+  color: #fde68a;
+}
+
+body.dark .pushkara-stat-card,
+body.dark .pushkara-controls-card,
+body.dark .pushkara-summary-card,
+body.dark .pushkara-padam-card,
+body.dark .pushkara-knowledge-card,
+.dark-theme .pushkara-stat-card,
+.dark-theme .pushkara-controls-card,
+.dark-theme .pushkara-summary-card,
+.dark-theme .pushkara-padam-card,
+.dark-theme .pushkara-knowledge-card {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark .pushkara-card-header,
+.dark-theme .pushkara-card-header {
+  background: #0f172a;
+  border-bottom-color: #334155;
+}
+
+body.dark .pushkara-card-header h2,
+body.dark .pushkara-stat-number,
+body.dark .pushkara-summary-table td,
+body.dark .pushkara-nak-name,
+body.dark .pushkara-card-nakshatra,
+body.dark .pushkara-data-value,
+body.dark .pushkara-knowledge-card h3,
+.dark-theme .pushkara-card-header h2,
+.dark-theme .pushkara-stat-number,
+.dark-theme .pushkara-summary-table td,
+.dark-theme .pushkara-nak-name,
+.dark-theme .pushkara-card-nakshatra,
+.dark-theme .pushkara-data-value,
+.dark-theme .pushkara-knowledge-card h3 {
+  color: #f8fafc;
+}
+
+body.dark .pushkara-tabs,
+.dark-theme .pushkara-tabs {
+  background: #0f172a;
+}
+
+body.dark .pushkara-tab-btn,
+.dark-theme .pushkara-tab-btn {
+  color: #94a3b8;
+}
+
+body.dark .pushkara-tab-btn.active,
+.dark-theme .pushkara-tab-btn.active {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark .pushkara-search-input,
+.dark-theme .pushkara-search-input {
+  background: #0f172a;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+body.dark .pushkara-summary-table th,
+.dark-theme .pushkara-summary-table th {
+  background: #0f172a;
+  color: #94a3b8;
+  border-bottom-color: #334155;
+}
+
+body.dark .pushkara-summary-table td,
+.dark-theme .pushkara-summary-table td {
+  border-bottom-color: #334155;
+}
+
+body.dark .pushkara-summary-table tbody tr:hover,
+.dark-theme .pushkara-summary-table tbody tr:hover {
+  background: #283548;
+}
+
+body.dark .pushkara-card-body,
+body.dark .pushkara-knowledge-item,
+.dark-theme .pushkara-card-body,
+.dark-theme .pushkara-knowledge-item {
+  background: #0f172a;
+}
+
+body.dark .pushkara-filter-chip,
+.dark-theme .pushkara-filter-chip {
+  background: #0f172a;
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+body.dark .pushkara-filter-chip.active,
+.dark-theme .pushkara-filter-chip.active {
+  background: #78350f;
+  color: #fde68a;
+  border-color: #d97706;
+}
+
+body.dark .pushkara-note-card,
+.dark-theme .pushkara-note-card {
+  background: #3a1515;
+  border-color: #7f1d1d;
+}
+
+body.dark .pushkara-note-card p,
+.dark-theme .pushkara-note-card p {
+  color: #fca5a5;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .pushkara-page-container {
+    padding: 12px 12px 32px;
+    gap: 16px;
+  }
+
+  .pushkara-hero-banner {
+    padding: 16px;
+  }
+
+  .pushkara-hero-titles h1 {
+    font-size: 19px;
+  }
+
+  .pushkara-controls-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pushkara-search-box {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .pushkara-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pushkara-summary-table th,
+  .pushkara-summary-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
