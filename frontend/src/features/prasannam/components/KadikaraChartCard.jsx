@@ -5,8 +5,14 @@ import {
   RASI_CONSTITUENT_STARS,
   getLocalizedPrasannamRasiName,
   getLocalizedPrasannamRasiLord,
-  enrichPlanetAstrology
+  enrichPlanetAstrology,
+  calculateTharaPalan
 } from '../../../utils/kadikaraPrasannam';
+import {
+  getPillarStarInfo,
+  getLocalizedPlanetCode,
+  PILLAR_TITLES_6LANG
+} from '../../../utils/jamakkol.utils';
 
 /**
  * Tooltip positioning helper based on South Indian 4x4 chart cell layout
@@ -97,6 +103,41 @@ export default function KadikaraChartCard({
     const am = Math.round((aDegVal - ad) * 60);
     return `${ad}°${String(am).padStart(2, '0')}'`;
   })();
+
+  // Pillar Star and Pada Lord info for Udhayam & Aarudam
+  const udhayamPillar = {
+    signIndex: udhayamIndex,
+    degreeInRasi: uDegVal,
+    formattedDegree: uDegFormatted
+  };
+  const aarudamPillar = {
+    signIndex: aarudamIndex,
+    degreeInRasi: aDegVal,
+    formattedDegree: aDegFormatted
+  };
+
+  const udhayamStarInfo = getPillarStarInfo(udhayamPillar, activeLang);
+  const aarudamStarInfo = getPillarStarInfo(aarudamPillar, activeLang);
+
+  const udhayamRasi = PRASANNAM_RASIS[udhayamIndex] || PRASANNAM_RASIS[0];
+  const aarudamRasi = PRASANNAM_RASIS[aarudamIndex] || PRASANNAM_RASIS[0];
+
+  const udhayamRasiName = getLocalizedPrasannamRasiName(udhayamIndex, activeLang);
+  const aarudamRasiName = getLocalizedPrasannamRasiName(aarudamIndex, activeLang);
+
+  const udhayamLordKey = udhayamRasi?.lordEn || udhayamRasi?.lord || 'jupiter';
+  const aarudamLordKey = aarudamRasi?.lordEn || aarudamRasi?.lord || 'saturn';
+
+  const udhayamRasiLordShort = getLocalizedPlanetCode(udhayamLordKey, activeLang);
+  const aarudamRasiLordShort = getLocalizedPlanetCode(aarudamLordKey, activeLang);
+
+  const pillarTitles = {
+    udhayam: PILLAR_TITLES_6LANG?.udhayam?.[activeLang] || PILLAR_TITLES_6LANG?.udhayam?.ta || 'உதயம்',
+    aarudam: PILLAR_TITLES_6LANG?.aarudam?.[activeLang] || PILLAR_TITLES_6LANG?.aarudam?.ta || 'ஆருடம்'
+  };
+
+  // Calculate Thara Palan between Udhayam Star and Aarudam Star
+  const tharaInfo = calculateTharaPalan(udhayamStarInfo?.starIdx, aarudamStarInfo?.starIdx, activeLang);
 
   // Format date & time display with AM/PM for center cell
   const formatDateTimeWithAmPm = (rawStr) => {
@@ -585,6 +626,94 @@ export default function KadikaraChartCard({
         {renderRasiBox(7)}
         {renderRasiBox(6)}
         {renderRasiBox(5)}
+      </div>
+
+      {/* Outside & Below Chart: [Udhayam, Aarudam Key Pillars Banner Card] */}
+      <div className="kadikara-chart-outer-footer">
+        <div className="jk-pillars-banner kadikara-pillars-banner" aria-label="Kadikara Key Pillars">
+          <div
+            className="jk-pillar-col"
+            title={`${pillarTitles.udhayam}: ${udhayamRasiName} (${udhayamRasiLordShort}) · ${udhayamStarInfo.text} · ${udhayamStarInfo.padaLordLabel}: ${udhayamStarInfo.padaLordShort}`}
+          >
+            <span className="jk-pillar-title">{pillarTitles.udhayam}</span>
+            <div
+              className="jk-pillar-badge jk-pillar-rasi-badge"
+              title={activeLang === 'ta' ? `ராசி: ${udhayamRasiName}, அதிபதி: ${udhayamRasiLordShort}` : `Rasi: ${udhayamRasiName}, Sign Lord: ${udhayamRasiLordShort}`}
+            >
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {udhayamRasiName} <span className="jk-pillar-lord">({udhayamRasiLordShort})</span>
+              </span>
+            </div>
+            <div
+              className="jk-pillar-badge jk-pillar-star-badge"
+              title={activeLang === 'ta' ? `நட்சத்திரம்: ${udhayamStarInfo.starName}, பாதம்: ${udhayamStarInfo.pada}, நட்சத்திர அதிபதி: ${udhayamStarInfo.lordShort}, பாதம் அதிபதி: ${udhayamStarInfo.padaLordShort}` : `Star: ${udhayamStarInfo.starName}, Pada: ${udhayamStarInfo.pada}, Star Lord: ${udhayamStarInfo.lordShort}, Pada Lord: ${udhayamStarInfo.padaLordShort}`}
+            >
+              <div className="jk-pillar-star-main">
+                <span className="jk-pillar-star-icon">★</span>
+                <span className="jk-pillar-badge-text">
+                  {udhayamStarInfo.starName} - {udhayamStarInfo.pada} <span className="jk-pillar-lord">({udhayamStarInfo.lordShort})</span>
+                </span>
+              </div>
+              <div className="jk-pillar-pada-lord">
+                ({udhayamStarInfo.padaLordLabel}: <span className="jk-pillar-pada-lord-val">{udhayamStarInfo.padaLordShort}</span>)
+              </div>
+            </div>
+          </div>
+
+          <div className="jk-pillar-divider" />
+
+          <div
+            className="jk-pillar-col"
+            title={`${pillarTitles.aarudam}: ${aarudamRasiName} (${aarudamRasiLordShort}) · ${aarudamStarInfo.text} · ${aarudamStarInfo.padaLordLabel}: ${aarudamStarInfo.padaLordShort}`}
+          >
+            <span className="jk-pillar-title">{pillarTitles.aarudam}</span>
+            <div
+              className="jk-pillar-badge jk-pillar-rasi-badge"
+              title={activeLang === 'ta' ? `ராசி: ${aarudamRasiName}, அதிபதி: ${aarudamRasiLordShort}` : `Rasi: ${aarudamRasiName}, Sign Lord: ${aarudamRasiLordShort}`}
+            >
+              <span className="jk-pillar-star-icon">★</span>
+              <span className="jk-pillar-badge-text">
+                {aarudamRasiName} <span className="jk-pillar-lord">({aarudamRasiLordShort})</span>
+              </span>
+            </div>
+            <div
+              className="jk-pillar-badge jk-pillar-star-badge"
+              title={activeLang === 'ta' ? `நட்சத்திரம்: ${aarudamStarInfo.starName}, பாதம்: ${aarudamStarInfo.pada}, நட்சத்திர அதிபதி: ${aarudamStarInfo.lordShort}, பாதம் அதிபதி: ${aarudamStarInfo.padaLordShort}` : `Star: ${aarudamStarInfo.starName}, Pada: ${aarudamStarInfo.pada}, Star Lord: ${aarudamStarInfo.lordShort}, Pada Lord: ${aarudamStarInfo.padaLordShort}`}
+            >
+              <div className="jk-pillar-star-main">
+                <span className="jk-pillar-star-icon">★</span>
+                <span className="jk-pillar-badge-text">
+                  {aarudamStarInfo.starName} - {aarudamStarInfo.pada} <span className="jk-pillar-lord">({aarudamStarInfo.lordShort})</span>
+                </span>
+              </div>
+              <div className="jk-pillar-pada-lord">
+                ({aarudamStarInfo.padaLordLabel}: <span className="jk-pillar-pada-lord-val">{aarudamStarInfo.padaLordShort}</span>)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Nakshatra Count & Thara Palan Card */}
+        <div className="kadikara-thara-card" aria-label="Thara Palan Card">
+          <div className="kadikara-thara-formula">
+            <span className="thara-formula-label">{tharaInfo.formulaLabel} =</span>
+            <span className="thara-formula-val">{tharaInfo.count}</span>
+          </div>
+          <div className="kadikara-thara-stars">
+            <span className="thara-star-name">({udhayamStarInfo.starName})</span>
+            <span className="thara-stars-arrow">→</span>
+            <span className="thara-star-name">({aarudamStarInfo.starName})</span>
+          </div>
+          <div className="kadikara-thara-result">
+            <span className="thara-result-title">{tharaInfo.tharaTitle}:</span>
+            <span className={`thara-result-name ${tharaInfo.type}`}>{tharaInfo.taraName}</span>
+            <span className={`thara-result-badge ${tharaInfo.type}`}>({tharaInfo.taraStatus})</span>
+          </div>
+          {tharaInfo.taraDesc && (
+            <div className="kadikara-thara-desc">{tharaInfo.taraDesc}</div>
+          )}
+        </div>
       </div>
     </div>
   );

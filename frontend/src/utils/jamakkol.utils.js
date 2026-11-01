@@ -220,31 +220,31 @@ export function calculateOuterJamaGrahas(timeStr, dayOfWeek) {
  */
 export const JAMAKKOL_SUB_PLANETS_RULES = {
   0: { // Sunday
-    day:   { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true } },
-    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 8, rasi: 8, degOffset: 0, isOffsetFromSun: true },  mrityu: { offsetSigns: 10, rasi: 10, degOffset: 12, isOffsetFromSun: true } }
+    day: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true }, mrityu: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true } },
+    night: { yama: { rasi: 5, degOffset: 0 }, rahu: { rasi: 0, degOffset: 0 }, maandi: { offsetSigns: 8, rasi: 8, degOffset: 0, isOffsetFromSun: true }, mrityu: { offsetSigns: 10, rasi: 10, degOffset: 12, isOffsetFromSun: true } }
   },
   1: { // Monday
-    day:   { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true } },
-    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 7, rasi: 7, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 9, rasi: 9, degOffset: 18, isOffsetFromSun: true } }
+    day: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true } },
+    night: { yama: { rasi: 6, degOffset: 0 }, rahu: { rasi: 9, degOffset: 0 }, maandi: { offsetSigns: 7, rasi: 7, degOffset: 6, isOffsetFromSun: true }, mrityu: { offsetSigns: 9, rasi: 9, degOffset: 18, isOffsetFromSun: true } }
   },
   2: { // Tuesday
-    day:   { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true }, mrityu: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true } },
+    day: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true }, mrityu: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true } },
     night: { yama: { rasi: 8, degOffset: 0 }, rahu: { rasi: 2, degOffset: 0 }, maandi: { offsetSigns: 6, rasi: 6, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 8, rasi: 8, degOffset: 24, isOffsetFromSun: true } }
   },
   3: { // Wednesday
-    day:   { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true }, mrityu: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true } },
+    day: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true }, mrityu: { offsetSigns: 5, rasi: 5, degOffset: 6, isOffsetFromSun: true } },
     night: { yama: { rasi: 9, degOffset: 0 }, rahu: { rasi: 5, degOffset: 0 }, maandi: { offsetSigns: 11, rasi: 11, degOffset: 6, isOffsetFromSun: true }, mrityu: { offsetSigns: 8, rasi: 8, degOffset: 0, isOffsetFromSun: true } }
   },
   4: { // Thursday
-    day:   { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true },  mrityu: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true } },
+    day: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { offsetSigns: 2, rasi: 2, degOffset: 0, isOffsetFromSun: true }, mrityu: { offsetSigns: 4, rasi: 4, degOffset: 12, isOffsetFromSun: true } },
     night: { yama: { rasi: 11, degOffset: 0 }, rahu: { rasi: 3, degOffset: 0 }, maandi: { offsetSigns: 10, rasi: 10, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 7, rasi: 7, degOffset: 6, isOffsetFromSun: true } }
   },
   5: { // Friday
-    day:   { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true },  mrityu: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true } },
+    day: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { offsetSigns: 1, rasi: 1, degOffset: 6, isOffsetFromSun: true }, mrityu: { offsetSigns: 3, rasi: 3, degOffset: 18, isOffsetFromSun: true } },
     night: { yama: { rasi: 2, degOffset: 0 }, rahu: { rasi: 6, degOffset: 0 }, maandi: { offsetSigns: 9, rasi: 9, degOffset: 18, isOffsetFromSun: true }, mrityu: { offsetSigns: 6, rasi: 6, degOffset: 12, isOffsetFromSun: true } }
   },
   6: { // Saturday
-    day:   { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true } },
+    day: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { offsetSigns: 0, rasi: 0, degOffset: 12, isOffsetFromSun: true }, mrityu: { offsetSigns: 2, rasi: 2, degOffset: 24, isOffsetFromSun: true } },
     night: { yama: { rasi: 3, degOffset: 0 }, rahu: { rasi: 8, degOffset: 0 }, maandi: { offsetSigns: 8, rasi: 8, degOffset: 24, isOffsetFromSun: true }, mrityu: { offsetSigns: 11, rasi: 11, degOffset: 6, isOffsetFromSun: true } }
   }
 };
@@ -539,7 +539,7 @@ export function getLocalizedCityName(cityName, lang = 'ta') {
   const safeLang = (lang || 'ta').split('-')[0].toLowerCase();
   const found = PRESET_CITIES.find(
     (c) => c.name.toLowerCase() === cityName.toLowerCase() ||
-           (c.names && Object.values(c.names).some(v => v.toLowerCase() === cityName.toLowerCase()))
+      (c.names && Object.values(c.names).some(v => v.toLowerCase() === cityName.toLowerCase()))
   );
   if (found && found.names) {
     return found.names[safeLang] || found.names.en || cityName;
@@ -919,7 +919,7 @@ export function getPillarStarInfo(pillar, lang = 'ta') {
       padaLordPlanet: 'mars',
       padaLordShort: '',
       padaLordName: '',
-      padaLordLabel: 'பதம் அதிபதி',
+      padaLordLabel: 'பாதம் அதிபதி',
       padaLordText: '',
       text: ''
     };
@@ -978,7 +978,7 @@ export function getPillarStarInfo(pillar, lang = 'ta') {
   const padaLordName = (safeLang === 'ta' ? navamsaRasiObj.lordTa : navamsaRasiObj.lord) || padaLordShort;
 
   const PADA_LORD_LABELS = {
-    ta: 'பதம் அதிபதி',
+    ta: 'பாதம் அதிபதி',
     en: 'Pada Lord',
     hi: 'पद स्वामी',
     te: 'పాద అధిపతి',
@@ -1826,13 +1826,13 @@ export function formatGocharaPlanetName(planetName, lang = 'ta') {
   const isTa = lang === 'ta';
   const nameKey = String(planetName).trim();
   const lower = nameKey.toLowerCase();
-  
+
   let pObj = PLANET_NAMES_6LANG[nameKey];
   if (!pObj) {
     const foundKey = Object.keys(PLANET_NAMES_6LANG).find(k => k.toLowerCase() === lower);
     if (foundKey) pObj = PLANET_NAMES_6LANG[foundKey];
   }
-  
+
   const baseName = pObj ? (isTa ? pObj.ta : pObj.en) : nameKey;
   const prefix = isTa ? 'கோ.' : 'Ko.';
   return `${prefix}${baseName}`;
@@ -1847,7 +1847,7 @@ export function formatJamaPlanetName(planetName, lang = 'ta') {
   const isTa = lang === 'ta';
   const nameKey = String(planetName).trim();
   const lower = nameKey.toLowerCase();
-  
+
   let baseName = nameKey;
   if (lower === 'snake' || lower === 'paambu' || lower === 'rahu' || lower === 'பாம்பு') {
     baseName = isTa ? 'ராகு' : 'Rahu';
@@ -2459,11 +2459,11 @@ export function generateJamakkolIndicators(chartData, lang = 'ta') {
       textTa: `கௌரி ${isGowriAuspicious ? 'சுப வேளை' : 'அசுப வேளை'} (${gowriNameTa})`,
       desc: isTa
         ? (isGowriAuspicious
-            ? `தற்போதைய கௌரி வேளை (${gowriNameTa}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
-            : `தற்போதைய கௌரி வேளை (${gowriNameTa}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`)
+          ? `தற்போதைய கௌரி வேளை (${gowriNameTa}) காரிய பேச்சுவார்த்தைகளுக்கும் புதிய தொடக்கங்களுக்கும் சாதகமான நேரமாகும்.`
+          : `தற்போதைய கௌரி வேளை (${gowriNameTa}) சாதகமற்றது. முக்கிய ஒப்பந்தங்களை அடுத்த சுப வேளைக்கு ஒத்திவைப்பது நலம்.`)
         : (isGowriAuspicious
-            ? `Current Gowri period (${gowriNameEn}) is highly auspicious for beginning negotiations and ventures.`
-            : `Current Gowri period (${gowriNameEn}) is inauspicious. Defer crucial agreements until a favorable period.`),
+          ? `Current Gowri period (${gowriNameEn}) is highly auspicious for beginning negotiations and ventures.`
+          : `Current Gowri period (${gowriNameEn}) is inauspicious. Defer crucial agreements until a favorable period.`),
       descEn: isGowriAuspicious
         ? `Current Gowri period (${gowriNameEn}) is highly auspicious for beginning negotiations and ventures.`
         : `Current Gowri period (${gowriNameEn}) is inauspicious. Defer crucial agreements until a favorable period.`,

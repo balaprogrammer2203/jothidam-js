@@ -2254,3 +2254,448 @@ body.dark-theme .kadikara-faq-answer {
   color: #d6d3d1 !important;
   border-top-color: #2c2015 !important;
 }
+
+/* --------------------------------------------------------------------------
+   Kadikara Prasannam Key Pillars Banner (Below Chart)
+-------------------------------------------------------------------------- */
+.kadikara-chart-outer-footer {
+  width: 100%;
+  max-width: 580px;
+  margin: 1.15rem auto 0.25rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.kadikara-pillars-banner {
+  background: linear-gradient(180deg, #fffbf5 0%, #fff7eb 100%);
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  width: 100%;
+  max-width: 540px;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.kadikara-pillars-banner:hover {
+  border-color: #fdba74;
+  box-shadow: 0 4px 12px -2px rgba(234, 88, 12, 0.14), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.kadikara-pillars-banner .jk-pillar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  user-select: none;
+  flex: 1;
+}
+
+.kadikara-pillars-banner .jk-pillar-title {
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #b91c1c;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.kadikara-pillars-banner .jk-pillar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #ffffff;
+  border: 1px solid #fecdd3;
+  border-radius: 7px;
+  padding: 0.18rem 0.6rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+}
+
+.kadikara-pillars-banner .jk-pillar-star-badge {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  padding: 0.22rem 0.65rem;
+}
+
+.kadikara-pillars-banner .jk-pillar-star-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  line-height: 1.2;
+}
+
+.kadikara-pillars-banner .jk-pillar-star-icon {
+  font-size: 0.75rem;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.kadikara-pillars-banner .jk-pillar-badge-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.kadikara-pillars-banner .jk-pillar-lord {
+  font-weight: 700;
+  color: #991b1b;
+  margin-left: 0.2rem;
+}
+
+.kadikara-pillars-banner .jk-pillar-pada-lord {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: #78350f;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.kadikara-pillars-banner .jk-pillar-pada-lord-val {
+  font-weight: 750;
+  color: #991b1b;
+  margin-left: 0.15rem;
+}
+
+.kadikara-pillars-banner .jk-pillar-divider {
+  width: 1px;
+  min-height: 70px;
+  align-self: stretch;
+  background-color: #fed7aa;
+  margin: 0 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Dark Mode for Kadikara Pillars Banner */
+html[data-theme="dark"] .kadikara-pillars-banner,
+[data-theme="dark"] .kadikara-pillars-banner,
+body.dark-theme .kadikara-pillars-banner {
+  background: linear-gradient(180deg, #1c150e 0%, #150f0a 100%) !important;
+  border-color: #78350f !important;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-title,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-title,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-title {
+  color: #f87171 !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-badge,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-badge,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-badge {
+  background: #0c0a09 !important;
+  border-color: #7f1d1d !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-star-icon,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-star-icon,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-star-icon {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-badge-text,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-badge-text,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-badge-text {
+  color: #f5f5f4 !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-lord,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-lord,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-lord {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-pada-lord,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-pada-lord,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-pada-lord {
+  color: #fde68a !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-pada-lord-val,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-pada-lord-val,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-pada-lord-val {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-divider,
+[data-theme="dark"] .kadikara-pillars-banner .jk-pillar-divider,
+body.dark-theme .kadikara-pillars-banner .jk-pillar-divider {
+  background-color: #78350f !important;
+}
+
+/* --------------------------------------------------------------------------
+   Kadikara Prasannam Nakshatra Count & Thara Palan Card
+-------------------------------------------------------------------------- */
+.kadikara-thara-card {
+  width: 100%;
+  max-width: 540px;
+  background: linear-gradient(180deg, #ffffff 0%, #fffdfa 100%);
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.kadikara-thara-card:hover {
+  border-color: #fdba74;
+  box-shadow: 0 4px 12px -2px rgba(234, 88, 12, 0.14), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.kadikara-thara-formula {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.kadikara-thara-formula .thara-formula-label {
+  color: #9a3412;
+  font-weight: 700;
+}
+
+.kadikara-thara-formula .thara-formula-val {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.85rem;
+  padding: 0.1rem 0.5rem;
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1.5px solid #fdba74;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.kadikara-thara-stars {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.kadikara-thara-stars .thara-star-name {
+  color: #3730a3;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  padding: 0.12rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 650;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.kadikara-thara-stars .thara-stars-arrow {
+  color: #c2410c;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.kadikara-thara-result {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.96rem;
+  margin-top: 0.15rem;
+}
+
+.kadikara-thara-result .thara-result-title {
+  font-weight: 750;
+  color: #b91c1c;
+}
+
+.kadikara-thara-result .thara-result-name {
+  font-weight: 800;
+  font-size: 1.02rem;
+}
+
+.kadikara-thara-result .thara-result-badge {
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+}
+
+/* Thara Status Variants */
+.kadikara-thara-result .thara-result-name.good {
+  color: #15803d;
+}
+.kadikara-thara-result .thara-result-badge.good {
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.kadikara-thara-result .thara-result-name.bad {
+  color: #b91c1c;
+}
+.kadikara-thara-result .thara-result-badge.bad {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.kadikara-thara-result .thara-result-name.moderate {
+  color: #b45309;
+}
+.kadikara-thara-result .thara-result-badge.moderate {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.kadikara-thara-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  max-width: 480px;
+  line-height: 1.35;
+}
+
+/* Dark theme for Thara Palan Card */
+html[data-theme="dark"] .kadikara-thara-card,
+[data-theme="dark"] .kadikara-thara-card,
+body.dark-theme .kadikara-thara-card {
+  background: linear-gradient(180deg, #1c1917 0%, #171412 100%) !important;
+  border-color: #78350f !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-card:hover,
+[data-theme="dark"] .kadikara-thara-card:hover,
+body.dark-theme .kadikara-thara-card:hover {
+  border-color: #9a3412 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-formula .thara-formula-label,
+[data-theme="dark"] .kadikara-thara-formula .thara-formula-label,
+body.dark-theme .kadikara-thara-formula .thara-formula-label {
+  color: #fdba74 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-formula .thara-formula-val,
+[data-theme="dark"] .kadikara-thara-formula .thara-formula-val,
+body.dark-theme .kadikara-thara-formula .thara-formula-val {
+  background: #451a03 !important;
+  border-color: #9a3412 !important;
+  color: #ffedd5 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-stars .thara-star-name,
+[data-theme="dark"] .kadikara-thara-stars .thara-star-name,
+body.dark-theme .kadikara-thara-stars .thara-star-name {
+  background: #1e1b4b !important;
+  border-color: #3730a3 !important;
+  color: #c7d2fe !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-stars .thara-stars-arrow,
+[data-theme="dark"] .kadikara-thara-stars .thara-stars-arrow,
+body.dark-theme .kadikara-thara-stars .thara-stars-arrow {
+  color: #fdba74 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-result .thara-result-title,
+[data-theme="dark"] .kadikara-thara-result .thara-result-title,
+body.dark-theme .kadikara-thara-result .thara-result-title {
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-result .thara-result-badge.good,
+[data-theme="dark"] .kadikara-thara-result .thara-result-badge.good,
+body.dark-theme .kadikara-thara-result .thara-result-badge.good {
+  background: #052e16 !important;
+  border-color: #166534 !important;
+  color: #86efac !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-result .thara-result-badge.bad,
+[data-theme="dark"] .kadikara-thara-result .thara-result-badge.bad,
+body.dark-theme .kadikara-thara-result .thara-result-badge.bad {
+  background: #450a0a !important;
+  border-color: #991b1b !important;
+  color: #fca5a5 !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-result .thara-result-badge.moderate,
+[data-theme="dark"] .kadikara-thara-result .thara-result-badge.moderate,
+body.dark-theme .kadikara-thara-result .thara-result-badge.moderate {
+  background: #451a03 !important;
+  border-color: #92400e !important;
+  color: #fde68a !important;
+}
+
+html[data-theme="dark"] .kadikara-thara-desc,
+[data-theme="dark"] .kadikara-thara-desc,
+body.dark-theme .kadikara-thara-desc {
+  color: #94a3b8 !important;
+}
+
+@media (max-width: 640px) {
+  .kadikara-chart-outer-footer {
+    margin-top: 0.85rem;
+  }
+  .kadikara-pillars-banner {
+    padding: 0.5rem 0.6rem;
+  }
+  .kadikara-pillars-banner .jk-pillar-divider {
+    margin: 0 0.5rem;
+    min-height: 60px;
+  }
+  .kadikara-pillars-banner .jk-pillar-badge {
+    padding: 0.15rem 0.45rem;
+  }
+  .kadikara-pillars-banner .jk-pillar-badge-text {
+    font-size: 0.78rem;
+  }
+  .kadikara-pillars-banner .jk-pillar-pada-lord {
+    font-size: 0.72rem;
+  }
+  .kadikara-thara-card {
+    padding: 0.6rem 0.8rem;
+    gap: 0.35rem;
+  }
+  .kadikara-thara-formula {
+    font-size: 0.95rem;
+  }
+  .kadikara-thara-stars {
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+  .kadikara-thara-result {
+    font-size: 0.88rem;
+  }
+  .kadikara-thara-desc {
+    font-size: 0.76rem;
+  }
+}

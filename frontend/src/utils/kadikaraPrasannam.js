@@ -1085,9 +1085,237 @@ export function enrichPlanetAstrology(planet, rasiIndex, lang = 'ta') {
   };
 }
 
+export const NAVATARA_DATA = {
+  1: {
+    taraNumber: 1,
+    key: 'janma',
+    ratingType: 'moderate',
+    isAuspicious: false,
+    badgeBg: '#fef3c7',
+    badgeColor: '#b45309',
+    badgeBorder: '#fde68a',
+    names: { en: 'Janma', ta: 'ஜன்மம்', hi: 'जन्म', te: 'జన్మ', kn: 'ಜನ್ಮ', ml: 'ജന്മം' },
+    status: { en: 'Moderate', ta: 'மிதம்', hi: 'मध्यम', te: 'మధ్యమం', kn: 'ಮಧ್ಯಮ', ml: 'മിതമായത്' },
+    desc: {
+      en: 'Body & mind - requires care and measured effort.',
+      ta: 'உடல்நலம், மன அமைதி ஆகியவற்றில் கூடுதல் கவனம் தேவை.',
+      hi: 'स्वास्थ्य और मन की शांति पर ध्यान देने की आवश्यकता है।',
+      te: 'ఆరోగ్యం మరియు మనశ్శాంతిపై శ్రద్ధ అవసరం.',
+      kn: 'ಆರೋಗ್ಯ ಮತ್ತು ಮನಸ್ಸಿನ ಶಾಂತಿಯ ಬಗ್ಗೆ ಕಾಳಜಿ ವಹಿಸಿ.',
+      ml: 'ആരോഗ്യത്തിലും മനസ്സിന്റെ സമാധാനത്തിലും ശ്രദ്ധ വേണം.'
+    }
+  },
+  2: {
+    taraNumber: 2,
+    key: 'sampat',
+    ratingType: 'good',
+    isAuspicious: true,
+    badgeBg: '#dcfce7',
+    badgeColor: '#15803d',
+    badgeBorder: '#bbf7d0',
+    names: { en: 'Sampat', ta: 'சம்பத்து', hi: 'सम्पत्', te: 'సంపత్', kn: 'ಸಂಪತ್', ml: 'സമ്പത്ത്' },
+    status: { en: 'Auspicious', ta: 'சுபம்', hi: 'शुभ', te: 'శుభం', kn: 'ಶುಭ', ml: 'ശുഭം' },
+    desc: {
+      en: 'Wealth, prosperity, and financial / task success.',
+      ta: 'செல்வம், தன லாபம், காரிய சித்தி தரும் சுப நிலை.',
+      hi: 'धन, संपत्ति और कार्यों में मनोवांछित सफलता।',
+      te: 'ధన లాభం, సంపద మరియు కార్య సిద్ధి కలుగును.',
+      kn: 'ಧನ ಲಾಭ, ಸಂಪತ್ತು ಮತ್ತು ಕಾರ್ಯ ಸಿದ್ಧಿ ಉಂಟಾಗುತ್ತದೆ.',
+      ml: 'ധനലാഭം, സമൃദ്ധി, കാര്യവിജയം എന്നിവ ലഭിക്കും.'
+    }
+  },
+  3: {
+    taraNumber: 3,
+    key: 'vipat',
+    ratingType: 'bad',
+    isAuspicious: false,
+    badgeBg: '#fee2e2',
+    badgeColor: '#b91c1c',
+    badgeBorder: '#fecaca',
+    names: { en: 'Vipat', ta: 'விபத்து', hi: 'विपत्', te: 'విపత్', kn: 'ವಿಪತ್', ml: 'വിപത്ത്' },
+    status: { en: 'Inauspicious', ta: 'அசுபம்', hi: 'அशुभ', te: 'అశుభం', kn: 'ಅಶುಭ', ml: 'അശുഭം' },
+    desc: {
+      en: 'Hazards, loss, and obstacles. Caution is advised.',
+      ta: 'ஆபத்து, நஷ்டம், தடைகள் ஏற்பட வாய்ப்பு. விழிப்புணர்வு தேவை.',
+      hi: 'हानि, बाधाएं और विपत्तियां आ सकती हैं। सतर्क रहें।',
+      te: 'నష్టం, ఆటంకాలు మరియు ప్రమాదాలకు అవకాశం.',
+      kn: 'ನಷ್ಟ, ಅಡೆತಡೆಗಳು ಮತ್ತು ಅಪಾಯದ ಸಾಧ್ಯತೆ. ಎಚ್ಚರವಿರಲಿ.',
+      ml: 'നഷ്ടം, തടസ്സങ്ങൾ, ആപത്തുകൾ എന്നിവ ഉണ്ടാകാം.'
+    }
+  },
+  4: {
+    taraNumber: 4,
+    key: 'kshema',
+    ratingType: 'good',
+    isAuspicious: true,
+    badgeBg: '#dcfce7',
+    badgeColor: '#15803d',
+    badgeBorder: '#bbf7d0',
+    names: { en: 'Kshema', ta: 'க்ஷேமம்', hi: 'क्षेम', te: 'క్షేమ', kn: 'ಕ್ಷೇಮ', ml: 'ക്ഷേമം' },
+    status: { en: 'Auspicious', ta: 'சுபம்', hi: 'शुभ', te: 'శుభం', kn: 'ಶುಭ', ml: 'ശുഭം' },
+    desc: {
+      en: 'Safety, well-being, comfort, and protection.',
+      ta: 'பாதுகாப்பு, சுகம், நல்வாழ்வு, குடும்ப நலன் கூடும்.',
+      hi: 'सुरक्षा, आराम, सुख-शांति और कल्याणकारी परिणाम।',
+      te: 'రక్షణ, సౌఖ్యం, క్షేమం మరియు శుభ ఫలితాలు.',
+      kn: 'ರಕ್ಷಣೆ, ಸೌಖ್ಯ, ಕ್ಷೇಮ ಮತ್ತು ಶುಭ ಫಲಗಳು.',
+      ml: 'സുരക്ഷിതത്വം, സുഖം, ക്ഷേമം എന്നിവ ഉറപ്പാകുന്നു.'
+    }
+  },
+  5: {
+    taraNumber: 5,
+    key: 'pratyak',
+    ratingType: 'bad',
+    isAuspicious: false,
+    badgeBg: '#fee2e2',
+    badgeColor: '#b91c1c',
+    badgeBorder: '#fecaca',
+    names: { en: 'Pratyak', ta: 'பிரத்யக்', hi: 'प्रत्यक्', te: 'ప్రత్యక్', kn: 'ಪ್ರತ್ಯಕ್', ml: 'പ്രത്യക്ക്' },
+    status: { en: 'Inauspicious', ta: 'அசுபம்', hi: 'अशुभ', te: 'అశుభం', kn: 'ಅಶುಭ', ml: 'അശുഭം' },
+    desc: {
+      en: 'Opposition, conflict, hindrance, and delays.',
+      ta: 'எதிர்ப்புகள், விரோதங்கள், காரியத் தடைகள் வரலாம்.',
+      hi: 'विरोध, रुकावटें और कठिनाइयां आ सकती हैं।',
+      te: 'వ్యతిరేకతలు, శత్రుత్వం మరియు పనులలో అడ్డంకులు.',
+      kn: 'ವಿರೋಧ, ಅಡೆತಡೆಗಳು ಮತ್ತು ತೊಂದರೆಗಳು ಬರಬಹುದು.',
+      ml: 'എതിർപ്പുകൾ, തടസ്സങ്ങൾ എന്നിവ നേരിടേണ്ടി വരാം.'
+    }
+  },
+  6: {
+    taraNumber: 6,
+    key: 'sadhana',
+    ratingType: 'good',
+    isAuspicious: true,
+    badgeBg: '#dcfce7',
+    badgeColor: '#15803d',
+    badgeBorder: '#bbf7d0',
+    names: { en: 'Sadhana', ta: 'சாதகம்', hi: 'साधक', te: 'సాధక', kn: 'ಸಾಧಕ', ml: 'സാധകം' },
+    status: { en: 'Auspicious', ta: 'சுபம்', hi: 'शुभ', te: 'శుభం', kn: 'ಶುಭ', ml: 'ശുഭം' },
+    desc: {
+      en: 'Accomplishment, success in endeavors, and fulfillment.',
+      ta: 'முயற்சிகள் வெற்றி பெறும், காரிய சித்தி, அனுகூல நிலை.',
+      hi: 'प्रयासों में सफलता, मनोकामना पूर्ति और प्रगति।',
+      te: 'ప్రయత్నాలలో విజయం, కార్య సిద్ధి కలుగును.',
+      kn: 'ಪ್ರಯತ್ನಗಳಲ್ಲಿ ಯಶಸ್ಸು, ಕಾರ್ಯ ಸಿದ್ಧಿ ಉಂಟಾಗುತ್ತದೆ.',
+      ml: 'ശ്രമങ്ങൾ വിജയിക്കും, കാര്യസിദ്ധി കൈവരും.'
+    }
+  },
+  7: {
+    taraNumber: 7,
+    key: 'naidhana',
+    ratingType: 'bad',
+    isAuspicious: false,
+    badgeBg: '#fee2e2',
+    badgeColor: '#991b1b',
+    badgeBorder: '#fca5a5',
+    names: { en: 'Naidhana (Vadha)', ta: 'வதம் (நைதனம்)', hi: 'वध (नैधन)', te: 'వధ (నైధన)', kn: 'ವಧ (ನೈಧನ)', ml: 'വധം (നൈധനം)' },
+    status: { en: 'Harmful', ta: 'மிகத் தீது', hi: 'कष्टकारी', te: 'తీవ్ర అశుభం', kn: 'ತೀವ್ರ ಅಶುಭ', ml: 'ഏറ്റവും ദോഷം' },
+    desc: {
+      en: 'Severe difficulties, total blockages, and critical losses.',
+      ta: 'கடும் இன்னல்கள், காரிய முடக்கம், இழப்புகள் ஏற்படலாம்.',
+      hi: 'गंभीर परेशानियां, रुकावटें और बड़ी हानि का भय।',
+      te: 'తీవ్రమైన ఆటంకాలు, పనులలో స్తబ్దత మరియు నష్టాలు.',
+      kn: 'ತೀವ್ರ ತೊಂದರೆಗಳು, ಕಾರ್ಯ ಸ್ಥಗಿತ ಮತ್ತು ನಷ್ಟಗಳು.',
+      ml: 'കഠിനമായ തടസ്സങ്ങൾ, കാര്യസ്തംഭനം എന്നിവയുണ്ടാകാം.'
+    }
+  },
+  8: {
+    taraNumber: 8,
+    key: 'mitra',
+    ratingType: 'good',
+    isAuspicious: true,
+    badgeBg: '#dcfce7',
+    badgeColor: '#15803d',
+    badgeBorder: '#bbf7d0',
+    names: { en: 'Mitra', ta: 'மைத்ரம்', hi: 'मित्र', te: 'మిత్ర', kn: 'ಮಿತ್ರ', ml: 'മിത്രം' },
+    status: { en: 'Auspicious', ta: 'சுபம்', hi: 'शुभ', te: 'శుభం', kn: 'ಶುಭ', ml: 'ശുഭം' },
+    desc: {
+      en: 'Friendship, support, joy, and cordial relations.',
+      ta: 'நட்பு, உதவி, நன்மைகள், சுமூகமான தீர்வு கிடைக்கும்.',
+      hi: 'मित्रता, सहायता, खुशहाली और अनुकूल समाधान।',
+      te: 'స్నేహం, సహాయం, అనుకూలతలు మరియు సంతోషం.',
+      kn: 'ಸ್ನೇಹ, ಸಹಾಯ, ಅನುಕೂಲತೆ ಮತ್ತು ಸಂತೋಷ.',
+      ml: 'സൗഹൃദം, സഹായം, അനുകൂല ഫലങ്ങൾ എന്നിവ ലഭിക്കും.'
+    }
+  },
+  9: {
+    taraNumber: 9,
+    key: 'parama_mitra',
+    ratingType: 'good',
+    isAuspicious: true,
+    badgeBg: '#dcfce7',
+    badgeColor: '#047857',
+    badgeBorder: '#6ee7b7',
+    names: { en: 'Parama Mitra', ta: 'பரம மைத்ரம்', hi: 'परम मित्र', te: 'పరమ మిత్ర', kn: 'ಪರಮ ಮಿತ್ರ', ml: 'പരമ മിത്രം' },
+    status: { en: 'Most Auspicious', ta: 'உத்தமம்', hi: 'अति शुभ', te: 'ఉత్తమ శుభం', kn: 'ಉತ್ತಮ ಶುಭ', ml: 'ഉത്തമം' },
+    desc: {
+      en: 'Great victory, supreme fortune, and utmost support.',
+      ta: 'மகிழ்ச்சி, பேரானந்தம், உன்னத வெற்றி, சிறந்த ஆதரவு.',
+      hi: 'अत्यंत शुभ, महान सफलता, आनंद और गहरा समर्थन।',
+      te: 'గొప్ప విజయం, అత్యుత్తమ అదృష్టం మరియు పరిపూర్ణ మద్దతు.',
+      kn: 'ದೊಡ್ಡ ಯಶಸ್ಸು, ಅತ್ಯುತ್ತಮ ಅದೃಷ್ಟ ಮತ್ತು ಪರಿಪೂರ್ಣ ಬೆಂಬಲ.',
+      ml: 'വലിയ വിജയം, ഉത്തമ ഭാഗ്യം, പൂർണ്ണ പിന്തുണ.'
+    }
+  }
+};
+
+/**
+ * Calculates Thara Palan (Navatara) from Udhayam star to Aarudam star
+ */
+export function calculateTharaPalan(fromStarIdx, toStarIdx, lang = 'ta') {
+  const safeLang = (lang || 'ta').split('-')[0].toLowerCase();
+  const fIdx = Math.max(0, Math.min(26, Number(fromStarIdx) || 0));
+  const tIdx = Math.max(0, Math.min(26, Number(toStarIdx) || 0));
+
+  // Count from Udhayam to Aarudam inclusive (1 to 27)
+  const count = ((tIdx - fIdx + 27) % 27) + 1;
+  const taraNum = ((count - 1) % 9) + 1;
+  const cycle = Math.floor((count - 1) / 9) + 1; // 1, 2, or 3
+  const taraObj = NAVATARA_DATA[taraNum] || NAVATARA_DATA[1];
+
+  const taraName = taraObj.names[safeLang] || taraObj.names.ta || taraObj.names.en;
+  const taraStatus = taraObj.status[safeLang] || taraObj.status.ta || taraObj.status.en;
+  const taraDesc = taraObj.desc[safeLang] || taraObj.desc.ta || taraObj.desc.en;
+
+  const formulaLabel = safeLang === 'ta'
+    ? 'உதயம் நட் -> ஆருடம் நட்'
+    : (safeLang === 'hi' ? 'उदय नक्षत्र -> आरूढ़ नक्षत्र'
+      : (safeLang === 'te' ? 'ఉదయ నక్షత్రం -> ఆరూఢ నక్షత్రం'
+        : (safeLang === 'kn' ? 'ಉದಯ ನಕ್ಷತ್ರ -> ಆರೂಢ ನಕ್ಷತ್ರ'
+          : (safeLang === 'ml' ? 'ഉദയം നക്ഷത്രം -> ആരൂഢം നക്ഷത്രം'
+            : 'Udhayam Nak -> Aarudam Nak'))));
+
+  const tharaTitle = safeLang === 'ta'
+    ? 'தாரா பலன்'
+    : (safeLang === 'hi' ? 'तारा फल'
+      : (safeLang === 'te' ? 'తారా బలం'
+        : (safeLang === 'kn' ? 'ತಾರಾ ಬಲ'
+          : (safeLang === 'ml' ? 'താരാ ഫലം'
+            : 'Thara Palan'))));
+
+  return {
+    count,
+    taraNum,
+    cycle,
+    taraObj,
+    taraName,
+    taraStatus,
+    taraDesc,
+    formulaLabel,
+    tharaTitle,
+    type: taraObj.type,
+    isAuspicious: taraObj.isAuspicious,
+    badgeBg: taraObj.badgeBg,
+    badgeColor: taraObj.badgeColor,
+    badgeBorder: taraObj.badgeBorder
+  };
+}
+
 export default {
   PRASANNAM_RASIS,
   BHAVA_PREDICTIONS,
+  NAVATARA_DATA,
+  calculateTharaPalan,
   RASI_CONSTITUENT_STARS,
   calculateKadikaraPrasannam,
   getLocalizedPrasannamRasiName,

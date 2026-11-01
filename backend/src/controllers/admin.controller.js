@@ -13,6 +13,7 @@ import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
 import JamakkolMaster from '../models/JamakkolMaster.js';
 import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
 import PushkaraNavamsaMaster from '../models/PushkaraNavamsaMaster.js';
+import TharaPalanMaster from '../models/TharaPalanMaster.js';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 
@@ -210,6 +211,20 @@ export const MODEL_REGISTRY = {
     name: 'Pushkara Navamsa (24 புஷ்கர நவாம்ச பாதங்கள்)',
     nameTa: 'புஷ்கர நவாம்ச பாதங்கள்',
     searchFields: ['nakshatraName.name', 'nakshatraName.nameTa', 'rasiName.name', 'rasiName.nameTa', 'navamsaRasiName.name', 'navamsaRasiName.nameTa'],
+    defaultSort: { order: 1 }
+  },
+  'thara-palan': {
+    model: TharaPalanMaster,
+    name: 'Nakshatra Thara Palan (27 நட்சத்திர தாரா பலன்)',
+    nameTa: 'நட்சத்திர தாரா பலன்',
+    searchFields: ['key', 'taraName.name', 'taraName.nameTa', 'status.name', 'status.nameTa', 'palan.name', 'palan.nameTa'],
+    defaultSort: { order: 1 }
+  },
+  thara_palan: {
+    model: TharaPalanMaster,
+    name: 'Nakshatra Thara Palan (27 நட்சத்திர தாரா பலன்)',
+    nameTa: 'நட்சத்திர தாரா பலன்',
+    searchFields: ['key', 'taraName.name', 'taraName.nameTa', 'status.name', 'status.nameTa', 'palan.name', 'palan.nameTa'],
     defaultSort: { order: 1 }
   }
 };

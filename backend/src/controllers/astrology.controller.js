@@ -14,12 +14,14 @@ import KadikaraPrasannamMaster from '../models/KadikaraPrasannamMaster.js';
 import JamakkolMaster from '../models/JamakkolMaster.js';
 import PlanetRasiDignityMaster from '../models/PlanetRasiDignityMaster.js';
 import PushkaraNavamsaMaster from '../models/PushkaraNavamsaMaster.js';
+import TharaPalanMaster from '../models/TharaPalanMaster.js';
 import { KP_HORARY_DATA } from '../services/kpHoraryData.js';
 import { NAKSHATRA_PADAS_DATA } from '../services/nakshatraPadaData.js';
 import { KADIKARA_PRASANNAM_MASTER_DATA } from '../services/kadikaraData.js';
 import { JAMAKKOL_PRASANNAM_MASTER_DATA } from '../services/jamakkolData.js';
 import { PLANET_RASI_DIGNITIES_DATA, TATKALIKA_RULES_DATA } from '../services/planetDignityData.js';
 import { PUSHKARA_NAVAMSA_DATA, PUSHKARA_NAKSHATRA_SUMMARY, NON_PUSHKARA_NAKSHATRAS_NOTE } from '../services/pushkaraNavamsaData.js';
+import { THARA_PALAN_MASTER_DATA, NAVATARA_BASE_DEFS } from '../services/tharaPalanData.js';
 import { calculateJamakkolPrasannam } from '../services/jamakkol.service.js';
 import { calculateVedicChart, AYANAMSA_MODES } from '../services/ephemeris.service.js';
 import { getPlaceCoordinates, searchPlaces } from '../services/geo.service.js';
@@ -2203,6 +2205,44 @@ export const getMasterPushkaraNavamsa = async (req, res) => {
       data: records,
       nakshatraSummary: PUSHKARA_NAKSHATRA_SUMMARY,
       note: NON_PUSHKARA_NAKSHATRAS_NOTE
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+/**
+ * Controller to fetch 27 Nakshatra Thara Palan Master data (Navatara Cycle)
+ * Auto-seeds into database if collection is empty
+ */
+export const getMasterTharaPalan = async (req, res) => {
+  try {
+    let records;
+    try {
+      records = await TharaPalanMaster.find({}).sort({ order: 1 });
+      if (!records || records.length === 0) {
+        for (const item of THARA_PALAN_MASTER_DATA) {
+          await TharaPalanMaster.updateOne(
+            { order: item.order },
+            { $set: item },
+            { upsert: true }
+          );
+        }
+        records = await TharaPalanMaster.find({}).sort({ order: 1 });
+      }
+    } catch {
+      records = null;
+    }
+
+    if (!records || records.length === 0) {
+      records = THARA_PALAN_MASTER_DATA;
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: records.length,
+      data: records,
+      navataraDefs: NAVATARA_BASE_DEFS
     });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });

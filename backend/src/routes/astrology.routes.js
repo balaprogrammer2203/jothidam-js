@@ -34,6 +34,7 @@ import {
   getMasterJamakkolPrasannam,
   getMasterPlanetDignities,
   getMasterPushkaraNavamsa,
+  getMasterTharaPalan,
   getNavigationMenu
 } from '../controllers/astrology.controller.js';
 import { verifyToken, optionalVerifyToken } from '../middleware/auth.middleware.js';
@@ -83,6 +84,8 @@ router.get('/master/planet-dignities', getMasterPlanetDignities);
 router.get('/master/pushkara-navamsam', getMasterPushkaraNavamsa);
 router.get('/master/pushkara-navamsam-padam-list', getMasterPushkaraNavamsa);
 router.get('/master/pushkara-navamsa', getMasterPushkaraNavamsa);
+router.get('/master/thara-palan', getMasterTharaPalan);
+router.get('/master/thara-palan-list', getMasterTharaPalan);
 
 // KP Horary Numbers 1-249 Master Table
 router.get('/master/kp-horary', getMasterKPHorary);

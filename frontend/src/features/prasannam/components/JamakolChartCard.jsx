@@ -204,7 +204,7 @@ export default function JamakolChartCard({
   chartData = {},
   dateTimeStr = '',
   cityName = 'Chennai',
-  onChangeCity = () => {},
+  onChangeCity = () => { },
   lang = 'ta'
 }) {
   const { i18n } = useTranslation(['astrology', 'common']);
@@ -273,10 +273,10 @@ export default function JamakolChartCard({
   const effectiveUdhayamRasi = foundUdhayamRasi !== -1
     ? foundUdhayamRasi
     : (udhayam.signIndex !== undefined
-        ? udhayam.signIndex
-        : (udhayam.rasiIndex !== undefined
-            ? udhayam.rasiIndex
-            : (pillars?.udhayam?.signIndex ?? pillars?.udhayam?.rasiIndex ?? 0)));
+      ? udhayam.signIndex
+      : (udhayam.rasiIndex !== undefined
+        ? udhayam.rasiIndex
+        : (pillars?.udhayam?.signIndex ?? pillars?.udhayam?.rasiIndex ?? 0)));
 
   // Determine true Aarudam Rasi Index (0 to 11)
   let foundAarudamRasi = -1;
@@ -290,10 +290,10 @@ export default function JamakolChartCard({
   const effectiveAarudamRasi = foundAarudamRasi !== -1
     ? foundAarudamRasi
     : (aarudam.signIndex !== undefined
-        ? aarudam.signIndex
-        : (aarudam.rasiIndex !== undefined
-            ? aarudam.rasiIndex
-            : (pillars?.aarudam?.signIndex ?? pillars?.aarudam?.rasiIndex ?? 0)));
+      ? aarudam.signIndex
+      : (aarudam.rasiIndex !== undefined
+        ? aarudam.rasiIndex
+        : (pillars?.aarudam?.signIndex ?? pillars?.aarudam?.rasiIndex ?? 0)));
 
   // Determine true Kavippu Rasi Index (0 to 11)
   let foundKavippuRasi = -1;
@@ -307,10 +307,10 @@ export default function JamakolChartCard({
   const effectiveKavippuRasi = foundKavippuRasi !== -1
     ? foundKavippuRasi
     : (kavippu.signIndex !== undefined
-        ? kavippu.signIndex
-        : (kavippu.rasiIndex !== undefined
-            ? kavippu.rasiIndex
-            : (pillars?.kavippu?.signIndex ?? pillars?.kavippu?.rasiIndex ?? 0)));
+      ? kavippu.signIndex
+      : (kavippu.rasiIndex !== undefined
+        ? kavippu.rasiIndex
+        : (pillars?.kavippu?.signIndex ?? pillars?.kavippu?.rasiIndex ?? 0)));
 
   // Rasi Name and Athipathi (with short form & brackets, e.g. "சிம்மம் (சூரி)")
   const udhayamRasiName = getLocalizedPrasannamRasiName(effectiveUdhayamRasi, activeLang);
@@ -1285,7 +1285,7 @@ export default function JamakolChartCard({
                 {udhayamRasiName} <span className="jk-pillar-lord">({udhayamRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${udhayamStarInfo.starName}, பாதம்: ${udhayamStarInfo.pada}, நட்சத்திர அதிபதி: ${udhayamStarInfo.lordShort}, பதம் அதிபதி: ${udhayamStarInfo.padaLordShort}` : `Star: ${udhayamStarInfo.starName}, Pada: ${udhayamStarInfo.pada}, Star Lord: ${udhayamStarInfo.lordShort}, Pada Lord: ${udhayamStarInfo.padaLordShort}`}>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${udhayamStarInfo.starName}, பாதம்: ${udhayamStarInfo.pada}, நட்சத்திர அதிபதி: ${udhayamStarInfo.lordShort}, பாதம் அதிபதி: ${udhayamStarInfo.padaLordShort}` : `Star: ${udhayamStarInfo.starName}, Pada: ${udhayamStarInfo.pada}, Star Lord: ${udhayamStarInfo.lordShort}, Pada Lord: ${udhayamStarInfo.padaLordShort}`}>
               <div className="jk-pillar-star-main">
                 <span className="jk-pillar-star-icon">★</span>
                 <span className="jk-pillar-badge-text">
@@ -1308,7 +1308,7 @@ export default function JamakolChartCard({
                 {aarudamRasiName} <span className="jk-pillar-lord">({aarudamRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${aarudamStarInfo.starName}, பாதம்: ${aarudamStarInfo.pada}, நட்சத்திர அதிபதி: ${aarudamStarInfo.lordShort}, பதம் அதிபதி: ${aarudamStarInfo.padaLordShort}` : `Star: ${aarudamStarInfo.starName}, Pada: ${aarudamStarInfo.pada}, Star Lord: ${aarudamStarInfo.lordShort}, Pada Lord: ${aarudamStarInfo.padaLordShort}`}>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${aarudamStarInfo.starName}, பாதம்: ${aarudamStarInfo.pada}, நட்சத்திர அதிபதி: ${aarudamStarInfo.lordShort}, பாதம் அதிபதி: ${aarudamStarInfo.padaLordShort}` : `Star: ${aarudamStarInfo.starName}, Pada: ${aarudamStarInfo.pada}, Star Lord: ${aarudamStarInfo.lordShort}, Pada Lord: ${aarudamStarInfo.padaLordShort}`}>
               <div className="jk-pillar-star-main">
                 <span className="jk-pillar-star-icon">★</span>
                 <span className="jk-pillar-badge-text">
@@ -1331,7 +1331,7 @@ export default function JamakolChartCard({
                 {kavippuRasiName} <span className="jk-pillar-lord">({kavippuRasiLordShort})</span>
               </span>
             </div>
-            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${kavippuStarInfo.starName}, பாதம்: ${kavippuStarInfo.pada}, நட்சத்திர அதிபதி: ${kavippuStarInfo.lordShort}, பதம் அதிபதி: ${kavippuStarInfo.padaLordShort}` : `Star: ${kavippuStarInfo.starName}, Pada: ${kavippuStarInfo.pada}, Star Lord: ${kavippuStarInfo.lordShort}, Pada Lord: ${kavippuStarInfo.padaLordShort}`}>
+            <div className="jk-pillar-badge jk-pillar-star-badge" title={activeLang === 'ta' ? `நட்சத்திரம்: ${kavippuStarInfo.starName}, பாதம்: ${kavippuStarInfo.pada}, நட்சத்திர அதிபதி: ${kavippuStarInfo.lordShort}, பாதம் அதிபதி: ${kavippuStarInfo.padaLordShort}` : `Star: ${kavippuStarInfo.starName}, Pada: ${kavippuStarInfo.pada}, Star Lord: ${kavippuStarInfo.lordShort}, Pada Lord: ${kavippuStarInfo.padaLordShort}`}>
               <div className="jk-pillar-star-main">
                 <span className="jk-pillar-star-icon">★</span>
                 <span className="jk-pillar-badge-text">
